@@ -1,1 +1,8 @@
 @import url('normalize.css');
+@import url('/src/styles/typography.module.scss');
+
+body {
+  background: var(--color-body-bg);
+  color: var(--color-body-text);
+  font-family: var(--font-family);
+}
