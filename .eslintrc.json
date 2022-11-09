@@ -18,6 +18,8 @@
       "namedComponents": "arrow-function",
       "unnamedComponents": "arrow-function"
     }],
-    "react/require-default-props": [0]
+    "react/require-default-props": [1],
+    "react/no-array-index-key": [0],
+    "linebreak-style": [1]
   }
 }
