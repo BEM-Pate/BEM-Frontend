@@ -2,14 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './Headline.module.scss';
 
-interface HeadlineProps extends React.HTMLAttributes<HTMLHeadingElement> {
-  headline: React.ElementType;
+interface Props extends React.HTMLAttributes<HTMLHeadingElement> {
+  headline: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 }
 
-/* if necessary add classname prop */
-const Headline: React.FC<HeadlineProps> = ({ children, headline }) => {
+const Headline = (props: Props) => {
+  const { headline, children, className } = props;
   const Heading = headline;
-  return <Heading className={classNames(styles.Headline)}>{children}</Heading>;
+  return <Heading className={classNames(styles.Headline, className)}>{children}</Heading>;
 };
 
 export default Headline;
