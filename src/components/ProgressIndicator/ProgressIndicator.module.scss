@@ -1,0 +1,30 @@
+.ProgressIndicator {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+  width: 100%;
+
+  &Element {
+    background-color: var(--color-border);
+    border-radius: 50%;
+    display: inline-block;
+    flex: 0 0 auto;
+    height: 16px;
+    width: 16px;
+
+    &Active {
+      background-color: var(--color-primary);
+    }
+  }
+
+  &Separator {
+    background-color: var(--color-border);
+    flex: 1 1 auto;
+    height: 2px;
+
+    &Active {
+      background-color: var(--color-primary);
+    }
+  }
+}
