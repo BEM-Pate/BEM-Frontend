@@ -1,0 +1,17 @@
+.Label {
+  margin: 12px 0px;
+  color: black;
+  font-family: var(--font-family);
+  display: block;
+}
+
+.Input {
+  width: 100%;
+  border: 2px solid #ccc;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border-radius: 5px;
+  background-color: #efefef;
+  display: block;
+  box-sizing: border-box;
+}
