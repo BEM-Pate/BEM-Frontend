@@ -1,0 +1,16 @@
+.Label {
+  margin: 12px 0px;
+  font-family: var(--font-family);
+  color: var(--color-body-text);
+  display: block;
+}
+
+.Textarea {
+  font-family: var(--font-family);
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border-radius: 5px;
+  display: block;
+  box-sizing: border-box;
+}
