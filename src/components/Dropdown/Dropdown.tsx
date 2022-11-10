@@ -11,14 +11,6 @@ interface Props {
   onChange?: ChangeEventHandler<HTMLSelectElement>
 }
 
-/* onChange function in parent component:
-
-const selectHandler = (event: React.ChangeEvent<{ value: unknown }>) => {
-  console.log(event.target.value);
-};
-
-*/
-
 const Dropdown = (props: Props) => {
   const {
     disabled, id, label, options, required, onChange = (() => {}),
