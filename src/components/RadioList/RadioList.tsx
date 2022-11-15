@@ -1,24 +1,26 @@
 import React from 'react';
 
-// can be deleted after fetching data from backend
-const DUMMYDATA = [
-  { _id: 1, value: 'Option 1' },
-  { _id: 2, value: 'Option 2' },
-  { _id: 3, value: 'Option 3' },
-  { _id: 4, value: 'Option 4' },
-  { _id: 5, value: 'Option 5' },
-];
+interface RadioListOptions {
+  _id: number;
+  value: string;
+}
+interface RadioListProps {
+  options: RadioListOptions[];
+  groupName: string;
+}
 
-const RadioList = () => (
-  <>
-    {DUMMYDATA.map(({ value, _id }) => (
-      <div>
-        <input type="radio" value={_id} name={value} />
-        {' '}
-        {value}
-      </div>
-    ))}
-  </>
-);
+const RadioList = (props: RadioListProps) => {
+  const { options, groupName } = props;
+  return (
+    <>
+      {options.map(({ value, _id }) => (
+        <div>
+          <input type="radio" value={_id} name={groupName} />
+          {value}
+        </div>
+      ))}
+    </>
+  );
+};
 
 export default RadioList;
