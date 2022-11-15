@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from './LandingPage.module.scss';
 import Button from '../../components/Button/Button';
+import RadioList from '../../components/RadioList/RadioList';
 
 interface LandingPageProps {
   children?: React.ReactNode
@@ -17,6 +18,7 @@ const LandingPage = (props: LandingPageProps) => {
       <Link to="/register/mentor">Register Mentor</Link>
       {children}
       <Button>Text</Button>
+      <RadioList />
     </div>
   );
 };
