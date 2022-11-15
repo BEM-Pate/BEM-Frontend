@@ -2,8 +2,20 @@
 @import url('/src/styles/typography.module.scss');
 @import url('/src/styles/color.module.scss');
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   background: var(--color-body-bg);
   color: var(--color-body-text);
   font-family: var(--font-family);
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-flow: column nowrap;
 }

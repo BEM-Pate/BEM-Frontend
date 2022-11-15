@@ -4,7 +4,13 @@ export interface FormStep {
 }
 
 export interface FormField {
-  type: 'text' | 'number' | 'date';
+  type: 'text' | 'number' | 'date' | 'radio';
   name: string;
-  value?: number | string | boolean;
+  label: string;
+  required?: boolean;
+  placeholder?: string;
+  description?: string;
+  value?: FormValue;
 }
+
+export type FormValue = number | string | boolean;
