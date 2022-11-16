@@ -3,29 +3,41 @@ import classNames from 'classnames';
 import styles from './Textfield.module.scss';
 
 interface Props {
-  placeholder: string,
-  type: HTMLInputTypeAttribute,
-  id: string,
+  placeholder?: string;
+  type: HTMLInputTypeAttribute;
+  id: string;
+  name: string;
   disabled?: boolean;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  label?: string;
 }
 
 const Textfield = (props: Props) => {
   const {
-    placeholder, type, id, disabled,
+    placeholder, type, id, name, disabled, onChange, label,
   } = props;
 
   return (
-    <>
-      <label hidden className={classNames(styles.Label)} htmlFor={id}>{placeholder}</label>
+    <div className={classNames(styles.Textfield)}>
+      {label
+          && (
+          <label
+            className={classNames(styles.TextfieldLabel)}
+            htmlFor={id}
+          >
+            {label}
+          </label>
+          )}
       <input
         placeholder={placeholder}
-        className={classNames(styles.Input)}
+        className={classNames(styles.TextfieldInput)}
         type={type}
         id={id}
-        name={id}
+        name={name}
         disabled={disabled}
+        onChange={onChange}
       />
-    </>
+    </div>
   );
 };
 
