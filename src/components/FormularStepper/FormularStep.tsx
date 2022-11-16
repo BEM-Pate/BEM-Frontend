@@ -1,13 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
-import { FormField } from './FormularTypes';
+import { FormField, FormValue } from './FormularTypes';
+import Textfield from '../Textfield/Textfield';
 
 interface Props {
   fields: FormField[];
   title: string;
   active: boolean;
-  onChange: any;
+  onChange: (fieldName: string, newFieldValue: FormValue) => void;
 }
 
 const FormularStep = (props: Props) => {
@@ -20,11 +21,53 @@ const FormularStep = (props: Props) => {
       {fields.map((field, i) => {
         switch (field.type) {
           case 'number':
-            return <input key={i} type="number" onChange={(e) => onChange(field.name, e.target.value)} />;
+            return (
+              <Textfield
+                key={i}
+                type="number"
+                id={`field-${field.name}`}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                onChange={(e) => onChange(field.name, e.target.value)}
+              />
+            );
           case 'date':
-            return <input key={i} type="date" onChange={(e) => onChange(field.name, e.target.value)} />;
+            return (
+              <Textfield
+                key={i}
+                type="date"
+                id={`field-${field.name}`}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                onChange={(e) => onChange(field.name, e.target.value)}
+              />
+            );
           case 'text':
-            return <input key={i} type="text" onChange={(e) => onChange(field.name, e.target.value)} />;
+            return (
+              <Textfield
+                key={i}
+                type="text"
+                id={`field-${field.name}`}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                onChange={(e) => onChange(field.name, e.target.value)}
+              />
+            );
+          case 'textarea':
+            return (
+              <Textfield
+                key={i}
+                type="text"
+                id={`field-${field.name}`}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                onChange={(e) => onChange(field.name, e.target.value)}
+              />
+            );
           case 'radio':
             return <>radio</>;
           default:

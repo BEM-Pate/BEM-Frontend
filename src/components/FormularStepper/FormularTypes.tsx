@@ -4,7 +4,7 @@ export interface FormStep {
 }
 
 export interface FormField {
-  type: 'text' | 'number' | 'date' | 'radio';
+  type: 'text' | 'number' | 'date' | 'radio' | 'textarea';
   name: string;
   label: string;
   required?: boolean;
