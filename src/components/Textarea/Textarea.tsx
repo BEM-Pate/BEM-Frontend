@@ -3,28 +3,41 @@ import classNames from 'classnames';
 import styles from './Textarea.module.scss';
 
 interface Props {
+  placeholder?: string;
+  id: string;
+  name: string;
   disabled?: boolean;
-  id: string,
-  placeholder: string,
-  rows: number,
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  label?: string;
+  resizable?: boolean;
+  rows?: number;
 }
 
 const Textarea = (props: Props) => {
   const {
-    disabled, id, placeholder, rows,
+    placeholder, id, name, disabled, onChange, label, resizable, rows,
   } = props;
   return (
-    <>
-      <label htmlFor={id} className={classNames(styles.Label)} hidden>{placeholder}</label>
+    <div className={classNames(styles.Textarea)}>
+      {label
+        && (
+          <label
+            className={classNames(styles.TextareaLabel)}
+            htmlFor={id}
+          >
+            {label}
+          </label>
+        )}
       <textarea
-        className={classNames(styles.Textarea)}
+        className={classNames(styles.TextareaInput, { [styles.resizable]: resizable })}
         disabled={disabled}
         id={id}
-        name={id}
+        name={name}
         placeholder={placeholder}
         rows={rows}
+        onChange={onChange}
       />
-    </>
+    </div>
   );
 };
 
