@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
 import { FormField, FormValue } from './FormularTypes';
 import Textfield from '../Textfield/Textfield';
+import Textarea from '../Textarea/Textarea';
 
 interface Props {
   fields: FormField[];
@@ -58,9 +59,8 @@ const FormularStep = (props: Props) => {
             );
           case 'textarea':
             return (
-              <Textfield
+              <Textarea
                 key={i}
-                type="text"
                 id={`field-${field.name}`}
                 name={field.name}
                 label={field.label}
