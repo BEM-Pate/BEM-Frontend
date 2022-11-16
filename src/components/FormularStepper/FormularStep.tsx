@@ -4,6 +4,7 @@ import styles from './FormularStepper.module.scss';
 import { FormField, FormValue } from './FormularTypes';
 import Textfield from '../Textfield/Textfield';
 import Textarea from '../Textarea/Textarea';
+import RadioList from '../RadioList/RadioList';
 
 interface Props {
   fields: FormField[];
@@ -26,7 +27,7 @@ const FormularStep = (props: Props) => {
               <Textfield
                 key={i}
                 type="number"
-                id={`field-${field.name}`}
+                id={`Textfield-${field.name}`}
                 name={field.name}
                 label={field.label}
                 placeholder={field.placeholder}
@@ -38,7 +39,7 @@ const FormularStep = (props: Props) => {
               <Textfield
                 key={i}
                 type="date"
-                id={`field-${field.name}`}
+                id={`Textfield-${field.name}`}
                 name={field.name}
                 label={field.label}
                 placeholder={field.placeholder}
@@ -50,7 +51,19 @@ const FormularStep = (props: Props) => {
               <Textfield
                 key={i}
                 type="text"
-                id={`field-${field.name}`}
+                id={`Textfield-${field.name}`}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                onChange={(e) => onChange(field.name, e.target.value)}
+              />
+            );
+          case 'email':
+            return (
+              <Textfield
+                key={i}
+                type="email"
+                id={`Textfield-${field.name}`}
                 name={field.name}
                 label={field.label}
                 placeholder={field.placeholder}
@@ -61,7 +74,7 @@ const FormularStep = (props: Props) => {
             return (
               <Textarea
                 key={i}
-                id={`field-${field.name}`}
+                id={`Textarea-${field.name}`}
                 name={field.name}
                 label={field.label}
                 placeholder={field.placeholder}
@@ -69,8 +82,9 @@ const FormularStep = (props: Props) => {
               />
             );
           case 'radio':
-            return <>radio</>;
+            return <RadioList name={field.name} options={field.options ?? []} />;
           default:
+            console.error(`Unknown type: ${field.type}`);
             return undefined;
         }
       })}

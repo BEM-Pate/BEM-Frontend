@@ -13,27 +13,34 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
 
   const fields: FormStep[] = [
     {
-      title: 'Titel',
+      title: 'Wer bist du?',
       fields: [
-        { type: 'text', name: 'text1', label: 'Label 1' },
-        { type: 'text', name: 'text2', label: 'Label 2' },
-        {
-          type: 'number', name: 'text3', label: 'Label 3', value: 42,
-        }],
+        { type: 'text', name: 'surname', label: 'Vorname' },
+        { type: 'text', name: 'name', label: 'Nachname' },
+        { type: 'email', name: 'text3', label: 'Email' },
+      ],
     },
     {
-      title: 'Titel 2',
+      title: 'Was kannst Du anbieten?',
       fields: [
-        { type: 'text', name: 'text4', label: 'Label 4' }, {
-          type: 'number', name: 'text5', label: 'Label 5', value: 42,
+        {
+          type: 'radio',
+          name: 'text4',
+          options: [
+            { value: 'case-study', label: 'BEM-Fallbegleitung' },
+            { value: 'consulting', label: 'BEM-Beratung allgemein' },
+            { value: 'consulting-disease', label: 'BEM-Beratung für ein spezielles Krankheitsbild' },
+          ],
+        }, {
+          type: 'select', name: 'certificate', label: 'Zertifikat wählen',
         }],
     },
     {
       title: 'Titel 3',
       fields: [
-        { type: 'text', name: 'text6', label: 'Label 6' }, {
-          type: 'number', name: 'text7', label: 'Label 7', value: 42,
-        }],
+        { type: 'textarea', name: 'experiences', label: 'Was sind Deine Erfahrungen in Bezug auf BEM und psychische Erkrankungen?' },
+        { type: 'textarea', name: 'motivation', label: 'Was motiviert dich, BEM-Pate zu werden?' },
+      ],
     },
   ];
 

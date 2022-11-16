@@ -4,13 +4,19 @@ export interface FormStep {
 }
 
 export interface FormField {
-  type: 'text' | 'number' | 'date' | 'radio' | 'textarea';
+  type: 'text' | 'email' | 'number' | 'date' | 'radio' | 'textarea' | 'select';
   name: string;
-  label: string;
+  label?: string;
   required?: boolean;
   placeholder?: string;
   description?: string;
   value?: FormValue;
+  options?: FormOption[];
 }
 
 export type FormValue = number | string | boolean;
+
+export interface FormOption {
+  label: string;
+  value: string;
+}

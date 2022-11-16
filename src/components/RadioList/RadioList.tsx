@@ -1,22 +1,19 @@
 import React from 'react';
+import { FormOption } from '../FormularStepper/FormularTypes';
 
-interface RadioListOptions {
-  _id: number;
-  value: string;
-}
 interface RadioListProps {
-  options: RadioListOptions[];
-  groupName: string;
+  options: FormOption[];
+  name: string;
 }
 
 const RadioList = (props: RadioListProps) => {
-  const { options, groupName } = props;
+  const { options, name } = props;
   return (
     <>
-      {options.map(({ value, _id }) => (
+      {options.map(({ value, label }) => (
         <div>
-          <input type="radio" value={_id} name={groupName} />
-          {value}
+          <input type="radio" value={value} name={name} />
+          {label}
         </div>
       ))}
     </>
