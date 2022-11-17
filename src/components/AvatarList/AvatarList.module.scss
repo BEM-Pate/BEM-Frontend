@@ -1,0 +1,16 @@
+.cardContainer {
+  display: flex;
+
+  &HeaderText {
+    font-size: 15px;
+    padding-left: 5%;
+  }
+  &DescriptionText {
+    max-width: 200px;
+    text-align: center;
+  }
+}
+.mainContainer {
+  background-color: var(--color-border);
+  width: 200px;
+}

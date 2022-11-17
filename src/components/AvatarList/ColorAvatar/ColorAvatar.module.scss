@@ -1,0 +1,12 @@
+.avatar {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(112, 212, 112);
+    border-radius: 60%;
+    margin: 10px 0;
+    padding: 10px;
+
+    &text{
+        font-size: 25px;
+    }
+}
