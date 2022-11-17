@@ -82,7 +82,13 @@ const FormularStep = (props: Props) => {
               />
             );
           case 'radio':
-            return <RadioList name={field.name} options={field.options ?? []} />;
+            return (
+              <RadioList
+                name={field.name}
+                options={field.options ?? []}
+                onChange={(e) => onChange(field.name, e.target.value)}
+              />
+            );
           default:
             console.error(`Unknown type: ${field.type}`);
             return undefined;
