@@ -1,18 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
-import { FormOption } from '../FormularStepper/FormularTypes';
+import { FormControl, FormOption } from '../FormularStepper/FormularTypes';
 import styles from './RadioList.module.scss';
 
-interface RadioListProps {
+interface RadioListProps extends FormControl<HTMLInputElement> {
   options: FormOption[];
-  name: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const RadioList = (props: RadioListProps) => {
-  const { options, name, onChange } = props;
+  const {
+    options, name, onChange, label: title,
+  } = props;
   return (
     <div className={classNames(styles.RadioList)}>
+      <span className={styles.RadioListLabel}>{title}</span>
       {options.map(({ value, label }, i) => (
         <div className={classNames(styles.RadioListOption)}>
           <input type="radio" value={value} id={`radio-${name}-${i}`} name={name} onChange={onChange} />

@@ -1,20 +1,13 @@
-export interface FormStep {
-  title: string;
-  fields: FormField[];
-}
+import React from 'react';
 
-export interface FormField {
-  type: 'text' | 'email' | 'number' | 'date' | 'radio' | 'textarea' | 'select';
-  name: string;
+export interface FormControl<T> {
+  id: string;
+  name?: string;
+  disabled?: boolean;
+  onChange?: React.ChangeEventHandler<T>;
   label?: string;
   required?: boolean;
-  placeholder?: string;
-  description?: string;
-  value?: FormValue;
-  options?: FormOption[];
 }
-
-export type FormValue = number | string | boolean;
 
 export interface FormOption {
   label: string;

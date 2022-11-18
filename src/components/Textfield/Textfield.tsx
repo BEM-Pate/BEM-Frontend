@@ -1,20 +1,16 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import styles from './Textfield.module.scss';
+import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props {
+interface Props extends FormControl<HTMLInputElement> {
+  type?: 'text' | 'number' | 'email' | 'date';
   placeholder?: string;
-  type: HTMLInputTypeAttribute;
-  id: string;
-  name: string;
-  disabled?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  label?: string;
 }
 
 const Textfield = (props: Props) => {
   const {
-    placeholder, type, id, name, disabled, onChange, label,
+    placeholder, type = 'text', id, name, disabled, onChange, label, required,
   } = props;
 
   return (
@@ -36,6 +32,7 @@ const Textfield = (props: Props) => {
         name={name}
         disabled={disabled}
         onChange={onChange}
+        required={required}
       />
     </div>
   );

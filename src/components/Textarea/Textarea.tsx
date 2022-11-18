@@ -1,21 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './Textarea.module.scss';
+import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props {
+interface Props extends FormControl<HTMLTextAreaElement> {
   placeholder?: string;
-  id: string;
-  name: string;
-  disabled?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
-  label?: string;
   resizable?: boolean;
   rows?: number;
 }
 
 const Textarea = (props: Props) => {
   const {
-    placeholder, id, name, disabled, onChange, label, resizable, rows,
+    placeholder, id, name, disabled, onChange, label, resizable, rows = 5,
   } = props;
   return (
     <div className={classNames(styles.Textarea)}>

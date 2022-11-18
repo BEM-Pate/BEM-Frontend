@@ -21,6 +21,7 @@
     "react/require-default-props": [1],
     "react/no-array-index-key": [0],
     "linebreak-style": [1],
-    "no-unused-vars": [1]
+    "no-unused-vars": [1],
+    "react/button-has-type": [0]
   }
 }
