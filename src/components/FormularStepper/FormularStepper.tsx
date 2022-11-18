@@ -15,6 +15,9 @@ interface Props {
 const FormularStepper = (props: Props) => {
   const { postUrl, children } = props;
   const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState<FormData>(new FormData());
+
+  const form = useRef<HTMLFormElement>(null);
 
   const previousStep = useCallback(() => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
@@ -22,15 +25,13 @@ const FormularStepper = (props: Props) => {
 
   const nextStep = useCallback(() => {
     if (currentStep <= Children.count(children)) setCurrentStep(currentStep + 1);
-  }, [currentStep]);
 
-  const form = useRef<HTMLFormElement>(null);
+    setFormData(new FormData(form.current ?? undefined));
+  }, [currentStep, form]);
 
   const submit = useCallback((e: FormEvent) => {
     // TODO: handle validation
-
     e.preventDefault();
-    const formData = new FormData(form.current ?? undefined);
 
     const data: any = {};
     formData.forEach((value, key) => {
@@ -63,6 +64,16 @@ const FormularStepper = (props: Props) => {
         )}
         >
           <h1>Summary</h1>
+          <table>
+            <tbody>
+              {Array.from(formData.entries(), ([key, value]) => (
+                <tr>
+                  <td>{key}</td>
+                  <td>{typeof value === 'string' ? value : 'File'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         <div className={classNames(styles.FormularStepperControls)}>
           <Button onClick={previousStep} disabled={currentStep <= 1}>Back</Button>
