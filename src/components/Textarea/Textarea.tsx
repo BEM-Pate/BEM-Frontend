@@ -1,30 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './Textarea.module.scss';
+import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props {
-  disabled?: boolean;
-  id: string,
-  placeholder: string,
-  rows: number,
+interface Props extends FormControl<HTMLTextAreaElement> {
+  placeholder?: string;
+  resizable?: boolean;
+  rows?: number;
 }
 
 const Textarea = (props: Props) => {
   const {
-    disabled, id, placeholder, rows,
+    placeholder, id, name, disabled, onChange, label, resizable, rows = 5,
   } = props;
   return (
-    <>
-      <label htmlFor={id} className={classNames(styles.Label)} hidden>{placeholder}</label>
+    <div className={classNames(styles.Textarea)}>
+      {label
+        && (
+          <label
+            className={classNames(styles.TextareaLabel)}
+            htmlFor={id}
+          >
+            {label}
+          </label>
+        )}
       <textarea
-        className={classNames(styles.Textarea)}
+        className={classNames(styles.TextareaInput, { [styles.resizable]: resizable })}
         disabled={disabled}
         id={id}
-        name={id}
+        name={name}
         placeholder={placeholder}
         rows={rows}
+        onChange={onChange}
       />
-    </>
+    </div>
   );
 };
 

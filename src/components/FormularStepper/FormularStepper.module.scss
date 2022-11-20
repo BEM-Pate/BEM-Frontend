@@ -1,0 +1,34 @@
+.FormularStepper {
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: monospace;
+
+  &Form {
+    flex: 1 1 auto;
+  }
+
+  &Controls {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+}
+
+.FormularStep,
+.FormularData {
+  display: none;
+  flex-flow: column nowrap;
+  overflow: hidden auto;
+  height: 100%;
+
+  &.isActive {
+    display: flex;
+  }
+}
+
+.FormularStep {
+  &Title {
+    position: sticky;
+    top: 0;
+  }
+}

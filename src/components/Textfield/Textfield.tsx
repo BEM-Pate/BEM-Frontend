@@ -1,31 +1,40 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import styles from './Textfield.module.scss';
+import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props {
-  placeholder: string,
-  type: HTMLInputTypeAttribute,
-  id: string,
-  disabled?: boolean;
+interface Props extends FormControl<HTMLInputElement> {
+  type?: 'text' | 'number' | 'email' | 'date';
+  placeholder?: string;
 }
 
 const Textfield = (props: Props) => {
   const {
-    placeholder, type, id, disabled,
+    placeholder, type = 'text', id, name, disabled, onChange, label, required,
   } = props;
 
   return (
-    <>
-      <label hidden className={classNames(styles.Label)} htmlFor={id}>{placeholder}</label>
+    <div className={classNames(styles.Textfield)}>
+      {label
+          && (
+          <label
+            className={classNames(styles.TextfieldLabel)}
+            htmlFor={id}
+          >
+            {label}
+          </label>
+          )}
       <input
         placeholder={placeholder}
-        className={classNames(styles.Input)}
+        className={classNames(styles.TextfieldInput)}
         type={type}
         id={id}
-        name={id}
+        name={name}
         disabled={disabled}
+        onChange={onChange}
+        required={required}
       />
-    </>
+    </div>
   );
 };
 
