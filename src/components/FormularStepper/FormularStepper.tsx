@@ -19,6 +19,7 @@ const FormularStepper = (props: Props) => {
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(new FormData());
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useRef<HTMLFormElement>(null);
 
@@ -33,19 +34,30 @@ const FormularStepper = (props: Props) => {
   }, [currentStep, form]);
 
   const submit = useCallback((e: FormEvent) => {
-    // TODO: handle validation
     e.preventDefault();
 
-    // console.log(form.current?.querySelector(':invalid')?.parentElement);
+    const invalidElement = form.current?.querySelector(':invalid') as Node | null;
+    if (invalidElement !== null) {
+      for (let i = 0; i < Children.count(children); i += 1) {
+        if (form.current?.children.item(i)?.contains(invalidElement)) {
+          setCurrentStep(i + 1);
+          return;
+        }
+      }
+    }
 
     const parsedFormData: any = {};
     formData.forEach((value, key) => {
       parsedFormData[key] = value;
     });
 
+    setIsSubmitting(true);
+
     fetch(postUrl, {
       body: postDataStructure(parsedFormData),
       method: 'POST',
+    }).finally(() => {
+      setIsSubmitting(false);
     });
   }, [form]);
 
@@ -91,7 +103,7 @@ const FormularStepper = (props: Props) => {
           {currentStep <= stepCount
             && <Button onClick={nextStep} disabled={currentStep > stepCount}>Next</Button>}
           {currentStep > stepCount
-            && <Button type="submit">Submit</Button>}
+            && <Button disabled={isSubmitting} type="submit">Submit</Button>}
         </div>
       </form>
     </div>
