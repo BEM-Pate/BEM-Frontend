@@ -1,6 +1,5 @@
 import React, {
-  Children, FormEvent,
-  useCallback, useRef, useState,
+  Children, FormEvent, useCallback, useRef, useState,
 } from 'react';
 import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
@@ -9,11 +8,15 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 
 interface Props {
   postUrl: string;
+  postDataStructure: (args: any) => any;
+  postDataLabels: any;
   children?: React.ReactNode;
 }
 
 const FormularStepper = (props: Props) => {
-  const { postUrl, children } = props;
+  const {
+    postUrl, postDataStructure, postDataLabels, children,
+  } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(new FormData());
 
@@ -33,13 +36,15 @@ const FormularStepper = (props: Props) => {
     // TODO: handle validation
     e.preventDefault();
 
-    const data: any = {};
+    // console.log(form.current?.querySelector(':invalid')?.parentElement);
+
+    const parsedFormData: any = {};
     formData.forEach((value, key) => {
-      data[key] = value;
+      parsedFormData[key] = value;
     });
 
     fetch(postUrl, {
-      body: data,
+      body: postDataStructure(parsedFormData),
       method: 'POST',
     });
   }, [form]);
@@ -49,7 +54,12 @@ const FormularStepper = (props: Props) => {
   return (
     <div className={classNames(styles.FormularStepper)}>
       <ProgressIndicator currentStep={currentStep} max={stepCount + 1} />
-      <form ref={form} className={classNames(styles.FormularStepperForm)} onSubmit={submit}>
+      <form
+        ref={form}
+        className={classNames(styles.FormularStepperForm)}
+        onSubmit={submit}
+        noValidate
+      >
         {Children.map(
           children,
           (child, i) => (React.cloneElement(
@@ -68,8 +78,9 @@ const FormularStepper = (props: Props) => {
             <tbody>
               {Array.from(formData.entries(), ([key, value]) => (
                 <tr>
-                  <td>{key}</td>
-                  <td>{typeof value === 'string' ? value : 'File'}</td>
+                  <td>{postDataLabels[key] || key}</td>
+                  {/* eslint-disable-next-line no-nested-ternary */}
+                  <td>{typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : 'File'}</td>
                 </tr>
               ))}
             </tbody>
