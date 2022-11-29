@@ -1,3 +1,13 @@
 .Button {
-  color: red;
+  color: black;
+  width: 15rem;
+  height: 5rem;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.2rem;
+  background-color: rgb(219, 217, 217);
+
+  &buttonText{
+    font-size: 1rem;
+  }
 }

@@ -20,7 +20,7 @@ const Button = (props: Props) => {
       disabled={disabled}
       className={classNames(styles.Button)}
     >
-      {children}
+      <p className={classNames(styles.ButtonbuttonText)}>{children}</p>
     </button>
   );
 };
