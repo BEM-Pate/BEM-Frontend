@@ -1,6 +1,5 @@
 import React, {
-  Children, FormEvent,
-  useCallback, useRef, useState,
+  Children, FormEvent, useCallback, useRef, useState,
 } from 'react';
 import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
@@ -9,13 +8,18 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 
 interface Props {
   postUrl: string;
+  postDataStructure: (args: any) => any;
+  postDataLabels: any;
   children?: React.ReactNode;
 }
 
 const FormularStepper = (props: Props) => {
-  const { postUrl, children } = props;
+  const {
+    postUrl, postDataStructure, postDataLabels, children,
+  } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(new FormData());
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useRef<HTMLFormElement>(null);
 
@@ -30,17 +34,30 @@ const FormularStepper = (props: Props) => {
   }, [currentStep, form]);
 
   const submit = useCallback((e: FormEvent) => {
-    // TODO: handle validation
     e.preventDefault();
 
-    const data: any = {};
+    const invalidElement = form.current?.querySelector(':invalid') as Node | null;
+    if (invalidElement !== null) {
+      for (let i = 0; i < Children.count(children); i += 1) {
+        if (form.current?.children.item(i)?.contains(invalidElement)) {
+          setCurrentStep(i + 1);
+          return;
+        }
+      }
+    }
+
+    const parsedFormData: any = {};
     formData.forEach((value, key) => {
-      data[key] = value;
+      parsedFormData[key] = value;
     });
 
+    setIsSubmitting(true);
+
     fetch(postUrl, {
-      body: data,
+      body: postDataStructure(parsedFormData),
       method: 'POST',
+    }).finally(() => {
+      setIsSubmitting(false);
     });
   }, [form]);
 
@@ -49,7 +66,12 @@ const FormularStepper = (props: Props) => {
   return (
     <div className={classNames(styles.FormularStepper)}>
       <ProgressIndicator currentStep={currentStep} max={stepCount + 1} />
-      <form ref={form} className={classNames(styles.FormularStepperForm)} onSubmit={submit}>
+      <form
+        ref={form}
+        className={classNames(styles.FormularStepperForm)}
+        onSubmit={submit}
+        noValidate
+      >
         {Children.map(
           children,
           (child, i) => (React.cloneElement(
@@ -68,8 +90,9 @@ const FormularStepper = (props: Props) => {
             <tbody>
               {Array.from(formData.entries(), ([key, value]) => (
                 <tr>
-                  <td>{key}</td>
-                  <td>{typeof value === 'string' ? value : 'File'}</td>
+                  <td>{postDataLabels[key] || key}</td>
+                  {/* eslint-disable-next-line no-nested-ternary */}
+                  <td>{typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : 'File'}</td>
                 </tr>
               ))}
             </tbody>
@@ -80,7 +103,7 @@ const FormularStepper = (props: Props) => {
           {currentStep <= stepCount
             && <Button onClick={nextStep} disabled={currentStep > stepCount}>Next</Button>}
           {currentStep > stepCount
-            && <Button type="submit">Submit</Button>}
+            && <Button disabled={isSubmitting} type="submit">Submit</Button>}
         </div>
       </form>
     </div>

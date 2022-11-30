@@ -4,13 +4,13 @@ import styles from './Textfield.module.scss';
 import { FormControl } from '../FormularStepper/FormularTypes';
 
 interface Props extends FormControl<HTMLInputElement> {
-  type?: 'text' | 'number' | 'email' | 'date';
+  type?: 'text' | 'number' | 'email' | 'date' | 'password';
   placeholder?: string;
 }
 
 const Textfield = (props: Props) => {
   const {
-    placeholder, type = 'text', id, name, disabled, onChange, label, required,
+    placeholder, type = 'text', id, name, disabled, onChange, label, required, onBlur,
   } = props;
 
   return (
@@ -32,6 +32,7 @@ const Textfield = (props: Props) => {
         name={name}
         disabled={disabled}
         onChange={onChange}
+        onBlur={onBlur}
         required={required}
       />
     </div>
