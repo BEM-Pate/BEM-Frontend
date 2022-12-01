@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './RegisterAffectedPage.module.scss';
 import FormularStepper from '../../components/FormularStepper/FormularStepper';
 import FormularStep from '../../components/FormularStepper/FormularStep';
 import Textfield from '../../components/Textfield/Textfield';
 import RadioList from '../../components/RadioList/RadioList';
+import { API_ADDRESS } from '../../helpers/env';
+import Dropdown from '../../components/Dropdown/Dropdown';
 
 interface LandingPageProps {
   children?: React.ReactNode;
@@ -13,12 +15,14 @@ interface LandingPageProps {
 const RegisterAffectedPage = (props: LandingPageProps) => {
   const { children } = props;
 
+  const [selectDisease, setSelectDisease] = useState(false);
+
   return (
     <div className={classNames(styles.RegisterAffectedPage)}>
       <h1>register affected page</h1>
       {children}
       <FormularStepper
-        postUrl="backend-url"
+        postUrl={`${API_ADDRESS}/user/register/defaultUser`}
         postDataStructure={(
           {
             email,
@@ -26,7 +30,9 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
             lastName,
             password,
             meetingNeeds,
+            meetingNeedsDisease,
             meetingPreference,
+            inProgress,
           },
         ) => ({
           email,
@@ -34,31 +40,17 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
           lastName,
           password,
           meetingPreference: {
-            support: '',
+            support: meetingNeeds,
             diseaseConsultation: '',
-            meeting: '',
+            meeting: meetingPreference,
             location: '',
             time: '',
           },
-          supportGroup: {
-            groupAdmin: 'string',
-            title: 'string',
-            description: 'string',
-            picture: 'string',
-            meeting: {
-              support: meetingNeeds,
-              diseaseConsultation: 'string',
-              meeting: meetingPreference,
-              location: 'string',
-              time: '2022-06-11T01:02:03+00:00',
-            },
-            virtualPreference: 'string',
-          },
-          processBEM: 'NOT_STARTED',
+          processBEM: inProgress,
           bemInformation: {
-            diseases: [
-              'string',
-            ],
+            diseases: Array.isArray(meetingNeedsDisease)
+              ? meetingNeedsDisease
+              : [meetingNeedsDisease],
             occupation: 'string',
             languages: [
               'string',
@@ -70,6 +62,10 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
           firstName: 'Vorname',
           lastName: 'Nachname',
           password: 'Passwort',
+          inProgress: 'BEM Prozessstatus',
+          meetingNeeds: 'Auf der Suche nach',
+          meetingNeedsDisease: 'Krankheitsbild',
+          meetingPreference: 'Präferenzen für ein Treffen',
         }}
       >
         <FormularStep title="Werde Teil der BEMpsy Community - Du bist nicht allein!">
@@ -88,8 +84,8 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
             label="Befindest du dich bereits im BEM-Prozess?"
             name="inProgress"
             options={[
-              { value: 'true', label: 'Ja' },
-              { value: 'false', label: 'Nein' },
+              { value: 'RUNNING', label: 'Ja' },
+              { value: 'NOT_STARTED', label: 'Nein' },
             ]}
             required
           />
@@ -104,8 +100,32 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
               { value: 'CASE_CONSULTING', label: 'BEM-Beratung Allgemein' },
               { value: 'CASE_CONSULTING_SPECIALIZED', label: 'BEM-Beratung auf ein spezielles Krankheitsbild bezogen' },
             ]}
+            onChange={(e) => setSelectDisease(e.target.value === 'CASE_CONSULTING_SPECIALIZED')}
             required
           />
+          {selectDisease && (
+          <Dropdown
+            id="dropdown-disease"
+            label="Bitte wähle dein Krankheitsbild"
+            name="meetingNeedsDisease"
+            options={[
+              {
+                value: 'disease-1',
+                label: 'Krankheit 1',
+              },
+              {
+                value: 'disease-2',
+                label: 'Krankheit 2',
+              },
+              {
+                value: 'disease-3',
+                label: 'Krankheit 3',
+              },
+            ]}
+            multiple
+            required
+          />
+          )}
           <RadioList
             id="radiolist-meetingPreference"
             name="meetingPreference"
