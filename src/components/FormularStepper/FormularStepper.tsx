@@ -23,6 +23,22 @@ const FormularStepper = (props: Props) => {
 
   const form = useRef<HTMLFormElement>(null);
 
+  const parseFormData = (data: FormData) => {
+    const parsedFormData: any = {};
+    Array.from(data.entries()).forEach(([key, value]) => {
+      if (key in parsedFormData) {
+        if (!Array.isArray(parsedFormData[key])) {
+          parsedFormData[key] = [parsedFormData[key]];
+        }
+        parsedFormData[key].push(value);
+      } else {
+        parsedFormData[key] = value;
+      }
+    });
+
+    return parsedFormData;
+  };
+
   const previousStep = useCallback(() => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   }, [currentStep]);
@@ -46,10 +62,7 @@ const FormularStepper = (props: Props) => {
       }
     }
 
-    const parsedFormData: any = {};
-    formData.forEach((value, key) => {
-      parsedFormData[key] = value;
-    });
+    const parsedFormData = parseFormData(formData);
 
     setIsSubmitting(true);
 
@@ -59,7 +72,7 @@ const FormularStepper = (props: Props) => {
     }).finally(() => {
       setIsSubmitting(false);
     });
-  }, [form]);
+  }, [form, currentStep]);
 
   const stepCount = Children.count(children);
 
@@ -88,11 +101,11 @@ const FormularStepper = (props: Props) => {
           <h1>Summary</h1>
           <table>
             <tbody>
-              {Array.from(formData.entries(), ([key, value]) => (
+              {Object.entries(parseFormData(formData)).map(([key, value]) => (
                 <tr>
                   <td>{postDataLabels[key] || key}</td>
                   {/* eslint-disable-next-line no-nested-ternary */}
-                  <td>{typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : 'File'}</td>
+                  <td>{typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}</td>
                 </tr>
               ))}
             </tbody>
