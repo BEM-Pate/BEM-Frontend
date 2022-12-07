@@ -2,6 +2,7 @@ import React, {
   Children, FormEvent, useCallback, useRef, useState,
 } from 'react';
 import classNames from 'classnames';
+import axios from 'axios';
 import styles from './FormularStepper.module.scss';
 import Button from '../Button/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
@@ -68,12 +69,22 @@ const FormularStepper = (props: Props) => {
 
     setIsSubmitting(true);
 
-    fetch(postUrl, {
-      body: postDataStructure(parsedFormData),
-      method: 'POST',
-    }).finally(() => {
-      setIsSubmitting(false);
-    });
+    try {
+      axios.post(postUrl, postDataStructure(parsedFormData))
+        .then((res) => {
+          if (res.status === 201) {
+            // Success
+          } else if (res.status === 200) {
+            // Wrong data
+          }
+        })
+        .catch((err) => console.error(err))
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   }, [form, currentStep]);
 
   const stepCount = Children.count(children);
