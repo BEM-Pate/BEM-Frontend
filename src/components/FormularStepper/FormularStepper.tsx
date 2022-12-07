@@ -66,12 +66,19 @@ const FormularStepper = (props: Props) => {
 
     setIsSubmitting(true);
 
-    fetch(postUrl, {
-      body: postDataStructure(parsedFormData),
-      method: 'POST',
-    }).finally(() => {
-      setIsSubmitting(false);
-    });
+    try {
+      fetch(postUrl, {
+        body: postDataStructure(parsedFormData),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).catch((err) => console.log(err)).finally(() => {
+        setIsSubmitting(false);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }, [form, currentStep]);
 
   const stepCount = Children.count(children);
