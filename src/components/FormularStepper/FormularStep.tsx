@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
+import Headline from '../Headline/Headline';
 
 interface Props {
   title: string;
@@ -14,8 +15,10 @@ const FormularStep = (props: Props) => {
   } = props;
   return (
     <div className={classNames(styles.FormularStep, { [styles.isActive]: active })}>
-      <h1 className={classNames(styles.FormularStepTitle)}>{title}</h1>
-      {children}
+      <Headline headline="h2" className={classNames(styles.FormularStepTitle)}>{title}</Headline>
+      <div className={classNames(styles.FormularStepChildren)}>
+        {children}
+      </div>
     </div>
   );
 };

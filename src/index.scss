@@ -3,6 +3,10 @@
 @import url('/src/styles/color.module.scss');
 @import url('/src/styles/sizes.module.scss');
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {

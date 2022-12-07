@@ -11,7 +11,7 @@ interface Props extends FormControl<HTMLTextAreaElement> {
 
 const Textarea = (props: Props) => {
   const {
-    placeholder, id, name, disabled, onChange, label, resizable, rows = 5,
+    placeholder, id, name, disabled, onChange, label, required, resizable, rows = 5,
   } = props;
   return (
     <div className={classNames(styles.Textarea)}>
@@ -22,6 +22,7 @@ const Textarea = (props: Props) => {
             htmlFor={id}
           >
             {label}
+            {required && <span className={classNames(styles.TextareaLabelRequired)}>*</span>}
           </label>
         )}
       <textarea

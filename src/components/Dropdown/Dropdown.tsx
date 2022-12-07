@@ -13,12 +13,15 @@ const Dropdown = (props: Props) => {
     disabled, id, name, label, multiple, options, required, onChange,
   } = props;
   return (
-    <>
-      <label className={classNames(styles.Label)} htmlFor={id}>{label}</label>
+    <div className={classNames(styles.Dropdown)}>
+      <label className={classNames(styles.DropdownLabel)} htmlFor={id}>
+        {label}
+        {required && <span className={classNames(styles.DropdownLabelRequired)}>*</span>}
+      </label>
       <select
         name={name}
         id={id}
-        className={classNames(styles.Select)}
+        className={classNames(styles.DropdownSelect)}
         onChange={onChange}
         disabled={disabled}
         required={required}
@@ -26,7 +29,7 @@ const Dropdown = (props: Props) => {
       >
         {options.map((option, index) => (
           <option
-            className={classNames(styles.Option)}
+            className={classNames(styles.DropdownSelectOption)}
             key={index}
             value={option.value}
           >
@@ -35,7 +38,7 @@ const Dropdown = (props: Props) => {
         ))}
       </select>
 
-    </>
+    </div>
   );
 };
 

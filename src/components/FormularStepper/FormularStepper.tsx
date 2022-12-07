@@ -2,9 +2,11 @@ import React, {
   Children, FormEvent, useCallback, useRef, useState,
 } from 'react';
 import classNames from 'classnames';
+import axios from 'axios';
 import styles from './FormularStepper.module.scss';
 import Button from '../Button/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
+import Headline from '../Headline/Headline';
 
 interface Props {
   postUrl: string;
@@ -52,11 +54,12 @@ const FormularStepper = (props: Props) => {
   const submit = useCallback((e: FormEvent) => {
     e.preventDefault();
 
-    const invalidElement = form.current?.querySelector(':invalid') as Node | null;
+    const invalidElement = form.current?.querySelector(':invalid') as HTMLElement | null;
     if (invalidElement !== null) {
       for (let i = 0; i < Children.count(children); i += 1) {
         if (form.current?.children.item(i)?.contains(invalidElement)) {
           setCurrentStep(i + 1);
+          setTimeout(() => invalidElement.focus(), 0);
           return;
         }
       }
@@ -66,12 +69,22 @@ const FormularStepper = (props: Props) => {
 
     setIsSubmitting(true);
 
-    fetch(postUrl, {
-      body: postDataStructure(parsedFormData),
-      method: 'POST',
-    }).finally(() => {
-      setIsSubmitting(false);
-    });
+    try {
+      axios.post(postUrl, postDataStructure(parsedFormData))
+        .then((res) => {
+          if (res.status === 201) {
+            // Success
+          } else if (res.status === 200) {
+            // Wrong data
+          }
+        })
+        .catch((err) => console.error(err))
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   }, [form, currentStep]);
 
   const stepCount = Children.count(children);
@@ -98,21 +111,23 @@ const FormularStepper = (props: Props) => {
           { [styles.isActive]: currentStep > stepCount },
         )}
         >
-          <h1>Summary</h1>
-          <table>
-            <tbody>
-              {Object.entries(parseFormData(formData)).map(([key, value]) => (
-                <tr>
-                  <td>{postDataLabels[key] || key}</td>
+          <Headline headline="h2">Summary</Headline>
+          <div className={classNames(styles.FormularDataTable)}>
+            {Object.entries(parseFormData(formData)).map(([key, value]) => (
+              <div className={classNames(styles.FormularDataTableRow)}>
+                <span className={classNames(styles.FormularDataTableKey)}>
+                  {postDataLabels[key] || key}
+                </span>
+                <span className={classNames(styles.FormularDataTableValue)}>
                   {/* eslint-disable-next-line no-nested-ternary */}
-                  <td>{typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  {typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
         <div className={classNames(styles.FormularStepperControls)}>
-          <Button onClick={previousStep} disabled={currentStep <= 1}>Back</Button>
+          <Button styling="outline" onClick={previousStep} disabled={currentStep <= 1}>Back</Button>
           {currentStep <= stepCount
             && <Button onClick={nextStep} disabled={currentStep > stepCount}>Next</Button>}
           {currentStep > stepCount
