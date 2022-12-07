@@ -6,6 +6,11 @@ import {
 import LandingPage from './pages/LandingPage/LandingPage';
 import RegisterAffectedPage from './pages/RegisterAffectedPage/RegisterAffectedPage';
 import RegisterMentorPage from './pages/RegisterMentorPage/RegisterMentorPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import Search from './components/Container/Search/Search';
+import Groups from './components/Container/Groups/Groups';
+import Profile from './components/Container/Profile/Profile';
+import Messages from './components/Container/Messages/Messages';
 
 const App = () => (
   <BrowserRouter>
@@ -14,6 +19,12 @@ const App = () => (
       <Route path="register">
         <Route path="affected" element={<RegisterAffectedPage />} />
         <Route path="mentor" element={<RegisterMentorPage />} />
+      </Route>
+      <Route element={<DashboardPage />}>
+        <Route path="/search" element={<Search />} />
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/groups" element={<Groups />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   </BrowserRouter>

@@ -1,6 +1,19 @@
+@font-face {
+  font-family: "HTW Berlin";
+  src: url('../fonts/HTW-Berlin/HTWBerlinOffice-Regular.ttf');
+}
+
+@font-face {
+  font-family: "HTW Berlin Bold";
+  src: url('../fonts/HTW-Berlin/HTWBerlinOffice-Bold.ttf');
+}
+
 :root {
   --font-family: 'Open Sans', sans-serif;
   --font-family-headline: 'Open Sans', sans-serif;
+
+  --font-htw-regular: "HTW Berlin";
+  --font-htw-bold: "HTW Berlin Bold";
 
   --font-size-lg: 40px;
   --font-lineheight-lg: 40px;
