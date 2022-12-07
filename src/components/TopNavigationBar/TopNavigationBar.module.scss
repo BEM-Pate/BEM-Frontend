@@ -1,0 +1,13 @@
+.Navigation {
+  background-color: white;
+  height: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px var(--color-border) solid;
+  img {
+    box-sizing: border-box;
+    max-width: 60%;
+    max-height:60%;
+  }
+}

@@ -1,13 +1,15 @@
 .Navigation {
+  z-index: 99;
+  background-color: white;
+  height:  var(--header-height);
   width: 100%;
-  padding: 10px;
   position: fixed;
   bottom: 0;
+  padding-top: 5px;
   border-top: 2px var(--color-border) solid;
   ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     list-style-type: none;
     list-style: none;
     margin: 0px;
@@ -17,26 +19,28 @@
 }
 
 .Link {
-  font-family: var(--font-htw-regular);
+  font-family: var(--font-family);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: inherit;
+  color: rgba(0,0,0,0.5);
   text-decoration: inherit;
   text-transform: capitalize;
+  font-size: 16px;
+  
   img {
-    max-width: 30px;
-    max-height:30px;
+    height: auto;
+    width: 28px;
+    margin-bottom: 3px;
     filter: opacity(20%);
    }
- 
 }
-
 .ActiveLink {
-  color: var( --color-htw-primary);
-  font-family: var(--font-htw-bold);
+  color: var(--color-primary);
+  font-weight: 700;
  img {
-  filter: invert(70%) sepia(42%) saturate(5629%) hue-rotate(44deg) brightness(99%) contrast(101%);
+ /*  filter: invert(70%) sepia(42%) saturate(5629%) hue-rotate(44deg) brightness(99%) contrast(101%); */
+ filter: invert(7%) sepia(1%) saturate(282%) hue-rotate(314deg) brightness(106%) contrast(94%);
  }
 }
