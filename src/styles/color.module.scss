@@ -1,8 +1,12 @@
 :root {
   --color-primary: #1A1A1A;
+  --color-error: #AF0000;
 
   --color-body-text: rgba(0, 0, 0, 0.9);
   --color-body-bg: #FFFFFF;
 
   --color-border: rgba(0, 0, 0, 0.2);
+
+  --color-button-text: #FFFFFF;
+  --color-button-bg: var(--color-primary);
 }

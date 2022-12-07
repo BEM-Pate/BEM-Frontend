@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
 import Button from '../Button/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
+import Headline from '../Headline/Headline';
 
 interface Props {
   postUrl: string;
@@ -98,14 +99,18 @@ const FormularStepper = (props: Props) => {
           { [styles.isActive]: currentStep > stepCount },
         )}
         >
-          <h1>Summary</h1>
-          <table>
+          <Headline headline="h2">Summary</Headline>
+          <table className={classNames(styles.FormularDataTable)}>
             <tbody>
               {Object.entries(parseFormData(formData)).map(([key, value]) => (
-                <tr>
-                  <td>{postDataLabels[key] || key}</td>
-                  {/* eslint-disable-next-line no-nested-ternary */}
-                  <td>{typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}</td>
+                <tr className={classNames(styles.FormularDataTableRow)}>
+                  <td className={classNames(styles.FormularDataTableKey)}>
+                    {postDataLabels[key] || key}
+                  </td>
+                  <td className={classNames(styles.FormularDataTableValue)}>
+                    {/* eslint-disable-next-line no-nested-ternary */}
+                    {typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}
+                  </td>
                 </tr>
               ))}
             </tbody>

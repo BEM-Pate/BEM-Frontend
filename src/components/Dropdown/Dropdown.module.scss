@@ -1,14 +1,23 @@
-.Label {
-  margin: 12px 0px;
-  font-family: var(--font-family);
-  color: var(--color-body-text);
-  display: block;
-}
+@import "src/styles/mixins.module";
 
-.Select {
- width: 100%;
-}
+.Dropdown {
 
-.Option {
-  font-family: var(--font-family);
+  &Label {
+    @include input-label;
+  }
+
+  &Select {
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    width: 100%;
+
+    &Option {
+      @include font-sm;
+      align-items: center;
+      display: flex;
+      font-family: var(--font-family);
+      height: 32px;
+      vertical-align: bottom;
+    }
+  }
 }

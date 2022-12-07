@@ -13,6 +13,9 @@ const Textfield = (props: Props) => {
     placeholder, type = 'text', id, name, disabled, onChange, label, required, onBlur,
   } = props;
 
+  // const [touched, setTouched] = useState(false);
+  // const [valid, setValid] = useState(false);
+
   return (
     <div className={classNames(styles.Textfield)}>
       {label
