@@ -1,4 +1,4 @@
-@import "src/styles/mixins.module";
+@import "src/styles/variables.module";
 
 .FormularStepper {
   display: flex;
@@ -43,13 +43,23 @@
     width: 100%;
 
     &Row {
+      display: flex;
+      flex-flow: column nowrap;
+      margin-bottom: 16px;
     }
 
     &Key {
       font-weight: 700;
+      &::after {
+        content: ':';
+      }
     }
 
-    &Value {}
+    &Value {
+      &:empty::before {
+        content: '-';
+      }
+    }
   }
 }
 

@@ -25,6 +25,7 @@ const Textfield = (props: Props) => {
             htmlFor={id}
           >
             {label}
+            {required && <span className={classNames(styles.TextfieldLabelRequired)}>*</span>}
           </label>
           )}
       <input

@@ -1,8 +1,13 @@
-@import "src/styles/mixins.module";
+@import "src/styles/variables.module";
 
 .Textarea {
   &Label {
     @include input-label;
+
+    &Required {
+      font-weight: 700;
+      color: var(--color-required);
+    }
   }
 
   &Input {

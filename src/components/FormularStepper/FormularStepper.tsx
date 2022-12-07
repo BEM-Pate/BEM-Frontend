@@ -53,11 +53,12 @@ const FormularStepper = (props: Props) => {
   const submit = useCallback((e: FormEvent) => {
     e.preventDefault();
 
-    const invalidElement = form.current?.querySelector(':invalid') as Node | null;
+    const invalidElement = form.current?.querySelector(':invalid') as HTMLElement | null;
     if (invalidElement !== null) {
       for (let i = 0; i < Children.count(children); i += 1) {
         if (form.current?.children.item(i)?.contains(invalidElement)) {
           setCurrentStep(i + 1);
+          setTimeout(() => invalidElement.focus(), 0);
           return;
         }
       }
@@ -100,24 +101,22 @@ const FormularStepper = (props: Props) => {
         )}
         >
           <Headline headline="h2">Summary</Headline>
-          <table className={classNames(styles.FormularDataTable)}>
-            <tbody>
-              {Object.entries(parseFormData(formData)).map(([key, value]) => (
-                <tr className={classNames(styles.FormularDataTableRow)}>
-                  <td className={classNames(styles.FormularDataTableKey)}>
-                    {postDataLabels[key] || key}
-                  </td>
-                  <td className={classNames(styles.FormularDataTableValue)}>
-                    {/* eslint-disable-next-line no-nested-ternary */}
-                    {typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className={classNames(styles.FormularDataTable)}>
+            {Object.entries(parseFormData(formData)).map(([key, value]) => (
+              <div className={classNames(styles.FormularDataTableRow)}>
+                <span className={classNames(styles.FormularDataTableKey)}>
+                  {postDataLabels[key] || key}
+                </span>
+                <span className={classNames(styles.FormularDataTableValue)}>
+                  {/* eslint-disable-next-line no-nested-ternary */}
+                  {typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
         <div className={classNames(styles.FormularStepperControls)}>
-          <Button onClick={previousStep} disabled={currentStep <= 1}>Back</Button>
+          <Button styling="outline" onClick={previousStep} disabled={currentStep <= 1}>Back</Button>
           {currentStep <= stepCount
             && <Button onClick={nextStep} disabled={currentStep > stepCount}>Next</Button>}
           {currentStep > stepCount

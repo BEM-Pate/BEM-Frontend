@@ -1,4 +1,4 @@
-@import "src/styles/mixins.module";
+@import "src/styles/variables.module";
 
 .Button {
   @include font-md();
@@ -11,6 +11,12 @@
   min-width: 96px;
 
   &:disabled {
-    opacity: 0.8;
+    opacity: 0.36;
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: 2px solid var(--color-button-bg);
+    color: var(--color-button-bg);
   }
 }

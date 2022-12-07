@@ -14,7 +14,10 @@ const Dropdown = (props: Props) => {
   } = props;
   return (
     <div className={classNames(styles.Dropdown)}>
-      <label className={classNames(styles.DropdownLabel)} htmlFor={id}>{label}</label>
+      <label className={classNames(styles.DropdownLabel)} htmlFor={id}>
+        {label}
+        {required && <span className={classNames(styles.DropdownLabelRequired)}>*</span>}
+      </label>
       <select
         name={name}
         id={id}

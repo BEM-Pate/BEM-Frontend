@@ -1,9 +1,14 @@
-@import "src/styles/mixins.module";
+@import "src/styles/variables.module";
 
 .Dropdown {
 
   &Label {
     @include input-label;
+
+    &Required {
+      font-weight: 700;
+      color: var(--color-required);
+    }
   }
 
   &Select {
