@@ -1,0 +1,42 @@
+.Navigation {
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  border-top: 2px var(--color-border) solid;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    list-style-type: none;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+  }
+
+}
+
+.Link {
+  font-family: var(--font-htw-regular);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  text-decoration: inherit;
+  text-transform: capitalize;
+  img {
+    max-width: 30px;
+    max-height:30px;
+    filter: opacity(20%);
+   }
+ 
+}
+
+.ActiveLink {
+  color: var( --color-htw-primary);
+  font-family: var(--font-htw-bold);
+ img {
+  filter: invert(70%) sepia(42%) saturate(5629%) hue-rotate(44deg) brightness(99%) contrast(101%);
+ }
+}
