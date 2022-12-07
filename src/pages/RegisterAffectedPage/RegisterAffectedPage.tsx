@@ -22,16 +22,16 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
       <h1>register affected page</h1>
       {children}
       <FormularStepper
-        postUrl={`${API_ADDRESS}/user/register/defaultUser`}
+        postUrl={`${API_ADDRESS}/user/register/seeker`}
         postDataStructure={(
           {
             email,
             firstName,
             lastName,
             password,
-            meetingNeeds,
-            meetingNeedsDisease,
-            meetingPreference,
+            meetingPreferenceSupport,
+            meetingPreferenceDisease,
+            meetingPreferenceMeeting,
             inProgress,
           },
         ) => ({
@@ -40,21 +40,21 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
           lastName,
           password,
           meetingPreference: {
-            support: meetingNeeds,
-            diseaseConsultation: '',
-            meeting: meetingPreference,
-            location: '',
-            time: '',
+            support: meetingPreferenceSupport,
+            diseaseConsultation: Array.isArray(meetingPreferenceDisease)
+              ? meetingPreferenceDisease
+              : [meetingPreferenceDisease],
+            meeting: meetingPreferenceMeeting,
           },
           processBEM: inProgress,
+          experience: 'tsdfsdsd',
+          motivation: 'sdfregverv',
           bemInformation: {
-            diseases: Array.isArray(meetingNeedsDisease)
-              ? meetingNeedsDisease
-              : [meetingNeedsDisease],
-            occupation: 'string',
-            languages: [
-              'string',
-            ],
+            diseases: Array.isArray(meetingPreferenceDisease)
+              ? meetingPreferenceDisease
+              : [meetingPreferenceDisease],
+            occupation: ['PHYSICAL'],
+            languages: ['DE', 'EN'],
           },
         })}
         postDataLabels={{
@@ -93,33 +93,45 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
         <FormularStep title="Werde Teil der BEMpsy Community - Du bist nicht allein!">
           <RadioList
             id="radiolist-needs"
-            name="meetingNeeds"
+            name="meetingPreferenceSupport"
             label="Was brauchst du?"
             options={[
               { value: 'CASE_SUPPORT', label: 'BEM Fallbegleitung' },
-              { value: 'CASE_CONSULTING', label: 'BEM-Beratung Allgemein' },
-              { value: 'CASE_CONSULTING_SPECIALIZED', label: 'BEM-Beratung auf ein spezielles Krankheitsbild bezogen' },
+              { value: 'CONSULTATION', label: 'BEM-Beratung Allgemein' },
+              { value: 'DISEASE_CONSULTATION', label: 'BEM-Beratung auf ein spezielles Krankheitsbild bezogen' },
             ]}
-            onChange={(e) => setSelectDisease(e.target.value === 'CASE_CONSULTING_SPECIALIZED')}
+            onChange={(e) => setSelectDisease(e.target.value === 'DISEASE_CONSULTATION')}
             required
           />
           {selectDisease && (
           <Dropdown
             id="dropdown-disease"
             label="Bitte wähle dein Krankheitsbild"
-            name="meetingNeedsDisease"
+            name="meetingPreferenceDisease"
             options={[
               {
-                value: 'disease-1',
-                label: 'Krankheit 1',
+                value: 'ACUTE_CRISIS',
+                label: 'ACUTE_CRISIS',
               },
               {
-                value: 'disease-2',
-                label: 'Krankheit 2',
+                value: 'OVERLOAD',
+                label: 'OVERLOAD',
               },
               {
-                value: 'disease-3',
-                label: 'Krankheit 3',
+                value: 'DEPRESSION',
+                label: 'DEPRESSION',
+              },
+              {
+                value: 'ADDICTION',
+                label: 'ADDICTION',
+              },
+              {
+                value: 'BURNOUT',
+                label: 'BURNOUT',
+              },
+              {
+                value: 'FEAR',
+                label: 'FEAR',
               },
             ]}
             multiple
@@ -128,7 +140,7 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
           )}
           <RadioList
             id="radiolist-meetingPreference"
-            name="meetingPreference"
+            name="meetingPreferenceMeeting"
             label="Präferenzen für ein Treffen"
             options={[
               { value: 'IN_PERSON', label: 'persönlich' },
