@@ -1,7 +1,8 @@
+@import "src/styles/variables.module";
+
 .FormularStepper {
   display: flex;
   flex-flow: column nowrap;
-  font-family: monospace;
 
   &Form {
     flex: 1 1 auto;
@@ -11,6 +12,11 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    padding: 8px 0;
+
+    & > * {
+      margin: 0 4px;
+    }
   }
 }
 
@@ -18,17 +24,57 @@
 .FormularData {
   display: none;
   flex-flow: column nowrap;
-  overflow: hidden auto;
-  height: 100%;
+  flex: 1 1 auto;
 
   &.isActive {
     display: flex;
   }
 }
 
+.FormularData {
+  padding: 16px;
+  position: relative;
+
+  &Table {
+    @include font-sm;
+    border-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+    width: 100%;
+
+    &Row {
+      display: flex;
+      flex-flow: column nowrap;
+      margin-bottom: 16px;
+    }
+
+    &Key {
+      font-weight: 700;
+      &::after {
+        content: ':';
+      }
+    }
+
+    &Value {
+      &:empty::before {
+        content: '-';
+      }
+    }
+  }
+}
+
 .FormularStep {
   &Title {
-    position: sticky;
-    top: 0;
+    margin: 0;
+    padding: 16px;
+  }
+
+  &Children {
+    overflow: hidden auto;
+    padding: 16px;
+
+    & > *:not(:last-child) {
+      margin-bottom: 32px;
+    }
   }
 }

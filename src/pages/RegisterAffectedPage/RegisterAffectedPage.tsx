@@ -19,7 +19,6 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
 
   return (
     <div className={classNames(styles.RegisterAffectedPage)}>
-      <h1>register affected page</h1>
       {children}
       <FormularStepper
         postUrl={`${API_ADDRESS}/user/register/seeker`}
@@ -106,8 +105,8 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
           {selectDisease && (
           <Dropdown
             id="dropdown-disease"
-            label="Bitte wähle dein Krankheitsbild"
-            name="meetingPreferenceDisease"
+            label="Bitte wähle dein Krankheitsbild (Mehrfachauswahl möglich)"
+            name="meetingNeedsDisease"
             options={[
               {
                 value: 'ACUTE_CRISIS',

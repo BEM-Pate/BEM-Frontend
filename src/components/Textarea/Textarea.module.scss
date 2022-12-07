@@ -1,19 +1,23 @@
+@import "src/styles/variables.module";
+
 .Textarea {
   &Label {
-    margin: 12px 0px;
-    font-family: var(--font-family);
-    color: var(--color-body-text);
-    display: block;
+    @include input-label;
+
+    &Required {
+      font-weight: 700;
+      color: var(--color-required);
+    }
   }
 
   &Input {
+    @include font-sm;
     font-family: var(--font-family);
     width: 100%;
-    padding: 14px 20px;
-    margin: 8px 0px;
+    border: 2px solid var(--color-border);
+    padding: 12px 8px;
     border-radius: 5px;
     display: block;
-    box-sizing: border-box;
     resize: none;
 
     &.resizable {
