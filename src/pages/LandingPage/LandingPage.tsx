@@ -17,8 +17,8 @@ const LandingPage = (props: LandingPageProps) => {
     <div className={classNames(styles.LandingPage)}>
 
       landing page
-      <Link to="/register/affected">Register Affected</Link>
-      <Link to="/register/mentor">Register Mentor</Link>
+      <Link to="/register/seeker">Register Seeker</Link>
+      <Link to="/register/pate">Register Pate</Link>
       {children}
       <Button>Text</Button>
       <h1>{t('appLanguage')}</h1>

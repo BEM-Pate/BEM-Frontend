@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import styles from './RegisterMentorPage.module.scss';
+import styles from './RegisterPatePage.module.scss';
 import Button from '../../components/Button/Button';
 
 interface RegisterMentorPageProps {
   children?: React.ReactNode
 }
 
-const RegisterMentorPage = (props: RegisterMentorPageProps) => {
+const RegisterPatePage = (props: RegisterMentorPageProps) => {
   const { children } = props;
   return (
     <div className={classNames(styles.RegisterMentorPage)}>
@@ -18,4 +18,4 @@ const RegisterMentorPage = (props: RegisterMentorPageProps) => {
   );
 };
 
-export default RegisterMentorPage;
+export default RegisterPatePage;
