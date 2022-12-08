@@ -21,10 +21,10 @@ const App = () => (
         <Route path="mentor" element={<RegisterMentorPage />} />
       </Route>
       <Route element={<DashboardPage />}>
-        <Route path="/search" element={<Search />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/groups" element={<Groups />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="search" element={<Search />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="groups" element={<Groups />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
   </BrowserRouter>
