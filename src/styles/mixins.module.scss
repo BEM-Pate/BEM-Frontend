@@ -22,3 +22,9 @@
   color: var(--color-body-text);
   display: block;
 }
+
+@mixin dashboard-container {
+  @include font-sm;
+  width: 100%;
+  padding: 0px 10px;
+}
