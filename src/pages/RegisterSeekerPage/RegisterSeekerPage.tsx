@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import styles from './RegisterAffectedPage.module.scss';
+import styles from './RegisterSeekerPage.module.scss';
 import FormularStepper from '../../components/FormularStepper/FormularStepper';
 import FormularStep from '../../components/FormularStepper/FormularStep';
 import Textfield from '../../components/Textfield/Textfield';
@@ -12,7 +12,7 @@ interface LandingPageProps {
   children?: React.ReactNode;
 }
 
-const RegisterAffectedPage = (props: LandingPageProps) => {
+const RegisterSeekerPage = (props: LandingPageProps) => {
   const { children } = props;
 
   const [selectDisease, setSelectDisease] = useState(false);
@@ -153,4 +153,4 @@ const RegisterAffectedPage = (props: LandingPageProps) => {
   );
 };
 
-export default RegisterAffectedPage;
+export default RegisterSeekerPage;
