@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.module.scss';
-import {
-    BrowserRouter, Routes, Route,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
 import RegisterAffectedPage from './pages/RegisterAffectedPage/RegisterAffectedPage';
 import RegisterMentorPage from './pages/RegisterMentorPage/RegisterMentorPage';
