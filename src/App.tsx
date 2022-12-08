@@ -25,7 +25,6 @@ const App = () => (
         <Route path="/messages" element={<Messages />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/profile" element={<Profile />} />
-
       </Route>
     </Routes>
   </BrowserRouter>
