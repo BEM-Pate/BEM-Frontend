@@ -5,11 +5,13 @@ import en from './english/translation.json';
 import de from './german/translation.json';
 
 const resources = {
-  en: {
-    translation: en,
-  },
   de: {
     translation: de,
+    country_code: 'ger',
+  },
+  en: {
+    translation: en,
+    country_code: 'gb',
   },
 };
 
