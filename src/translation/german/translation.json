@@ -1,9 +1,12 @@
 {
-    "buttonNext": "Weiter",
     "appLanguage": "Sprache",
-    "findBemMentor": "Bem-Pate finden",
-    "becomeBemMentor": "Bem-Pate werden",
-    "dashboardWelcomeText": "Willkommen beim BEMpsy Selbshilfeprotal.",
-    "dashboardDescription": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
-    "dashboardQuestion": "Was möchten Sie finden?"
+
+    "landingPageWelcome": "Willkommen beim BEMpsy Selbsthilfe-Portal",
+    "landingPageIntroduction": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
+    "landingPageCTA": "Was möchtest du tun?",
+    "landingPageLinkFindPate": "Bem-Pate finden",
+    "landingPageLinkBecomePate": "BEM-Pate werden",
+    "landingPageLinkOrLabel": "oder",
+    "landingPageLinkVideos": "Betroffene erzählen (Videos)",
+    "landingPageLinkLogin": "Mit bestehendem Account anmelden"
 }

@@ -21,7 +21,7 @@ const Button = (props: Props) => {
       disabled={disabled}
       className={classNames(styles.Button, { [styles.outlined]: styling === 'outline' })}
     >
-      {children}
+      <p className={classNames(styles.ButtonbuttonText)}>{children}</p>
     </button>
   );
 };

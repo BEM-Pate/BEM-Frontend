@@ -3,33 +3,32 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import styles from './LandingPage.module.scss';
-import Button from '../../components/Button/Button';
-import { availableLanguages } from '../../translation/i18n';
+import Headline from '../../components/Headline/Headline';
 
-interface LandingPageProps {
-  children?: React.ReactNode
-}
-
-const LandingPage = (props: LandingPageProps) => {
-  const { children } = props;
-  const { t, i18n } = useTranslation();
+const LandingPage = () => {
+  const { t } = useTranslation();
   return (
     <div className={classNames(styles.LandingPage)}>
-
-      landing page
-      <Link to="/register/seeker">Register Seeker</Link>
-      <Link to="/register/pate">Register Pate</Link>
-      {children}
-      <Button>Text</Button>
-      <h1>{t('appLanguage')}</h1>
-      <select defaultValue={i18n.language} onChange={(e) => i18n.changeLanguage(e.target.value)}>
-        {availableLanguages.map((language) => (
-          <option key={language}>{language}</option>
-        ))}
-      </select>
-      <Button>
-        {t('buttonNext')}
-      </Button>
+      <div>
+        <Headline headline="h2">{t('landingPageWelcome')}</Headline>
+        <p>{t('landingPageIntroduction')}</p>
+        <Headline headline="h3">{t('landingPageCTA')}</Headline>
+      </div>
+      <div className={styles.LandingPageButtons}>
+        <Link to="/register/seeker" className={classNames(styles.LandingPageButton, styles.LandingPageButtonIndigo)}>
+          {t('landingPageLinkFindPate')}
+        </Link>
+        <Link to="/register/pate" className={classNames(styles.LandingPageButton, styles.LandingPageButtonMagenta)}>
+          {t('landingPageLinkBecomePate')}
+        </Link>
+        <span className={classNames(styles.LandingPageOrLabel)}>{t('landingPageLinkOrLabel')}</span>
+        <Link to="/register/video" className={classNames(styles.LandingPageButton, styles.LandingPageButtonOrange)}>
+          {t('landingPageLinkVideos')}
+        </Link>
+        <Link to="/login" className={classNames(styles.LandingPageLink)}>
+          {t('landingPageLinkLogin')}
+        </Link>
+      </div>
     </div>
   );
 };

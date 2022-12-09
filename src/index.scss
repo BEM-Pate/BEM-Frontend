@@ -1,7 +1,5 @@
 @import url('normalize.css');
-@import url('/src/styles/typography.module.scss');
-@import url('/src/styles/color.module.scss');
-@import url('/src/styles/sizes.module.scss');
+@import "styles/variables.module";
 
 * {
   box-sizing: border-box;
@@ -23,4 +21,12 @@ body {
 #root {
   display: flex;
   flex-flow: column nowrap;
+}
+
+a {
+  color: var(--color-link);
+}
+
+p {
+  @include font-sm;
 }
