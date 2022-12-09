@@ -4,62 +4,35 @@ import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import styles from './LandingPage.module.scss';
 import Button from '../../components/Button/Button';
-import { availableLanguages } from '../../translation/i18n';
+import Headline from '../../components/Headline/Headline';
 
-interface LandingPageProps {
-  children?: React.ReactNode;
-}
-const DATA = [
-  {
-    title: 'Bem-Pate finden',
-    ref: '/register/affected',
-  },
-  {
-    title: 'Bem-Pate werden',
-    ref: '/register/mentor',
-  },
-  {
-    title: 'Selbsthilfegruppe finden',
-    ref: '/register/supportGroup',
-  },
-  {
-    title: 'Selbsthilfegruppe gründen',
-    ref: '/register/createSupportGroup',
-  },
-  {
-    title: 'Videos',
-    ref: '/register/video',
-  },
-];
-const LandingPage = (props: LandingPageProps) => {
-  const { children } = props;
-  const { t, i18n } = useTranslation();
+const LandingPage = () => {
+  const { t } = useTranslation();
   return (
     <div className={classNames(styles.LandingPage)}>
       <div>
-        <h2>Willkommen beim BEMpsy Selbsthilfe-Portal.</h2>
+        <Headline headline="h2">Willkommen beim BEMpsy Selbsthilfe-Portal.</Headline>
         <p>
           Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit
           psychischen Beeinträchtigungen.
         </p>
-        <h2>Was möchtest du tun?</h2>
+        <Headline headline="h3">Was möchtest du tun?</Headline>
       </div>
-      {DATA.map((item) => (
-        <div className={classNames(styles.landingPageButton)}>
-          <Link to={item.ref}>
-            <Button>
-              {item.title}
-            </Button>
-          </Link>
-        </div>
-      ))}
-      {children}
-      <h1>{t('appLanguage')}</h1>
-      <select defaultValue={i18n.language} onChange={(e) => i18n.changeLanguage(e.target.value)}>
-        {availableLanguages.map((language) => (
-          <option key={language}>{language}</option>
-        ))}
-      </select>
+      <div className={styles.LandingPageButtons}>
+        <Link to="/register/seeker" className={classNames(styles.LandingPageButton, styles.LandingPageButtonIndigo)}>
+          Bem-Pate finden
+        </Link>
+        <Link to="/register/pate" className={classNames(styles.LandingPageButton, styles.LandingPageButtonMagenta)}>
+          BEM-Pate werden
+        </Link>
+        <span className={classNames(styles.LandingPageOrLabel)}>oder</span>
+        <Link to="/register/video" className={classNames(styles.LandingPageButton, styles.LandingPageButtonOrange)}>
+          Betroffene erzählen (Videos)
+        </Link>
+        <Link to="/login" className={classNames(styles.LandingPageLink)}>
+          Mit bestehendem Account anmelden
+        </Link>
+      </div>
       <Button>
         {t('buttonNext')}
       </Button>

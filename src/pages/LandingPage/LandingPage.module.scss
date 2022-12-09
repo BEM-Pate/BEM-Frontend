@@ -1,5 +1,61 @@
+@import "src/styles/variables.module";
+
 .LandingPage {
     flex: 1;
     justify-content: center;
-    text-align: center;
+    padding: 16px;
+
+    &Buttons {
+        align-items: center;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    &Button {
+        @include font-md;
+        align-items: center;
+        border: 2px solid currentColor;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        height: 56px;
+        margin: 4px 0;
+        text-decoration: none;
+        width: 100%;
+
+        &Indigo {
+            color: var(--color-indigo);
+        }
+        &Magenta {
+            color: var(--color-magenta);
+        }
+        &Orange {
+            color: var(--color-orange);
+        }
+    }
+
+    &OrLabel {
+        @include font-sm;
+        opacity: 0.4;
+        margin: 16px 0;
+
+        &::before {
+            content: '-';
+            margin-right: 4px;
+        }
+
+        &::after {
+            content: '-';
+            margin-left: 4px;
+        }
+    }
+
+    &Link {
+        @include font-md;
+        display: inline-block;
+        border-bottom: 1px solid currentColor;
+        text-decoration: none;
+        padding: 4px 0;
+        margin-top: 16px;
+    }
 }

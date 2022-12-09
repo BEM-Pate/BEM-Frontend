@@ -1,6 +1,10 @@
 :root {
   /* Colors from MIRO Wireframes */
   --color-primary: #1A1A1A;
+  --color-indigo: #414BB2;
+  --color-magenta: #DA0063;
+  --color-orange: #F24726;
+
   --color-error: #AF0000;
   --color-required: #FF0000;
 
@@ -8,6 +12,7 @@
   --color-body-bg: #FFFFFF;
 
   --color-border: rgba(0, 0, 0, 0.2);
+  --color-link: var(--color-indigo);
 
 
   /* Temporary Colors */
