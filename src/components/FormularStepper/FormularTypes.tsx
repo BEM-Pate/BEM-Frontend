@@ -5,6 +5,7 @@ export interface FormControl<T> {
   name?: string;
   disabled?: boolean;
   onChange?: React.ChangeEventHandler<T>;
+  onBlur?: React.FormEventHandler<T>;
   label?: string;
   required?: boolean;
 }

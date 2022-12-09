@@ -1,43 +1,44 @@
-import React, { ChangeEventHandler } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import styles from './Dropdown.module.scss';
+import { FormControl, FormOption } from '../FormularStepper/FormularTypes';
 
-interface Props {
-  id: string,
-  options: string[],
-  label: string,
-  disabled?: boolean;
-  required?: boolean
-  onChange?: ChangeEventHandler<HTMLSelectElement>
+interface Props extends FormControl<HTMLSelectElement> {
+  multiple?: boolean;
+  options: FormOption[];
 }
 
 const Dropdown = (props: Props) => {
   const {
-    disabled, id, label, options, required, onChange = (() => {}),
+    disabled, id, name, label, multiple, options, required, onChange,
   } = props;
   return (
-    <>
-      <label className={classNames(styles.Label)} htmlFor={id}>{label}</label>
+    <div className={classNames(styles.Dropdown)}>
+      <label className={classNames(styles.DropdownLabel)} htmlFor={id}>
+        {label}
+        {required && <span className={classNames(styles.DropdownLabelRequired)}>*</span>}
+      </label>
       <select
-        name={id}
+        name={name}
         id={id}
-        className={classNames(styles.Select)}
+        className={classNames(styles.DropdownSelect)}
         onChange={onChange}
         disabled={disabled}
         required={required}
+        multiple={multiple}
       >
         {options.map((option, index) => (
           <option
-            className={classNames(styles.Option)}
+            className={classNames(styles.DropdownSelectOption)}
             key={index}
-            value={option}
+            value={option.value}
           >
-            {option}
+            {option.label}
           </option>
         ))}
       </select>
 
-    </>
+    </div>
   );
 };
 

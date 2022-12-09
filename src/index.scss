@@ -1,6 +1,11 @@
 @import url('normalize.css');
 @import url('/src/styles/typography.module.scss');
 @import url('/src/styles/color.module.scss');
+@import url('/src/styles/sizes.module.scss');
+
+* {
+  box-sizing: border-box;
+}
 
 html,
 body,

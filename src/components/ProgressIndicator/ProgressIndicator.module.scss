@@ -1,8 +1,12 @@
 .ProgressIndicator {
+  background-color: var(--color-body-bg);
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
   justify-content: stretch;
+  padding: 16px;
+  position: sticky;
+  top: 0;
   width: 100%;
 
   &Element {

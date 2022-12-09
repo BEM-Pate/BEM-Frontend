@@ -1,8 +1,20 @@
 :root {
+  /* Colors from MIRO Wireframes */
   --color-primary: #1A1A1A;
+  --color-error: #AF0000;
+  --color-required: #FF0000;
 
   --color-body-text: rgba(0, 0, 0, 0.9);
   --color-body-bg: #FFFFFF;
 
   --color-border: rgba(0, 0, 0, 0.2);
+
+
+  /* Temporary Colors */
+  --color-htw-primary: #76b900;
+  --color-dashboard-background: rgba(0,0,0,0.05);
+
+  --color-button-text: #FFFFFF;
+  --color-button-bg: var(--color-primary);
+
 }
