@@ -1,5 +1,12 @@
 {
     "appLanguage": "Sprache",
+    "labelFirstName": "Vorname",
+    "labelLastName": "Nachname",
+    "labelEMail": "E-Mail",
+    "labelPassword": "Passwort",
+    "labelYes": "Ja",
+    "labelNo": "Nein",
+    "labelDiseaseProfile": "Krankheitsbild",
 
     "landingPageWelcome": "Willkommen beim BEMpsy Selbsthilfe-Portal",
     "landingPageIntroduction": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
@@ -8,5 +15,25 @@
     "landingPageLinkBecomePate": "BEM-Pate werden",
     "landingPageLinkOrLabel": "oder",
     "landingPageLinkVideos": "Betroffene erzählen (Videos)",
-    "landingPageLinkLogin": "Mit bestehendem Account anmelden"
+    "landingPageLinkLogin": "Mit bestehendem Account anmelden",
+
+    "registerSeekerHeader": "Werde Teil der BEMpsy Community - Du bist nicht allein!",
+    "registerSeekerStatus": "Befindest du dich bereits im BEM-Prozess?",
+    "registerSeekerNeeds": "Was brauchst du?",
+    "registerSeekerNeedsOption1": "BEM-Fallbegleitung",
+    "registerSeekerNeedsOption2": "BEM-Beratung Allgemein",
+    "registerSeekerNeedsOption3": "BEM-Beratung auf ein spzielles Krankheitsbild",
+    "registerSeekerDiseaseHeader": "Bitte wähle dein Krankheitsbild (Mehrfachauswahl möglich)",
+    "registerSeekerDiseaseOption1": "akute Kriese",
+    "registerSeekerDiseaseOption2": "Überlastung",
+    "registerSeekerDiseaseOption3": "Depression",
+    "registerSeekerDiseaseOption4": "Adsitik",
+    "registerSeekerDiseaseOption5": "Burnout",
+    "registerSeekerDiseaseOption6": "Angst",
+    "registerSeekerMeetingHeader": "Präferenzen für ein Treffen",
+    "registerSeekerMeetingHeaderOption1": "persönlich",
+    "registerSeekerMeetingHeaderOption2": "virtuell",
+    "regusterSeekerSummary": "Zusammenfassung der eingebenen Daten"
+
+
 }
