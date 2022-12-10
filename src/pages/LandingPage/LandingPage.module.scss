@@ -57,5 +57,11 @@
         text-decoration: none;
         padding: 4px 0;
         margin-top: 16px;
+        transition: var(--transition);
+
+        &:hover {
+            opacity: 0.5;
+            text-decoration: none;
+        }
     }
 }

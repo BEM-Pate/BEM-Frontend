@@ -8,5 +8,9 @@
     "landingPageLinkBecomePate": "BEM-Pate werden",
     "landingPageLinkOrLabel": "oder",
     "landingPageLinkVideos": "Betroffene erzählen (Videos)",
-    "landingPageLinkLogin": "Mit bestehendem Account anmelden"
+    "landingPageLinkLogin": "Mit bestehendem Account anmelden",
+
+    "loginPageHeadline": "Mit bestehendem Account anmelden",
+    "loginPageButtonLogin": "Anmelden",
+    "loginPageButtonForgotPassword": "Passwort vergessen"
 }

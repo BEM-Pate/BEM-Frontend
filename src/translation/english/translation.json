@@ -8,5 +8,9 @@
     "landingPageLinkBecomePate": "Become a BEM-Pate",
     "landingPageLinkOrLabel": "or",
     "landingPageLinkVideos": "Hear Stories of Seekers (Videos)",
-    "landingPageLinkLogin": "Login with your existing account"
+    "landingPageLinkLogin": "Login with your existing account",
+
+    "loginPageHeadline": "Login with existing account",
+    "loginPageButtonLogin": "Login",
+    "loginPageButtonForgotPassword": "Forgot Password"
 }
