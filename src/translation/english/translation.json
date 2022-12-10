@@ -1,5 +1,12 @@
 {
     "appLanguage": "Language",
+    "labelFirstName": "First name",
+    "labelLastName": "Surname",
+    "labelEMail": "E-Mail",
+    "labelPassword": "Password",
+    "labelYes": "Yes",
+    "labelNo": "No",
+    "labelDiseaseProfile": "Disease pattern",
 
     "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
     "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -12,5 +19,23 @@
 
     "loginPageHeadline": "Login with existing account",
     "loginPageButtonLogin": "Login",
-    "loginPageButtonForgotPassword": "Forgot Password"
+    "loginPageButtonForgotPassword": "Forgot Password",
+
+    "registerSeekerHeader": "Become part of the BEMpsy community - you are not alone!",
+    "registerSeekerStatus": "Are you already in the BEM process?",
+    "registerSeekerNeeds": "What are you searching for?",
+    "registerSeekerNeedsOption1": "BEM Case Support",
+    "registerSeekerNeedsOption2": "BEM-Counseling General",
+    "registerSeekerNeedsOption3": "BEM-Counseling on a specific disease pattern",
+    "registerSeekerDiseaseHeader": "Please select your disease pattern (multiple selection possible)",
+    "registerSeekerDiseaseOption1": "acutecrisis",
+    "registerSeekerDiseaseOption2": "overload",
+    "registerSeekerDiseaseOption3": "depression",
+    "registerSeekerDiseaseOption4": "adsitic",
+    "registerSeekerDiseaseOption5": "burnout",
+    "registerSeekerDiseaseOption6": "Anxiety",
+    "registerSeekerMeetingHeader": "meeting preferences",
+    "registerSeekerMeetingHeaderOption1": "in person",
+    "registerSeekerMeetingHeaderOption2": "virtual",
+    "regusterSeekerSummary": "summary of your entered data"
 }
