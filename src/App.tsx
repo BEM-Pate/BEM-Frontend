@@ -10,6 +10,7 @@ import Groups from './components/Container/Groups/Groups';
 import Profile from './components/Container/Profile/Profile';
 import Messages from './components/Container/Messages/Messages';
 import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
+import EditProfile from './components/Container/Profile/EditProfile/EditProfile';
 
 const App = () => (
   <div>
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="messages" element={<Messages />} />
             <Route path="groups" element={<Groups />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="editprofile" element={<EditProfile />} />
           </Route>
         </Route>
       </Routes>
