@@ -7,6 +7,9 @@
     "labelYes": "Ja",
     "labelNo": "Nein",
     "labelDiseaseProfile": "Krankheitsbild",
+    "labelBio": "Biographie",
+    "labelBecomeMentor": "Pate werden",
+    "labelEdit": "Bearbeiten",
 
     "landingPageWelcome": "Willkommen beim BEMpsy Selbsthilfe-Portal",
     "landingPageIntroduction": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
@@ -37,7 +40,10 @@
     "registerSeekerMeetingHeader": "Präferenzen für ein Treffen",
     "registerSeekerMeetingHeaderOption1": "persönlich",
     "registerSeekerMeetingHeaderOption2": "virtuell",
-    "regusterSeekerSummary": "Zusammenfassung der eingebenen Daten"
+    "regusterSeekerSummary": "Zusammenfassung der eingebenen Daten",
 
+    "profilePageYourProfile": "Dein Profil",
+    "profilePageYourData": "Deine Daten",
+    "profilePageDeleteProfile": "Profil löschen!"
 
 }

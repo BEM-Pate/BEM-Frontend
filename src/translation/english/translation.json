@@ -7,6 +7,9 @@
     "labelYes": "Yes",
     "labelNo": "No",
     "labelDiseaseProfile": "Disease pattern",
+    "labelBio": "Biography",
+    "labelBecomeMentor": "Become a Mentor",
+    "labelEdit": "Edit ",
 
     "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
     "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -37,5 +40,10 @@
     "registerSeekerMeetingHeader": "meeting preferences",
     "registerSeekerMeetingHeaderOption1": "in person",
     "registerSeekerMeetingHeaderOption2": "virtual",
-    "regusterSeekerSummary": "summary of your entered data"
+    "regusterSeekerSummary": "summary of your entered data",
+
+
+    "profilePageYourProfile": "Your Profile",
+    "profilePageYourData": "Your Data",
+    "profilePageDeleteProfile": "Delete Profile!"
 }

@@ -14,6 +14,7 @@ import Messages from './components/Container/Messages/Messages';
 import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
 import LoginPage from './pages/LoginPage/LoginPage';
 import useSessionStorage from './helpers/useSessionStorage';
+import EditProfile from './components/Container/Profile/EditProfile/EditProfile';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
@@ -42,6 +43,7 @@ const App = () => {
               <Route path="messages" element={<Messages />} />
               <Route path="groups" element={<Groups />} />
               <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
+              <Route path="editprofile" element={<EditProfile />} />
             </Route>
           </Route>
         </Routes>
