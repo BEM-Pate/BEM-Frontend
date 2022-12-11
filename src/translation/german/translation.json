@@ -10,6 +10,10 @@
     "labelBio": "Biographie",
     "labelBecomeMentor": "Pate werden",
     "labelEdit": "Bearbeiten",
+    "labelMessages" : "Nachrichten",
+    "labelSearch": "Suche",
+    "labelGroups": "Gruppen",
+    "labelProfile" : "Profil",
 
     "landingPageWelcome": "Willkommen beim BEMpsy Selbsthilfe-Portal",
     "landingPageIntroduction": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
@@ -40,6 +44,12 @@
 
     "profilePageYourProfile": "Dein Profil",
     "profilePageYourData": "Deine Daten",
-    "profilePageDeleteProfile": "Profil löschen!"
+    "profilePageDeleteProfile": "Profil löschen!",
 
+    "messagesHeader": "Nachrichten",
+    "messagesTage": "Tage",
+
+    "GroupsHeader" : "Gruppen",
+
+    "SearchSearchbar" : "Suche..."
 }

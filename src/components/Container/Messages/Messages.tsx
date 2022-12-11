@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import styles from './Messages.module.scss';
 import Headline from '../../Headline/Headline';
 
@@ -43,10 +44,12 @@ const generateRandomPerson = () => {
 
 const paten = generateRandomPerson();
 
-const Messages = () => (
-  <div className={classNames(styles.Messages)}>
-    <Headline headline="h2">Messages</Headline>
-    {
+const Messages = () => {
+  const { t } = useTranslation();
+  return (
+    <div className={classNames(styles.Messages)}>
+      <Headline headline="h2">{t('messagesHeader')}</Headline>
+      {
       paten.map((pate, index) => (
         <>
           <div key={index} className={classNames(styles.MessagesItem)}>
@@ -54,7 +57,7 @@ const Messages = () => (
             <div className={classNames(styles.MessagesItemInfo)}>
               <div className={classNames(styles.MessagesItemInfoName)}>
                 <span>{pate.firstName}</span>
-                <span>{`${pate.date.getDay()}d ago`}</span>
+                <span>{`${pate.date.getDay()} ${t('messagesTage')}`}</span>
               </div>
               <p>
                 {pate.message}
@@ -67,7 +70,8 @@ const Messages = () => (
         </>
       ))
     }
-  </div>
-);
+    </div>
+  );
+};
 
 export default Messages;

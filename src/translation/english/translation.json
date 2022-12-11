@@ -10,6 +10,10 @@
     "labelBio": "Biography",
     "labelBecomeMentor": "Become a Mentor",
     "labelEdit": "Edit ",
+    "labelMessages" : "Massages",
+    "labelSearch": "Search",
+    "labelGroups": "Groups",
+    "labelProfile" : "Profile",
 
     "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
     "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -41,5 +45,12 @@
 
     "profilePageYourProfile": "Your Profile",
     "profilePageYourData": "Your Data",
-    "profilePageDeleteProfile": "Delete Profile!"
+    "profilePageDeleteProfile": "Delete Profile!",
+
+    "messagesHeader": "Massages",
+    "messagesTage": "days ago",
+
+    "GroupsHeader" : "Groups",
+
+    "SearchSearchbar" : "Search..."
 }

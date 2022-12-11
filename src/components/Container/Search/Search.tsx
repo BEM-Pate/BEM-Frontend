@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import styles from './Search.module.scss';
 import Textfield from '../../Textfield/Textfield';
 
@@ -51,29 +52,32 @@ const paten = generateRandomPerson();
 
 /* <-- DELETE THIS SHIT LATER!!! */
 
-const Search = () => (
-  <div className={classNames(styles.Search)}>
+const Search = () => {
+  const { t } = useTranslation();
+  return (
+    <div className={classNames(styles.Search)}>
 
-    <div className={classNames(styles.SearchBar)}>
-      <Textfield id="pate-search" type="text" placeholder="Search..." />
-    </div>
-    <div className={classNames(styles.SearchPanel)}>
-      {paten.map((person, index) => (
-        <div key={index} className={classNames(styles.Pate)}>
-          <img src={images[index] || placeholder} alt="placeholder" />
-          <div className={classNames(styles.PateInfo)}>
-            <div className={classNames(styles.PateInfoName)}>
-              <span>{`${person.firstName} ${person.lastName}`}</span>
-              <span>{person.age}</span>
+      <div className={classNames(styles.SearchBar)}>
+        <Textfield id="pate-search" type="text" placeholder={t('SearchSearchbar')!} />
+      </div>
+      <div className={classNames(styles.SearchPanel)}>
+        {paten.map((person, index) => (
+          <div key={index} className={classNames(styles.Pate)}>
+            <img src={images[index] || placeholder} alt="placeholder" />
+            <div className={classNames(styles.PateInfo)}>
+              <div className={classNames(styles.PateInfoName)}>
+                <span>{`${person.firstName} ${person.lastName}`}</span>
+                <span>{person.age}</span>
+              </div>
+              <span>
+                {person.location}
+              </span>
             </div>
-            <span>
-              {person.location}
-            </span>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Search;
