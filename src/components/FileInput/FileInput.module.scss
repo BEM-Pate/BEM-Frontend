@@ -1,0 +1,12 @@
+@import "src/styles/variables.module";
+
+.FileInput {
+  &Label {
+    @include input-label;
+
+    &Required {
+      @include input-label-required;
+    }
+  }
+  &Input {}
+}

@@ -23,6 +23,11 @@
   display: block;
 }
 
+@mixin input-label-required {
+  font-weight: 700;
+  color: var(--color-required);
+}
+
 @mixin dashboard-container {
   @include font-sm;
   width: 100%;
