@@ -20,6 +20,10 @@
     "landingPageLinkVideos": "Betroffene erzählen (Videos)",
     "landingPageLinkLogin": "Mit bestehendem Account anmelden",
 
+    "loginPageHeadline": "Mit bestehendem Account anmelden",
+    "loginPageButtonLogin": "Anmelden",
+    "loginPageButtonForgotPassword": "Passwort vergessen",
+
     "registerSeekerHeader": "Werde Teil der BEMpsy Community - Du bist nicht allein!",
     "registerSeekerStatus": "Befindest du dich bereits im BEM-Prozess?",
     "registerSeekerNeeds": "Was brauchst du?",
