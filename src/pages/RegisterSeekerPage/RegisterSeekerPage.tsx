@@ -8,20 +8,14 @@ import Textfield from '../../components/Textfield/Textfield';
 import RadioList from '../../components/RadioList/RadioList';
 import { API_ADDRESS } from '../../helpers/env';
 import Dropdown from '../../components/Dropdown/Dropdown';
-import { availableLanguages } from '../../translation/i18n';
 
-interface LandingPageProps {
-  children?: React.ReactNode;
-}
-
-const RegisterSeekerPage = (props: LandingPageProps) => {
-  const { children } = props;
+const RegisterSeekerPage = () => {
+  const { t } = useTranslation();
 
   const [selectDisease, setSelectDisease] = useState(false);
-  const { t, i18n } = useTranslation();
+
   return (
     <div className={classNames(styles.RegisterAffectedPage)}>
-      {children}
       <FormularStepper
         postUrl={`${API_ADDRESS}/user/register/seeker`}
         postDataStructure={(
@@ -70,9 +64,27 @@ const RegisterSeekerPage = (props: LandingPageProps) => {
         }}
       >
         <FormularStep title={t('registerSeekerHeader')!}>
-          <Textfield type="text" id="textfield-firstName" name="firstName" label={t('labelFirstName')!} required />
-          <Textfield type="text" id="textfield-lastName" name="lastName" label={t('labelLastName')!} required />
-          <Textfield type="email" id="textfield-email" name="email" label={t('labelEMail')!} required />
+          <Textfield
+            type="text"
+            id="textfield-firstName"
+            name="firstName"
+            label={t('labelFirstName')!}
+            required
+          />
+          <Textfield
+            type="text"
+            id="textfield-lastName"
+            name="lastName"
+            label={t('labelLastName')!}
+            required
+          />
+          <Textfield
+            type="email"
+            id="textfield-email"
+            name="email"
+            label={t('labelEMail')!}
+            required
+          />
           <Textfield
             type="password"
             id="textfield-password"
@@ -92,16 +104,6 @@ const RegisterSeekerPage = (props: LandingPageProps) => {
           />
         </FormularStep>
         <FormularStep title={t('registerSeekerStatus')!}>
-          <div>
-            <select
-              defaultValue={i18n.language}
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
-            >
-              {availableLanguages.map((language) => (
-                <option key={language}>{language}</option>
-              ))}
-            </select>
-          </div>
           <RadioList
             id="radiolist-needs"
             name="meetingPreferenceSupport"
