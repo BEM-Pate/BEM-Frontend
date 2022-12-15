@@ -37,13 +37,13 @@ interface Props {
 
 interface ResultProps {
   data: any;
-  userData: any;
+  userAttributes: any;
 }
 
 const Loading = () => <p className={classNames(styles.SearchLoading)}>Loading</p>;
 
 const Results = (props: ResultProps) => {
-  const { data, userData } = props;
+  const { data, userAttributes } = props;
   return (
     <div className={classNames(styles.SearchResults)}>
       {
@@ -57,7 +57,7 @@ const Results = (props: ResultProps) => {
           experience={pate.experience}
           diseases={pate.diseases}
           occupation={pate.occupation}
-          userData={userData}
+          userAttributes={userAttributes}
         />
       ))
 }
@@ -69,6 +69,7 @@ const Search = (props: Props) => {
   const { userData } = props;
 
   const [matches, setMatches] = useState(null);
+  const [userAttributes, setUserAttributes] = useState(null);
 
   useEffect(() => {
     axios.post(`${API_ADDRESS}/match/pate`, '', {
@@ -82,6 +83,17 @@ const Search = (props: Props) => {
         setMatches(res.data);
       }
     });
+
+    axios.get(`${API_ADDRESS}/user/userinfo`, {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${userData.token}`,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        setUserAttributes(res.data.bemInformation);
+      }
+    });
   }, []);
 
   return (
@@ -90,7 +102,7 @@ const Search = (props: Props) => {
         <Textfield id="pate-search" type="text" placeholder="Search..." />
       </div>
       <div>
-        {matches ? <Results data={matches} userData={userData} /> : <Loading />}
+        {matches ? <Results data={matches} userAttributes={userAttributes} /> : <Loading />}
       </div>
     </div>
   );

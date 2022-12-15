@@ -14,14 +14,14 @@ interface Props {
   languages: string[];
   occupation: string[];
   diseases: string[];
-  userData: any;
+  userAttributes: any;
 }
 
 const ResultCard = (props: Props) => {
   const {
-    firstName, lastName, image, languages, experience, occupation, diseases, userData,
+    firstName, lastName, image, languages, experience, occupation, diseases, userAttributes,
   } = props;
-  console.log(userData);
+  console.log(userAttributes);
   return (
     <div className={classNames(styles.ResultCard)}>
       <div className={classNames(styles.ResultCardEssentials)}>
@@ -38,7 +38,7 @@ const ResultCard = (props: Props) => {
         <div>
           {occupation.map((lang: string, index) => (
             <span
-              className={classNames(styles.ResultCardTag)}
+              className={classNames(styles.ResultCardTag, userAttributes.occupation.includes(lang) ? styles.ResultCardTagActive : '')}
               key={index}
             >
               {lang}
@@ -48,12 +48,12 @@ const ResultCard = (props: Props) => {
         </div>
         <Headline headline="p">Krankheitsbild</Headline>
         <div>
-          {diseases.map((lang: string, index) => (
+          {diseases.map((disease: string, index) => (
             <span
-              className={classNames(styles.ResultCardTag)}
+              className={classNames(styles.ResultCardTag, userAttributes.diseases.includes(disease) ? styles.ResultCardTagActive : '')}
               key={index}
             >
-              {lang}
+              {disease}
             </span>
           ))}
 
@@ -63,7 +63,10 @@ const ResultCard = (props: Props) => {
         <div>
           {languages.map((lang: string, index) => (
             <span
-              className={classNames(styles.ResultCardTag)}
+              className={classNames(
+                styles.ResultCardTag,
+                userAttributes.languages.includes(lang) ? styles.ResultCardTagActive : '',
+              )}
               key={index}
             >
               {lang}
