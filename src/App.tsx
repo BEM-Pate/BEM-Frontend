@@ -28,8 +28,8 @@ const App = () => {
   );
   return (
     <div>
-      <TopNavigationBar />
       <BrowserRouter>
+        <TopNavigationBar />
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage setUserData={setUserData} />} />
@@ -39,7 +39,7 @@ const App = () => {
           </Route>
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
-              <Route path="search" element={<Search />} />
+              <Route path="search" element={<Search userData={userData} />} />
               <Route path="messages" element={<Messages />} />
               <Route path="groups" element={<Groups />} />
               <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
