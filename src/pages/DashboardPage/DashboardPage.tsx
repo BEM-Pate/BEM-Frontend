@@ -2,12 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import { Outlet } from 'react-router-dom';
 import styles from './DashboardPage.module.scss';
-import BottomNavigtionBar from '../../components/BottomNavigationBar/BottomNavigtionBar';
+import LandingPage from '../LandingPage/LandingPage';
 
 const DashboardPage = () => (
   <div className={classNames(styles.Dashboard)}>
     <Outlet />
-    <BottomNavigtionBar />
+    <LandingPage />
   </div>
 );
 
