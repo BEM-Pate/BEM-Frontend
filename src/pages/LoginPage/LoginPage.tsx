@@ -65,7 +65,7 @@ const LoginPage = (props: Props) => {
             id="login-email"
             type="email"
             name="email"
-            label="Email"
+            label={t('labelEMail')!}
             onChange={onChange}
             required
           />
@@ -73,7 +73,7 @@ const LoginPage = (props: Props) => {
             id="login-password"
             type="password"
             name="password"
-            label="Password"
+            label={t('labelPassword')!}
             onChange={onChange}
             required
           />
