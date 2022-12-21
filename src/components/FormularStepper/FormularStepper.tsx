@@ -2,11 +2,11 @@ import React, {
   Children, FormEvent, useCallback, useRef, useState,
 } from 'react';
 import classNames from 'classnames';
-import axios from 'axios';
 import styles from './FormularStepper.module.scss';
 import Button from '../Button/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Headline from '../Headline/Headline';
+import useAxios from '../../helpers/useAxios';
 
 interface Props {
   postUrl: string;
@@ -22,6 +22,8 @@ const FormularStepper = (props: Props) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(new FormData());
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const axios = useAxios();
 
   const form = useRef<HTMLFormElement>(null);
 

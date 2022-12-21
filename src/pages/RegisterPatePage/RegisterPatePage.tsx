@@ -9,40 +9,125 @@ import Textfield from '../../components/Textfield/Textfield';
 import RadioList from '../../components/RadioList/RadioList';
 import FileInput from '../../components/FileInput/FileInput';
 import Textarea from '../../components/Textarea/Textarea';
+import CheckList from '../../components/CheckList/CheckList';
 
 const RegisterPatePage = () => {
   const { t } = useTranslation();
 
   const [selectDisease, setSelectDisease] = useState(false);
+  const [meetingRegion, setMeetingRegion] = useState(false);
 
   return (
     <div className={classNames(styles.RegisterPatePage)}>
-      <FormularStepper postUrl="" postDataStructure={(e) => e} postDataLabels={{}}>
+      <FormularStepper
+        postUrl="/user/register/pate"
+        postDataStructure={({
+          email,
+          firstName,
+          lastName,
+          password,
+          languages,
+          helpOffers,
+          meetingPreferenceMeeting,
+          experienceText,
+          motivationText,
+          helpOffersDiseases,
+          preferredDates,
+          avatar,
+        }) => {
+          console.log(avatar);
+          return ({
+            email,
+            firstName,
+            lastName,
+            password,
+            meetingPreference: {
+              support: helpOffers,
+              diseaseConsultation: Array.isArray(helpOffersDiseases)
+                ? helpOffersDiseases
+                : [helpOffersDiseases],
+              meeting: meetingPreferenceMeeting,
+              location: 'Berlin',
+              time: Array.isArray(preferredDates)
+                ? preferredDates
+                : [preferredDates],
+            },
+            processBEM: 'DONE',
+            bemInformation: {
+              diseases: Array.isArray(helpOffersDiseases)
+                ? helpOffersDiseases
+                : [helpOffersDiseases],
+              occupation: [
+                'PHYSICAL',
+              ],
+              languages: Array.isArray(languages || [])
+                ? languages || []
+                : [languages],
+            },
+            experience: experienceText,
+            motivation: motivationText,
+          });
+        }}
+        postDataLabels={{
+          email: t('labelEMail'),
+          firstName: t('labelFirstName'),
+          lastName: t('labelLastName'),
+          password: t('labelPassword'),
+        }}
+      >
         <FormularStep title={t('registerPateStep1Title')!}>
           <Dropdown
             options={[
-              { value: 'NONE', label: '- none -' },
+              {
+                value: 'ACUTE_CRISIS',
+                label: t('registerPateDiseaseOption1'),
+              },
+              {
+                value: 'OVERLOAD',
+                label: t('registerPateDiseaseOption2'),
+              },
+              {
+                value: 'DEPRESSION',
+                label: t('registerPateDiseaseOption3'),
+              },
+              {
+                value: 'ADDICTION',
+                label: t('registerPateDiseaseOption4'),
+              },
+              {
+                value: 'BURNOUT',
+                label: t('registerPateDiseaseOption5'),
+              },
+              {
+                value: 'FEAR',
+                label: t('registerPateDiseaseOption6'),
+              },
             ]}
             id="dropdown-experience"
+            name="diseaseExperience"
             label={t('registerPateDiseaseExperience')!}
             required
           />
           <Dropdown
             options={[
-              { value: 'NONE', label: '- none -' },
+              { value: 'JOB_1', label: 'Job 1' },
+              { value: 'JOB_2', label: 'Job 2' },
+              { value: 'JOB_3', label: 'Job 3' },
             ]}
             id="dropdown-job"
+            name="job"
             label={t('registerPateJob')!}
             required
           />
-          <Dropdown
+          <CheckList
             options={[
-              { value: 'NONE', label: '- none -' },
               { value: 'ENGLISH', label: 'Englisch' },
+              { value: 'TURKISH', label: 'Türkisch' },
+              { value: 'POLISH', label: 'Polnisch' },
             ]}
-            id="dropdown-languages"
+            id="checklist-languages"
+            name="languages"
             label={t('registerPateLanguages')!}
-            required
           />
         </FormularStep>
         <FormularStep title={t('registerPateStep2Title')!}>
@@ -74,7 +159,12 @@ const RegisterPatePage = () => {
             label={t('labelPassword')!}
             required
           />
-          <FileInput id="fileinput-avatar" label={t('registerPateAvatar')!} required />
+          <FileInput
+            id="fileinput-avatar"
+            name="avatar"
+            label={t('registerPateAvatar')!}
+            required
+          />
         </FormularStep>
         <FormularStep title={t('registerPateStep3Title')!}>
           <RadioList
@@ -124,20 +214,32 @@ const RegisterPatePage = () => {
               required
             />
           )}
-          <Dropdown options={[]} id="dropdown-certificate" label={t('registerPateCertificateType')!} required />
+          <Dropdown
+            options={[
+              { value: 'CERTIFICATE_1', label: t('registerPateCertificateOption1') },
+              { value: 'CERTIFICATE_2', label: t('registerPateCertificateOption2') },
+              { value: 'CERTIFICATE_3', label: t('registerPateCertificateOption3') },
+            ]}
+            id="dropdown-certificate"
+            label={t('registerPateCertificateType')!}
+            required
+          />
           <FileInput
             id="fileinput-certificate"
+            name="certificateFile"
             label={t('registerPateCertificateFile')!}
           />
         </FormularStep>
         <FormularStep>
           <Textarea
             id="textarea-experience"
+            name="experienceText"
             label={t('registerPateExperienceText')!}
             required
           />
           <Textarea
             id="textarea-motivation"
+            name="motivationText"
             label={t('registerPateMotivationText')!}
             required
           />
@@ -148,12 +250,20 @@ const RegisterPatePage = () => {
             name="meetingPreferenceMeeting"
             label={t('registerPateMeetingHeader')!}
             options={[
-              { value: 'IN_PERSON', label: t('registerPateMeetingHeaderOption1') },
-              { value: 'VIRTUAL', label: t('registerPateMeetingHeaderOption2') },
+              { value: 'VIRTUAL', label: t('registerPateMeetingHeaderOption1') },
+              { value: 'IN_PERSON', label: t('registerPateMeetingHeaderOption2') },
             ]}
+            onChange={(e) => setMeetingRegion(e.target.value === 'IN_PERSON')}
             required
           />
+          {meetingRegion && (
           <Dropdown
+            options={[]}
+            id="dropdown-meetingRegion"
+            name="meetingRegion"
+          />
+          )}
+          <CheckList
             options={[
               { value: 'MONDAY', label: 'Montag' },
               { value: 'TUESDAY', label: 'Dienstag' },
@@ -164,8 +274,8 @@ const RegisterPatePage = () => {
               { value: 'SUNDAY', label: 'Sonntag' },
             ]}
             id="dropdown-date"
+            name="preferredDates"
             label={t('registerPatePreferredDates')!}
-            multiple
             required
           />
         </FormularStep>

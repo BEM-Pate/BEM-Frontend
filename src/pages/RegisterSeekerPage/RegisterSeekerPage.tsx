@@ -6,7 +6,6 @@ import FormularStepper from '../../components/FormularStepper/FormularStepper';
 import FormularStep from '../../components/FormularStepper/FormularStep';
 import Textfield from '../../components/Textfield/Textfield';
 import RadioList from '../../components/RadioList/RadioList';
-import { API_ADDRESS } from '../../helpers/env';
 import Dropdown from '../../components/Dropdown/Dropdown';
 
 const RegisterSeekerPage = () => {
@@ -17,7 +16,7 @@ const RegisterSeekerPage = () => {
   return (
     <div className={classNames(styles.RegisterAffectedPage)}>
       <FormularStepper
-        postUrl={`${API_ADDRESS}/user/register/seeker`}
+        postUrl="/user/register/seeker"
         postDataStructure={(
           {
             email,

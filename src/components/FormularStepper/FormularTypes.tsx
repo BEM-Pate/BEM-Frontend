@@ -12,5 +12,5 @@ export interface FormControl<T> {
 
 export interface FormOption {
   label: string;
-  value: string;
+  value?: string | number;
 }

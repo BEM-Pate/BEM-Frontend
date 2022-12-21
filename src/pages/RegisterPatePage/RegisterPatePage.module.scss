@@ -1,1 +1,5 @@
-.RegisterPatePage {}
+@import '../../styles/mixins.module';
+
+.RegisterPatePage {
+  @include page;
+}

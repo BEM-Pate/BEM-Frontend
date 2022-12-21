@@ -2,12 +2,11 @@ import React, { useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './LoginPage.module.scss';
 import Textfield from '../../components/Textfield/Textfield';
 import Headline from '../../components/Headline/Headline';
 import Button from '../../components/Button/Button';
-import { API_ADDRESS } from '../../helpers/env';
+import useAxios from '../../helpers/useAxios';
 
 interface Props {
   setUserData: (s: any) => void;
@@ -17,6 +16,8 @@ const LoginPage = (props: Props) => {
   const { setUserData } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const axios = useAxios();
 
   const [formData, setFormData] = useState<FormData>(new FormData());
   const [submitting, setSubmitting] = useState(false);
@@ -32,7 +33,7 @@ const LoginPage = (props: Props) => {
 
     setSubmitting(true);
     try {
-      axios.post(`${API_ADDRESS}/user/login`, {
+      axios.post('/user/login', {
         email: formData.get('email'),
         password: formData.get('password'),
       }).then((res) => {
@@ -48,7 +49,7 @@ const LoginPage = (props: Props) => {
           setSubmitting(false);
         });
     } catch (err) {
-      console.log('failed', err);
+      console.error('Login failed:', err);
     }
   };
 
@@ -65,7 +66,7 @@ const LoginPage = (props: Props) => {
             id="login-email"
             type="email"
             name="email"
-            label="Email"
+            label={t('labelEMail')!}
             onChange={onChange}
             required
           />
@@ -73,7 +74,7 @@ const LoginPage = (props: Props) => {
             id="login-password"
             type="password"
             name="password"
-            label="Password"
+            label={t('labelPassword')!}
             onChange={onChange}
             required
           />
