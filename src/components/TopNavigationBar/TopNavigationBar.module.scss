@@ -5,10 +5,19 @@
   justify-content: center;
   align-items: center;
   border-bottom: 2px var(--color-border) solid;
-  img {
-    box-sizing: border-box;
-    max-width: 40%;
-    max-height:40%;
-    padding: 3%;
-  }
+  a {
+    height:100%;
+     img {
+       box-sizing: border-box;
+       user-drag: none;  
+       user-select: none;
+       -moz-user-select: none;
+       -webkit-user-drag: none;
+       -webkit-user-select: none;
+       -ms-user-select: none;  
+       height:100%;
+       padding: 8px;
+     }
+   }
+   
 }
