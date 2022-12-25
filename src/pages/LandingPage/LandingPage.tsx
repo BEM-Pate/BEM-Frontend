@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import styles from './LandingPage.module.scss';
 import Headline from '../../components/Headline/Headline';
+import Button from '../../components/Button/Button';
 
 const LandingPage = () => {
   const { t } = useTranslation();

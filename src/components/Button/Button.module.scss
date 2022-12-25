@@ -2,15 +2,15 @@
 
 .Button {
   @include font-md();
-  background-color: var(--color-button-bg);
-  border: 2px solid var(--color-button-bg);
-  border-radius: 5px;
+  background-color:  rgb(99, 131, 123);
+  //border: 2px solid var(--color-button-bg);
+  border-radius: 50px;
   color: var(--color-button-text);
-  height: 48px;
+  height: 50px;
   padding: 0 16px;
-  min-width: 96px;
-  cursor: pointer;
-  transition: var(--transition);
+  min-width: 200px;
+  //cursor: pointer;
+  //transition: var(--transition);
 
   p {
     margin: 0px;
