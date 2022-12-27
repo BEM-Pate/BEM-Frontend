@@ -7,6 +7,8 @@ import styles from './FormularStepper.module.scss';
 import Button from '../Button/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Headline from '../Headline/Headline';
+import arrowRight from '../../images/icons/ui/arrow_right_white.svg';
+import arrowLeft from '../../images/icons/ui/arrow_left_white.svg';
 
 interface Props {
   postUrl: string;
@@ -91,7 +93,6 @@ const FormularStepper = (props: Props) => {
 
   return (
     <div className={classNames(styles.FormularStepper)}>
-      <ProgressIndicator currentStep={currentStep} max={stepCount + 1} />
       <form
         ref={form}
         className={classNames(styles.FormularStepperForm)}
@@ -127,13 +128,31 @@ const FormularStepper = (props: Props) => {
           </div>
         </div>
         <div className={classNames(styles.FormularStepperControls)}>
-          <Button styling="outline" onClick={previousStep} disabled={currentStep <= 1}>Back</Button>
+          <Button styling="outline" onClick={previousStep} disabled={currentStep <= 1} icon>
+            <img
+              className={classNames(styles.FormularStepperControlsIcon)}
+              src={arrowLeft}
+              alt=">"
+            />
+          </Button>
           {currentStep <= stepCount
-            && <Button onClick={nextStep} disabled={currentStep > stepCount}>Next</Button>}
+            && (
+            <Button onClick={nextStep} disabled={currentStep > stepCount} icon>
+              <img
+                className={classNames(styles.FormularStepperControlsIcon)}
+                src={arrowRight}
+                alt=">"
+              />
+            </Button>
+            )}
           {currentStep > stepCount
             && <Button disabled={isSubmitting} type="submit">Submit</Button>}
         </div>
       </form>
+      <span>
+        {currentStep <= stepCount && `${currentStep}/${stepCount}`}
+      </span>
+      <ProgressIndicator currentStep={currentStep} max={stepCount + 1} />
     </div>
   );
 };

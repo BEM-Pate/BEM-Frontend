@@ -1,6 +1,7 @@
 @import "src/styles/variables.module";
 
 .Dropdown {
+  user-select: none;
 
   &Label {
     @include input-label;
@@ -10,18 +11,103 @@
     }
   }
 
-  &Select {
-    border: 2px solid var(--color-border);
-    border-radius: 5px;
-    width: 100%;
+  &Container {
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-input);
+    overflow: hidden;
+  }
 
-    &Option {
-      @include font-sm;
-      align-items: center;
-      display: flex;
-      font-family: var(--font-family);
-      height: 32px;
-      vertical-align: bottom;
+  &Value {
+    background-color: var(--color-white);
+    border: var(--border-transparent);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    height: 56px;
+    padding: 16px 56px 16px 16px;
+    position: relative;
+    text-align: left;
+    transition: all 0.4s;
+    width: 100%;
+    z-index: 0;
+
+    &Icon {
+      height: 24px;
+      position: absolute;
+      right: 16px;
+      width: 24px;
+    }
+
+    &Empty {
+      color: var(--color-body-text-secondary);
     }
   }
+
+  &List {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-left: var(--border-transparent);
+    border-right: var(--border-transparent);
+    background-color: var(--color-white);
+    display: flex;
+    flex-flow: column nowrap;
+    max-height: 0;
+    padding: 0;
+    overflow: hidden auto;
+    transition: all 0.4s;
+    visibility: hidden;
+    z-index: -1;
+  }
+
+  &Option {
+    background-color: transparent;
+    border: none;
+    height: 46px;
+    padding: 11px 14px;
+    text-align: left;
+
+    &Selected {
+      background-color: var(--color-primary-transparent);
+    }
+  }
+}
+
+.open {
+  .Dropdown {
+    &Value {
+      border: var(--border);
+      border-bottom: none;
+
+      &Icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &List {
+      border: var(--border);
+      border-top: none;
+      max-height: 256px;
+      padding: 8px 0;
+      visibility: visible;
+    }
+  }
+}
+
+.multiple {
+  .Dropdown {
+    &Value {
+      display: none;
+    }
+
+    &List {
+      border: var(--border);
+      border-radius: 16px;
+      max-height: 256px;
+      padding: 0;
+      visibility: visible;
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }

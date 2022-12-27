@@ -27,7 +27,13 @@ const RadioList = (props: RadioListProps) => {
             onChange={onChange}
             required={required}
           />
-          <label htmlFor={`radio-${name}-${i}`}>{label}</label>
+          <label
+            htmlFor={`radio-${name}-${i}`}
+            className={classNames(styles.RadioListOptionLabel)}
+          >
+            <span className={classNames(styles.RadioListOptionIcon)} />
+            {label}
+          </label>
         </div>
       ))}
     </div>

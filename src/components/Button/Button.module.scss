@@ -3,17 +3,18 @@
 .Button {
   @include font-md();
   background-color: var(--color-button-bg);
+  box-shadow: var(--box-shadow-button);
   border: 2px solid var(--color-button-bg);
-  border-radius: 5px;
+  border-radius: 32px;
   color: var(--color-button-text);
-  height: 48px;
+  height: 56px;
   padding: 0 16px;
   min-width: 96px;
   cursor: pointer;
   transition: var(--transition);
 
   p {
-    margin: 0px;
+    margin: 0;
   }
 
   &:disabled {
@@ -25,12 +26,18 @@
     color: var(--color-button-bg);
   }
 
-  &.outlined {
+  &.secondary {
     background-color: transparent;
     color: var(--color-button-bg);
 
     &:enabled:hover {
       opacity: 0.5;
     }
+  }
+
+  &.icon {
+    padding: 0;
+    min-width: 0;
+    width: 56px;
   }
 }
