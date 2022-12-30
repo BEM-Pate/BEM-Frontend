@@ -1,0 +1,23 @@
+.container {
+  background-color: rgb(152, 200, 188);
+  text-align: center;
+  &backgroundImage{
+    background-image: url('../../../../images/icons/ui/bglogo2.png');
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    padding: 15%;
+  }
+  &main{
+    display: float;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-top: 100%;
+    padding-bottom: 100%;
+    margin: 5%;
+  }
+  &text{
+    color: white;
+  }
+}

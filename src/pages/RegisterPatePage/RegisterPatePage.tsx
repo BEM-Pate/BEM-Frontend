@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './RegisterPatePage.module.scss';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Buttons/Button';
 
 interface RegisterMentorPageProps {
   children?: React.ReactNode

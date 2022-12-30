@@ -4,7 +4,7 @@ import React, {
 import classNames from 'classnames';
 import axios from 'axios';
 import styles from './FormularStepper.module.scss';
-import Button from '../Button/Button';
+import Button from '../Buttons/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Headline from '../Headline/Headline';
 

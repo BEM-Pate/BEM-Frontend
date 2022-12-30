@@ -6,7 +6,7 @@ import axios from 'axios';
 import styles from './LoginPage.module.scss';
 import Textfield from '../../components/Textfield/Textfield';
 import Headline from '../../components/Headline/Headline';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Buttons/Button';
 import { API_ADDRESS } from '../../helpers/env';
 
 interface Props {

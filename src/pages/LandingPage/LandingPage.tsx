@@ -28,6 +28,12 @@ const LandingPage = () => {
         <Link to="/login" className={classNames(styles.LandingPageLink)}>
           {t('landingPageLinkLogin')}
         </Link>
+        <hr />
+        <Link to="/onboardingseeker">
+          <p>
+            Onboarding
+          </p>
+        </Link>
       </div>
     </div>
   );

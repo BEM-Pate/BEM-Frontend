@@ -1,0 +1,15 @@
+.imageContainer{
+    margin-bottom: 5%;
+    &image{
+        float: right;
+    }
+}
+.textContainer{
+    text-align: center;
+    &header{
+        font-weight: bold
+    }
+}
+.buttonContainer{
+    text-align: center;
+}

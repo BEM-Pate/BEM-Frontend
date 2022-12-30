@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import styles from './Profile.module.scss';
-import Button from '../../Button/Button';
+import Button from '../../Buttons/Button';
 import logo from '../../../images/default.png';
 
 const Profile = () => {
