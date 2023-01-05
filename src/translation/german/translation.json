@@ -44,6 +44,10 @@
 
     "profilePageYourProfile": "Dein Profil",
     "profilePageYourData": "Deine Daten",
-    "profilePageDeleteProfile": "Profil löschen!"
+    "profilePageDeleteProfile": "Profil löschen!",
+
+    "messagesPageHeader": "Nachrichten",
+    "messagesPageSubHeader": "Ihre Kontakte",
+    "messagesPageMessages": "Ihre Nachrichten"
 
 }

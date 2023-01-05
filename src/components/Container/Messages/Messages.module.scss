@@ -1,40 +1,61 @@
 @import "src/styles/variables.module";
 
 .Messages {
-    @include dashboard-container;
-    &Item {
-        height: 80px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        &Info {  
-            @include font-md;
-            width: 100%;
-            font-weight: bold;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-          &Name {
-            display: flex;
-            justify-content: space-between;
-          }
-        }
+  //@include dashboard-container;
+  background-color: rgb(99, 131, 123);
+  &ProfilePictures {
+    border-radius: 15px;
+    height: 50px;
+    width: 50px;
+    margin-top: 1%;
+    margin-bottom: 4%;
+    margin-right: 2%;
+    margin-left: 1%;
+}
+  &ContainerContacts {
+    background-color: rgba(110, 135, 129, 0.768);
+    overflow: auto;
+    white-space: nowrap;
+    margin-bottom: 5%;
+    &Images {
+      width: 50px;
+      height: 50px;
     }
-    img {
-        border-radius: 8px;
-        max-width: 100%;
-        max-height: 100%;
+  }
+  &ContainerMessages {
+    background-color: white;
+    border: 0.5px solid black;
+    border-radius: 25px;
+    overflow: auto;
+    white-space: nowrap;
+    height: 600px;
+
+    &Messages {
+      margin: 1.5%;
+      background-color: rgba(211, 202, 202, 0.638);
+      border-radius: 15px;
     }
-    p {
-        margin-bottom: 0px;
-        @include font-sm;
-        font-weight: 400;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    &Text {
+      &Name {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      &Message {
+        margin-left: 5%;
+      }
+      &Date {
+        color: #00000076;
+        align-items: right;
+      }
     }
-    hr {
-        border: rgba($color: #000000, $alpha: 0.1) 1px solid
-    }
+  
+  }
+  &Header {
+    padding: 2%;
+    text-align: center;
+    color: white;
+  }
+  &Subheader{
+    color: white;
+  }
 }
