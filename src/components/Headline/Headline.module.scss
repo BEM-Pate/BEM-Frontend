@@ -1,4 +1,30 @@
 .Headline {
-  color: var(--color-body-text);
+  color: var(--color-headline-text);
   font-family: var(--font-family-headline);
+  font-weight: var(--font-weight-headline);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--font-lineheight-h1);
+}
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--font-lineheight-h2);
+}
+h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--font-lineheight-h3);
+}
+h4 {
+  font-size: var(--font-size-h4);
+  line-height: var(--font-lineheight-h4);
+}
+h5 {
+  font-size: var(--font-size-h5);
+  line-height: var(--font-lineheight-h5);
+}
+h6 {
+  font-size: var(--font-size-h6);
+  line-height: var(--font-lineheight-h6);
 }

@@ -1,19 +1,25 @@
 :root {
   /* Colors from MIRO Wireframes */
-  --color-primary: #1A1A1A;
-  --color-indigo: #414BB2;
-  --color-magenta: #DA0063;
-  --color-orange: #F24726;
+  --color-primary: #98C8BC;
+  --color-primary-transparent: rgba(228, 239, 236, 0.4);
+  --color-primary-darker: #63837B;
+  --color-primary-darker-transparent: #63837B66;
+  --color-white: #FFFFFF;
+  --color-black: #22172A;
 
   --color-error: #AF0000;
   --color-required: #FF0000;
 
-  --color-body-text: rgba(0, 0, 0, 0.9);
-  --color-body-bg: #FFFFFF;
+  --color-body-text: var(--color-black);
+  --color-body-text-secondary: rgba(34, 23, 42, 0.5);
+  --color-body-bg: #E8EDEC;
+  --color-body-bg-white: #FFFFFF;
   --color-body-bg-darker: #F5F5F5;
 
+  --color-headline-text: var(--color-primary-darker);
+
   --color-border: rgba(0, 0, 0, 0.2);
-  --color-link: var(--color-indigo);
+  --color-link: var(--color-primary-darker);
 
 
   /* Temporary Colors */
@@ -21,6 +27,10 @@
   --color-dashboard-background: rgba(0,0,0,0.05);
 
   --color-button-text: #FFFFFF;
-  --color-button-bg: var(--color-primary);
+  --color-button-bg: var(--color-primary-darker);
+  --box-shadow-button: 0px 8px 40px rgba(75, 22, 76, 0.2);
+  --box-shadow-input: 0px 2px 20px rgba(117, 34, 119, 0.04);
 
+  --border: 1.5px solid var(--color-primary);
+  --border-transparent: 1.5px solid transparent;
 }

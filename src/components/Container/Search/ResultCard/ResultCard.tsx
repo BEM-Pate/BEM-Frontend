@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './ResultCard.module.scss';
 import Headline from '../../../Headline/Headline';
 
-/* import arrowRight from '../../../../images/icons/ui/arrow_right.svg'; */
+/* import arrowRight from '../../../../images/icons/ui/chevron_right.svg'; */
 /* import languageIcon from '../../../../images/icons/ui/language.svg'; */
 
 interface Props {

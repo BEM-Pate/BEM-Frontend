@@ -1,34 +1,19 @@
 .ProgressIndicator {
-  background-color: var(--color-body-bg);
+  background-color: var(--color-primary-darker-transparent);
   align-items: center;
+  border-radius: 4px;
   display: flex;
   flex-flow: row nowrap;
+  height: 4px;
   justify-content: stretch;
-  padding: 16px;
+  overflow: hidden;
   position: sticky;
   top: 0;
   width: 100%;
 
-  &Element {
-    background-color: var(--color-border);
-    border-radius: 50%;
-    display: inline-block;
-    flex: 0 0 auto;
-    height: 16px;
-    width: 16px;
-
-    &Active {
-      background-color: var(--color-primary);
-    }
-  }
-
-  &Separator {
-    background-color: var(--color-border);
-    flex: 1 1 auto;
-    height: 2px;
-
-    &Active {
-      background-color: var(--color-primary);
-    }
+  &Bar {
+    background-color: var(--color-primary);
+    border-radius: 4px;
+    height: 100%;
   }
 }

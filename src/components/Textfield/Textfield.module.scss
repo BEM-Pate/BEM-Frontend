@@ -10,16 +10,17 @@
   }
 
   &Input {
-    @include font-sm;
-    width: 100%;
-    border: 2px solid var(--color-border);
-    padding: 12px 8px;
-    border-radius: 5px;
+    @include input-text;
+    border: 1.5px solid transparent;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-input);
     display: block;
+    height: 56px;
+    padding: 16px;
+    width: 100%;
 
-    &.invalid {
-      color: var(--color-error);
-      border-color: currentColor;
+    &:focus {
+      border-color: var(--color-primary);
     }
   }
 }

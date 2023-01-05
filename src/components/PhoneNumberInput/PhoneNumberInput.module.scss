@@ -1,0 +1,49 @@
+@import "src/styles/variables.module";
+
+.PhoneNumberInput {
+  &Label {
+    @include input-label;
+
+    &Required {
+      @include input-label-required;
+    }
+  }
+
+  & :global .PhoneInput {
+    --PhoneInputCountryFlag-borderColor--focus: var(--color-primary) !important;
+    --PhoneInputCountrySelectArrow-color--focus: var(--color-primary) !important;
+
+    position: relative;
+
+    &Country {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 67px;
+      margin-right: 0;
+      padding: 0 16px;
+
+      &Icon {
+        svg {
+          vertical-align: top;
+        }
+      }
+    }
+
+    &Input {
+      @include input-text;
+      border: 1.5px solid transparent;
+      border-radius: 16px;
+      box-shadow: var(--box-shadow-input);
+      display: block;
+      height: 56px;
+      padding: 16px 16px 16px 67px;
+      width: 100%;
+
+      &:focus {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+}

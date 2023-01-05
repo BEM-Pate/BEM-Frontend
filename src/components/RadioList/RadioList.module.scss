@@ -10,20 +10,55 @@
   }
 
   &Option {
-    @include font-sm;
+    @include input-text;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    height: 32px;
+    min-height: 32px;
     margin-bottom: 4px;
 
-    > label {
+    &Icon {
+      align-items: center;
+      background-color: var(--color-white);
+      border: 1px solid transparent;
+      border-radius: 50%;
+      display: inline-flex;
+      flex: 0 0 auto;
+      height: 24px;
+      justify-content: center;
+      margin: 0 18px 0 10px;
+      transition: all 0.2s;
+      width: 24px;
+
+      &::before {
+        background-color: var(--color-primary);
+        border-radius: 50%;
+        display: inline-block;
+        content: '';
+        height: 0;
+        transition: all 0.2s;
+        width: 0;
+      }
+    }
+
+    &Label {
       align-items: center;
       display: flex;
       flex-flow: row nowrap;
       flex: 1 1 auto;
       height: 100%;
-      margin-left: 8px;
+    }
+
+    input {
+      display: none;
+
+      &:checked + label > span {
+        border-color: var(--color-primary);
+        &::before {
+          height: 12px;
+          width: 12px;
+        }
+      }
     }
   }
 }
