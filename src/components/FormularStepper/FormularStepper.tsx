@@ -7,8 +7,8 @@ import styles from './FormularStepper.module.scss';
 import Button from '../Button/Button';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Headline from '../Headline/Headline';
-import arrowRight from '../../images/icons/ui/arrow_right_white.svg';
-import arrowLeft from '../../images/icons/ui/arrow_left_white.svg';
+import arrowRight from '../../images/icons/ui/arrow_forward.svg';
+import arrowLeft from '../../images/icons/ui/arrow_back.svg';
 
 interface Props {
   postUrl: string;
@@ -121,14 +121,35 @@ const FormularStepper = (props: Props) => {
                 </span>
                 <span className={classNames(styles.FormularDataTableValue)}>
                   {/* eslint-disable-next-line no-nested-ternary */}
-                  {typeof value === 'string' ? ((key === 'password' && value !== '') ? '******' : value) : Array.isArray(value) ? value.join(', ') : 'File'}
+                  {typeof value === 'string'
+                    ? ((key === 'password' && value !== '')
+                      ? '******'
+                      : value)
+                    : Array.isArray(value)
+                      ? value.join(', ')
+                      : 'File'}
                 </span>
               </div>
             ))}
           </div>
         </div>
-        <div className={classNames(styles.FormularStepperControls)}>
-          <Button styling="outline" onClick={previousStep} disabled={currentStep <= 1} icon>
+      </form>
+      <div className={classNames(styles.FormularStepperProgress)}>
+        <span className={classNames(styles.FormularStepperProgressCounter)}>
+          <span className={classNames(styles.FormularStepperProgressCounterCurrent)}>
+            {Math.min(currentStep, stepCount)}
+          </span>
+          <span className={classNames(styles.FormularStepperProgressCounterTotal)}>
+            {`/${stepCount}`}
+          </span>
+        </span>
+        <div className={classNames(styles.FormularStepperProgressControls)}>
+          <Button
+            className={classNames(styles.FormularStepperProgressControlsBack)}
+            onClick={previousStep}
+            disabled={currentStep <= 1}
+            icon
+          >
             <img
               className={classNames(styles.FormularStepperControlsIcon)}
               src={arrowLeft}
@@ -136,23 +157,22 @@ const FormularStepper = (props: Props) => {
             />
           </Button>
           {currentStep <= stepCount
-            && (
-            <Button onClick={nextStep} disabled={currentStep > stepCount} icon>
-              <img
-                className={classNames(styles.FormularStepperControlsIcon)}
-                src={arrowRight}
-                alt=">"
-              />
-            </Button>
-            )}
+          && (
+          <Button onClick={nextStep} disabled={currentStep > stepCount} icon>
+            <img
+              className={classNames(styles.FormularStepperControlsIcon)}
+              src={arrowRight}
+              alt=">"
+            />
+          </Button>
+          )}
           {currentStep > stepCount
-            && <Button disabled={isSubmitting} type="submit">Submit</Button>}
+          && <Button disabled={isSubmitting} type="submit">Submit</Button>}
         </div>
-      </form>
-      <span>
-        {currentStep <= stepCount && `${currentStep}/${stepCount}`}
-      </span>
-      <ProgressIndicator currentStep={currentStep} max={stepCount + 1} />
+        <div className={classNames(styles.FormularStepperProgressBar)}>
+          <ProgressIndicator currentStep={currentStep} max={stepCount + 1} />
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ interface Props {
   type?: 'submit' | 'reset' | 'button' | undefined;
   styling?: 'primary' | 'outline';
   icon?: boolean;
+  className?: string | undefined;
   children?: React.ReactNode;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -13,7 +14,7 @@ interface Props {
 
 const Button = (props: Props) => {
   const {
-    type = 'button', styling = 'primary', icon = false, children, disabled, onClick = (() => {}),
+    type = 'button', styling = 'primary', icon = false, className = '', children, disabled, onClick = (() => {}),
   } = props;
   return (
     <button
@@ -23,7 +24,7 @@ const Button = (props: Props) => {
       className={classNames(styles.Button, {
         [styles.outlined]: styling === 'outline',
         [styles.icon]: icon,
-      })}
+      }, className)}
     >
       <p className={classNames(styles.ButtonbuttonText)}>{children}</p>
     </button>

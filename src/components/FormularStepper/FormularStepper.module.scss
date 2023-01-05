@@ -8,19 +8,44 @@
     flex: 1 1 auto;
   }
 
-  &Controls {
+  &Progress {
+    align-items: flex-end;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    padding: 8px 0;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 0 24px;
 
-    & > * {
-      margin: 0 4px;
+    &Counter {
+      font-weight: 700;
+      font-size: 20px;
+
+      &Current {
+        color: var(--color-primary-darker);
+      }
+      &Total {
+        color: var(--color-primary-darker-transparent);
+      }
     }
 
-    &Icon {
-      height: 24px;
-      width: 24px;
+    &Controls {
+      align-items: flex-end;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+
+      & > * {
+        margin: 0 4px;
+      }
+
+      &Icon {
+        height: 24px;
+        width: 24px;
+      }
+    }
+
+    &Bar {
+      margin-top: 16px;
+      width: 100%;
     }
   }
 }
