@@ -29,6 +29,11 @@
     transform: translate(-50%,-50%);
     scale: 100%;
     &Icon {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;  
       height: 180px;
       margin: 0 auto;
     }
