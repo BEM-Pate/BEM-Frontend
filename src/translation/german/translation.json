@@ -44,6 +44,9 @@
 
     "profilePageYourProfile": "Dein Profil",
     "profilePageYourData": "Deine Daten",
-    "profilePageDeleteProfile": "Profil löschen!"
+    "profilePageDeleteProfile": "Profil löschen!",
+
+    "modalWindowDefaultHeadline": "Etwas ist schief gelaufen!",
+    "modalWindowDefaultText": "Bitte drücke auf OK"
 
 }
