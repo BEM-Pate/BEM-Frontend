@@ -1,0 +1,26 @@
+.imageContainer{
+    align-items: 'center';
+    justify-self: 'center';
+    display: 'flex';
+    margin: 10%;
+
+    &image{
+        width: 300px;
+        height: 300px;
+    }
+}
+.textContainer{
+    text-align: center;
+    &header{
+        font-weight: bold
+    }
+}
+.buttonContainer{
+    text-align: center;
+}
+.LoginContainer{
+    align-items: center;
+    &text{
+        text-align: center;
+    }
+}

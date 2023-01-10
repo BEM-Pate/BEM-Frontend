@@ -10,6 +10,9 @@
     "labelBio": "Biography",
     "labelBecomeMentor": "Become a Mentor",
     "labelEdit": "Edit ",
+    "labelNext": "Next",
+    "labelRegister": "Register",
+    "labelLogin": "Login with your existing account",
 
     "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
     "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -18,7 +21,6 @@
     "landingPageLinkBecomePate": "Become a BEM-Pate",
     "landingPageLinkOrLabel": "or",
     "landingPageLinkVideos": "Hear Stories of Seekers (Videos)",
-    "landingPageLinkLogin": "Login with your existing account",
 
     "loginPageHeadline": "Login with existing account",
     "loginPageButtonLogin": "Login",
@@ -45,5 +47,13 @@
 
     "profilePageYourProfile": "Your Profile",
     "profilePageYourData": "Your Data",
-    "profilePageDeleteProfile": "Delete Profile!"
+    "profilePageDeleteProfile": "Delete Profile!",
+
+    "onboardingPageSeekerHeader": "BEM consultation at eye level",
+    "onboardingPageSeekerDescription": "Find answers on the topic of BEM due to mental impairments",
+
+    "onboardingPateHeader": "Become a BEM sponsor",
+    "onboardingPateDescription": "Share your BEM experience with other BEM-entitled people who have a mental impairment",
+
+    "onboardingSHGHeader": "Start or find a support group"
 }
