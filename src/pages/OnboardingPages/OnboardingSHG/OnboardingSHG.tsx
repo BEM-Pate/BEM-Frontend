@@ -24,7 +24,7 @@ const OnboardingSHG = () => {
       </div>
 
       <div className={classnames(styles.buttonContainer)}>
-        <Button>{t('labelRegister')}</Button>
+        <Button className={classnames(styles.buttonContainerbutton)}>{t('labelRegister')}</Button>
       </div>
       <hr />
       <Link to="/login" className={classnames(styles.LoginContainertext)}>

@@ -25,7 +25,7 @@ const OnboardingPate = () => {
       </div>
       <div className={classnames(styles.buttonContainer)}>
         <Link to="/register/pate">
-          <Button>{t('labelRegister')}</Button>
+          <Button className={classnames(styles.buttonContainerbutton)}>{t('labelRegister')}</Button>
         </Link>
       </div>
       <hr />
