@@ -1,11 +1,9 @@
-import React from 'react';
-
-export interface FormControl<T> {
+export interface FormControl {
   id: string;
   name?: string;
   disabled?: boolean;
-  onChange?: React.ChangeEventHandler<T>;
-  onBlur?: React.FormEventHandler<T>;
+  onChange?: (e: any) => void;
+  onBlur?: (e: any) => void;
   label?: string;
   required?: boolean;
 }

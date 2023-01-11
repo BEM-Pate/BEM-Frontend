@@ -8,7 +8,6 @@ import Textfield from '../../components/Textfield/Textfield';
 import Headline from '../../components/Headline/Headline';
 import Button from '../../components/Button/Button';
 import { API_ADDRESS } from '../../helpers/env';
-import PhoneNumberInput from '../../components/PhoneNumberInput/PhoneNumberInput';
 
 interface Props {
   setUserData: (s: any) => void;
@@ -78,7 +77,6 @@ const LoginPage = (props: Props) => {
             onChange={onChange}
             required
           />
-          <PhoneNumberInput id="some-id" label="Label" name="test" />
           <div className={classNames(styles.LoginPageFormButtons)}>
             <Link to="/forgot-password" className={classNames(styles.LoginPageFormLink)}>
               {t('loginPageButtonForgotPassword')}

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FormControl, FormOption } from '../FormularStepper/FormularTypes';
 import styles from './RadioList.module.scss';
 
-interface RadioListProps extends FormControl<HTMLInputElement> {
+interface RadioListProps extends FormControl {
   options: FormOption[];
 }
 
@@ -24,7 +24,7 @@ const RadioList = (props: RadioListProps) => {
             value={value}
             id={`radio-${name}-${i}`}
             name={name}
-            onChange={onChange}
+            onChange={onChange && ((e) => onChange(e.target.value))}
             required={required}
           />
           <label
