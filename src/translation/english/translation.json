@@ -45,5 +45,9 @@
 
     "profilePageYourProfile": "Your Profile",
     "profilePageYourData": "Your Data",
-    "profilePageDeleteProfile": "Delete Profile!"
+    "profilePageDeleteProfile": "Delete Profile!",
+
+    "messagesPageHeader": "Messages",
+    "messagesPageSubHeader": "Your Contacts",
+    "messagesPageMessages": "Your Messages"
 }
