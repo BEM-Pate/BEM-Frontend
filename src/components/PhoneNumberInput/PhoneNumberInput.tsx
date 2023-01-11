@@ -7,7 +7,7 @@ import { FormControl } from '../FormularStepper/FormularTypes';
 import styles from './PhoneNumberInput.module.scss';
 import 'react-phone-number-input/style.css';
 
-interface Props extends FormControl<HTMLInputElement> {}
+interface Props extends FormControl {}
 
 const PhoneNumberInput = (props: Props) => {
   const {
@@ -41,7 +41,7 @@ const PhoneNumberInput = (props: Props) => {
         international
         countryCallingCodeEditable={false}
         numberInputProps={{
-          onChange,
+          onChange: onChange && ((e: any) => onChange(e.target.value)),
           onBlur,
         }}
       />

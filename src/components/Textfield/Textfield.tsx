@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './Textfield.module.scss';
 import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props extends FormControl<HTMLInputElement> {
+interface Props extends FormControl {
   type?: 'text' | 'number' | 'email' | 'date' | 'password';
   placeholder?: string;
 }
@@ -35,7 +35,7 @@ const Textfield = (props: Props) => {
         id={id}
         name={name}
         disabled={disabled}
-        onChange={onChange}
+        onChange={onChange && ((e) => onChange(e.target.value))}
         onBlur={onBlur}
         required={required}
       />

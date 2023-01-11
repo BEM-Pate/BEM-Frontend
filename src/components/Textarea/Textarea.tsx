@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './Textarea.module.scss';
 import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props extends FormControl<HTMLTextAreaElement> {
+interface Props extends FormControl {
   placeholder?: string;
   resizable?: boolean;
   rows?: number;
@@ -32,7 +32,7 @@ const Textarea = (props: Props) => {
         name={name}
         placeholder={placeholder}
         rows={rows}
-        onChange={onChange}
+        onChange={onChange && ((e) => onChange(e.target.value))}
       />
     </div>
   );

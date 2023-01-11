@@ -1,0 +1,36 @@
+@import "src/styles/variables.module";
+
+.PinInput {
+  &Label {
+    @include input-label;
+
+    &Required {
+      @include input-label-required;
+    }
+  }
+
+  :global .pincode-input-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .pincode-input-text {
+      @include input-pin;
+      background-color: var(--color-white) !important;
+      border: var(--border-transparent) !important;
+      border-radius: 16px;
+      height: 64px !important;
+      margin:0 !important;
+      padding:0 !important;
+      text-align:center !important;
+      width: 64px !important;
+    }
+
+    .pincode-input-text:focus,
+    .pincode-input-text:not([value=""]) {
+      border: var(--border) !important;
+      box-shadow: none;
+      outline: none;
+    }
+  }
+}
