@@ -4,7 +4,7 @@ import styles from './Button.module.scss';
 
 interface Props {
   type?: 'submit' | 'reset' | 'button' | undefined;
-  styling?: 'primary' | 'outline';
+  styling?: 'primary' | 'outline' | 'link';
   icon?: boolean;
   className?: string | undefined;
   children?: React.ReactNode;
@@ -23,10 +23,11 @@ const Button = (props: Props) => {
       disabled={disabled}
       className={classNames(styles.Button, {
         [styles.outlined]: styling === 'outline',
+        [styles.link]: styling === 'link',
         [styles.icon]: icon,
       }, className)}
     >
-      <p className={classNames(styles.ButtonbuttonText)}>{children}</p>
+      {children}
     </button>
   );
 };

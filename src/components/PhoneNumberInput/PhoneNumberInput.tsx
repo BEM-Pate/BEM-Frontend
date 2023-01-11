@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PhoneInputWithCountry from 'react-phone-number-input';
 import de from 'react-phone-number-input/locale/de.json';
@@ -15,6 +15,12 @@ const PhoneNumberInput = (props: Props) => {
   } = props;
 
   const [value, setValue] = useState<any>();
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(value ?? '');
+    }
+  }, [value]);
 
   return (
     <div className={classNames(styles.PhoneNumberInput)}>
@@ -34,16 +40,12 @@ const PhoneNumberInput = (props: Props) => {
         name={name}
         disabled={disabled}
         onChange={setValue}
+        onBlur={onBlur}
         labels={de}
-        value={value}
         flags={flags}
         defaultCountry="DE"
         international
         countryCallingCodeEditable={false}
-        numberInputProps={{
-          onChange: onChange && ((e: any) => onChange(e.target.value)),
-          onBlur,
-        }}
       />
     </div>
   );
