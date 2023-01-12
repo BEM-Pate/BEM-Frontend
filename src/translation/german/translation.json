@@ -10,6 +10,9 @@
     "labelBio": "Biographie",
     "labelBecomeMentor": "Pate werden",
     "labelEdit": "Bearbeiten",
+    "labelNext": "Weiter",
+    "labelRegister": "Registrieren",
+    "labelLogin": "Mit bestehendem Account anmelden",
 
     "landingPageWelcome": "Willkommen beim BEMpsy Selbsthilfe-Portal",
     "landingPageIntroduction": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
@@ -18,7 +21,6 @@
     "landingPageLinkBecomePate": "BEM-Pate werden",
     "landingPageLinkOrLabel": "oder",
     "landingPageLinkVideos": "Betroffene erzählen (Videos)",
-    "landingPageLinkLogin": "Mit bestehendem Account anmelden",
 
     "loginPageHeadline": "Mit bestehendem Account anmelden",
     "loginPageButtonLogin": "Anmelden",
@@ -46,8 +48,17 @@
     "profilePageYourData": "Deine Daten",
     "profilePageDeleteProfile": "Profil löschen!",
 
+
     "messagesPageHeader": "Nachrichten",
     "messagesPageSubHeader": "Ihre Kontakte",
-    "messagesPageMessages": "Ihre Nachrichten"
+    "messagesPageMessages": "Ihre Nachrichten",
 
+
+    "onboardingPageSeekerHeader": "BEM-Beratung auf Augenhöhe",
+    "onboardingPageSeekerDescription": "Finden Sie Antworten zum Thema BEM aufgrund psychischer Beeinträchtigungen",
+
+    "onboardingPateHeader": "Werden Sie BEM-Pate",
+    "onboardingPateDescription": "Teilen Sie Ihren BEM-Erfahrungsschatz mit anderen BEM-Berechtigten, die eine psychische Beeinträchtigung haben",
+
+    "onboardingSHGHeader": "Gründen oder finden Sie eine Selbsthilfegruppe "
 }
