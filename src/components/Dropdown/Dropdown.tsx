@@ -4,7 +4,7 @@ import styles from './Dropdown.module.scss';
 import { FormControl, FormOption } from '../FormularStepper/FormularTypes';
 import expand from '../../images/icons/ui/expand.svg';
 
-interface Props extends FormControl<HTMLSelectElement> {
+interface Props extends FormControl {
   multiple?: boolean;
   options: FormOption[];
 }
@@ -122,7 +122,7 @@ const Dropdown = (props: Props) => {
         className={classNames(styles.hidden)}
         value={value}
         name={name}
-        onChange={onChange}
+        onChange={onChange && ((e) => onChange(e.target.value))}
         multiple={multiple}
       >
         {options.map((option, i) => <option key={i} value={option.value}>{option.value}</option>)}

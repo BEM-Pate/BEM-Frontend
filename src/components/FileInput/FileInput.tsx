@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './FileInput.module.scss';
 import { FormControl } from '../FormularStepper/FormularTypes';
 
-interface Props extends FormControl<HTMLInputElement> {}
+interface Props extends FormControl {}
 
 const FileInput = (props: Props) => {
   const {
@@ -27,7 +27,7 @@ const FileInput = (props: Props) => {
         id={id}
         name={name}
         disabled={disabled}
-        onChange={onChange}
+        onChange={onChange && ((e) => onChange(e.target.files))}
         onBlur={onBlur}
         required={required}
       />

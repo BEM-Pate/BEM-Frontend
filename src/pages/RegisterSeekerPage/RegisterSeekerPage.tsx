@@ -111,7 +111,7 @@ const RegisterSeekerPage = (props: LandingPageProps) => {
               { value: 'CONSULTATION', label: t('registerSeekerNeedsOption2') },
               { value: 'DISEASE_CONSULTATION', label: t('registerSeekerNeedsOption3') },
             ]}
-            onChange={(e) => setSelectDisease(e.target.value === 'DISEASE_CONSULTATION')}
+            onChange={(e) => setSelectDisease(e === 'DISEASE_CONSULTATION')}
             required
           />
           {selectDisease && (
