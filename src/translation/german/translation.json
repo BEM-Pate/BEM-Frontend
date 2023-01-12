@@ -48,6 +48,9 @@
     "profilePageYourData": "Deine Daten",
     "profilePageDeleteProfile": "Profil löschen!",
 
+    "modalWindowDefaultHeadline": "Etwas ist schief gelaufen!",
+    "modalWindowDefaultText": "Bitte drücke auf OK",
+
 
     "messagesPageHeader": "Nachrichten",
     "messagesPageSubHeader": "Ihre Kontakte",

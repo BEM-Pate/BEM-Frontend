@@ -50,6 +50,10 @@
     "profilePageDeleteProfile": "Delete Profile!",
 
 
+    "modalWindowDefaultHeadline": "Something went wrong!",
+    "modalWindowDefaultText": "Please press OK",
+
+
     "onboardingPageSeekerHeader": "BEM consultation at eye level",
     "onboardingPageSeekerDescription": "Find answers on the topic of BEM due to mental impairments",
 
