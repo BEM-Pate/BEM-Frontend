@@ -49,6 +49,7 @@
     "profilePageYourData": "Your Data",
     "profilePageDeleteProfile": "Delete Profile!",
 
+
     "onboardingPageSeekerHeader": "BEM consultation at eye level",
     "onboardingPageSeekerDescription": "Find answers on the topic of BEM due to mental impairments",
 
@@ -56,4 +57,9 @@
     "onboardingPateDescription": "Share your BEM experience with other BEM-entitled people who have a mental impairment",
 
     "onboardingSHGHeader": "Start or find a support group"
+
+    "messagesPageHeader": "Messages",
+    "messagesPageSubHeader": "Your Contacts",
+    "messagesPageMessages": "Your Messages"
+
 }
