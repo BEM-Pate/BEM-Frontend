@@ -2,6 +2,8 @@ import React, { ReactElement, useCallback } from 'react';
 import './App.module.scss';
 import {
   BrowserRouter, Routes, Route, Navigate,
+  useParams,
+  useLocation,
 } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
 import RegisterSeekerPage from './pages/RegisterSeekerPage/RegisterSeekerPage';
@@ -19,10 +21,11 @@ import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/Onboardin
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import ChatRoom from './components/Container/Messages/Chatroom';
+import { useZustand } from './zustand/store';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
-
+  const route = useZustand(state => state.route)
   const authenticationSwitch = useCallback(
     (
       component: ReactElement,
@@ -31,9 +34,11 @@ const App = () => {
     [userData],
   );
   return (
-    <div>
+    <div style={{
+      height: '100%',
+    }}>
       <BrowserRouter>
-        <TopNavigationBar />
+        {!route?.includes('chatroom') && <TopNavigationBar />}
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage setUserData={setUserData} />} />
@@ -44,6 +49,8 @@ const App = () => {
             <Route path="seeker" element={<RegisterSeekerPage />} />
             <Route path="pate" element={<RegisterPatePage />} />
           </Route>
+          <Route path="chatroom/:id" element={<ChatRoom />} />
+
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
