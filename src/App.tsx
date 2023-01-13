@@ -18,6 +18,7 @@ import EditProfile from './components/Container/Profile/EditProfile/EditProfile'
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
+import ChatRoom from './components/Container/Messages/Chatroom';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
@@ -47,11 +48,14 @@ const App = () => {
             <Route path="dashboard">
               <Route path="search" element={<Search userData={userData} />} />
               <Route path="messages" element={<Messages />} />
+              <Route path="messages/:id" element={<ChatRoom />} />
               <Route path="groups" element={<Groups />} />
               <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
               <Route path="editprofile" element={<EditProfile />} />
             </Route>
           </Route>
+
+
         </Routes>
       </BrowserRouter>
     </div>
