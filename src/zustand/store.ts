@@ -1,6 +1,21 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { persist, StateStorage } from 'zustand/middleware'
 import axios from 'axios'
+
+import { get, set, del } from 'idb-keyval' // can use anything: IndexedDB, Ionic Storage, etc.
+
+// Custom storage object
+const storage: StateStorage = {
+    getItem: async (name: string): Promise<string | null> => {
+        return (await get(name)) || null
+    },
+    setItem: async (name: string, value: string): Promise<void> => {
+        await set(name, value)
+    },
+    removeItem: async (name: string): Promise<void> => {
+        await del(name)
+    },
+}
 
 interface store {
     user: null | any,
@@ -10,7 +25,11 @@ interface store {
     fetchChatroom: () => void,
     fetchContacts: (userIds: string[]) => Promise<void>,
     token: null | string,
+    setCurrentRoute: (route: string) => void,
+    route: null | string
 }
+
+
 
 const BASE_URL = `http://141.45.146.171/api`
 const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmU2YTYxYjA2YmQ0NTU4YjFiM2UiLCJpYXQiOjE2NzM1NTU1ODksImV4cCI6MTY3MzY0MTk4OX0.2-b4eEGZLGu5dyrIIyNO00ocwzO5eVDgMSR-irjIsKQ'
@@ -42,12 +61,8 @@ export const useZustand = create<store>()(
                     for (const chatroom of res.data) {
                         participants.push(...chatroom.participants)
                     }
-
-
-
                     set({ chatrooms: res.data })
                     get().fetchContacts(participants)
-
                 })
             },
             fetchContacts: async (userIds: string[]) => {
@@ -61,7 +76,11 @@ export const useZustand = create<store>()(
                     users.push(user)
                 }
                 set({ contacts: users.filter((user) => user._id !== USER_ID) })
-            }
+            },
+            setCurrentRoute: (route: string) => {
+                set({ route })
+            },
+            route: null
         }),
         {
             name: 'bear-store',

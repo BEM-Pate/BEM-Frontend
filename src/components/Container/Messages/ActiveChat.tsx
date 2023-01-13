@@ -1,3 +1,5 @@
+import BackHeader from "./BackHeader"
+import ChatBox from "./ChatBox"
 
 export default function ActiveChat({ conversation, targetedUser }: { conversation: any, targetedUser: any }) {
     const baseUserData = targetedUser.baseUserData
@@ -14,18 +16,40 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
             >
 
 
-                <h4>
-                    {date.getHours()}:{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
-                </h4>
-                <p
+                <div
                     style={{
-                        // backgroundColor: targetedUser._id === message.sender ? 'red' : 'blue',
-                        textAlign: targetedUser._id === message.sender ? 'left' : 'right',
+                        textAlign: 'center',
+                        color: '#E4EFEC',
+                        opacity: 0.5,
+                        fontSize: '14px',
+                        margin: '0 0 20px 0'
 
                     }}
                 >
-                    {message.text}
-                </p>
+                    {date.getHours()}:{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: targetedUser._id === message.sender ? 'start' : 'end',
+
+
+                    }}
+
+                >
+                    <p
+                        style={{
+                            padding: '12px 24px 12px 24px',
+                            backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',
+                            maxWidth: '60%',
+                            borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
+
+
+                        }}
+                    >
+                        {message.text}
+                    </p>
+                </div>
             </div>)
         } else {
             const previousDate = new Date(conversation.messages[i - 1].time)
@@ -35,20 +59,41 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
             >
                 {
                     date.getTime() - previousDate.getTime() > 3600000 &&
-                    <h4>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            color: '#E4EFEC',
+                            opacity: 0.5,
+                            fontSize: '14px',
+                            margin: '0 0 20px 0'
+
+                        }}
+                    >
                         {date.getHours()}:{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
-                    </h4>
+                    </div>
                 }
-                <p
+                <div
                     style={{
-                        // backgroundColor: targetedUser._id === message.sender ? 'red' : 'blue',
-                        textAlign: targetedUser._id === message.sender ? 'left' : 'right',
+                        display: 'flex',
+                        justifyContent: targetedUser._id === message.sender ? 'start' : 'end',
 
 
                     }}
+
                 >
-                    {message.text}
-                </p>
+                    <p
+                        style={{
+                            padding: '12px 24px 12px 24px',
+                            backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',
+                            maxWidth: '60%',
+                            borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
+
+
+                        }}
+                    >
+                        {message.text}
+                    </p>
+                </div>
             </div>)
 
 
@@ -62,12 +107,36 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
     return <div style={{
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
+
+        backgroundColor: '#63837B',
+        color: 'white',
+        paddingTop: '20px',
+        display: 'flex',
+        flexDirection: 'column',
 
     }}  >
-        <h1>{baseUserData.firstName} {baseUserData.lastName}</h1>
-        {objects}
+        <BackHeader
+            targetedUser={targetedUser}
+        ></BackHeader>
+
+        {/* <h1>{baseUserData.firstName} {baseUserData.lastName}</h1> */}
+
+
+        <div
+            style={{
+                flex: 1,
+                padding: '0 24px 24px 24px',
+            }}
+        >
+            {objects}
+        </div>
+        <div
+            style={{
+                padding: '0 24px 24px 24px',
+            }}
+        >
+
+            <ChatBox></ChatBox>
+        </div>
     </div>
 }

@@ -81,7 +81,7 @@ const Messages = () => {
   const navigate = useNavigate();
 
 
-  const [chatrooms, fetchChatroom, contacts] = useZustand((state) => [state.chatrooms, state.fetchChatroom, state.contacts]);
+  const [chatrooms, fetchChatroom, contacts, setRoute] = useZustand((state) => [state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute]);
 
   useEffect(() => {
     fetchChatroom();
@@ -101,7 +101,7 @@ const Messages = () => {
       </h4>
       <div className={classNames(styles.MessagesContainerContacts)}>
 
-        {contacts.map((user: any) => {
+        {contacts?.map((user: any) => {
           const userData = user.baseUserData;
           //@ts-ignore
           const b64 = btoa(
@@ -126,7 +126,8 @@ const Messages = () => {
                 alt="PatePicture"
                 className={classNames(styles.MessagesProfilePictures)}
                 onClick={() => {
-                  navigate(`/dashboard/messages/${user._id}`)
+                  navigate(`/chatroom/${user._id}`)
+                  setRoute(`/chatroom/${user._id}`)
                 }}
               />
               <h1>{userData.firstName}</h1>
