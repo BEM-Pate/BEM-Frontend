@@ -6,11 +6,12 @@ import styles from './PinInput.module.scss';
 
 interface Props extends FormControl {
   length: number;
+  focus: boolean;
 }
 
 const PinInput = (props: Props) => {
   const {
-    id, label, required, disabled, length, onChange,
+    id, label, required, disabled, length, onChange, focus,
   } = props;
 
   return (
@@ -34,6 +35,7 @@ const PinInput = (props: Props) => {
         type="numeric"
         inputMode="number"
         autoSelect
+        focus={focus}
       />
     </div>
   );

@@ -1,91 +1,182 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './LoginPage.module.scss';
 import Textfield from '../../components/Textfield/Textfield';
 import Headline from '../../components/Headline/Headline';
 import Button from '../../components/Button/Button';
 import { API_ADDRESS } from '../../helpers/env';
+import PhoneNumberInput from '../../components/PhoneNumberInput/PhoneNumberInput';
+import PinInput from '../../components/PinInput/PinInput';
+import Validators from '../../helpers/validators';
 
 interface Props {
   setUserData: (s: any) => void;
 }
+
+type LoginType = 'phone' | 'email';
+type RequestState = 'OTP' | 'AUTH';
 
 const LoginPage = (props: Props) => {
   const { setUserData } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<FormData>(new FormData());
-  const [submitting, setSubmitting] = useState(false);
+  const [state, setState] = useState<RequestState>('OTP');
+  const [mode, setMode] = useState<LoginType>('phone');
+  const [accountName, setAccountName] = useState('');
+  const [otpCode, setOtpCode] = useState<string | null>(null);
+  const [validators, setValidators] = useState<any[]>([]);
+  const [requesting, setRequesting] = useState(false);
 
-  const form = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    setState('OTP');
+    setAccountName('');
+    setOtpCode(null);
 
-  const onChange = () => {
-    setFormData(new FormData(form.current ?? undefined));
-  };
+    switch (mode) {
+      case 'email':
+        setValidators([
+          Validators.isNotEmpty,
+          Validators.isEmail,
+        ]);
+        break;
+      case 'phone':
+        setValidators([
+          Validators.isNotEmpty,
+          Validators.isPhoneNumber,
+        ]);
+        break;
+      default:
+    }
+  }, [mode]);
 
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-
-    setSubmitting(true);
+  const requestOTP = useCallback(() => {
     try {
-      axios.post(`${API_ADDRESS}/user/login`, {
-        email: formData.get('email'),
-        password: formData.get('password'),
+      setRequesting(true);
+      axios.post(`${API_ADDRESS}/user/account/generateOTP?method=${mode}`, {
+        accountName,
       }).then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          setState('AUTH');
+        }
+      }).finally(() => {
+        setRequesting(false);
+      });
+    } catch (err) {
+      console.log('failed', err);
+    }
+  }, [accountName, mode]);
+
+  const requestLogin = useCallback(() => {
+    try {
+      setRequesting(true);
+      axios.post(`${API_ADDRESS}/user/login`, {
+        accountName,
+        code: otpCode,
+      }).then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setUserData(res.data);
           navigate('/');
         }
-      })
-        .catch(() => {
-          setUserData(null);
-        })
-        .finally(() => {
-          setSubmitting(false);
-        });
+      }).finally(() => {
+        setRequesting(false);
+      });
     } catch (err) {
       console.log('failed', err);
     }
-  };
+  }, [accountName, otpCode]);
 
   return (
     <div className={classNames(styles.LoginPage)}>
       <div className={classNames(styles.LoginPageContainer)}>
         <Headline headline="h3" className={classNames(styles.LoginPageHeadline)}>{t('loginPageHeadline')}</Headline>
-        <form
-          ref={form}
-          className={classNames(styles.LoginPageForm)}
-          onSubmit={onSubmit}
-        >
-          <Textfield
-            id="login-email"
-            type="email"
-            name="email"
-            label={t('labelEMail')!}
-            onChange={onChange}
-            required
-          />
-          <Textfield
-            id="login-password"
-            type="password"
-            name="password"
-            label={t('labelPassword')!}
-            onChange={onChange}
-            required
-          />
-          <div className={classNames(styles.LoginPageFormButtons)}>
-            <Link to="/forgot-password" className={classNames(styles.LoginPageFormLink)}>
-              {t('loginPageButtonForgotPassword')}
-            </Link>
-            <Button type="submit" disabled={submitting}>
-              {t('loginPageButtonLogin')}
-            </Button>
-          </div>
-        </form>
+        <div className={classNames(styles.LoginPageForm)}>
+          {state === 'OTP' && (
+          <>
+            {mode === 'email'
+              && (
+                <>
+                  <span className={classNames(styles.LoginPageFormInstruction)}>
+                    E-Mail eingeben zum Anmelden
+                  </span>
+                  <Textfield
+                    id="login-email"
+                    type="email"
+                    name="email"
+                    placeholder="mail@example.com"
+                    onChange={(e) => setAccountName(e)}
+                    required
+                  />
+                </>
+              )}
+            {mode === 'phone'
+              && (
+                <>
+                  <span className={classNames(styles.LoginPageFormInstruction)}>
+                    Telefonnummer eingeben zum Anmelden
+                  </span>
+                  <PhoneNumberInput
+                    id="login-phone"
+                    name="phone"
+                    onChange={(e) => setAccountName(e)}
+                    required
+                  />
+                </>
+              )}
+            <div className={classNames(styles.LoginPageFormActions)}>
+              <Button
+                onClick={requestOTP}
+                disabled={Validators.validate(accountName, validators) || requesting}
+              >
+                Request OTP Code
+              </Button>
+            </div>
+          </>
+          )}
+
+          {state === 'AUTH' && (
+            <>
+              <PinInput
+                id="login-otp"
+                length={4}
+                onChange={(e) => setOtpCode(e)}
+                focus
+              />
+              <div className={classNames(styles.LoginPageFormActions)}>
+                <span className={classNames(styles.LoginPageFormActionsResendOTP)}>
+                  Code nicht erhalten?&nbsp;
+                  <Button onClick={requestOTP} styling="link">
+                    Code nochmal senden
+                  </Button>
+                </span>
+                <Button
+                  onClick={requestLogin}
+                  disabled={Validators.validate(accountName, validators) || requesting}
+                >
+                  {t('loginPageButtonLogin')}
+                </Button>
+              </div>
+            </>
+          )}
+
+          <span className={classNames(styles.LoginPageFormOr)}>or</span>
+
+          <Button
+            className={styles.LoginPageFormModeSwitch}
+            styling="outline"
+            onClick={() => (mode === 'email'
+              ? setMode('phone')
+              : setMode('email'))}
+          >
+            {mode === 'email' && 'Login with phone number'}
+            {mode === 'phone' && 'Login with email'}
+          </Button>
+        </div>
       </div>
     </div>
   );
