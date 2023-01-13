@@ -8,7 +8,9 @@
 
   ],
   "parserOptions": {
-    "project": "./tsconfig.json",
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "./",
+
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
@@ -21,7 +23,7 @@
     "react/require-default-props": [1],
     "react/no-array-index-key": [0],
     "linebreak-style": [1],
-    "no-unused-vars": [1],
+    // "no-unused-vars": [2],
     "react/button-has-type": [0]
   }
 }

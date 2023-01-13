@@ -18,6 +18,7 @@ import EditProfile from './components/Container/Profile/EditProfile/EditProfile'
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
+import ChatRoom from './components/Container/Messages/Chatroom';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
@@ -52,6 +53,8 @@ const App = () => {
               <Route path="editprofile" element={authenticationSwitch(<EditProfile />, '/login')} />
             </Route>
           </Route>
+
+
         </Routes>
       </BrowserRouter>
     </div>
