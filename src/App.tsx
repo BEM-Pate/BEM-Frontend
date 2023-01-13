@@ -39,11 +39,11 @@ const App = () => {
           </Route>
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
-              <Route path="search" element={<Search userData={userData} />} />
-              <Route path="messages" element={<Messages />} />
-              <Route path="groups" element={<Groups />} />
+              <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
+              <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
+              <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
               <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
-              <Route path="editprofile" element={<EditProfile />} />
+              <Route path="editprofile" element={authenticationSwitch(<EditProfile />, '/login')} />
             </Route>
           </Route>
         </Routes>

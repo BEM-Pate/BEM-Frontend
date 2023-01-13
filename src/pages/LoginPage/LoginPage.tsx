@@ -26,7 +26,7 @@ const LoginPage = (props: Props) => {
 
   const [state, setState] = useState<RequestState>('OTP');
   const [mode, setMode] = useState<LoginType>('phone');
-  const [accountName, setAccountName] = useState('+49');
+  const [accountName, setAccountName] = useState('');
   const [otpCode, setOtpCode] = useState<string | null>(null);
   const [validators, setValidators] = useState<any[]>([]);
   const [requesting, setRequesting] = useState(false);
@@ -59,7 +59,8 @@ const LoginPage = (props: Props) => {
       axios.post(`${API_ADDRESS}/user/account/generateOTP?method=${mode}`, {
         accountName,
       }).then((res) => {
-        if (res.status === 200) {
+        console.log(res);
+        if (res.status === 201) {
           setState('AUTH');
         }
       }).finally(() => {
@@ -73,10 +74,11 @@ const LoginPage = (props: Props) => {
   const requestLogin = useCallback(() => {
     try {
       setRequesting(true);
-      axios.post(`${API_ADDRESS}/user/account/generateOTP?method=${mode}`, {
+      axios.post(`${API_ADDRESS}/user/login`, {
         accountName,
         code: otpCode,
       }).then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setUserData(res.data);
           navigate('/');
