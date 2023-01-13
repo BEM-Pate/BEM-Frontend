@@ -24,13 +24,15 @@
       padding:0 !important;
       text-align:center !important;
       width: 64px !important;
+
+      &:focus,
+      &:not([value=""]) {
+        border: var(--border) !important;
+        box-shadow: none;
+        outline: none;
+      }
     }
 
-    .pincode-input-text:focus,
-    .pincode-input-text:not([value=""]) {
-      border: var(--border) !important;
-      box-shadow: none;
-      outline: none;
-    }
+
   }
 }
