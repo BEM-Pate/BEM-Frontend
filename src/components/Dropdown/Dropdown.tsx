@@ -96,7 +96,7 @@ const Dropdown = (props: Props) => {
           )}
           onClick={(e) => toggleList(e)}
         >
-          {value || 'Please select...'}
+          {options[options.findIndex((option) => option.value === value)]?.label || 'Please select...'}
           <img
             className={classNames(styles.DropdownValueIcon)}
             src={expand}

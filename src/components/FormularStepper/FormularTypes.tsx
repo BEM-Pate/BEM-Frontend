@@ -11,4 +11,5 @@ export interface FormControl {
 export interface FormOption {
   label: string;
   value: string;
+  icon?: string;
 }
