@@ -7,6 +7,7 @@ import Headline from '../../components/Headline/Headline';
 import becomePate from '../../images/icons/landingpage/become-pate.svg';
 import createGroup from '../../images/icons/landingpage/create-group.svg';
 import findGroup from '../../images/icons/landingpage/find-group.svg';
+import Button from '../../components/Button/Button';
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -18,20 +19,25 @@ const LandingPage = () => {
         <Headline headline="h3">{t('landingPageCTA')}</Headline>
       </div>
       <div className={styles.LandingPageButtons}>
-        <Link to="/register/seeker" className={classNames(styles.LandingPageButton)}>
+        <Link to="/onboardingseeker" className={classNames(styles.LandingPageButton)}>
           <img src={findGroup} alt="Find a Group" />
           <span>{t('landingPageLinkFindPate')}</span>
         </Link>
-        <Link to="/register/pate" className={classNames(styles.LandingPageButton)}>
+        <Link to="/onboardingpate" className={classNames(styles.LandingPageButton)}>
           <img src={becomePate} alt="Become a Pate" />
           <span>{t('landingPageLinkBecomePate')}</span>
         </Link>
-        <Link to="/register/video" className={classNames(styles.LandingPageButton)}>
+        <Link to="/onboardingshg" className={classNames(styles.LandingPageButton)}>
+          <img src={becomePate} alt="Become a Pate" />
+          <span>{t('landingPageLinkBecomePate')}</span>
+        </Link>
+        <Button styling="outline" className={classNames(styles.LandingPageButton)} disabled>
           <img src={createGroup} alt="Create a Group" />
           <span>{t('landingPageLinkVideos')}</span>
-        </Link>
+        </Button>
+        <hr />
         <Link to="/login" className={classNames(styles.LandingPageLink)}>
-          {t('landingPageLinkLogin')}
+          {t('labelLogin')}
         </Link>
       </div>
     </div>

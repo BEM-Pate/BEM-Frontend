@@ -15,6 +15,9 @@ import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
 import LoginPage from './pages/LoginPage/LoginPage';
 import useSessionStorage from './helpers/useSessionStorage';
 import EditProfile from './components/Container/Profile/EditProfile/EditProfile';
+import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
+import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
+import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
@@ -33,17 +36,20 @@ const App = () => {
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage setUserData={setUserData} />} />
+          <Route path="onboardingseeker" element={<OnboardingSeeker />} />
+          <Route path="onboardingpate" element={<OnboardingPate />} />
+          <Route path="onboardingshg" element={<OnboardingSHG />} />
           <Route path="register">
             <Route path="seeker" element={<RegisterSeekerPage />} />
             <Route path="pate" element={<RegisterPatePage />} />
           </Route>
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
-              <Route path="search" element={<Search userData={userData} />} />
-              <Route path="messages" element={<Messages />} />
-              <Route path="groups" element={<Groups />} />
+              <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
+              <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
+              <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
               <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
-              <Route path="editprofile" element={<EditProfile />} />
+              <Route path="editprofile" element={authenticationSwitch(<EditProfile />, '/login')} />
             </Route>
           </Route>
         </Routes>

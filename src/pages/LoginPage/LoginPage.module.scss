@@ -16,22 +16,43 @@
   }
 
   &Headline {
+    text-align: center;
     margin: 0 0 24px;
   }
 
   &Form {
-    &Buttons {
-      align-items: center;
+    align-items: stretch;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+
+    &Instruction {
+      @include font-md;
+      align-self: center;
+      color: var(--color-primary-darker);
+    }
+
+    &Actions {
+      align-items: stretch;
       display: flex;
+      flex-flow: column nowrap;
       justify-content: center;
 
+      &ResendOTP {
+        align-self: center;
+      }
+
       & > *:not(:last-child) {
-        margin-right: 16px;
+        margin-bottom: 16px;
       }
     }
 
     &Link {
       @include font-sm;
+    }
+
+    &Or {
+      align-self: center;
     }
 
     & > *:not(:last-child) {
