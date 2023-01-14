@@ -5,16 +5,11 @@ import { useZustand, socket } from "../../../zustand/store"
 export default function ChatBox({ conversation }: { conversation: any }) {
 
     const [message, setMessage] = useState('')
-    const [ setChatRoom] = useZustand(state => [ state.setChatroom])
+    const [setChatRoom] = useZustand(state => [state.setChatroom])
     // const [chatRoom, setChatRoom] = useState<any>(conversation)
 
 
-    useEffect(() => {
-        socket.on('new-message', ({ messageObj }) => {
-       
-            setChatRoom(conversation._id, messageObj)
-        })
-    }, [])
+   
 
     return (<div
         style={{
