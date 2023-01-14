@@ -126,6 +126,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
             style={{
                 flex: 1,
                 padding: '0 24px 24px 24px',
+                overflow:'scroll'
             }}
         >
             {objects}
@@ -136,7 +137,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
             }}
         >
 
-            <ChatBox></ChatBox>
+            <ChatBox conversation={conversation}></ChatBox>
         </div>
     </div>
 }

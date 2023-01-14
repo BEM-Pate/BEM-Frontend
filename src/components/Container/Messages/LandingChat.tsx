@@ -140,7 +140,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                     </label> deine Nachricht gelesen hat
                 </div>
             </div>
-            <div    
+            <div
                 style={{
                     flexBasis: '40%',
                     display: 'flex',
@@ -150,7 +150,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                     padding: '0 24px 0 24px',
                 }}
             >
-                <ChatBox />
+                <ChatBox conversation={conversation}></ChatBox>
             </div>
         </div>
     </>

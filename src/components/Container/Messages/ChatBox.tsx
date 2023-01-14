@@ -1,10 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useZustand } from "../../../zustand/store"
 
 
-export default function ChatBox() {
+export default function ChatBox({ conversation }: { conversation: any }) {
 
     const [message, setMessage] = useState('')
+    const [socket, setChatRoom] = useZustand(state => [state.socket, state.setChatroom])
+    // const [chatRoom, setChatRoom] = useState<any>(conversation)
 
+
+    useEffect(() => {
+        socket.on('new-message', ({ messageObj }) => {
+       
+            setChatRoom(conversation._id, messageObj)
+        })
+    }, [])
 
     return (<div
         style={{
@@ -31,6 +41,8 @@ export default function ChatBox() {
                 onClick={(e) => {
                     if (message.trim() !== '') {
                         setMessage('')
+                        console.log('sending mafucking message')
+                        socket.emit('send-message', { roomId: conversation._id, message })
                     }
                 }}
                 version="1.1" id="_x32_"
@@ -53,6 +65,11 @@ export default function ChatBox() {
             onKeyPress={(e) => {
                 if (message.trim() !== '' && e.key === 'Enter') {
                     setMessage('')
+                    console.log('sending mafucking message')
+                    console.log(socket.id)
+
+                    socket.emit('send-message', { roomId: conversation._id, message })
+
                 }
             }}
             onChange={(e) => {
