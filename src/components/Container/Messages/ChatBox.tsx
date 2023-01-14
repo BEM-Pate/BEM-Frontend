@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { useZustand } from "../../../zustand/store"
+import { useZustand, socket } from "../../../zustand/store"
 
 
 export default function ChatBox({ conversation }: { conversation: any }) {
 
     const [message, setMessage] = useState('')
-    const [socket, setChatRoom] = useZustand(state => [state.socket, state.setChatroom])
+    const [ setChatRoom] = useZustand(state => [ state.setChatroom])
     // const [chatRoom, setChatRoom] = useState<any>(conversation)
 
 

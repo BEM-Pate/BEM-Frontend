@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useZustand } from '../../../zustand/store';
+import { useZustand, socket } from '../../../zustand/store';
 import ActiveChat from './ActiveChat';
 import LandingChat from './LandingChat';
 import io from 'socket.io-client';
@@ -11,7 +11,7 @@ const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQ
 export default function ChatRoom() {
     let { id } = useParams()
 
-    let [chatRooms, contacts, socket] = useZustand(state => [state.chatrooms, state.contacts, state.socket])
+    let [chatRooms, contacts] = useZustand(state => [state.chatrooms, state.contacts])
 
     let targetedUser = contacts.find((contact: any) => contact._id === id)
     let pickedChatRoom = chatRooms.find((chatroom: any) => chatroom.participants.includes(id))
