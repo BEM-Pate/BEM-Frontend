@@ -11,7 +11,7 @@ const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQ
 export default function ChatRoom() {
     let { id } = useParams()
 
-    let [chatRooms, contacts] = useZustand(state => [state.chatrooms, state.contacts])
+    let [chatRooms, contacts, setChatRoom] = useZustand(state => [state.chatrooms, state.contacts, state.setChatroom])
 
     let targetedUser = contacts.find((contact: any) => contact._id === id)
     let pickedChatRoom = chatRooms.find((chatroom: any) => chatroom.participants.includes(id))
@@ -27,6 +27,15 @@ export default function ChatRoom() {
         }
 
     }, [chatRooms])
+
+    useEffect(() => {
+        socket.on('new-message', ({ roomId, messageObj }) => {
+            setChatRoom(roomId, messageObj)
+        })
+
+        return () => { socket.off('new-message') }
+    }, [])
+
 
     return <>
         <div
