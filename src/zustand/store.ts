@@ -15,7 +15,6 @@ interface store {
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
-    socket: Socket,
     setChatroom: (chatroomId: string, messageObj: any) => void,
 }
 
@@ -26,7 +25,7 @@ const USER_ID = '63c06e6a61b06bd4558b1b3e'
 const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmU2YTYxYjA2YmQ0NTU4YjFiM2UiLCJpYXQiOjE2NzM2ODU4MjAsImV4cCI6MTY3Mzc3MjIyMH0.bkYCL7TFAp-PHKlNr0pn-eqnCpG12zdJZJZK_Vbs858'
 
 
-const socket = io(`http://141.45.146.171`, {
+export const socket = io(`http://141.45.146.171`, {
     path: '/api',
     extraHeaders: {
         Authorization: `Bearer ${HARD_CORDED_TOKEN_USER}`
@@ -40,7 +39,6 @@ socket.on('connect', () => {
 export const useZustand = create<store>()(
     persist(
         (set, get, props) => ({
-            socket,
             user: null,
             token: null,
             logIn: () => {
@@ -64,15 +62,11 @@ export const useZustand = create<store>()(
                     for (const chatroom of res.data) {
                         participants.push(...chatroom.participants)
                     }
-
-                    console.log(participants)
-                    console.log("fetching chatrooms")
                     set({ chatrooms: res.data })
                     get().fetchContacts(participants)
                 })
             },
             fetchContacts: async (userIds: string[]) => {
-                console.log("fetch contacts")
                 const users: any[] = []
                 for (const userId of userIds) {
                     const user = (await axios.get(`${BASE_URL}/user/userdata/${userId}`, {
