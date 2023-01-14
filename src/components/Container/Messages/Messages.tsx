@@ -5,7 +5,7 @@ import styles from './Messages.module.scss';
 import { useNavigate } from "react-router-dom";
 
 import placeholder from '../../../images/default.png';
-import { useZustand } from '../../../zustand/store';
+import { socket, useZustand } from '../../../zustand/store';
 const GERMAN_FIRST_NAMES = [
   'Anna',
   'Bruno',
@@ -80,7 +80,6 @@ const Messages = () => {
 
   const navigate = useNavigate();
 
-
   const [chatrooms, fetchChatroom, contacts, setRoute] = useZustand((state) => [state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute]);
 
   useEffect(() => {
@@ -88,6 +87,8 @@ const Messages = () => {
   },
     []
   )
+
+
 
 
   const { t } = useTranslation();
@@ -126,8 +127,8 @@ const Messages = () => {
                 alt="PatePicture"
                 className={classNames(styles.MessagesProfilePictures)}
                 onClick={() => {
-                  navigate(`/chatroom/${user._id}`)
-                  setRoute(`/chatroom/${user._id}`)
+                  navigate(`/dashboard/chatroom/${user._id}`)
+                  setRoute(`/dashboard/chatroom/${user._id}`)
                 }}
               />
               <h1>{userData.firstName}</h1>

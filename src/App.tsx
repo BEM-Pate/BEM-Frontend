@@ -21,7 +21,7 @@ import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/Onboardin
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import ChatRoom from './components/Container/Messages/Chatroom';
-import { useZustand } from './zustand/store';
+import { useZustand, socket } from './zustand/store';
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
   const route = useZustand(state => state.route)
@@ -33,6 +33,10 @@ const App = () => {
     ) => (userData ? component : <Navigate replace to={redirectPath} />),
     [userData],
   );
+
+
+
+
   return (
     <div style={{
       height: '100%',
@@ -49,10 +53,11 @@ const App = () => {
             <Route path="seeker" element={<RegisterSeekerPage />} />
             <Route path="pate" element={<RegisterPatePage />} />
           </Route>
-          <Route path="chatroom/:id" element={<ChatRoom />} />
 
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
+              <Route path="chatroom/:id" element={<ChatRoom />} />
+
               <Route path="search" element={<Search userData={userData} />} />
               <Route path="messages" element={<Messages />} />
               <Route path="groups" element={<Groups />} />

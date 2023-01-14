@@ -9,7 +9,15 @@ export default function ChatBox({ conversation }: { conversation: any }) {
     // const [chatRoom, setChatRoom] = useState<any>(conversation)
 
 
-   
+    // useEffect(() => {
+    //     socket.on('new-message', ({ roomId, messageObj }) => {
+    //         setChatRoom(roomId, messageObj)
+    //     })
+
+    //     return () => {
+    //         console.log('deleting')
+    //         socket.off('new-message') }
+    // }, [])
 
     return (<div
         style={{

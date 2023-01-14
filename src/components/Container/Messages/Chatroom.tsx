@@ -28,15 +28,6 @@ export default function ChatRoom() {
 
     }, [chatRooms])
 
-    useEffect(() => {
-        socket.on('new-message', ({ roomId, messageObj }) => {
-            setChatRoom(roomId, messageObj)
-        })
-
-        return () => { socket.off('new-message') }
-    }, [])
-
-
     return <>
         <div
             style={{
