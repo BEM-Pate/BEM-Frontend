@@ -2,23 +2,8 @@ import { create } from 'zustand'
 import { persist, StateStorage } from 'zustand/middleware'
 import axios from 'axios'
 
-import { get, set, del } from 'idb-keyval' // can use anything: IndexedDB, Ionic Storage, etc.
 import { Socket } from 'socket.io-client'
 import io from 'socket.io-client';
-
-
-// Custom storage object
-const storage: StateStorage = {
-    getItem: async (name: string): Promise<string | null> => {
-        return (await get(name)) || null
-    },
-    setItem: async (name: string, value: string): Promise<void> => {
-        await set(name, value)
-    },
-    removeItem: async (name: string): Promise<void> => {
-        await del(name)
-    },
-}
 
 interface store {
     user: null | any,
@@ -41,7 +26,8 @@ const USER_ID = '63c06e6a61b06bd4558b1b3e'
 const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmU2YTYxYjA2YmQ0NTU4YjFiM2UiLCJpYXQiOjE2NzM2ODU4MjAsImV4cCI6MTY3Mzc3MjIyMH0.bkYCL7TFAp-PHKlNr0pn-eqnCpG12zdJZJZK_Vbs858'
 
 
-const socket = io('http://localhost:3001', {
+const socket = io(`http://141.45.146.171`, {
+    path: '/api',
     extraHeaders: {
         Authorization: `Bearer ${HARD_CORDED_TOKEN_USER}`
     }
@@ -78,11 +64,15 @@ export const useZustand = create<store>()(
                     for (const chatroom of res.data) {
                         participants.push(...chatroom.participants)
                     }
+
+                    console.log(participants)
+                    console.log("fetching chatrooms")
                     set({ chatrooms: res.data })
                     get().fetchContacts(participants)
                 })
             },
             fetchContacts: async (userIds: string[]) => {
+                console.log("fetch contacts")
                 const users: any[] = []
                 for (const userId of userIds) {
                     const user = (await axios.get(`${BASE_URL}/user/userdata/${userId}`, {
