@@ -3,6 +3,9 @@ import { persist, StateStorage } from 'zustand/middleware'
 import axios from 'axios'
 
 import { get, set, del } from 'idb-keyval' // can use anything: IndexedDB, Ionic Storage, etc.
+import { Socket } from 'socket.io-client'
+import io from 'socket.io-client';
+
 
 // Custom storage object
 const storage: StateStorage = {
@@ -26,18 +29,32 @@ interface store {
     fetchContacts: (userIds: string[]) => Promise<void>,
     token: null | string,
     setCurrentRoute: (route: string) => void,
-    route: null | string
+    route: null | string,
+    socket: Socket,
+    setChatroom: (chatroomId: string, messageObj: any) => void,
 }
 
 
 
 const BASE_URL = `http://141.45.146.171/api`
-const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmU2YTYxYjA2YmQ0NTU4YjFiM2UiLCJpYXQiOjE2NzM1NTU1ODksImV4cCI6MTY3MzY0MTk4OX0.2-b4eEGZLGu5dyrIIyNO00ocwzO5eVDgMSR-irjIsKQ'
 const USER_ID = '63c06e6a61b06bd4558b1b3e'
+const HARD_CORDED_TOKEN_USER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmU2YTYxYjA2YmQ0NTU4YjFiM2UiLCJpYXQiOjE2NzM2ODU4MjAsImV4cCI6MTY3Mzc3MjIyMH0.bkYCL7TFAp-PHKlNr0pn-eqnCpG12zdJZJZK_Vbs858'
+
+
+const socket = io('http://localhost:3001', {
+    extraHeaders: {
+        Authorization: `Bearer ${HARD_CORDED_TOKEN_USER}`
+    }
+});
+
+socket.on('connect', () => {
+    console.log('connected')
+})
 
 export const useZustand = create<store>()(
     persist(
         (set, get, props) => ({
+            socket,
             user: null,
             token: null,
             logIn: () => {
@@ -79,6 +96,13 @@ export const useZustand = create<store>()(
             },
             setCurrentRoute: (route: string) => {
                 set({ route })
+            },
+
+            setChatroom: (chatRoomId: string, messageObject: any) => {
+                const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
+                let chatrooms = get().chatrooms
+                chatrooms[targetIndex].messages.push(messageObject)
+                set({ chatrooms })
             },
             route: null
         }),
