@@ -17,16 +17,7 @@ export default function ChatRoom() {
     let pickedChatRoom = chatRooms.find((chatroom: any) => chatroom.participants.includes(id))
 
 
-    useEffect(() => {
-        if (chatRooms.length === 0) return
-
-        if (socket.connected) {
-            for (const chatroom of chatRooms) {
-                socket.emit('join-chatroom', { roomId: chatroom._id })
-            }
-        }
-
-    }, [chatRooms])
+  
 
     return <>
         <div

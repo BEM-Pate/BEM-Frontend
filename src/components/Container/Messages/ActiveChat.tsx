@@ -7,7 +7,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
     const elementRef = useRef(null)
     useEffect(() => {
         //@ts-ignore
-        elementRef.current.scrollIntoView()
+        elementRef?.current?.scrollIntoView()
 
     }, [conversation.messages.length])
 

@@ -40,7 +40,7 @@ export default function ChatBox({ conversation }: { conversation: any }) {
                 if (message.trim() !== '') {
                     setMessage('')
                     console.log('sending mafucking message')
-                    socket.emit('send-message', { roomId: conversation._id, message })
+                    socket?.emit('send-message', { roomId: conversation._id, message })
                 }
             }}
 
@@ -81,9 +81,9 @@ export default function ChatBox({ conversation }: { conversation: any }) {
                 if (message.trim() !== '' && e.key === 'Enter') {
                     setMessage('')
                     console.log('sending mafucking message')
-                    console.log(socket.id)
+                    console.log(socket?.id)
 
-                    socket.emit('send-message', { roomId: conversation._id, message })
+                    socket?.emit('send-message', { roomId: conversation._id, message })
 
                 }
             }}
