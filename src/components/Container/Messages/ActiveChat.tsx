@@ -1,8 +1,16 @@
 import BackHeader from "./BackHeader"
 import ChatBox from "./ChatBox"
+import {useEffect, useRef} from "react";
 
 export default function ActiveChat({ conversation, targetedUser }: { conversation: any, targetedUser: any }) {
     const baseUserData = targetedUser.baseUserData
+    const elementRef = useRef(null)
+    useEffect(() => {
+        //@ts-ignore
+        elementRef.current.scrollIntoView()
+
+    }, [conversation.messages.length])
+
 
     const objects = []
 
@@ -54,9 +62,8 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
         } else {
             const previousDate = new Date(conversation.messages[i - 1].time)
             // if difference greater than 1 hour 
-            objects.push(<div
+            objects.push(<div className={"messageContainer"}>
 
-            >
                 {
                     date.getTime() - previousDate.getTime() > 3600000 &&
                     <div
@@ -94,6 +101,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
                         {message.text}
                     </p>
                 </div>
+                <div ref={elementRef} />
             </div>)
 
 

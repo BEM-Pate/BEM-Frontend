@@ -38,7 +38,7 @@ const App = () => {
 
 
   return (
-    <div style={{
+      <div style={{
       height: '100%',
     }}>
       <BrowserRouter>
@@ -54,17 +54,16 @@ const App = () => {
             <Route path="pate" element={<RegisterPatePage />} />
           </Route>
 
-          <Route element={<DashboardPage />}>
-            <Route path="dashboard">
-              <Route path="chatroom/:id" element={<ChatRoom />} />
+            <Route path="dashboard" element={<DashboardPage />}>
+                <Route path="chatroom/:id" element={<ChatRoom />} />
 
-              <Route path="search" element={<Search userData={userData} />} />
-              <Route path="messages" element={<Messages />} />
-              <Route path="groups" element={<Groups />} />
-              <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
-              <Route path="editprofile" element={<EditProfile />} />
-            </Route>
-          </Route>
+                <Route path="search" element={<Search userData={userData} />} />
+                <Route path="messages" element={<Messages />} />
+                <Route path="groups" element={<Groups />} />
+                <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
+                <Route path="editprofile" element={<EditProfile />} />
+
+              </Route>
 
 
         </Routes>

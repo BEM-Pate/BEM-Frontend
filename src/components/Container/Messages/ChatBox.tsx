@@ -26,33 +26,45 @@ export default function ChatBox({ conversation }: { conversation: any }) {
             height: '48px',
         }}
     >
-        <label
-            style={{
-                position: 'absolute',
-                top: '5px',
-                right: '8px',
-                cursor: 'pointer',
-            }}
-        >
-            <svg height="40px" width="40px"
+
+            <svg
                 style={{
-                    transform: 'rotate(135deg)',
+                    position: 'absolute',
+                    top: '-20px',
+                    right: '-20px',
+                    cursor: 'pointer',
                     color: 'white',
                     fill: '#98C8BC',
 
-                }}
-                onClick={(e) => {
-                    if (message.trim() !== '') {
-                        setMessage('')
-                        console.log('sending mafucking message')
-                        socket.emit('send-message', { roomId: conversation._id, message })
-                    }
-                }}
-                version="1.1" id="_x32_"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">  </style> <g> <path d="M256,0C114.623,0,0,114.616,0,256s114.623,256,256,256c141.391,0,256-114.616,256-256S397.391,0,256,0z M378.268,287.116c0,8.666-7.028,15.68-15.68,15.68h-89.334l10.898,46.623c1,4.312-0.71,8.798-4.332,11.348 c-3.61,2.551-8.421,2.638-12.131,0.24l-131.913-95.225c-3.145-2.276-5-5.913-5-9.783s1.855-7.514,5-9.783l131.913-95.231 c3.71-2.399,8.521-2.305,12.131,0.246c3.622,2.55,5.333,7.036,4.332,11.348l-10.898,46.623h89.334c8.652,0,15.68,7.014,15.68,15.68 V287.116z"></path> </g> </g></svg>
+                }}  onClick={(e) => {
+                if (message.trim() !== '') {
+                    setMessage('')
+                    console.log('sending mafucking message')
+                    socket.emit('send-message', { roomId: conversation._id, message })
+                }
+            }}
 
-        </label>
+                width="100" height="100" viewBox="0 0 112 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_2_2394)">
+                    <rect x="40" y="32" width="48" height="48" rx="24" fill="#98C8BC"/>
+                </g>
+                <path d="M71.8628 48.1515C71.446 47.7237 70.8291 47.5643 70.2538 47.7321L56.84 51.6328C56.2331 51.8014 55.8029 52.2854 55.687 52.9003C55.5687 53.5261 55.9822 54.3205 56.5224 54.6527L60.7166 57.2305C61.1468 57.4948 61.702 57.4285 62.058 57.0695L66.8608 52.2368C67.1026 51.9851 67.5027 51.9851 67.7445 52.2368C67.9862 52.48 67.9862 52.8743 67.7445 53.126L62.9333 57.9595C62.5765 58.3177 62.5098 58.8755 62.7724 59.3084L65.3352 63.5446C65.6353 64.048 66.1522 64.3332 66.7191 64.3332C66.7858 64.3332 66.8608 64.3332 66.9275 64.3248C67.5777 64.2409 68.0946 63.7963 68.2864 63.1672L72.263 49.7705C72.4381 49.2001 72.2797 48.5793 71.8628 48.1515Z" fill="white"/>
+                <defs>
+                    <filter id="filter0_d_2_2394" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="8"/>
+                        <feGaussianBlur stdDeviation="20"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0.294118 0 0 0 0 0.0862745 0 0 0 0 0.298039 0 0 0 0.2 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_2394"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_2394" result="shape"/>
+                    </filter>
+                </defs>
+            </svg>
+
+
+
         <input type={'text'}
             style={{
                 backgroundColor: '#FFFFFF',

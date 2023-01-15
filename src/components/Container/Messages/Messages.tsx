@@ -131,7 +131,7 @@ const Messages = () => {
                   setRoute(`/dashboard/chatroom/${user._id}`)
                 }}
               />
-              <h1>{userData.firstName}</h1>
+              {/*<h1>{userData.firstName}</h1>*/}
             </div>
           )
         })}
