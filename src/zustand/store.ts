@@ -36,9 +36,9 @@ const BASE_URL = `http://141.45.146.171/api`
 // const HARD_CORDED_TOKEN_USER = HARD_COREs[index]
 
 export const SOCKET_URL =
-    // `http://141.45.146.171`
+    `http://141.45.146.171`
     // ||
-    `http://localhost:3001`
+    // `http://localhost:3001`
 
 export let socket: null | Socket = null
 
