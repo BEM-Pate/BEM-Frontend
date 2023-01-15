@@ -38,7 +38,7 @@ const App = () => {
 
 
   return (
-    <div style={{
+      <div style={{
       height: '100%',
     }}>
       <BrowserRouter>
