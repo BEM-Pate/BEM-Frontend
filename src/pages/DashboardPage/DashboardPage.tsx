@@ -30,6 +30,7 @@ const DashboardPage = () => {
     })
 
     socket.on('client-message-seen', (room)=>{
+      console.log('client-message-seen')
       setSeen(room._id, room)
     })
 

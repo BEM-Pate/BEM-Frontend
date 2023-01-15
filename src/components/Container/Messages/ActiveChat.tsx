@@ -10,9 +10,10 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
     const lastMessage = conversation.messages[conversation.messages.length - 1]
 
     useEffect(() => {
+        console.log('')
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
-    }, [conversation.messages.length])
+    }, [conversation.messages.length, lastMessage.seen.length])
 
 
     useEffect(() => {
@@ -35,7 +36,6 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
     for (let i = 0; i < conversation.messages.length; i++) {
         const message = conversation.messages[i]
         const date = new Date(message.time)
-        console.log(message.time)
 
         if (i === 0) {
             objects.push(<div
@@ -117,6 +117,27 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
 
                         }}
                     >
+                        {
+                            (() => {
+                                if (
+                                    message.sender === me.account._id
+                                    &&
+                                    message.seen.find((obj: any) => { return obj.userId !== me.account._id })
+                                ) {
+                                    return 'seen:'
+                                } else if (
+                                    message.sender === me.account._id
+                                    &&
+                                    !message.seen.find((obj: any) => { return obj.userId !== me.account._id })
+                                ) {
+                                    return 'sent:'
+                                }
+
+                                return ''
+                            })()
+
+                        }
+
                         {message.text}
                     </p>
                 </div>

@@ -1,53 +1,11 @@
-import React, { useEffect } from 'react';
 import classNames from 'classnames';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './Messages.module.scss';
 import { useNavigate } from "react-router-dom";
+import styles from './Messages.module.scss';
 
-import placeholder from '../../../images/default.png';
-import { socket, useZustand } from '../../../zustand/store';
-const GERMAN_FIRST_NAMES = [
-  'Anna',
-  'Bruno',
-  'Carla',
-  'Dieter',
-  'Emma',
-  'Friedrich',
-  'Greta',
-  'Hans',
-  'Irina',
-  'Johann',
-];
-const GERMAN_LAST_NAMES = [
-  'Müller',
-  'Schmidt',
-  'Schneider',
-  'Fischer',
-  'Weber',
-  'Meyer',
-  'Wagner',
-  'Becker',
-  'Schulz',
-  'Hoffmann',
-];
-const GERMAN_LOCATIONS = [
-  'Berlin',
-  'Hamburg',
-  'München',
-  'Köln',
-  'Frankfurt',
-  'Stuttgart',
-  'Düsseldorf',
-  'Dortmund',
-  'Essen',
-  'Bremen',
-];
-const messages = [
-  "Hey, how's it going?",
-  'Good, just hanging out at home. You?',
-  "Same here. Let's plan to grab a coffee",
-  "Sounds good to me. Let's pick a day and time.",
-];
+import { useZustand } from '../../../zustand/store';
+
 
 // const generateRandomPerson = () => {
 //   const people = [];
