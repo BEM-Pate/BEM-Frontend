@@ -56,6 +56,7 @@ const App = () => {
 
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
+              <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
               <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
               <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
