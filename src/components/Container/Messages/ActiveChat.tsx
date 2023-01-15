@@ -1,15 +1,33 @@
 import BackHeader from "./BackHeader"
 import ChatBox from "./ChatBox"
-import {useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
+import { socket, useZustand } from "../../../zustand/store";
 
 export default function ActiveChat({ conversation, targetedUser }: { conversation: any, targetedUser: any }) {
-    const baseUserData = targetedUser.baseUserData
+
+    const me = useZustand(state => state.user)
     const elementRef = useRef(null)
+    const lastMessage = conversation.messages[conversation.messages.length - 1]
+
     useEffect(() => {
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
-
     }, [conversation.messages.length])
+
+
+    useEffect(() => {
+        if (socket) {
+            for (const message of conversation.messages) {
+                if (!message?.seen?.find((obj: any) => obj.userId === me.account._id)) {
+                    socket!.emit('server-message-seen', { roomId: conversation._id })
+                    break;
+                }
+            }
+        }
+    }, [socket, lastMessage])
+
+
+
 
 
     const objects = []
@@ -17,6 +35,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
     for (let i = 0; i < conversation.messages.length; i++) {
         const message = conversation.messages[i]
         const date = new Date(message.time)
+        console.log(message.time)
 
         if (i === 0) {
             objects.push(<div
@@ -134,7 +153,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
             style={{
                 flex: 1,
                 padding: '0 24px 24px 24px',
-                overflow:'scroll'
+                overflow: 'scroll'
             }}
         >
             {objects}

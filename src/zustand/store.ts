@@ -14,14 +14,15 @@ interface store {
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
-    setChatroom: (chatroomId: string, messageObj: any) => void,
+    pushMessageToChatRoom: (chatroomId: string, messageObj: any) => void,
     setUser: (user: any) => void,
     socketConfig: null | {
-        path: string,
+        path?: string,
         extraHeaders: {
             Authorization: string
         }
     },
+    setSeen: (chatroomId: string, messageId: string) => void,
 }
 
 
@@ -66,6 +67,7 @@ export const useZustand = create<store>()(
                 set({
                     socketConfig: {
                         path: '/api/socket.io',
+
                         extraHeaders: {
                             Authorization: `Bearer ${user.token}`
                         }
@@ -106,10 +108,16 @@ export const useZustand = create<store>()(
                 set({ route })
             },
 
-            setChatroom: (chatRoomId: string, messageObject: any) => {
+            pushMessageToChatRoom: (chatRoomId: string, messageObject: any) => {
                 const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
                 let chatrooms = get().chatrooms
                 chatrooms[targetIndex].messages.push(messageObject)
+                set({ chatrooms })
+            },
+            setSeen: (chatRoomId: string, chatroom: any) => {
+                const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
+                let chatrooms = get().chatrooms
+                chatrooms[targetIndex] = chatroom
                 set({ chatrooms })
             },
             route: null

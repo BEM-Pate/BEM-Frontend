@@ -9,9 +9,10 @@ import { io } from 'socket.io-client'
 const DashboardPage = () => {
   const route = useZustand(state => state.route)
   const location = useLocation()
-  const setChatRoom = useZustand(state => state.setChatroom)
+  const setChatRoom = useZustand(state => state.pushMessageToChatRoom)
   const chatRooms = useZustand(state => state.chatrooms)
   const socketConfig = useZustand(state => state.socketConfig)
+  const setSeen =useZustand(state=>state.setSeen)
 
   useEffect(() => {
     if (!socket) return
@@ -27,6 +28,11 @@ const DashboardPage = () => {
     socket.on('new-message', ({ roomId, messageObj }) => {
       setChatRoom(roomId, messageObj)
     })
+
+    socket.on('client-message-seen', (room)=>{
+      setSeen(room._id, room)
+    })
+
 
   }, [chatRooms, socket])
 

@@ -5,7 +5,7 @@ import { useZustand, socket } from "../../../zustand/store"
 export default function ChatBox({ conversation }: { conversation: any }) {
 
     const [message, setMessage] = useState('')
-    const [setChatRoom] = useZustand(state => [state.setChatroom])
+    const [setChatRoom] = useZustand(state => [state.pushMessageToChatRoom])
     // const [chatRoom, setChatRoom] = useState<any>(conversation)
 
 
