@@ -65,7 +65,7 @@ export const useZustand = create<store>()(
                 set({ user })
                 set({
                     socketConfig: {
-                        path: '/socket.io',
+                        path: '/api/socket.io',
                         extraHeaders: {
                             Authorization: `Bearer ${user.token}`
                         }
