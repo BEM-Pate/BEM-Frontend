@@ -7,12 +7,8 @@ import { initiliazeSocket, socket, SOCKET_URL, useZustand } from '../../zustand/
 import { io } from 'socket.io-client'
 
 const DashboardPage = () => {
-  const route = useZustand(state => state.route)
   const location = useLocation()
-  const setChatRoom = useZustand(state => state.pushMessageToChatRoom)
-  const chatRooms = useZustand(state => state.chatrooms)
-  const socketConfig = useZustand(state => state.socketConfig)
-  const setSeen =useZustand(state=>state.setSeen)
+  const [setChatRoom, chatRooms, socketConfig, setSeen] = useZustand((state) => [state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen]);
 
   useEffect(() => {
     if (!socket) return

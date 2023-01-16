@@ -7,47 +7,17 @@ import styles from './Messages.module.scss';
 import { useZustand } from '../../../zustand/store';
 
 
-// const generateRandomPerson = () => {
-//   const people = [];
-//   while (people.length !== 50) {
-//     const firstName = GERMAN_FIRST_NAMES[Math.floor(Math.random() * GERMAN_FIRST_NAMES.length)];
-//     const lastName = GERMAN_LAST_NAMES[Math.floor(Math.random() * GERMAN_LAST_NAMES.length)];
-//     const age = Math.floor(Math.random() * 100);
-//     const location = GERMAN_LOCATIONS[Math.floor(Math.random() * GERMAN_LOCATIONS.length)];
-//     const message = messages[Math.floor(Math.random() * messages.length)];
-//     const date = new Date(Math.random() * Date.now());
-
-//     const person = {
-//       firstName,
-//       lastName,
-//       age,
-//       location,
-//       date,
-//       message,
-//     };
-
-//     people.push(person);
-//   }
-
-//   return people;
-// };
-
-// const paten = generateRandomPerson();
-
 const Messages = () => {
 
   const navigate = useNavigate();
 
-  const [chatrooms, fetchChatroom, contacts, setRoute] = useZustand((state) => [state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute]);
+  const [fetchChatroom, contacts, setRoute] = useZustand((state) => [state.fetchChatroom, state.contacts, state.setCurrentRoute]);
 
   useEffect(() => {
     fetchChatroom();
   },
     []
   )
-
-
-
 
   const { t } = useTranslation();
   return (
@@ -62,7 +32,6 @@ const Messages = () => {
 
         {contacts?.map((user: any) => {
           const userData = user.baseUserData;
-          //@ts-ignore
           const b64 = btoa(
             userData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
           )
@@ -99,49 +68,8 @@ const Messages = () => {
       <h4 className={classNames(styles.MessagesSubheader)}>
         {t('messagesPageMessages')}
       </h4>
-      <div
-        className={classNames(styles.MessagesContainerMessages)}
-      >
-        {/**
-         *Bilder durch ProfilePicture ersetzen
-         *die Nachricjten anklickbar machen
-         */
-          // paten.map((pate) => (
-          //   <div className={classNames(styles.MessagesContainerMessagesMessages)}>
-          //     <img
-          //       src={placeholder}
-          //       alt="placeholder"
-          //       className={classNames(styles.MessagesProfilePictures)}
-          //     />
-          //     <span
-          //       className={classNames(styles.MessagesContainerMessagesTextName)}
-          //     >
-          //       {pate.firstName}
-          //       {' '}
-          //       {pate.lastName}
-          //       {' '}
-          //     </span>
-          //     <br />
-          //     <span
-          //       className={classNames(
-          //         styles.MessagesContainerMessagesTextMessage,
-          //       )}
-          //     >
-          //       {pate.message}
-          //     </span>
-          //     <br />
-          //     <span
-          //       className={classNames(styles.MessagesContainerMessagesTextDate)}
-          //     >
-          //       {`${pate.date.toDateString()}`}
-          //     </span>
-          //     <hr />
-          //   </div>
-          // ))
+      <div className={classNames(styles.MessagesContainerMessages)}>
 
-
-
-        }
       </div>
     </div>
   );

@@ -105,7 +105,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            border: '2px solid #98C8BC',
+                            border: '4px solid #98C8BC',
                         }}
                     >
                         <img
@@ -138,6 +138,34 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                     >
                         {baseUserData.firstName}
                     </label> deine Nachricht gelesen hat
+                </div>
+
+                <div
+                    style={{
+                        display: 'flex',
+                        gap: '5px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#83ACA2',
+                        borderRadius: '32px',
+                        width: '250px',
+                        margin: '10px auto',
+                        padding: '4px 12px 4px 8px'
+                    }}>
+
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_218_3343)">
+                            <path d="M4.66669 7.99984L8.00002 11.3332L14.6667 4.6665" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7.99998 7.99984L11.3333 4.6665M1.33331 7.99984L4.66665 11.3332L1.33331 7.99984Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_218_3343">
+                                <rect width="16" height="16" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <span>Lesebestätigung erhalten</span>
                 </div>
             </div>
             <div

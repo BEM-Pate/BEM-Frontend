@@ -13,6 +13,7 @@
     margin-left: 1%;
 }
   &ContainerContacts {
+    display: flex;
     background-color: rgba(110, 135, 129, 0.768);
     overflow: auto;
     white-space: nowrap;

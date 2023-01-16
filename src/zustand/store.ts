@@ -6,7 +6,6 @@ import io, { Socket } from 'socket.io-client';
 
 interface store {
     user: null | any,
-    logIn: () => void,
     contacts: null | any,
     chatrooms: null | any,
     fetchChatroom: () => void,
@@ -51,17 +50,12 @@ export const initiliazeSocket = (
 }
 
 
-
 export const useZustand = create<store>()(
     persist(
         (set, get, props) => ({
             user: null,
             token: null,
             socketConfig: null,
-            logIn: () => {
-
-                set({ user: { name: 'test' } })
-            },
             setUser: (user: any) => {
                 set({ user })
                 set({
@@ -128,4 +122,3 @@ export const useZustand = create<store>()(
         }
     )
 )
-
