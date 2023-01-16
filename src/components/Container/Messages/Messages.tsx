@@ -85,8 +85,12 @@ const Messages = () => {
                             const contentType = userData.avatar.contentType;
                             const chatRoom = chatrooms?.find((chatroom: any) => chatroom.participants.includes(user._id))
                             let unSeenMsgLength = 0;
+
                             chatRoom?.messages.forEach((msg: any) => {
-                                if (msg.seen?.filter((user: any) => user.userId !== me._id).length === 1) {
+
+                                const isMeInSeeen = msg.seen?.find((user: any) => user.userId === me._id);
+                                console.log("hehe "+isMeInSeeen)
+                                    if (!isMeInSeeen && msg.sender !== me._id) {
                                     unSeenMsgLength++;
                                 }
                             })

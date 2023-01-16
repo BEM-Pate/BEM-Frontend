@@ -56,14 +56,15 @@ export const useZustand = create<store>()(
             user: null,
             token: null,
             socketConfig: null,
-            setUser: (user: any) => {
-                set({ user })
+            setUser: (data: any) => {
+                console.log(data)
+                set({ user:data.account })
+                set({token: data.token})
                 set({
                     socketConfig: {
                         path: '/api/socket.io',
-
                         extraHeaders: {
-                            Authorization: `Bearer ${user.token}`
+                            Authorization: `Bearer ${data.token}`
                         }
                     }
                 })
@@ -73,7 +74,7 @@ export const useZustand = create<store>()(
             fetchChatroom: () => {
                 axios.get(`${BASE_URL}/chat/rooms`, {
                     headers: {
-                        Authorization: `Bearer ${get().user?.token}`
+                        Authorization: `Bearer ${get().token}`
                     }
                 }).then((res) => {
                     let participants: any[] = []
@@ -89,14 +90,14 @@ export const useZustand = create<store>()(
                 const users: any[] = []
                 for (const userId of userIds) {
                     const user = (await axios.get(`${BASE_URL}/user/userdata/${userId}`, {
-                        headers: {
-                            Authorization: `Bearer ${get().user?.token}`
-                        }
+                        // headers: {
+                        //     Authorization: `Bearer ${get().token}`
+                        // }
                     })).data
                     users.push(user)
                 }
 
-                set({ contacts: users.filter((user) => user._id !== get().user.account._id) })
+                set({ contacts: users.filter((user) => user._id !== get().user._id) })
             },
             setCurrentRoute: (route: string) => {
                 set({ route })

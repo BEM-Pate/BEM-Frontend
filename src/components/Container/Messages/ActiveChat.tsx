@@ -19,7 +19,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
     useEffect(() => {
         if (socket) {
             for (const message of conversation.messages) {
-                if (!message?.seen?.find((obj: any) => obj.userId === me.account._id)) {
+                if (!message?.seen?.find((obj: any) => obj.userId === me._id)) {
                     socket!.emit('server-message-seen', { roomId: conversation._id })
                     break;
                 }
@@ -128,9 +128,9 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
                         {
                             (() => {
                                 if (
-                                    message.sender === me.account._id
+                                    message.sender === me._id
                                     &&
-                                    message.seen.find((obj: any) => { return obj.userId !== me.account._id })
+                                    message.seen.find((obj: any) => { return obj.userId !== me._id })
                                 ) {
                                     return <svg
                                         style={{width: "25px"}}
@@ -147,9 +147,9 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
                                     </svg>
 
                                 } else if (
-                                    message.sender === me.account._id
+                                    message.sender === me._id
                                     &&
-                                    !message.seen.find((obj: any) => { return obj.userId !== me.account._id })
+                                    !message.seen.find((obj: any) => { return obj.userId !== me._id })
                                 ) {
                                     return <svg
                                         style={{width: "25px"}}
