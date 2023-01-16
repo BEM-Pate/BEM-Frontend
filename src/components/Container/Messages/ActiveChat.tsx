@@ -1,9 +1,9 @@
 import BackHeader from "./BackHeader"
 import ChatBox from "./ChatBox"
-import { useEffect, useRef } from "react";
-import { socket, useZustand } from "../../../zustand/store";
+import {useEffect, useRef} from "react";
+import {socket, useZustand} from "../../../zustand/store";
 
-export default function ActiveChat({ conversation, targetedUser }: { conversation: any, targetedUser: any }) {
+export default function ActiveChat({conversation, targetedUser}: { conversation: any, targetedUser: any }) {
 
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
@@ -20,15 +20,12 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
         if (socket) {
             for (const message of conversation.messages) {
                 if (!message?.seen?.find((obj: any) => obj.userId === me._id)) {
-                    socket!.emit('server-message-seen', { roomId: conversation._id })
+                    socket!.emit('server-message-seen', {roomId: conversation._id})
                     break;
                 }
             }
         }
     }, [socket, lastMessage])
-
-
-
 
 
     const objects = []
@@ -53,7 +50,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
 
                     }}
                 >
-                    {date.getHours()}:{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
+                    {(date.getHours() < 10 ? '0' : '') + date.getHours()}:{(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
                 </div>
                 <div
                     style={{
@@ -64,18 +61,24 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
                     }}
 
                 >
-                    <p
+                    <div
                         style={{
-                            padding: '12px 24px 12px 24px',
+                            alignContent: 'center',
+                            verticalAlign: 'middle',
+                            wordBreak: 'break-all',
+                            whiteSpace: 'normal',
+                            padding: '12px 20px 12px 24px',
                             backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',
-                            maxWidth: '60%',
+                            maxWidth: '100%',
                             borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
-
-
+                            margin: '10px 0'
                         }}
                     >
                         {message.text}
-                    </p>
+                        {
+                            messageStatus(message, me)
+                        }
+                    </div>
                 </div>
             </div>)
         } else {
@@ -109,10 +112,8 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
                 >
                     <div
                         style={{
-                            // display: 'flex',
-                            // alignItems: 'center',
                             alignContent: 'center',
-                            verticalAlign:'middle',
+                            verticalAlign: 'middle',
                             wordBreak: 'break-all',
                             whiteSpace: 'normal',
                             padding: '12px 20px 12px 24px',
@@ -126,49 +127,13 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
 
                         {message.text}
                         {
-                            (() => {
-                                if (
-                                    message.sender === me._id
-                                    &&
-                                    message.seen.find((obj: any) => { return obj.userId !== me._id })
-                                ) {
-                                    return <svg
-                                        style={{width: "25px"}}
-                                        width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_218_3343)">
-                                            <path d="M4.66669 7.99984L8.00002 11.3332L14.6667 4.6665" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M7.99998 7.99984L11.3333 4.6665M1.33331 7.99984L4.66665 11.3332L1.33331 7.99984Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_218_3343">
-                                                <rect width="16" height="16" fill="white"/>
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
-                                } else if (
-                                    message.sender === me._id
-                                    &&
-                                    !message.seen.find((obj: any) => { return obj.userId !== me._id })
-                                ) {
-                                    return <svg
-                                        style={{width: "25px"}}
-                                        width="25" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.66669 4.99984L5.00002 8.33317L11.6667 1.6665" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-
-                                }
-
-                                return ''
-                            })()
-
+                            messageStatus(message, me)
                         }
 
                     </div>
                 </div>
-                <div ref={elementRef} />
+                <div ref={elementRef}/>
             </div>)
-
 
 
         }
@@ -187,7 +152,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
         display: 'flex',
         flexDirection: 'column',
 
-    }}  >
+    }}>
         <BackHeader
             targetedUser={targetedUser}
         ></BackHeader>
@@ -213,4 +178,47 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
             <ChatBox conversation={conversation}></ChatBox>
         </div>
     </div>
+}
+
+const messageStatus = (message: any, me: any) => {
+    if (
+        message.sender === me._id
+        &&
+        message.seen.find((obj: any) => {
+            return obj.userId !== me._id
+        })
+    ) {
+        return <svg
+            style={{width: "25px"}}
+            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_218_3343)">
+                <path d="M4.66669 7.99984L8.00002 11.3332L14.6667 4.6665" stroke="white" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.99998 7.99984L11.3333 4.6665M1.33331 7.99984L4.66665 11.3332L1.33331 7.99984Z"
+                      stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_218_3343">
+                    <rect width="16" height="16" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+
+    } else if (
+        message.sender === me._id
+        &&
+        !message.seen.find((obj: any) => {
+            return obj.userId !== me._id
+        })
+    ) {
+        return <svg
+            style={{width: "25px"}}
+            width="25" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.66669 4.99984L5.00002 8.33317L11.6667 1.6665" stroke="white" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+    }
+
+    return ''
 }

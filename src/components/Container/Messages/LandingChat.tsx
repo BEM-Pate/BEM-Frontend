@@ -53,7 +53,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                 <div
 
                 >
-                    <BackHeader></BackHeader>
+                    <BackHeader/>
 
                     <div
                         style={{
@@ -178,7 +178,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                     padding: '0 24px 0 24px',
                 }}
             >
-                <ChatBox conversation={conversation}></ChatBox>
+                <ChatBox conversation={conversation}/>
             </div>
         </div>
     </>

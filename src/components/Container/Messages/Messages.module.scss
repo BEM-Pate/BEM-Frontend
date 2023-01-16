@@ -5,8 +5,8 @@
   background-color: rgb(99, 131, 123);
   &ProfilePictures {
     border-radius: 15px;
-    height: 50px;
-    width: 50px;
+    height: 100%;
+    width: 100%;
     margin-top: 1%;
     margin-bottom: 4%;
     margin-right: 2%;
@@ -24,10 +24,12 @@
 }
   &ContainerContacts {
     display: flex;
-    background-color: rgba(110, 135, 129, 0.768);
+    background-color: rgba(110, 135, 129, 0);
     overflow: auto;
+    gap: 1rem;
     white-space: nowrap;
     margin-bottom: 5%;
+    padding: 10px;
     &Images {
       width: 50px;
       height: 50px;
@@ -68,5 +70,6 @@
   }
   &Subheader{
     color: white;
+    padding: 10px
   }
 }
