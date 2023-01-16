@@ -17,9 +17,19 @@ const Messages = () => {
         },
         []
     )
+    console.log("before sort")
     console.log(chatrooms)
      // sort by last message time
-    chatrooms.sort((a:any, b:any) => {return new Date(a.messages[a.messages?.length-1]?.time).getTime() - new Date(b.messages[b.messages?.length-1]?.time).getTime()})
+    chatrooms.sort((a:any, b:any) => {
+        let aTime = new Date(a.messages[a.messages.length - 1].time).getTime();
+
+        let bTime = new Date(b.messages[b.messages.length - 1].time).getTime();
+        if(aTime > bTime) return -1;
+        if(aTime < bTime) return 1;
+        return 0;
+    })
+    console.log("after sort")
+    console.log(chatrooms)
 
     const {t} = useTranslation();
     return (
