@@ -24,19 +24,21 @@ export default function ChatBox({ conversation }: { conversation: any }) {
             position: 'relative',
             width: '100%',
             height: '48px',
+            display: 'flex',
         }}
     >
-
+            <div   style={{
+                position: 'absolute',
+                // top: '-20px',
+                // right: '-20px',
+                cursor: 'pointer',
+                color: 'white',
+                fill: '#98C8BC',
+                width: '50px',
+                marginLeft: '290px'
+            }}>
             <svg
-                style={{
-                    position: 'absolute',
-                    top: '-20px',
-                    right: '-20px',
-                    cursor: 'pointer',
-                    color: 'white',
-                    fill: '#98C8BC',
-
-                }}  onClick={(e) => {
+                onClick={(e) => {
                 if (message.trim() !== '') {
                     setMessage('')
                     console.log('sending mafucking message')
@@ -44,7 +46,7 @@ export default function ChatBox({ conversation }: { conversation: any }) {
                 }
             }}
 
-                width="100" height="100" viewBox="0 0 112 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                width="100%" height="100%" viewBox="35 27 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_2_2394)">
                     <rect x="40" y="32" width="48" height="48" rx="24" fill="#98C8BC"/>
                 </g>
@@ -62,7 +64,7 @@ export default function ChatBox({ conversation }: { conversation: any }) {
                     </filter>
                 </defs>
             </svg>
-
+            </div>
 
 
         <input type={'text'}

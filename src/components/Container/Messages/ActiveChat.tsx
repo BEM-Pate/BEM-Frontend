@@ -113,7 +113,7 @@ export default function ActiveChat({ conversation, targetedUser }: { conversatio
                             // alignItems: 'center',
                             alignContent: 'center',
                             verticalAlign:'middle',
-                            // wordBreak: 'break-all',
+                            wordBreak: 'break-all',
                             whiteSpace: 'normal',
                             padding: '12px 20px 12px 24px',
                             backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',

@@ -14,12 +14,13 @@ const Messages = () => {
     const [me, chatrooms, fetchChatroom, contacts, setRoute] = useZustand((state) => [state.user, state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute]);
     useEffect( () => {
             fetchChatroom();
-            chatrooms.sort((a:any, b:any) => {return new Date(a.messages[a.messages?.length-1]?.time).getTime() - new Date(b.messages[b.messages?.length-1]?.time).getTime()})
         },
         []
     )
     console.log(chatrooms)
      // sort by last message time
+    chatrooms.sort((a:any, b:any) => {return new Date(a.messages[a.messages?.length-1]?.time).getTime() - new Date(b.messages[b.messages?.length-1]?.time).getTime()})
+
     const {t} = useTranslation();
     return (
         <div className={classNames(styles.Messages)}>
