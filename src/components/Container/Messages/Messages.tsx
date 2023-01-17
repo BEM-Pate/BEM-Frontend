@@ -9,14 +9,12 @@ const Messages = () => {
 
     const navigate = useNavigate();
 
-    const [me, chatrooms, fetchChatroom, contacts, setRoute] = useZustand((state) => [state.user, state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute]);
+    const [me, chatrooms, fetchChatroom, contacts, setRoute, onlineUsersInRooms] = useZustand((state) => [state.user, state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute, state.onlineUsersInRooms])
     useEffect(() => {
             fetchChatroom();
         },
         []
     )
-    console.log("before sort")
-    console.log(chatrooms)
     // sort by last message time
     chatrooms.sort((a: any, b: any) => {
         const aTime = new Date(a.messages[a.messages.length - 1]?.time).getTime();
@@ -28,8 +26,6 @@ const Messages = () => {
         // }
         return 0;
     })
-    console.log("after sort")
-    console.log(chatrooms)
 
     const {t} = useTranslation();
     return (
@@ -43,18 +39,27 @@ const Messages = () => {
             <div className={classNames(styles.MessagesContainerContacts)}>
 
                 {contacts?.map((user: any) => {
-                    const userData = user.baseUserData;
+                    const userData = user.baseUserData
+
                     const b64 = btoa(
                         userData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
                     )
-                    const contentType = userData.avatar.contentType;
+                    let isUserOnline = false;
+                    for (const room in onlineUsersInRooms) {
+                        if(onlineUsersInRooms.hasOwnProperty(room)){
+                            if (onlineUsersInRooms[room].includes(userData.account)) {
+                                isUserOnline = true;
+                            }
+                        }
+                    }
+                    const contentType = userData?.avatar.contentType;
                     return (
                         <div style={
                             {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 width: '100px',
-                                height: '100px',
+                                // height: '100px',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 cursor: 'pointer',
@@ -70,6 +75,8 @@ const Messages = () => {
                                     setRoute(`/dashboard/chatroom/${user._id}`)
                                 }}
                             />
+                            {isUserOnline && <div style={{width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'green'}}/>}
+                            {!isUserOnline && <div style={{width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'red'}}/>}
                         </div>
                     )
                 })}
@@ -99,7 +106,6 @@ const Messages = () => {
                                 let unSeenMsgLength = 0;
                                 chatRoom?.messages.forEach((msg: any) => {
                                     const isMeInSeeen = msg.seen?.find((user: any) => user.userId === me._id);
-                                    console.log("hehe " + isMeInSeeen)
                                     if (!isMeInSeeen && msg.sender !== me._id) {
                                         unSeenMsgLength++;
                                     }

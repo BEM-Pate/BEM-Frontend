@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import io, { Socket } from 'socket.io-client';
+import {map} from "react-bootstrap/ElementChildren";
 
 interface store {
     user: null | any,
@@ -22,6 +23,8 @@ interface store {
         }
     },
     setSeen: (chatroomId: string, messageId: string) => void,
+    onlineUsersInRooms: null | any,
+    setOnlineUsersInRooms: (onlineUsers: any) => void,
 }
 
 
@@ -36,9 +39,9 @@ const BASE_URL = `http://141.45.146.171/api`
 // const HARD_CORDED_TOKEN_USER = HARD_COREs[index]
 
 export const SOCKET_URL =
-    `http://141.45.146.171`
+    // `http://141.45.146.171`
     // ||
-    // `http://localhost:3001`
+    `http://localhost:5000`
 
 export let socket: null | Socket = null
 
@@ -62,7 +65,7 @@ export const useZustand = create<store>()(
                 set({token: data.token})
                 set({
                     socketConfig: {
-                        path: '/api/socket.io',
+                        // path: '/api/socket.io',
                         extraHeaders: {
                             Authorization: `Bearer ${data.token}`
                         }
@@ -115,7 +118,14 @@ export const useZustand = create<store>()(
                 chatrooms[targetIndex] = chatroom
                 set({ chatrooms })
             },
-            route: null
+            route: null,
+            onlineUsersInRooms: [],
+            setOnlineUsersInRooms: (obj: any) => {
+                const {roomId, availableClients} = obj
+                const onlineUsersInRooms = get().onlineUsersInRooms;
+                onlineUsersInRooms[roomId] = availableClients
+                set({ onlineUsersInRooms: onlineUsersInRooms })
+            }
         }),
         {
             name: 'bear-store',

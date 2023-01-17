@@ -8,7 +8,8 @@ import { io } from 'socket.io-client'
 
 const DashboardPage = () => {
   const location = useLocation()
-  const [setChatRoom, chatRooms, socketConfig, setSeen] = useZustand((state) => [state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen]);
+  const [setChatRoom, chatRooms, socketConfig, setSeen, setOnlineUsersInRooms, onlineUsersInRooms] = useZustand((state) =>
+      [state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms])
 
   useEffect(() => {
     if (!socket) return
@@ -19,10 +20,18 @@ const DashboardPage = () => {
     for (const chatroom of chatRooms) {
       console.log('joining chatroom')
       socket.emit('join-chatroom', { roomId: chatroom._id })
+      socket.emit('check-available-status-in-room', { roomId: chatroom._id })
     }
 
     socket.on('new-message', ({ roomId, messageObj }) => {
       setChatRoom(roomId, messageObj)
+    })
+
+    socket.on('available-clients',  (data) => {
+        console.log('set available-clients')
+        console.log(data)
+        setOnlineUsersInRooms(data)
+        console.log(onlineUsersInRooms)
     })
 
     socket.on('client-message-seen', (room)=>{

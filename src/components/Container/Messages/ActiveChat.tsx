@@ -14,6 +14,7 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
     const elementRef = useRef(null)
     const lastMessage = conversation.messages[conversation.messages.length - 1]
 
+
     useEffect(() => {
         console.log('')
         //@ts-ignore
@@ -22,9 +23,10 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
 
 
     useEffect(() => {
-        if (socket) {
+        if (socket && lastMessage) {
             for (const message of conversation.messages) {
                 if (!message?.seen?.find((obj: any) => obj.userId === me._id)) {
+                   console.log('set server seen');
                     socket!.emit('server-message-seen', {roomId: conversation._id})
                     break;
                 }
