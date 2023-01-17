@@ -28,21 +28,16 @@ const DashboardPage = () => {
     })
 
     socket.on('available-clients', (data) => {
-      console.log('set available-clients')
-      console.log(data)
       setOnlineUsersInRooms(data)
-      console.log(onlineUsersInRooms)
     })
 
     socket.on('client-message-seen', (room) => {
-      console.log('client-message-seen')
       setSeen(room._id, room)
     })
 
     socket.on('user-disconnected', (data) => {
       let usersInRoom = onlineUsersInRooms[data.roomId]
-      const availableClients = usersInRoom.filter((user: any) => user._id !== data.userId)
-      console.log({ usersInRoom })
+      const availableClients = usersInRoom.filter((id: any) => id !== data.userId)
       setOnlineUsersInRooms({ availableClients, roomId: data.roomId })
     })
 
