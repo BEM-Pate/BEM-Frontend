@@ -36,6 +36,7 @@ const DashboardPage = () => {
     })
 
     socket.on('user-disconnected', (data) => {
+      console.log(`user is offline: ${data.userId}}`) 
       let usersInRoom = onlineUsersInRooms[data.roomId]
       const availableClients = usersInRoom.filter((id: any) => id !== data.userId)
       setOnlineUsersInRooms({ availableClients, roomId: data.roomId })
