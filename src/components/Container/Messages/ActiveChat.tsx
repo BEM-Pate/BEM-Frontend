@@ -1,10 +1,15 @@
 import BackHeader from "./BackHeader"
 import ChatBox from "./ChatBox"
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {socket, useZustand} from "../../../zustand/store";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export default function ActiveChat({conversation, targetedUser}: { conversation: any, targetedUser: any }) {
-
+    const [show, setShow] = useState(false);
+    const [targetedMessage, setTargetedMessage] = useState<any>(null)
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
     const lastMessage = conversation.messages[conversation.messages.length - 1]
@@ -73,6 +78,10 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
                             borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
                             margin: '10px 0'
                         }}
+                        onClick={() => {
+                            handleShow()
+                            setTargetedMessage(message)
+                        }}
                     >
                         {message.text}
                         {
@@ -123,6 +132,10 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
                             margin: '10px 0'
 
                         }}
+                        onClick={() => {
+                            handleShow()
+                            setTargetedMessage(message)
+                        }}
                     >
 
                         {message.text}
@@ -155,7 +168,7 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
     }}>
         <BackHeader
             targetedUser={targetedUser}
-        ></BackHeader>
+        />
 
         {/* <h1>{baseUserData.firstName} {baseUserData.lastName}</h1> */}
 
@@ -177,6 +190,45 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
 
             <ChatBox conversation={conversation}></ChatBox>
         </div>
+        <Modal caria-labelledby="example-custom-modal-styling-title" show={show} onHide={handleClose} size="lg" centered>
+            <Modal.Header closeButton>
+                <Modal.Title>Message Info</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div style={{display:'flex', alignItems:"center", padding: "5px"}}>
+                    <svg
+                        style={{width: "25px"}}
+                        width="25" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.66669 4.99984L5.00002 8.33317L11.6667 1.6665" stroke="black" stroke-width="1.5"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Delivered: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[0]?.date)}</span>
+                </div>
+                {checkValidDate(new Date(targetedMessage?.seen[1]?.date)) &&
+
+                <div style={{display:'flex', alignItems:"center", padding: "5px", borderTop: "1px solid rgba(34, 23, 42, 0.08)"}}>
+                    <svg
+                        style={{width: "25px"}}
+                        width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_218_3343)">
+                            <path d="M4.66669 7.99984L8.00002 11.3332L14.6667 4.6665" stroke="black" stroke-width="1.5"
+                                  stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7.99998 7.99984L11.3333 4.6665M1.33331 7.99984L4.66665 11.3332L1.33331 7.99984Z"
+                                  stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_218_3343">
+                                <rect width="16" height="16" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    Read: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[1]?.date)}</span></div>
+
+                }
+                </Modal.Body>
+        </Modal>
+
+
     </div>
 }
 
@@ -221,4 +273,18 @@ const messageStatus = (message: any, me: any) => {
     }
 
     return ''
+}
+
+const getTime = (time: any) => {
+    const date = new Date(time)
+    if(checkValidDate(date)) {
+        return (date.getHours() < 10 ? "0": "")+date.getHours() + ":"+ (date.getMinutes() < 10 ? "0": "") + date.getMinutes() + " " + date.getDate() + "." + ("0" + date.getMonth() + 1).slice(-2)+ "." +date.getFullYear()
+    } else {
+        return "Not delivered"
+    }
+}
+
+const checkValidDate= (date: any) => {
+    // @ts-ignore
+    return date instanceof Date && !isNaN(date);
 }
