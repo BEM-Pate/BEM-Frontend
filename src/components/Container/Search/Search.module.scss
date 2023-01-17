@@ -19,7 +19,7 @@
     }
     &Loading {
         animation: loading 0.7s ease-in-out infinite alternate;
-        height: calc(100vh - 2*var(--header-height));
+        height: calc(100vh - 4*var(--header-height));
         display: flex;
         justify-content: center;
         align-items: center;
