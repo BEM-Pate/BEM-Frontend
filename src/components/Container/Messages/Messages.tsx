@@ -100,9 +100,9 @@ const Messages = () => {
                                 const user = contacts?.find((user: any) => user._id === userId);
                                 const userData = user?.baseUserData;
                                 const b64 = btoa(
-                                    userData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
+                                    userData?.avatar?.data?.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
                                 )
-                                const contentType = userData.avatar.contentType;
+                                const contentType = userData?.avatar?.contentType;
                                 let unSeenMsgLength = 0;
                                 chatRoom?.messages.forEach((msg: any) => {
                                     const isMeInSeeen = msg.seen?.find((user: any) => user.userId === me._id);
@@ -112,8 +112,8 @@ const Messages = () => {
                                 })
 
                                 const lastMessage = chatRoom?.messages[chatRoom.messages.length - 1]
-                                const firstName = userData.firstName;
-                                const lastName = userData.lastName;
+                                const firstName = userData?.firstName;
+                                const lastName = userData?.lastName;
                                 const time = new Date(lastMessage?.time)
                                 const todayDate = new Date();
                                 const isToday = todayDate.getDate() === time.getDate()

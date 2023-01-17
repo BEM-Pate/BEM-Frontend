@@ -9,7 +9,7 @@ import { io } from 'socket.io-client'
 const DashboardPage = () => {
   const location = useLocation()
   const [setChatRoom, chatRooms, socketConfig, setSeen, setOnlineUsersInRooms, onlineUsersInRooms] = useZustand((state) =>
-      [state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms])
+    [state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms])
 
   useEffect(() => {
     if (!socket) return
@@ -27,18 +27,24 @@ const DashboardPage = () => {
       setChatRoom(roomId, messageObj)
     })
 
-    socket.on('available-clients',  (data) => {
-        console.log('set available-clients')
-        console.log(data)
-        setOnlineUsersInRooms(data)
-        console.log(onlineUsersInRooms)
+    socket.on('available-clients', (data) => {
+      console.log('set available-clients')
+      console.log(data)
+      setOnlineUsersInRooms(data)
+      console.log(onlineUsersInRooms)
     })
 
-    socket.on('client-message-seen', (room)=>{
+    socket.on('client-message-seen', (room) => {
       console.log('client-message-seen')
       setSeen(room._id, room)
     })
 
+    socket.on('user-disconnected', (data) => {
+      let usersInRoom = onlineUsersInRooms[data.roomId]
+      const availableClients = usersInRoom.filter((user: any) => user._id !== data.userId)
+      console.log({ usersInRoom })
+      setOnlineUsersInRooms({ availableClients, roomId: data.roomId })
+    })
 
   }, [chatRooms, socket])
 
