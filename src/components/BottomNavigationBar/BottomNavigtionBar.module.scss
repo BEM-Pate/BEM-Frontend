@@ -1,22 +1,27 @@
 .Navigation {
-  position: fixed;
-
   background-color: white;
   width: 100vw;
+  height: 10%;
   bottom: 0px;
   left: 0px;
   overflow: hidden;
   filter: drop-shadow(-4px -4px 20px rgba(208, 218, 215, 0.4));
+  margin-top: auto;
   ul {
 /*  display: grid;
     grid-template-columns: repeat(4, 1fr); */
     display: flex;
+    height: 100%;
     justify-content: space-between;
     list-style-type: none;
     list-style: none;
     padding: 20px 30px;
     margin: 0;
   }
+  li {
+    display: flex;
+  }
+
 }
 .Link {
   display: flex;

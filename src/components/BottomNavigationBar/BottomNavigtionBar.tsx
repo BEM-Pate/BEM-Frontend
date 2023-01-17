@@ -12,7 +12,7 @@ import ChatRoom from '../Container/Messages/Chatroom';
 const BottomNavigtionBar = () => (
   <nav className={classNames(styles.Navigation)}>
     <ul>
-      <li>
+      <li className={classNames(styles.Elements)}>
         <NavLink to="/dashboard/search" className={({ isActive }) => (isActive ? classNames(styles.Link, styles.ActiveLink) : styles.Link)}>
           <img src={search} alt="search" />
         </NavLink>

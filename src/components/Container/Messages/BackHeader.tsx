@@ -1,19 +1,32 @@
 import { useNavigate } from "react-router-dom";
+import {useZustand} from "../../../zustand/store";
 
 
 export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
+    const {onlineUsersInRooms} = useZustand(state => state)
     const userData = targetedUser?.baseUserData
     const navigate = useNavigate()
+
+    const checkIfUserIsOnline = (userData: any) => {
+        for (const room in onlineUsersInRooms) {
+            if(onlineUsersInRooms.hasOwnProperty(room)){
+                if (onlineUsersInRooms[room].includes(userData.account)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     return <>
         <div
             style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                margin: '0 24px 0 10px',
+                margin: '0 1rem',
+                alignItems: 'center'
             }}
         >
             <svg
-                style={{ marginBottom: '35px' }}
                 onClick={() => {
                     navigate(-1)
 
@@ -30,12 +43,35 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
                 </defs>
             </svg>
 
-            <div
+            <div className="header__user___name__container"
                 style={{
                     visibility: targetedUser ? 'visible' : 'hidden',
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}
             >
-                <h1>{userData?.firstName}</h1>
+                <div className="header__user__name"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '10px'
+                    }}
+
+                >
+                    <h1 style={{margin:"0"}}>{userData?.firstName}</h1>
+                    <div className="status_cirle"style={{
+                        width: '20px', height: '20px', borderRadius: '50%', backgroundColor: checkIfUserIsOnline(userData)? '#1dbf73': 'grey',border:"2px solid white", transition: "background .3s"
+                    }}/>
+                </div>
+                <div
+                    style={{opacity: checkIfUserIsOnline(userData) ? 1 : 0.5}}
+                    className="header__user__status">
+                    {checkIfUserIsOnline(userData) ? 'online' : 'offline'}
+                </div>
+
             </div>
 
 

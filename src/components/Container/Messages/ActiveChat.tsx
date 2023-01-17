@@ -5,40 +5,38 @@ import {socket, useZustand} from "../../../zustand/store";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export default function ActiveChat({conversation, targetedUser}: { conversation: any, targetedUser: any }) {
+export default function ActiveChat({room, targetedUser}: { room: any, targetedUser: any }) {
     const [show, setShow] = useState(false);
     const [targetedMessage, setTargetedMessage] = useState<any>(null)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
-    const lastMessage = conversation.messages[conversation.messages.length - 1]
+    const lastMessage = room.messages[room.messages.length - 1]
 
 
     useEffect(() => {
         console.log('')
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
-    }, [conversation.messages.length, lastMessage.seen.length])
+    }, [room.messages.length, lastMessage.seen.length])
 
 
     useEffect(() => {
         if (socket && lastMessage) {
-            for (const message of conversation.messages) {
+            for (const message of room.messages) {
                 if (!message?.seen?.find((obj: any) => obj.userId === me._id)) {
-                   console.log('set server seen');
-                    socket!.emit('server-message-seen', {roomId: conversation._id})
+                    console.log('set server seen');
+                    socket!.emit('server-message-seen', {roomId: room._id})
                     break;
                 }
             }
         }
     }, [socket, lastMessage])
 
-
     const objects = []
-
-    for (let i = 0; i < conversation.messages.length; i++) {
-        const message = conversation.messages[i]
+    for (let i = 0; i < room.messages.length; i++) {
+        const message = room.messages[i]
         const date = new Date(message.time)
 
         if (i === 0) {
@@ -57,7 +55,7 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
 
                     }}
                 >
-                    {(date.getHours() < 10 ? '0' : '') + date.getHours()}:{(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
+                    {(date.getHours() < 10 ? '0' : '')}{date.getHours()}:{(date.getMinutes() < 10 ? '0' : '')}{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
                 </div>
                 <div
                     style={{
@@ -93,7 +91,7 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
                 </div>
             </div>)
         } else {
-            const previousDate = new Date(conversation.messages[i - 1].time)
+            const previousDate = new Date(room.messages[i - 1].time)
             // if difference greater than 1 hour 
             objects.push(<div className={"messageContainer"}>
 
@@ -109,15 +107,13 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
 
                         }}
                     >
-                        {date.getHours()}:{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
+                        {date.getHours() < 10 ? "0" : ""}{date.getHours()}:{date.getMinutes() < 10 ? "0" : ""}{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
                     </div>
                 }
                 <div
                     style={{
                         display: 'flex',
                         justifyContent: targetedUser._id === message.sender ? 'start' : 'end',
-
-
                     }}
 
                 >
@@ -152,8 +148,6 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
 
 
         }
-
-
     }
 
 
@@ -179,7 +173,7 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
             style={{
                 flex: 1,
                 padding: '0 24px 24px 24px',
-                overflow: 'scroll'
+                overflowY: 'scroll'
             }}
         >
             {objects}
@@ -190,7 +184,7 @@ export default function ActiveChat({conversation, targetedUser}: { conversation:
             }}
         >
 
-            <ChatBox conversation={conversation}></ChatBox>
+            <ChatBox conversation={room}/>
         </div>
         <Modal caria-labelledby="example-custom-modal-styling-title" show={show} onHide={handleClose} size="lg" centered>
             <Modal.Header closeButton>

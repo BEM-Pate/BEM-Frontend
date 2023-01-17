@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import BackHeader from "./BackHeader";
 import ChatBox from "./ChatBox";
 
-export default function LandingChat({ conversation, targetedUser }: { conversation: any, targetedUser: any }) {
+export default function LandingChat({ room, targetedUser }: { room: any, targetedUser: any }) {
     const baseUserData = targetedUser.baseUserData
     const b64 = btoa(
         baseUserData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
@@ -10,7 +10,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
 
     const contentType = baseUserData.avatar.contentType;
 
-    const firstMeet = new Date(conversation.createdAt)
+    const firstMeet = new Date(room.createdAt)
     const now = new Date()
 
     const diffInMs = now.getTime() - firstMeet.getTime()
@@ -178,7 +178,7 @@ export default function LandingChat({ conversation, targetedUser }: { conversati
                     padding: '0 24px 0 24px',
                 }}
             >
-                <ChatBox conversation={conversation}/>
+                <ChatBox conversation={room}/>
             </div>
         </div>
     </>

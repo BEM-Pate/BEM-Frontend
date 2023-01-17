@@ -23,11 +23,11 @@ export default function ChatRoom() {
             {pickedChatRoom?.messages.length === 0 ?
                 <LandingChat
                     targetedUser={targetedUser}
-                    conversation={pickedChatRoom}
+                    room={pickedChatRoom}
                 />
                 : <ActiveChat
                     targetedUser={targetedUser}
-                    conversation={pickedChatRoom}
+                    room={pickedChatRoom}
 
                 />
             }

@@ -27,6 +27,18 @@ const Messages = () => {
         return 0;
     })
 
+
+    const checkIfUserIsOnline = (userData: any) => {
+        for (const room in onlineUsersInRooms) {
+            if(onlineUsersInRooms.hasOwnProperty(room)){
+                if (onlineUsersInRooms[room].includes(userData.account)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     const {t} = useTranslation();
     return (
         <div className={classNames(styles.Messages)}>
@@ -44,29 +56,21 @@ const Messages = () => {
                     const b64 = btoa(
                         userData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
                     )
-                    let isUserOnline = false;
-                    for (const room in onlineUsersInRooms) {
-                        if(onlineUsersInRooms.hasOwnProperty(room)){
-                            if (onlineUsersInRooms[room].includes(userData.account)) {
-                                isUserOnline = true;
-                            }
-                        }
-                    }
+                    let isUserOnline = checkIfUserIsOnline(userData);
+
                     const contentType = userData?.avatar.contentType;
                     return (
-                        <div style={
+                        <div className="avatar-container" style={
                             {
-                                display: 'flex',
-                                flexDirection: 'column',
                                 width: '100px',
-                                // height: '100px',
-                                justifyContent: 'center',
-                                alignItems: 'center',
+                                height: '100px',
+                                position: 'relative',
                                 cursor: 'pointer',
                             }
 
                         }>
                             <img
+                                style={{height:"100%", width:"100%", borderRadius:"16px"} }
                                 src={`data:${contentType};base64,${b64}`}
                                 alt="PatePicture"
                                 className={classNames(styles.MessagesProfilePictures)}
@@ -75,8 +79,10 @@ const Messages = () => {
                                     setRoute(`/dashboard/chatroom/${user._id}`)
                                 }}
                             />
-                            {isUserOnline && <div style={{width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'green'}}/>}
-                            {!isUserOnline && <div style={{width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'red'}}/>}
+                           <div className="status_cirle"style={{
+                                width: '20px', height: '20px', borderRadius: '50%', backgroundColor: isUserOnline? '#1dbf73': 'grey',border:"2px solid white",
+                                position: 'absolute', bottom: '0', right: '0', transition: "background .3s"
+                            }}/>
                         </div>
                     )
                 })}
@@ -103,6 +109,9 @@ const Messages = () => {
                                     userData?.avatar?.data?.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
                                 )
                                 const contentType = userData?.avatar?.contentType;
+
+                                let isUserOnline = checkIfUserIsOnline(userData);
+
                                 let unSeenMsgLength = 0;
                                 chatRoom?.messages.forEach((msg: any) => {
                                     const isMeInSeeen = msg.seen?.find((user: any) => user.userId === me._id);
@@ -117,11 +126,12 @@ const Messages = () => {
                                 const time = new Date(lastMessage?.time)
                                 const todayDate = new Date();
                                 const isToday = todayDate.getDate() === time.getDate()
+
                                 return (
                                     <div className="msgContainer__msg" style={{
                                         borderBottom: '1px solid rgba(34,23,42, .08)',
                                         display: 'flex',
-                                        // justifyContent: 'center',
+                                        gap: '10px',
                                         alignItems: 'center',
                                         width: '100%',
                                         padding: '10px'
@@ -131,11 +141,23 @@ const Messages = () => {
                                              setRoute(`/dashboard/chatroom/${user._id}`)
                                          }}
                                     >
-                                        <img
-                                            src={`data:${contentType};base64,${b64}`}
-                                            alt="PatePicture"
-                                            className={classNames(styles.MessagesProfilePicturesMsgGroup)}
-                                        />
+                                        <div className="msgContainer__msg__avatar" style={{
+                                            height: '50px',
+                                            position: 'relative',
+                                            cursor: 'pointer',
+                                        }} >
+                                            <img
+                                                style={{height:"100%", width:"100%", borderRadius:"50%"} }
+                                                src={`data:${contentType};base64,${b64}`}
+                                                alt="PatePicture"
+                                                className={classNames(styles.MessagesProfilePictures)}
+                                            />
+                                            <div className="status_cirle"style={{
+                                                width: '20px', height: '20px', borderRadius: '50%', backgroundColor: isUserOnline? '#1dbf73': 'grey',border:"2px solid white",
+                                                position: 'absolute', bottom: '0', right: '0', transition: "background .3s"
+                                            }}/>
+                                        </div>
+
                                         <div className="msgContainer__msg__content" style={{width: '320px'}}>
                                             <div className="msgContainer__msg__content__header"
                                                  style={{display: 'flex'}}>
@@ -185,3 +207,7 @@ const Messages = () => {
                     };
 
                         export default Messages;
+
+
+
+
