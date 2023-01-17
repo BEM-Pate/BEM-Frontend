@@ -39,9 +39,9 @@ const BASE_URL = `http://141.45.146.171/api`
 // const HARD_CORDED_TOKEN_USER = HARD_COREs[index]
 
 export const SOCKET_URL =
-    // `http://141.45.146.171`
+    `http://141.45.146.171`
     // ||
-    `http://localhost:5000`
+    // `http://localhost:5000`
 
 export let socket: null | Socket = null
 
@@ -65,7 +65,7 @@ export const useZustand = create<store>()(
                 set({token: data.token})
                 set({
                     socketConfig: {
-                        // path: '/api/socket.io',
+                        path: '/api/socket.io',
                         extraHeaders: {
                             Authorization: `Bearer ${data.token}`
                         }
