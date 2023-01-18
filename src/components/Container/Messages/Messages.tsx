@@ -191,7 +191,7 @@ const Messages = () => {
                                                 }}>
                                                     {lastMessage ? lastMessage.text : ''}
                                                 </div>
-                                                <span style={{marginLeft: 'auto'}}
+                                                <span style={{marginLeft: 'auto', color: "#9EA3AE"}}
                                                       className={classNames(styles.MessagesTime)}>{time ? ((time.getHours() < 10 ? '0' : '')+time.getHours() + ":" + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes()) : ''} {!isToday ? (time.getDate() + "." + ("0" + time.getMonth() + 1).slice(-2)) : ''}</span>
                                             </div>
                                         </div>
