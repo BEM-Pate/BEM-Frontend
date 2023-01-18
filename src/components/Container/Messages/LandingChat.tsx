@@ -1,12 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import BackHeader from "./BackHeader";
 import ChatBox from "./ChatBox";
+import {useZustand} from "../../../zustand/store";
 
 export default function LandingChat({ room, targetedUser }: { room: any, targetedUser: any }) {
     const baseUserData = targetedUser.baseUserData
+    const {onlineUsersInRooms} = useZustand(state => state)
+
     const b64 = btoa(
         baseUserData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
     )
+    const checkIfUserIsOnline = (userData: any) => {
+        for (const room in onlineUsersInRooms) {
+            if(onlineUsersInRooms.hasOwnProperty(room)){
+                if (onlineUsersInRooms[room].includes(userData?.account)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     const contentType = baseUserData.avatar.contentType;
 
@@ -40,8 +53,8 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
             style={{
                 textAlign: 'center',
                 height: '100%',
-                alignItems: 'center',
-                justifyContent: 'center',
+                // alignItems: 'center',
+                // justifyContent: 'center',
                 display: 'flex',
                 flexDirection: 'column',
                 color: 'white',
@@ -49,21 +62,25 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
 
             }}
         >
-            <div>
-                <div
+            <BackHeader/>
 
-                >
-                    <BackHeader/>
+            <div style={{
+                flex: '1',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
 
+            }}>
                     <div
                         style={{
                             justifyContent: 'start',
                             display: 'flex',
+                            flexDirection: 'column',
                             marginLeft: '24px',
                         }}
                     >
 
-                    </div>
 
                     <div
                         style={{
@@ -105,6 +122,7 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
+                            position: 'relative',
                             border: '4px solid #98C8BC',
                         }}
                     >
@@ -121,14 +139,19 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
                             onClick={() => {
                             }}
                         />
+                        <div className="status_cirle" style={{
+                            position: 'absolute', bottom: "-10px", right:'40px',
+                            width: '20px', height: '20px', borderRadius: '50%', backgroundColor: checkIfUserIsOnline(baseUserData)? '#1dbf73': 'grey',border:"2px solid white", transition: "background .3s"
+                        }}/>
                     </div>
+
 
 
                 </div>
 
                 <div
                     style={{
-                        margin: '0 50px 0 50px',
+                        margin: '0 60px',
                     }}
                 >
                     Wissen, wenn <label
@@ -168,6 +191,7 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
                     <span>Lesebestätigung erhalten</span>
                 </div>
             </div>
+
             <div
                 style={{
                     flexBasis: '40%',
@@ -175,7 +199,7 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
                     justifyContent: 'end',
                     flexDirection: 'column',
                     width: '100%',
-                    padding: '0 24px 0 24px',
+                    padding: '0 24px 24px',
                 }}
             >
                 <ChatBox conversation={room}/>

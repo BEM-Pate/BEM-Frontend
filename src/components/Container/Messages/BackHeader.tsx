@@ -10,7 +10,7 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
     const checkIfUserIsOnline = (userData: any) => {
         for (const room in onlineUsersInRooms) {
             if(onlineUsersInRooms.hasOwnProperty(room)){
-                if (onlineUsersInRooms[room].includes(userData.account)) {
+                if (onlineUsersInRooms[room].includes(userData?.account)) {
                     return true;
                 }
             }
@@ -22,7 +22,7 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
             style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                margin: '0 1rem',
+                margin: '10px 1rem',
                 alignItems: 'center'
             }}
         >
@@ -61,7 +61,7 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
                     }}
 
                 >
-                    <h1 style={{margin:"0"}}>{userData?.firstName}</h1>
+                    <h1 style={{margin:"0"}}>{userData?.firstName} {userData?.lastName}</h1>
                     <div className="status_cirle"style={{
                         width: '20px', height: '20px', borderRadius: '50%', backgroundColor: checkIfUserIsOnline(userData)? '#1dbf73': 'grey',border:"2px solid white", transition: "background .3s"
                     }}/>

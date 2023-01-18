@@ -157,7 +157,6 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
 
         backgroundColor: '#63837B',
         color: 'white',
-        paddingTop: '20px',
         display: 'flex',
         flexDirection: 'column',
 
