@@ -143,6 +143,7 @@ const Messages = () => {
                                     >
                                         <div className="msgContainer__msg__avatar" style={{
                                             height: '50px',
+                                            width: '50px',
                                             position: 'relative',
                                             cursor: 'pointer',
                                         }} >
@@ -158,7 +159,7 @@ const Messages = () => {
                                             }}/>
                                         </div>
 
-                                        <div className="msgContainer__msg__content" style={{width: '320px'}}>
+                                        <div className="msgContainer__msg__content" style={{flex: "1", overflow:"hidden"}}>
                                             <div className="msgContainer__msg__content__header"
                                                  style={{display: 'flex'}}>
                                                 <b style={{fontSize: 'large'}}> {firstName} {lastName} </b>
