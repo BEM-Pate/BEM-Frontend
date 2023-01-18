@@ -183,7 +183,7 @@ const Messages = () => {
                                             <div className="msgContainer__msg__content__body"
                                                  style={{display: 'flex'}}>
                                                 <div className="preview__msg" style={{
-                                                    width: '70%',
+                                                    width: '85%',
                                                     overflow: 'hidden',
                                                     whiteSpace: 'nowrap',
                                                     textOverflow: 'ellipsis',
