@@ -31,7 +31,7 @@ const Messages = () => {
     const checkIfUserIsOnline = (userData: any) => {
         for (const room in onlineUsersInRooms) {
             if(onlineUsersInRooms.hasOwnProperty(room)){
-                if (onlineUsersInRooms[room].includes(userData.account)) {
+                if (onlineUsersInRooms[room].includes(userData?.account)) {
                     return true;
                 }
             }
@@ -60,17 +60,8 @@ const Messages = () => {
 
                     const contentType = userData?.avatar.contentType;
                     return (
-                        <div className="avatar-container" style={
-                            {
-                                width: '100px',
-                                height: '100px',
-                                position: 'relative',
-                                cursor: 'pointer',
-                            }
-
-                        }>
+                        <div className={classNames(styles.MessagesContainerContactsAvatarContainer) }>
                             <img
-                                style={{height:"100%", width:"100%", borderRadius:"16px"} }
                                 src={`data:${contentType};base64,${b64}`}
                                 alt="PatePicture"
                                 className={classNames(styles.MessagesProfilePictures)}
@@ -89,9 +80,7 @@ const Messages = () => {
 
 
             </div>
-            {/*<h4 className={classNames(styles.MessagesSubheader)}>*/}
-            {/*    {t('messagesPageMessages')}*/}
-            {/*</h4>*/}
+
             <div className={classNames(styles.MessagesContainerMessages)}>
                 <div className="msgContainer" style={{
                     display: 'flex',

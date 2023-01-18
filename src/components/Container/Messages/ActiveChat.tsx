@@ -52,7 +52,6 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
                         opacity: 0.5,
                         fontSize: '14px',
                         margin: '0 0 20px 0'
-
                     }}
                 >
                     {(date.getHours() < 10 ? '0' : '')}{date.getHours()}:{(date.getMinutes() < 10 ? '0' : '')}{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
@@ -197,6 +196,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
                         <path d="M1.66669 4.99984L5.00002 8.33317L11.6667 1.6665" stroke="black" stroke-width="1.5"
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                    {/*TODO : Hasan*/}
                     Delivered: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[0]?.date)}</span>
                 </div>
                 {checkValidDate(new Date(targetedMessage?.seen[1]?.date)) &&
@@ -217,6 +217,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
                             </clipPath>
                         </defs>
                     </svg>
+                    {/*TODO : Hasan*/}
                     Read: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[1]?.date)}</span></div>
 
                 }

@@ -37,6 +37,18 @@
       width: 50px;
       height: 50px;
     }
+    &AvatarContainer{
+      width: 100px;
+      height: 100px;
+      position: relative;
+      cursor: pointer;
+      &image{
+        height:100%;
+        width: 100%;
+        border-radius: 16px;
+      }
+    }
+
   }
   &ContainerMessages {
     background-color: white;
