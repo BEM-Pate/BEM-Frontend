@@ -30,8 +30,8 @@ const BottomNavigtionBar = () => (
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/profile" className={({ isActive }) => (isActive ? classNames(styles.Link, styles.ActiveLink) : styles.Link)}>
-          <img src={settings} alt="profile" />
+        <NavLink to="/dashboard/settings" className={({ isActive }) => (isActive ? classNames(styles.Link, styles.ActiveLink) : styles.Link)}>
+          <img src={settings} alt="settings" />
         </NavLink>
       </li>
     </ul>

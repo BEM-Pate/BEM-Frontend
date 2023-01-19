@@ -1,9 +1,7 @@
-import React, { ReactElement, useCallback, useEffect } from 'react';
+import React, { ReactElement, useCallback } from 'react';
 import './App.module.scss';
 import {
   BrowserRouter, Routes, Route, Navigate,
-  useParams,
-  useLocation,
 } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
 import RegisterSeekerPage from './pages/RegisterSeekerPage/RegisterSeekerPage';
@@ -16,10 +14,10 @@ import Messages from './components/Container/Messages/Messages';
 import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
 import LoginPage from './pages/LoginPage/LoginPage';
 import useSessionStorage from './helpers/useSessionStorage';
-import EditProfile from './components/Container/Profile/EditProfile/EditProfile';
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
+import Settings from './components/Container/Settings/Settings';
 import ChatRoom from './components/Container/Messages/Chatroom';
 import { useZustand, socket } from './zustand/store';
 
@@ -34,14 +32,8 @@ const App = () => {
     ) => (userData ? component : <Navigate replace to={redirectPath} />),
     [userData],
   );
-
-
-
-
   return (
-      <div style={{
-      height: '100%',
-    }}>
+    <div>
       <BrowserRouter>
         {!route?.includes('chatroom') && <TopNavigationBar />}
         <Routes>
@@ -61,8 +53,8 @@ const App = () => {
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
               <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
               <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
-              <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
-              <Route path="editprofile" element={authenticationSwitch(<EditProfile />, '/login')} />
+              <Route path="settings" element={authenticationSwitch(<Settings userData={userData} />, '/login')} />
+              <Route path="profile" element={authenticationSwitch(<Profile userData={userData} />, '/login')} />
             </Route>
           </Route>
 
