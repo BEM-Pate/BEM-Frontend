@@ -13,11 +13,10 @@ export default function ChatRoom() {
     let pickedChatRoom = chatRooms.find((chatroom: any) => chatroom.participants.includes(id))
 
     return <>
-        <div
+        <div className="Chatroom"
             style={{
                 width: '100%',
                 height: '100%',
-
             }}
         >
             {pickedChatRoom?.messages.length === 0 ?

@@ -3,7 +3,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import io, { Socket } from 'socket.io-client';
-import {map} from "react-bootstrap/ElementChildren";
 
 interface store {
     user: null | any,
@@ -30,13 +29,6 @@ interface store {
 
 
 const BASE_URL = `http://141.45.146.171/api`
-// const USER_IDs = ['63c06e6a61b06bd4558b1b3e', '63c06ed361b06bd4558b1b55']
-// const HARD_COREs = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmU2YTYxYjA2YmQ0NTU4YjFiM2UiLCJpYXQiOjE2NzM2ODU4MjAsImV4cCI6MTY3Mzc3MjIyMH0.bkYCL7TFAp-PHKlNr0pn-eqnCpG12zdJZJZK_Vbs858',
-//     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2MwNmVkMzYxYjA2YmQ0NTU4YjFiNTUiLCJpYXQiOjE2NzM2ODU4ODAsImV4cCI6MTY3Mzc3MjI4MH0.gKdb3RTefJUXFH5pHiNNsryiijdHClOa-uOkLNYNNxI']
-
-// const index = 1
-// const USER_ID = USER_IDs[index]
-// const HARD_CORDED_TOKEN_USER = HARD_COREs[index]
 
 export const SOCKET_URL =
     `http://141.45.146.171`
