@@ -18,9 +18,12 @@ import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/Onboardin
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import Settings from './components/Container/Settings/Settings';
+import ChatRoom from './components/Container/Messages/Chatroom';
+import { useZustand, socket } from './zustand/store';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
+  const route = useZustand(state => state.route)
 
   const authenticationSwitch = useCallback(
     (
@@ -30,9 +33,8 @@ const App = () => {
     [userData],
   );
   return (
-    <div>
       <BrowserRouter>
-        <TopNavigationBar />
+        {!route?.includes('chatroom') && <TopNavigationBar />}
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage setUserData={setUserData} />} />
@@ -43,8 +45,10 @@ const App = () => {
             <Route path="seeker" element={<RegisterSeekerPage />} />
             <Route path="pate" element={<RegisterPatePage />} />
           </Route>
+
           <Route element={<DashboardPage />}>
             <Route path="dashboard">
+              <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
               <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
               <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
@@ -52,9 +56,10 @@ const App = () => {
               <Route path="profile" element={authenticationSwitch(<Profile userData={userData} />, '/login')} />
             </Route>
           </Route>
+
+
         </Routes>
       </BrowserRouter>
-    </div>
   );
 };
 
