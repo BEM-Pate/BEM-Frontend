@@ -27,15 +27,14 @@ const Profile = (props: Props) => {
   const enumRoutes = ['ageranges', 'diseases', 'genders', 'languages', 'meetings', 'occupations', 'processbem', 'supports'];
 
   /* eslint-disable */
-  const [userBaseData, setUserBaseData] = useState<NormalUserData | BaseUserData | PateData>();
- /*  const [isUserPate, setIsUserPate] = useState<boolean>(false); */
-  const [baseUserData, setBaseUserData] = useState({});
-  const [meetingPreference, setMeetingPreference] = useState({});
+  const [oldUserBaseData, setOldUserBaseData] = useState<NormalUserData | BaseUserData | PateData>();
+  const [newBaseUserData, setNewBaseUserData] = useState({});
+  const [newMeetingPreference, setNewMeetingPreference] = useState({});
 
   useEffect(() => {
     const setUpPage = async () => {
       const baseDataResponse = await API.getBaseUserData(userData.token);
-      setUserBaseData(baseDataResponse);
+      setOldUserBaseData(baseDataResponse);
       /* setIsUserPate(baseDataResponse.role === "pate" ? true : false); */
     };
     setUpPage();
@@ -48,10 +47,10 @@ const Profile = (props: Props) => {
       `${API_ADDRESS}/user/userdata`,
       {
         baseUserData: {
-          ...baseUserData,
+          ...newBaseUserData,
         },
         meetingPreference: {
-          ...meetingPreference,
+          ...newMeetingPreference,
         },
       },
       {
@@ -65,7 +64,7 @@ const Profile = (props: Props) => {
    } catch (err) {
     console.error(err);
    }
-  }, [baseUserData, meetingPreference]);
+  }, [newMeetingPreference, newBaseUserData]);
 
   function userIsPate (object: any) : object is PateData {
     return object === undefined ? false : object.role === "pate";
@@ -107,45 +106,45 @@ const Profile = (props: Props) => {
     />
   } 
 
-  console.log(userData.token)
 
-  //TODO: Hasan Labels übersetzen
+  //ToDo: Hasan Labels übersetzen
   return (
     <div className={classNames(styles.Profile)}>
       <Textfield
         id={`${t("labelFirstName")}`}
         label={`${t("labelFirstName")}`}
-        defaultValue={userBaseData?.firstName}
+        defaultValue={oldUserBaseData?.firstName}
         placeholder={`${t("labelFirstName")}`}
-        onChange={(e) => setBaseUserData((prev) => (prev = { ...prev, firstName: e }))}
+        onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, firstName: e }))}
       ></Textfield>
       <Textfield
         id={`${t("labelLastName")}`}
         label={`${t("labelLastName")}`}
-        defaultValue={userBaseData?.lastName}
-        placeholder={userBaseData?.lastName}
-        onChange={(e) => setBaseUserData((prev) => (prev = { ...prev, lastName: e }))}
+        defaultValue={oldUserBaseData?.lastName}
+        placeholder={oldUserBaseData?.lastName}
+        onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, lastName: e }))}
       ></Textfield>
-      <Textfield
+      {/* ToDo FIX Location Update */}
+{/*       <Textfield
         id="Location"
         label="Location"
-        defaultValue={userBaseData?.meetingPreference.location}
-        placeholder={userBaseData?.lastName}
-        onChange={(e) => setBaseUserData((prev) => (prev = { ...prev, lastName: e }))}
-      ></Textfield>
-      {userIsPate(userBaseData) ? <Textarea
+        defaultValue={oldUserBaseData?.meetingPreference.location}
+        placeholder={oldUserBaseData?.meetingPreference.location}
+        onChange={(e) => setNewMeetingPreference((prev) => (prev = { ...prev, location: e }))}
+      ></Textfield> */}
+      {userIsPate(oldUserBaseData) ? <Textarea
       id="Experience"
       label="Experience"
       placeholder="Experience"
-      defaultValue={userBaseData.experience}
-      onChange={(e) => setBaseUserData((prev) => (prev = { ...prev, experience: e }))}
+      defaultValue={oldUserBaseData.experience}
+      onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, experience: e }))}
       ></Textarea> : ""}
-      {userIsPate(userBaseData) ? <Textarea
+      {userIsPate(oldUserBaseData) ? <Textarea
       id="Motivation"
       label="Motivation"
       placeholder="Motivation"
-      defaultValue={userBaseData.motivation}
-      onChange={(e) => setBaseUserData((prev) => (prev = { ...prev, motivation: e }))}
+      defaultValue={oldUserBaseData.motivation}
+      onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, motivation: e }))}
       ></Textarea> : ""}
 
       {enumRoutes.map((route, index) => {

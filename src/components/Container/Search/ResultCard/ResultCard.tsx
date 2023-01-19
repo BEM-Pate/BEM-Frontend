@@ -50,7 +50,7 @@ const ResultCard = (props: Props) => {
       <div className={classNames(styles.ResultCardEssentials)}>
         <div className={classNames(styles.ResultCardEssentialsImageScore)}>
           <img src={imageSrc} alt={pate.firstName} />
-          <span>{`${pate.score === undefined ? 'sds' : pate.score * 100} %`}</span>
+          <span>{`${pate.score === undefined ? pate.score : pate.score * 100} %`}</span>
         </div>
         <div>
           <Headline headline="h3">{`${pate.firstName} ${pate.lastName}`}</Headline>
