@@ -1,80 +1,96 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
+import axios from 'axios';
 import styles from './ResultCard.module.scss';
 import Headline from '../../../Headline/Headline';
-
-/* import arrowRight from '../../../../images/icons/ui/chevron_right.svg'; */
-/* import languageIcon from '../../../../images/icons/ui/language.svg'; */
+import { NormalUserData, PateData } from '../../../../util/types';
+import placeholder from '../../../../images/default.png';
+import API from '../../../../helpers/api';
+import { API_ADDRESS } from '../../../../helpers/env';
+import Button from '../../../Button/Button';
 
 interface Props {
-  firstName: string;
-  lastName: string;
-  image: string;
-  experience: string;
-  languages: string[];
-  occupation: string[];
-  diseases: string[];
-  userAttributes: any;
+  userAttributes: NormalUserData;
+  pate: PateData;
+  token: string;
 }
 
 const ResultCard = (props: Props) => {
-  const {
-    firstName, lastName, image, languages, experience, occupation, diseases, userAttributes,
-  } = props;
-  console.log(userAttributes);
+  const { userAttributes, pate, token } = props;
+  const [imageSrc, setImageSrc] = useState<any>(placeholder);
+
+  useEffect(() => {
+    const setUserAvatar = async () => {
+      const userAvatar = await API.getUserAvatar(pate.account);
+      setImageSrc(userAvatar);
+    };
+    setUserAvatar();
+  }, []);
+
+  const requstContact = useCallback(() => {
+    try {
+      axios.post(
+        `${API_ADDRESS}/match/request-contact/${pate.account}`,
+        '',
+        {
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
   return (
     <div className={classNames(styles.ResultCard)}>
       <div className={classNames(styles.ResultCardEssentials)}>
-        <img src={image} alt="test" />
+        <div className={classNames(styles.ResultCardEssentialsImageScore)}>
+          <img src={imageSrc} alt={pate.firstName} />
+          <span>{`${pate.score === undefined ? 'sds' : pate.score * 100} %`}</span>
+        </div>
         <div>
-          <Headline headline="h3">{`${firstName} ${lastName}`}</Headline>
-          <Headline headline="p">{experience}</Headline>
+          <Headline headline="h3">{`${pate.firstName} ${pate.lastName}`}</Headline>
+          <p>{pate.motivation}</p>
         </div>
       </div>
       <hr />
       <div className={classNames(styles.ResultCardAdditional)}>
-
-        <Headline headline="p">Berfusgruppe</Headline>
-        <div>
-          {occupation.map((lang: string, index) => (
-            <span
-              className={classNames(styles.ResultCardTag, userAttributes.occupation.includes(lang) ? styles.ResultCardTagActive : '')}
-              key={index}
-            >
-              {lang}
-            </span>
-          ))}
-
-        </div>
-        <Headline headline="p">Krankheitsbild</Headline>
-        <div>
-          {diseases.map((disease: string, index) => (
-            <span
-              className={classNames(styles.ResultCardTag, userAttributes.diseases.includes(disease) ? styles.ResultCardTagActive : '')}
-              key={index}
-            >
-              {disease}
-            </span>
-          ))}
-
-        </div>
-
         <Headline headline="p">Ich spreche</Headline>
         <div>
-          {languages.map((lang: string, index) => (
+          {pate.languages.map((lang: string, index) => (
             <span
               className={classNames(
                 styles.ResultCardTag,
-                userAttributes.languages.includes(lang) ? styles.ResultCardTagActive : '',
+                userAttributes.languages.includes(lang)
+                  ? styles.ResultCardTagActive
+                  : '',
               )}
               key={index}
             >
               {lang}
             </span>
           ))}
-
+        </div>
+        <Headline headline="p">Berufsfeld</Headline>
+        <div>
+          <span
+            className={classNames(
+              styles.ResultCardTag,
+              userAttributes.occupation === pate.occupation
+                ? styles.ResultCardTagActive
+                : '',
+            )}
+          >
+            {' '}
+            {pate.occupation}
+          </span>
         </div>
       </div>
+      <Button styling="outline" onClick={requstContact}>Request Contact</Button>
     </div>
   );
 };

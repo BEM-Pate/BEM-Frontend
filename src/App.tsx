@@ -14,10 +14,10 @@ import Messages from './components/Container/Messages/Messages';
 import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
 import LoginPage from './pages/LoginPage/LoginPage';
 import useSessionStorage from './helpers/useSessionStorage';
-import EditProfile from './components/Container/Profile/EditProfile/EditProfile';
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
+import Settings from './components/Container/Settings/Settings';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
@@ -48,8 +48,8 @@ const App = () => {
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
               <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
               <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
-              <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
-              <Route path="editprofile" element={authenticationSwitch(<EditProfile />, '/login')} />
+              <Route path="settings" element={authenticationSwitch(<Settings userData={userData} />, '/login')} />
+              <Route path="profile" element={authenticationSwitch(<Profile userData={userData} />, '/login')} />
             </Route>
           </Route>
         </Routes>

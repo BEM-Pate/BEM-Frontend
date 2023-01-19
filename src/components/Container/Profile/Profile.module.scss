@@ -1,33 +1,5 @@
 .Profile {
-  position: relative;
-  &Header {
-    text-align: center;
-    font-size: 100%;
-    font-weight: bold;
-  }
-  &DataField {
-    margin: 5%;
-  }
-  &DataText {
-    font-size: 100%;
-    font-weight: bold;
-  }
-  &Image {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 40%;
-    width: 20%;
-    height: auto;
-  }
-  &Edit {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  &ButtonGroup {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
+  padding: 16px;
+  display: grid;
+  row-gap: 32px;
 }
