@@ -5,12 +5,13 @@ import { FormControl } from '../FormularStepper/FormularTypes';
 
 interface Props extends FormControl {
   type?: 'text' | 'number' | 'email' | 'date' | 'password';
+  defaultValue?: string;
   placeholder?: string;
 }
 
 const Textfield = (props: Props) => {
   const {
-    placeholder, type = 'text', id, name, disabled, onChange, label, required, onBlur,
+    placeholder, type = 'text', id, name, disabled, defaultValue, onChange, label, required, onBlur,
   } = props;
 
   // const [touched, setTouched] = useState(false);
@@ -30,6 +31,7 @@ const Textfield = (props: Props) => {
           )}
       <input
         placeholder={placeholder}
+        defaultValue={defaultValue}
         className={classNames(styles.TextfieldInput)}
         type={type}
         id={id}

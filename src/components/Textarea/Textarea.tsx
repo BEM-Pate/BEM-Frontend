@@ -6,12 +6,13 @@ import { FormControl } from '../FormularStepper/FormularTypes';
 interface Props extends FormControl {
   placeholder?: string;
   resizable?: boolean;
+  defaultValue?: string;
   rows?: number;
 }
 
 const Textarea = (props: Props) => {
   const {
-    placeholder, id, name, disabled, onChange, label, required, resizable, rows = 5,
+    placeholder, id, name, disabled, onChange, label, required, defaultValue, resizable, rows = 5,
   } = props;
   return (
     <div className={classNames(styles.Textarea)}>
@@ -27,6 +28,7 @@ const Textarea = (props: Props) => {
         )}
       <textarea
         className={classNames(styles.TextareaInput, { [styles.resizable]: resizable })}
+        defaultValue={defaultValue}
         disabled={disabled}
         id={id}
         name={name}
