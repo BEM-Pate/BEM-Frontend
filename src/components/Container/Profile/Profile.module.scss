@@ -1,4 +1,7 @@
+@import "src/styles/variables.module";
+
 .Profile {
+  @include dashboard-container;
   padding: 16px;
   display: grid;
   row-gap: 32px;

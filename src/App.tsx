@@ -33,7 +33,6 @@ const App = () => {
     [userData],
   );
   return (
-    <div>
       <BrowserRouter>
         {!route?.includes('chatroom') && <TopNavigationBar />}
         <Routes>
@@ -61,7 +60,6 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
-    </div>
   );
 };
 

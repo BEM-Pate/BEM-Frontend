@@ -152,7 +152,7 @@ const Profile = (props: Props) => {
       })}
 
       <Button onClick={updateUserData}>Update</Button>
-      <Button onClick={updateUserData}>Update</Button>
+      {/*<Button onClick={updateUserData}>Update</Button>*/}
 
     </div>
   );
