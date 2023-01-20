@@ -27,7 +27,7 @@ const ResultCard = (props: Props) => {
     setUserAvatar();
   }, []);
 
-  const requstContact = useCallback(() => {
+/*   const requstContact = useCallback(() => {
     try {
       axios.post(
         `${API_ADDRESS}/match/request-contact/${pate.account}`,
@@ -44,53 +44,27 @@ const ResultCard = (props: Props) => {
       console.error(err);
     }
   }, []);
+ */
+
+  function within3Days(dateString:string): boolean {
+    const diff = new Date().getTime() - new Date(dateString).getTime();
+    const diffDays = diff / (1000 * 3600 * 24);
+    return diffDays < 7;
+  }
+
+  console.log(pate)
 
   return (
     <div className={classNames(styles.ResultCard)}>
-      <div className={classNames(styles.ResultCardEssentials)}>
-        <div className={classNames(styles.ResultCardEssentialsImageScore)}>
-          <img src={imageSrc} alt={pate.firstName} />
-          <span>{`${pate.score === undefined ? pate.score : pate.score * 100} %`}</span>
-        </div>
+     {within3Days(pate.date!) && <div className={classNames(styles.ResultCardNewTag)}>NEW</div>}
+      <img src={imageSrc} alt={pate.firstName}></img>
+      <div className={classNames(styles.ResultCardDetails)}>
         <div>
-          <Headline headline="h3">{`${pate.firstName} ${pate.lastName}`}</Headline>
-          <p>{pate.motivation}</p>
+        <Headline className={classNames(styles.ResultCardDetailsName)} headline='p'>{pate.firstName}</Headline>
+        <Headline className={classNames(styles.ResultCardDetailsLocation)} headline='p'>{pate.meetingPreference.location}</Headline>
+        <div className={classNames(styles.ResultCardDetailsBackground)}></div>
         </div>
       </div>
-      <hr />
-      <div className={classNames(styles.ResultCardAdditional)}>
-        <Headline headline="p">Ich spreche</Headline>
-        <div>
-          {pate.languages.map((lang: string, index) => (
-            <span
-              className={classNames(
-                styles.ResultCardTag,
-                userAttributes.languages.includes(lang)
-                  ? styles.ResultCardTagActive
-                  : '',
-              )}
-              key={index}
-            >
-              {lang}
-            </span>
-          ))}
-        </div>
-        <Headline headline="p">Berufsfeld</Headline>
-        <div>
-          <span
-            className={classNames(
-              styles.ResultCardTag,
-              userAttributes.occupation === pate.occupation
-                ? styles.ResultCardTagActive
-                : '',
-            )}
-          >
-            {' '}
-            {pate.occupation}
-          </span>
-        </div>
-      </div>
-      <Button styling="outline" onClick={requstContact}>Request Contact</Button>
     </div>
   );
 };

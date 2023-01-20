@@ -106,6 +106,7 @@ const Profile = (props: Props) => {
     />
   } 
 
+  console.log(userData)
 
   //ToDo: Hasan Labels übersetzen
   return (

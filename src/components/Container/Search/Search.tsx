@@ -5,6 +5,11 @@ import styles from './Search.module.scss';
 import { API_ADDRESS } from '../../../helpers/env';
 import ResultCard from './ResultCard/ResultCard';
 import { PateData } from '../../../util/types';
+import Headline from '../../Headline/Headline';
+import Button from '../../Button/Button';
+import magnifier from "../../../images/icons/ui/magnifier.svg";
+import filter from "../../../images/icons/ui/filter.svg";
+
 
 interface Props {
   userData: any;
@@ -71,14 +76,24 @@ const Search = (props: Props) => {
 
   return (
     <div className={classNames(styles.Search)}>
-      <div className={classNames(styles.SearchBar)} />
+      <div className={classNames(styles.SearchHeaders)}>
+        <Headline className={classNames(styles.SearchHeadersHeadlineH1)} headline='h1'>BEM-Pate finden</Headline>
       <div>
+      <Button icon styling='outline' className={classNames(styles.SearchHeadersButton)}>
+        <img src={magnifier} alt="search"></img>
+      </Button>
+      <Button icon styling='outline' className={classNames(styles.SearchHeadersButton)} >
+      <img src={filter} alt="filter"></img>
+      </Button>
+      </div>
+      </div>
+      <>
         {matches ? (
           <Results token={userData.token} paten={matches} userAttributes={userAttributes} />
         ) : (
           <Loading />
         )}
-      </div>
+      </>
     </div>
   );
 };

@@ -14,6 +14,7 @@ export interface BaseUserData {
   baseUserData: string;
   meetingPreference: MeetingPreference;
   score?: number;
+  date?: string;
 }
 
 export interface PateData extends BaseUserData {

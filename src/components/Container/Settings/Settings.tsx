@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import axios from 'axios';
-/* import { Buffer } from 'buffer'; */
 import { Link } from 'react-router-dom';
 import styles from './Settings.module.scss';
 import { API_ADDRESS } from '../../../helpers/env';
@@ -9,8 +8,8 @@ import Headline from '../../Headline/Headline';
 import API from '../../../helpers/api';
 import Button from '../../Button/Button';
 import LanguageDropdown from '../../LanguageDropdown/LanguageDropdown';
-
 import placeholder from '../../../images/default.png';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   userData: any;
@@ -18,6 +17,7 @@ interface Props {
 
 const Settings = (props: Props) => {
   const { userData } = props;
+  const navigate = useNavigate();
   const [userAttributes, setUserAttributes] = useState<any | null>(null);
   const [imageData, setImageData] = useState<any>(placeholder);
 
@@ -62,6 +62,7 @@ const Settings = (props: Props) => {
       <div className={classNames(styles.SettingsPreferences)}>
         <Headline headline="h3">Preferences</Headline>
         <LanguageDropdown />
+        <Button onClick={()=> navigate('/login')}>Logout</Button>
       </div>
     </div>
   );
