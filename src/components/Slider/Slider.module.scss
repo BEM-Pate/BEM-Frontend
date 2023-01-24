@@ -1,0 +1,40 @@
+@mixin slider-thumb {
+    cursor: pointer;
+    height: 32px;
+    width: 40px;
+    position: relative;
+    z-index: 2;
+    margin-top: -12px;
+    background: url("../../images/icons/ui/thumb_single.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.Slider {
+  &Input {
+    width: 50%;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background: transparent;
+    &::-webkit-slider-runnable-track {
+     background-color: #E5E6EB;
+      border-radius: 50px;
+      height: 8px;
+    }
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+        @include slider-thumb();
+    }
+    &:focus {
+      outline: none;
+    }
+    &::-moz-range-thumb {
+      border: none;
+      @include slider-thumb();
+    }
+    
+  }
+  
+}
+
