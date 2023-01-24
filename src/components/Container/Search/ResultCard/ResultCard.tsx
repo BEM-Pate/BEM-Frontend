@@ -52,7 +52,6 @@ const ResultCard = (props: Props) => {
     return diffDays < 7;
   }
 
-  console.log(pate)
 
   return (
     <div className={classNames(styles.ResultCard)}>

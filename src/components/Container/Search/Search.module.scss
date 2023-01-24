@@ -8,6 +8,7 @@
     overflow: auto;
     white-space: nowrap;
     margin-left: -0.4rem;
+    margin-bottom: 24px;
     }
     &Loading {
         animation: loading 0.7s ease-in-out infinite alternate;
@@ -26,6 +27,11 @@
             display: inline;
             color: var(--color-black);
         }
+        &HeadlineH2 {
+            font-size: 20px;
+            color: var(--color-black);
+            margin-bottom: 16px;
+        }
         margin-bottom: 24px;
        button {
         margin-left: 12px;
@@ -38,6 +44,19 @@
         }
        }
     }
+
+    &Map {
+        width: 100%;
+        img {
+            height: 420px;
+            border-radius: 20px;
+            width: inherit;
+            object-fit: cover;
+            object-position: center;
+            overflow: hidden;
+        }
+    }
+
     
 }
 
