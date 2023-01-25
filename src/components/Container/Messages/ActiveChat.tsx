@@ -45,39 +45,22 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
             objects.push(<div
 
             >
-                {/*<div*/}
-                {/*    style={{*/}
-                {/*        textAlign: 'center',*/}
-                {/*        color: '#E4EFEC',*/}
-                {/*        opacity: 0.5,*/}
-                {/*        fontSize: '14px',*/}
-                {/*        margin: '0 0 20px 0'*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*TODO aktuelles Datum nicht zentriert*/}
-                <div className={classNames(styles.ActiveChatDate)}>
+
+
+                <div className={classNames(styles.ActiveChatDate)}
+                >
                     {(date.getHours() < 10 ? '0' : '')}{date.getHours()}:{(date.getMinutes() < 10 ? '0' : '')}{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
                 </div>
-
-                {/*TODO Bubble ganze Seite*/}
-                <div className={classNames(styles.ActiveChatStartEnd)}
+                <div className={classNames(styles.ActiveChatBubble)}
                     style={{
-                        display: 'flex',
                         justifyContent: targetedUser._id === message.sender ? 'start' : 'end',
-                    }}>
+                    }}
 
-                    {/*TODO bubbly zu klein*/}
-                    <div className={classNames(styles.ActiveChatStartEndMsgStyle)}
+                >
+                    <div className={classNames(styles.ActiveChatMessage)}
                         style={{
-                            // alignContent: 'center',
-                            // verticalAlign: 'middle',
-                            // wordBreak: 'break-all',
-                            // whiteSpace: 'normal',
-                            // padding: '12px 20px 12px 24px',
                             backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',
-                            // maxWidth: '100%',
                             borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
-                            // margin: '10px 0'
                         }}
                         onClick={() => {
                             handleShow()
@@ -98,41 +81,20 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
 
                 {
                     date.getTime() - previousDate.getTime() > 3600000 &&
-                        // TODO Datum dasselbe
-                    <div className={classNames(styles.ActiveDate)}
-                        style={{
-                            textAlign: 'center',
-                            color: '#E4EFEC',
-                            opacity: 0.5,
-                            fontSize: '14px',
-                            margin: '0 0 20px 0'
-
-                        }}
-                    >
+                    <div className={classNames(styles.ActiveChatDate)}>
                         {date.getHours() < 10 ? "0" : ""}{date.getHours()}:{date.getMinutes() < 10 ? "0" : ""}{date.getMinutes()} {date.getDate()}.{("0" + date.getMonth() + 1).slice(-2)}
                     </div>
                 }
-                {/*TODO*/}
-                <div className={classNames(styles.ActiveChatStartEnd)}
+                <div className={classNames(styles.ActiveChatBubble)}
                     style={{
-                        display: 'flex',
                         justifyContent: targetedUser._id === message.sender ? 'start' : 'end',
                     }}
 
                 >
-                    {/*TODO*/}
-                    <div className={classNames(styles.ActiveChatStartEndMsgStyle)}
+                    <div className={classNames(styles.ActiveChatMessage)}
                         style={{
-                            alignContent: 'center',
-                            verticalAlign: 'middle',
-                            wordBreak: 'break-all',
-                            whiteSpace: 'normal',
-                            padding: '12px 20px 12px 24px',
                             backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',
-                            maxWidth: '100%',
                             borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
-                            margin: '10px 0'
-
                         }}
                         onClick={() => {
                             handleShow()
@@ -154,18 +116,8 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
         }
     }
 
-    // TODO background color
-    return <div className={classNames(styles.ActiveChatBackground)}
-        style={{
-        width: '100%',
-        height: '100%',
 
-        backgroundColor: '#63837B',
-        color: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-
-    }}>
+    return <div className={classNames(styles.ActiveChatBackground)}>
         <BackHeader
             targetedUser={targetedUser}
         />
@@ -173,10 +125,12 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
         {/* <h1>{baseUserData.firstName} {baseUserData.lastName}</h1> */}
 
 
-        <div className={classNames(styles.ActiveChatContainerScrolling)}>
+        <div className={classNames(styles.ActiveChatBackgroundFlow)}
+        >
             {objects}
         </div>
-        <div className={classNames(styles.ActiveChatContainerBox)}>
+        <div className={classNames(styles.ActiveChatPadding)}
+        >
 
             <ChatBox conversation={room}/>
         </div>
@@ -186,19 +140,18 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
             </Modal.Header>
             <Modal.Body>
                 <div className={classNames(styles.ActiveChatModelBody)}>
-                    <svg className={classNames(styles.ActiveChatModelBodySvg)}
+                    <svg className={classNames(styles.ActiveChatModelBodySvgStyle)}
                         width="25" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.66669 4.99984L5.00002 8.33317L11.6667 1.6665" stroke="black" stroke-width="1.5"
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     {/*TODO : Hasan*/}
-                    Delivered: <span className={classNames(styles.ActiveChatModelBodySpan)} >{getTime(targetedMessage?.seen[0]?.date)}</span>
+                    Delivered: <span className={classNames(styles.ActiveChatModelBodyDelivered)}>{getTime(targetedMessage?.seen[0]?.date)}</span>
                 </div>
                 {checkValidDate(new Date(targetedMessage?.seen[1]?.date)) &&
 
-                // <div style={{display:'flex', alignItems:"center", padding: "5px", borderTop: "1px solid rgba(34, 23, 42, 0.08)"}}>
                 <div className={classNames(styles.ActiveChatModelBodyBox)}>
-                    <svg className={classNames(styles.ActiveChatModelBodySvg)}
+                    <svg className={classNames(styles.ActiveChatModelBodySvgStyle)}
                         width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_218_3343)">
                             <path d="M4.66669 7.99984L8.00002 11.3332L14.6667 4.6665" stroke="black" stroke-width="1.5"
@@ -213,7 +166,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
                         </defs>
                     </svg>
                     {/*TODO : Hasan*/}
-                    Read: <span className={classNames(styles.ActiveChatModelBodySeen)}>{getTime(targetedMessage?.seen[1]?.date)}</span></div>
+                    Read: <span className={classNames(styles.ActiveChatModelBodyDelivered)}>{getTime(targetedMessage?.seen[1]?.date)}</span></div>
 
                 }
                 </Modal.Body>
@@ -231,7 +184,8 @@ const messageStatus = (message: any, me: any) => {
             return obj.userId !== me._id
         })
     ) {
-        return <svg className={classNames(styles.ActiveChatModelBodySvg)}
+        return <svg
+            style={{width: "25px"}}
             width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_218_3343)">
                 <path d="M4.66669 7.99984L8.00002 11.3332L14.6667 4.6665" stroke="white" stroke-width="1.5"
@@ -253,7 +207,8 @@ const messageStatus = (message: any, me: any) => {
             return obj.userId !== me._id
         })
     ) {
-        return <svg className={classNames(styles.ActiveChatModelBodySvg)}
+        return <svg
+            style={{width: "25px"}}
             width="25" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.66669 4.99984L5.00002 8.33317L11.6667 1.6665" stroke="white" stroke-width="1.5"
                   stroke-linecap="round" stroke-linejoin="round"/>

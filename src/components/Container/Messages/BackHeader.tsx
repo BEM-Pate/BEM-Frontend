@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import {useZustand} from "../../../zustand/store";
+import styles from "./BackHeader.module.scss";
+import classNames from "classnames";
 
 
 export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
@@ -18,13 +20,7 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
         return false;
     }
     return <>
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                margin: '10px 1rem',
-                alignItems: 'center'
-            }}
+        <div className={classNames(styles.BackHeader)}
         >
             <svg
                 onClick={() => {
@@ -43,28 +39,15 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
                 </defs>
             </svg>
 
-            <div className="header__user___name__container"
+            <div className={classNames(styles.BackHeaderUserName)}
                 style={{
                     visibility: targetedUser ? 'visible' : 'hidden',
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: 'center',
-                    alignItems: 'center',
                 }}
             >
-                <div className="header__user__name"
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px'
-                    }}
-
-                >
-                    <h1 style={{margin:"0"}}>{userData?.firstName} {userData?.lastName}</h1>
-                    <div className="status_cirle"style={{
-                        width: '20px', height: '20px', borderRadius: '50%', backgroundColor: checkIfUserIsOnline(userData)? '#1dbf73': 'grey',border:"2px solid white", transition: "background .3s"
-                    }}/>
+                <div className={classNames(styles.BackHeaderUserNameContainer)}>
+                    <h1 className={classNames(styles.BackHeaderUserNameContainerHeader)} >{userData?.firstName} {userData?.lastName}</h1>
+                    <div className={classNames(styles.BackHeaderUserNameContainerStatusCircle)}
+                         style={{backgroundColor: checkIfUserIsOnline(userData)? '#1dbf73': 'grey'}}/>
                 </div>
                 <div
                     style={{opacity: checkIfUserIsOnline(userData) ? 1 : 0.5}}
@@ -75,11 +58,9 @@ export default function BackHeader({ targetedUser }: { targetedUser?: any }) {
             </div>
 
 
-            <div
+            <div className={classNames(styles.BackHeaderVisibility)}
                 style={{
                     visibility: targetedUser ? 'visible' : 'hidden',
-                    width: '40px',
-                    height: '40px',
                 }}
             >
 

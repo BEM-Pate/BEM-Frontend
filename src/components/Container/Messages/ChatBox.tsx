@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react"
 import {useZustand, socket} from "../../../zustand/store"
+import styles from "./ChatBox.module.scss";
+import classNames from "classnames";
 
 
 export default function ChatBox({conversation}: { conversation: any }) {
@@ -7,30 +9,10 @@ export default function ChatBox({conversation}: { conversation: any }) {
     const [message, setMessage] = useState('')
     const [setChatRoom] = useZustand(state => [state.pushMessageToChatRoom])
 
-    return (<div
-        style={{
-            position: 'relative',
-            width: '100%',
-            height: '48px',
-            display: 'flex',
-            backgroundColor: '#FFFFFF',
-            borderRadius: '80px',
-            paddingLeft: '10px',
-        }}
+    return (<div className={classNames(styles.ChatBox)}
     >
         <input type={'text'}
-               style={
-                   {
-                       boxSizing: 'border-box',
-                       borderWidth: '0px',
-                       outline: 'none',
-                       width: '100%',
-                       height: '100%',
-                       outlineStyle: 'none',
-                       borderRadius: '80px',
-                       fontSize: '16px',
-                   }
-               }
+               className={classNames(styles.ChatBoxInput)}
                value={message}
                onKeyPress={(e) => {
                    if (message.trim() !== '' && e.key === 'Enter') {
@@ -47,16 +29,7 @@ export default function ChatBox({conversation}: { conversation: any }) {
                }}
         >
         </input>
-        <div style={{
-            // position: 'absolute',
-            // top: '-20px',
-            // right: '-20px',
-            cursor: 'pointer',
-            color: 'white',
-            fill: '#98C8BC',
-            width: '50px',
-            // marginLeft: '290px'
-        }}>
+        <div className={classNames(styles.ChatBoxSend)}>
             <svg
                 onClick={(e) => {
                     if (message.trim() !== '') {

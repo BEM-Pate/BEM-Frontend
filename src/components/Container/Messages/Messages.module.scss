@@ -56,13 +56,12 @@
       &StatusCircle {
         width: 20px;
         height: 20px;
-        borderRadius: 50%;
+        border-radius: 50%;
         border: 2px solid white;
         position: absolute;
         bottom: 0;
         right: 0;
         transition: background .3s;
-      }
     }
 
   }
@@ -80,15 +79,69 @@
 
     &MsgContainer {
       display: flex;
-      flexDirection: column;
+      flex-direction: column;
 
-      &Msg {
-        borderBottom: 1px solid rgba(34, 23, 42, .08);
-        //display: flex;
+      &Row {
+        border-bottom: 1px solid rgba(34, 23, 42, .08);
+        display: flex;
         gap: 10px;
-        alignItems: center;
+        align-items: center;
         width: 100%;
         padding: 10px;
+
+        &Avatar {
+          height: 50px;
+          width: 50px;
+          position: relative;
+          cursor: pointer;
+
+          &Images {
+            height:100%;
+            width:100%;
+            border-radius:50%;
+          }
+
+          &Content{
+            flex: 1;
+            overflow:hidden;
+
+            &Msg {
+              display: flex;
+
+              &Font{
+                font-size: large;
+              }
+
+              &Unread{
+                display: inline-flex;
+                height: 25px;
+                width: 25px;
+                background-color: #98C8BC;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                margin-left: auto;
+              }
+            }
+
+            &Body {
+              display: flex;
+
+              &Preview{
+                width: 85%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+
+              &Date{
+                margin-left: auto;
+                color: #9EA3AE;
+              }
+
+            }
+          }
+        }
 
         &Content {
           flex: 1;
@@ -98,59 +151,12 @@
             font-size: large;
           }
 
-          &Header {
-            display: flex;
 
-            &Span {
-              display: inline-flex;
-              height: 25px;
-              width: 25px;
-              backgroundColor: #98C8BC;
-              borderRadius: 50%;
-              alignItems: center;
-              justifyContent: center;
-              marginLeft: auto;
-            }
-
-            &b {
-              fontSize: large;
-            }
-          ;
-          }
 
           &Body {
             display: flex;
-
-            &Time {
-              marginLeft: auto;
-              color: #9EA3AE;
-            }
-
-            &Preview {
-              width: 85%;
-              overflow: hidden;
-              whiteSpace: nowrap;
-              textOverflow: ellipsis;
-            }
           }
         }
-
-        &Avatar {
-          height: 50px;
-          width: 50px;
-          position: relative;
-          cursor: pointer;
-
-          &StatusCircle {
-            width: 20px;
-            height: 20px;
-            borderRadius: 50%;
-            border: 2px solid white;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            transition: background .3s
-          }
 
           &Images {
             height: 100%;

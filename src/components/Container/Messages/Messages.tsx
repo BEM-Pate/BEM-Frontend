@@ -21,8 +21,8 @@ const Messages = () => {
 
         const bTime = new Date(b.messages[b.messages.length - 1]?.time).getTime();
         // if(aTime && bTime) {
-        if (aTime > bTime) return -1;
-        if (aTime < bTime) return 1;
+            if (aTime > bTime) return -1;
+            if (aTime < bTime) return 1;
         // }
         return 0;
     })
@@ -30,7 +30,7 @@ const Messages = () => {
 
     const checkIfUserIsOnline = (userData: any) => {
         for (const room in onlineUsersInRooms) {
-            if (onlineUsersInRooms.hasOwnProperty(room)) {
+            if(onlineUsersInRooms.hasOwnProperty(room)){
                 if (onlineUsersInRooms[room].includes(userData?.account)) {
                     return true;
                 }
@@ -60,7 +60,7 @@ const Messages = () => {
 
                     const contentType = userData?.avatar.contentType;
                     return (
-                        <div className={classNames(styles.MessagesContainerContactsAvatarContainer)}>
+                        <div className={classNames(styles.MessagesContainerContactsAvatarContainer) }>
                             <img
                                 src={`data:${contentType};base64,${b64}`}
                                 alt="PatePicture"
@@ -70,15 +70,10 @@ const Messages = () => {
                                     setRoute(`/dashboard/chatroom/${user._id}`)
                                 }}
                             />
-                            {/*<div className="status_cirle"style={{*/}
-                            {/*     width: '20px', height: '20px', borderRadius: '50%', backgroundColor: isUserOnline? '#1dbf73': 'grey',border:"2px solid white",*/}
-                            {/*     position: 'absolute', bottom: '0', right: '0', transition: "background .3s"*/}
-                            {/* }}/>*/}
-                            <div className={classNames(styles.MessagesContainerContactsAvatarContainerStatusCircle)}
-                                 style={{
-                                     backgroundColor: isUserOnline ? '#1dbf73' : 'grey'
-                                 }}/>
-                            {/*TODO Circle*/}
+
+
+                           <div className={classNames(styles.MessagesContainerContactsAvatarContainerStatusCircle)}
+                                style={{backgroundColor: isUserOnline? '#1dbf73': 'grey'}}/>
                         </div>
                     )
                 })}
@@ -87,15 +82,11 @@ const Messages = () => {
             </div>
 
             <div className={classNames(styles.MessagesContainerMessages)}>
-                {/*<div className="msgContainer" style={{*/}
-                {/*    display: 'flex',*/}
-                {/*    flexDirection: 'column',*/}
-                {/*}}>*/}
                 <div className={classNames(styles.MessagesContainerMessagesMsgContainer)}>
 
                     {
                         chatrooms?.map((chatRoom: any) => {
-                            if (chatRoom.messages.length > 0) {
+                            if(chatRoom.messages.length > 0) {
                                 let participants = chatRoom.participants;
                                 let userId = participants.find((participant: any) => participant !== me._id);
                                 const user = contacts?.find((user: any) => user._id === userId);
@@ -123,77 +114,38 @@ const Messages = () => {
                                 const isToday = todayDate.getDate() === time.getDate()
 
                                 return (
-                                    <div className="msgContainer__msg" style={{
-                                        borderBottom: '1px solid rgba(34,23,42, .08)',
-                                        display: 'flex',
-                                        gap: '10px',
-                                        alignItems: 'center',
-                                        width: '100%',
-                                        padding: '10px'
-                                    }}
-                                        // TODO Textvorschau nicht neben Name
-                                        // <div className={classNames(styles.MessagesContainerMessagesMsgContainerMsg)}
+                                    <div className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRow)}
                                          onClick={() => {
                                              navigate(`/dashboard/chatroom/${user._id}`)
                                              setRoute(`/dashboard/chatroom/${user._id}`)
                                          }}
                                     >
-                                        <div
-                                            className={classNames(styles.MessagesContainerMessagesMsgContainerMsgAvatar)}>
-
-                                            <img
-                                                style={{height: "100%", width: "100%", borderRadius: "50%"}}
+                                        <div className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowAvatar)}>
+                                            <img className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowAvatarImages)}
                                                 src={`data:${contentType};base64,${b64}`}
                                                 alt="PatePicture"
-                                                className={classNames(styles.MessagesProfilePictures)}
                                             />
-                                            {/*TODO Circle*/}
-                                            {/*<div className="status_cirle"style={{*/}
-                                            {/*    width: '20px', height: '20px', borderRadius: '50%', backgroundColor: isUserOnline? '#1dbf73': 'grey',border:"2px solid white",*/}
-                                            {/*    position: 'absolute', bottom: '0', right: '0', transition: "background .3s"*/}
-                                            <div
-                                                className={classNames(styles.MessagesContainerContactsAvatarContainerStatusCircle)}
-                                                style={{
-                                                    backgroundColor: isUserOnline ? '#1dbf73' : 'grey'
-                                                }}/>
+                                            <div className={classNames(styles.MessagesContainerContactsAvatarContainerStatusCircle)}
+                                                 style={{backgroundColor: isUserOnline? '#1dbf73': 'grey'}}/>
                                         </div>
 
-                                            <div className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContent)}>
-                                                <div className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContentHeader)}>
+                                        <div className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowContent)}>
+                                            <div className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowContentMsg)}>
+                                                <b className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowContentMsgFont)}> {firstName} {lastName} </b>
 
-                                                <b className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContentFont)}> {firstName} {lastName} </b>
-
-                                                    {/*TODO*/}
-                                                {unSeenMsgLength > 0 && <span style={
-                                                    // className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContentHeaderSpan)
-                                                    {
-                                                        display: 'inline-flex',
-                                                        height: '25px',
-                                                        width: '25px',
-                                                        backgroundColor: '#98C8BC',
-                                                        borderRadius: '50%',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        marginLeft: 'auto'
-                                                    }}>
+                                                {unSeenMsgLength > 0 && <span className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowAvatarContentMsgUnread)}>
                                                 {unSeenMsgLength}
                                             </span>}
 
 
                                             </div>
-
-                                            <div
-                                                className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContentBody)}>
-                                                <div
-                                                    className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContentBodyPreview)}
-                                                    style={{
-                                                        ...(unSeenMsgLength > 0 ? {fontWeight: 'bold'} : {fontWeight: 'normal'})
-                                                    }}>
+                                            <div className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowContentBody)}>
+                                                <div className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowContentBodyPreview)}
+                                                     style={{...(unSeenMsgLength > 0 ? {fontWeight: 'bold'} : {fontWeight: 'normal'})
+                                                }}>
                                                     {lastMessage ? lastMessage.text : ''}
                                                 </div>
-                                                <span style={{marginLeft: 'auto', color: "#9EA3AE"}}
-                                                      // className={classNames(styles.MessagesContainerMessagesMsgContainerMsgContentBodyTime)}
-                                                >{time ? ((time.getHours() < 10 ? '0' : '') + time.getHours() + ":" + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes()) : ''} {!isToday ? (time.getDate() + "." + ("0" + time.getMonth() + 1).slice(-2)) : ''}</span>
+                                                <span className={classNames(styles.MessagesContainerContactsContainerMessagesMsgContainerRowAvatarContentBodyDate)}>{time ? ((time.getHours() < 10 ? '0' : '')+time.getHours() + ":" + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes()) : ''} {!isToday ? (time.getDate() + "." + ("0" + time.getMonth() + 1).slice(-2)) : ''}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -201,15 +153,11 @@ const Messages = () => {
                                 )
                             }
                         })
-                    }
-                </div>
-            </div>
-        </div>
-    );
-};
+                        }
+                        </div>
+                        </div>
+                        </div>
+                        );
+                    };
 
-export default Messages;
-
-
-
-
+                        export default Messages;

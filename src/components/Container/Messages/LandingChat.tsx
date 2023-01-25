@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom";
 import BackHeader from "./BackHeader";
 import ChatBox from "./ChatBox";
 import {useZustand} from "../../../zustand/store";
+import styles from "./LandingChat.module.scss";
+import classNames from "classnames";
+
 
 export default function LandingChat({ room, targetedUser }: { room: any, targetedUser: any }) {
     const baseUserData = targetedUser.baseUserData
@@ -49,132 +52,54 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
 
 
     return <>
-        <div
-            style={{
-                textAlign: 'center',
-                height: '100%',
-                // alignItems: 'center',
-                // justifyContent: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                color: 'white',
-                backgroundColor: '#63837B',
-
-            }}
-        >
+        <div className={classNames(styles.LandingChat)}>
             <BackHeader/>
 
-            <div style={{
-                flex: '1',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-
-            }}>
-                    <div
-                        style={{
-                            justifyContent: 'start',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            marginLeft: '24px',
-                        }}
-                    >
+            <div className={classNames(styles.LandingChatBackHeader)}>
+                    <div className={classNames(styles.LandingChatBackHeaderContent)}>
 
 
-                    <div
-                        style={{
-                            fontSize: '24px'
-
-                        }}
-                    >
+                    <div className={classNames(styles.LandingChatBackHeaderFont)}>
                         Sie sind verbunden mit <b
-                            style={{
-                                color: '#98c8bd',
-                            }}
+                            className={classNames(styles.LandingChatBackHeaderFontColor)}
                         >
                             {baseUserData.firstName}
                         </b>
                     </div>
 
-                    <div
-                        style={{
-                            color: 'white',
-                            opacity: 0.7,
-                            fontSize: '14px',
-                        }}
-                    >
+                    <div className={classNames(styles.LandingChatBackHeaderText)}>
                         {displayDiff} her
                     </div>
 
                 </div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginTop: '24px',
-                    marginBottom: '40px',
-                }}>
-                    <div
-                        style={{
-                            borderRadius: '50%',
-                            width: '110px',
-                            height: '110px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            position: 'relative',
-                            border: '4px solid #98C8BC',
-                        }}
+                <div className={classNames(styles.LandingChatContent)}>
+                    <div className={classNames(styles.LandingChatContentProfilePicture)}
                     >
                         <img
                             src={`data:${contentType};base64,${b64}`}
                             alt="PatePicture"
-                            style={{
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '50%',
-
-
-                            }}
+                            className={classNames(styles.LandingChatContentProfilePictureImages)}
                             onClick={() => {
                             }}
                         />
-                        <div className="status_cirle" style={{
-                            position: 'absolute', bottom: "-10px", right:'40px',
-                            width: '20px', height: '20px', borderRadius: '50%', backgroundColor: checkIfUserIsOnline(baseUserData)? '#1dbf73': 'grey',border:"2px solid white", transition: "background .3s"
-                        }}/>
+                        <div className={classNames(styles.LandingChatContentProfilePictureStatusCircle)} style={{
+                            backgroundColor: checkIfUserIsOnline(baseUserData)? '#1dbf73': 'grey'}}/>
                     </div>
 
 
 
                 </div>
 
-                <div
-                    style={{
-                        margin: '0 60px',
-                    }}
+                <div className={classNames(styles.LandingChatBackHeaderDescription)}
                 >
                     Wissen, wenn <label
-                        style={{
-                            color: '#98c8bd',
-                        }}
+                    className={classNames(styles.LandingChatBackHeaderDescriptionLabel)}
                     >
                         {baseUserData.firstName}
                     </label> deine Nachricht gelesen hat
                 </div>
 
-                <div
-                    style={{
-                        display: 'flex',
-                        gap: '5px',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#83ACA2',
-                        borderRadius: '32px',
-                        width: '250px',
-                        margin: '10px auto',
-                        padding: '4px 12px 4px 8px'
-                    }}>
+                <div className={classNames(styles.LandingChatBackHeaderCircle)}>
 
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_218_3343)">
@@ -192,15 +117,7 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
                 </div>
             </div>
 
-            <div
-                style={{
-                    flexBasis: '40%',
-                    display: 'flex',
-                    justifyContent: 'end',
-                    flexDirection: 'column',
-                    width: '100%',
-                    padding: '0 24px 24px',
-                }}
+            <div className={classNames(styles.LandingChatBackHeaderInput)}
             >
                 <ChatBox conversation={room}/>
             </div>

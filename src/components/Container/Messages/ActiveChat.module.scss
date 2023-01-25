@@ -2,83 +2,70 @@
 
 .ActiveChat {
 
-  &ModelBody {
-    display: flex;
-    alignItems:center;
-    padding: 5px;
-
-    &Svg{
-      width: 25px;
-    }
-
-    &Span{
-      marginLeft: auto;
-    }
-
-    &Box {
-      display: flex;
-      alignItems: center;
-      padding: 5px;
-      borderTop: 1px solid rgba(34, 23, 42, 0.08);
-    }
-
-    &Seen {
-      marginLeft: auto;
-    }
-
-  }
-
-  &Container {
-    width: 100%;
-    height: 100%;
-    backgroundColor: #63837B;
-    color: white;
-    display: flex;
-    flexDirection: column;
-
-    &Box {
-      padding: 0 24px 24px 24px;
-    }
-
-    &Scrolling {
-      flex: 1;
-      padding: 0 24px 24px 24px;
-      overflowY: scroll;
-    }
-  }
-
-
-  &Date {
-    textAlign: center;
+  &Date{
+    text-align: center;
     color: #E4EFEC;
     opacity: 0.5;
-    fontSize: 14px;
+    font-size: 14px;
     margin: 0 0 20px 0;
+  }
 
-    &StartEnd {
+  &Bubble{
+    display: flex;
+  }
+
+  &Message{
+    align-content: center;
+    vertical-align: middle;
+    word-break: break-all;
+    white-space: normal;
+    padding: 12px 20px 12px 24px;
+    max-width: 100%;
+    margin: 10px 0;
+  }
+
+  &Background{
+    width: 100%;
+    height: 100%;
+    background-color: #63837B;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &BackgroundFlow{
+    flex: 1;
+    padding: 0 24px 24px 24px;
+    overflow-y: scroll;
+  }
+
+  &Padding{
+    padding: 0 24px 24px 24px;
+  }
+
+  &ModelBody {
+
       display: flex;
+      align-items: center;
+      padding: 5px;
 
-      &MsgStyle {
-        alignContent: center;
-        verticalAlign: middle;
-        wordBreak: break-all;
-        whiteSpace: normal;
-        padding: 12px 20px 12px 24px;
-        //backgroundColor: targetedUser._id === message.sender ? '#738F88' : '#98C8BC99',
-        maxWidth: 100%;
-        //borderRadius: targetedUser._id === message.sender ? '24px 24px 24px 0px' : '24px 24px 0px 24px',
-        margin: 10px 0;
+      &SvgStyle{
+        width: 25px;
       }
-    }
 
-    &Date {
-      textAlign: center;
-      color: #E4EFEC;
-      opacity: 0.5;
-      fontSize: 14px;
-      margin: 0 0 20px 0;
-    }
+      &Delivered{
+        margin-left: auto;
+      }
 
+
+    &Box {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      border-top: 1px solid rgba(34, 23, 42, 0.08);
+
+    }
 
   }
+
 }

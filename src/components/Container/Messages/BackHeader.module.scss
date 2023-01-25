@@ -1,0 +1,39 @@
+@import "src/styles/variables.module";
+
+.BackHeader{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 1rem;
+  align-items: center;
+
+  &Visibility{
+    width: 40px;
+    height: 40px;
+  }
+
+  &UserName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &Container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      &Header{
+        margin:0;
+      }
+
+      &StatusCircle{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border:2px solid white;
+        transition: background .3s;
+      }
+    }
+  }
+}
