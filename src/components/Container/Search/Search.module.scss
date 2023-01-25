@@ -12,11 +12,9 @@
        display: grid;
        grid-template-columns: repeat(1, 1fr);
        gap: 20px;
-
        @media (max-width: 768px) {
         max-width: 100%;
        }
-       
     }
     &Loading {
         animation: loading 0.7s ease-in-out infinite alternate;

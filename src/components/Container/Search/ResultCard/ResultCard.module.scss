@@ -5,7 +5,8 @@
     background-color: var(--color-body-bg);
     border-radius: 10px;
     filter: drop-shadow(2px 2px 4px var(--color-border));
-    display: grid;
+    display: flex;
+    flex-direction: column;
     column-gap: 20px;
     row-gap: 6px;
     border: var(--color-primary-darker-transparent) 1px solid;

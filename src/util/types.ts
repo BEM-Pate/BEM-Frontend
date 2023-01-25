@@ -24,6 +24,7 @@ export interface PateData extends BaseUserData {
 }
 
 export interface NormalUserData extends BaseUserData {
+  pendingContact: string[];
   processBEM: string;
 }
 

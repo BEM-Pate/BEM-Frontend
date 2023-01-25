@@ -3,24 +3,29 @@ import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './DashboardPage.module.scss';
 import BottomNavigtionBar from '../../components/BottomNavigationBar/BottomNavigtionBar';
-import { initiliazeSocket, socket, SOCKET_URL, useZustand } from '../../zustand/store';
+import { initializeSocket, socket, SOCKET_URL, useZustand } from '../../zustand/store';
 import { io } from 'socket.io-client'
 
 const DashboardPage = () => {
   const location = useLocation()
-  const [setChatRoom, chatRooms, socketConfig, setSeen, setOnlineUsersInRooms, onlineUsersInRooms] = useZustand((state) =>
-    [state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms])
+  const [fetchPendingContacts, setChatRoom, chatRooms, socketConfig, setSeen, setOnlineUsersInRooms, onlineUsersInRooms] = useZustand((state) =>
+    [state.fetchPendingContacts, state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms])
 
   useEffect(() => {
     if (!socket) return
-    if (chatRooms?.length === 0) return
+    // if (chatRooms?.length === 0) return
 
     socket.removeAllListeners()
+    socket.on('connect', () => {
+        console.log('socket connected')
+    })
 
-    for (const chatroom of chatRooms) {
-      console.log('joining chatroom')
-      socket.emit('join-chatroom', { roomId: chatroom._id })
-      socket.emit('check-available-status-in-room', { roomId: chatroom._id })
+    if(chatRooms?.length > 0) {
+      for (const chatroom of chatRooms) {
+        console.log('joining chatroom')
+        socket.emit('join-chatroom', { roomId: chatroom._id })
+        socket.emit('check-available-status-in-room', { roomId: chatroom._id })
+      }
     }
 
     socket.on('new-message', ({ roomId, messageObj }) => {
@@ -42,11 +47,17 @@ const DashboardPage = () => {
       setOnlineUsersInRooms({ availableClients, roomId: data.roomId })
     })
 
+    socket.on('notify-contact-request', (data) => {
+      console.log("notify triggered")
+        fetchPendingContacts()
+      console.log(data)
+    })
+
   }, [chatRooms, socket])
 
   useEffect(() => {
     if (socketConfig && !socket) {
-      initiliazeSocket(socketConfig)
+      initializeSocket(socketConfig)
     }
 
   }, [socketConfig])

@@ -3,10 +3,15 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import io, { Socket } from 'socket.io-client';
+import {API_ADDRESS} from "../helpers/env";
 
 interface store {
     user: null | any,
     contacts: null | any,
+    newContactRequestLength: number,
+    newUnseenMessageLength: () => number,
+    pendingContacts: null | any,
+    fetchPendingContacts: () => void,
     chatrooms: null | any,
     fetchChatroom: () => void,
     fetchContacts: (userIds: string[]) => Promise<void>,
@@ -28,16 +33,17 @@ interface store {
 
 
 
-const BASE_URL = `http://141.45.146.171/api`
+// const BASE_URL = `http://141.45.146.171/api`
+const BASE_URL = API_ADDRESS
 
 export const SOCKET_URL =
-    `http://141.45.146.171`
+    // `http://141.45.146.171`
     // ||
-    // `http://localhost:5000`
+    `http://localhost:5000`
 
 export let socket: null | Socket = null
 
-export const initiliazeSocket = (
+export const initializeSocket = (
     socketConfig: any
 ) => {
     console.log('initializing socket')
@@ -50,14 +56,17 @@ export const useZustand = create<store>()(
         (set, get, props) => ({
             user: null,
             token: null,
+            pendingContacts: null,
+            newContactRequestLength: 0,
             socketConfig: null,
             setUser: (data: any) => {
                 console.log(data)
                 set({ user:data.account })
+                set({pendingContacts: data.account.baseUserData.pendingContact})
                 set({token: data.token})
                 set({
                     socketConfig: {
-                        path: '/api/socket.io',
+                        // path: '/api/socket.io',
                         extraHeaders: {
                             Authorization: `Bearer ${data.token}`
                         }
@@ -79,6 +88,18 @@ export const useZustand = create<store>()(
                     }
                     set({ chatrooms: res.data })
                     get().fetchContacts(participants)
+                })
+            },
+            fetchPendingContacts: () => {
+                console.log('fetching pending contacts')
+                axios.get(`${BASE_URL}/user/userData`, {
+                    headers: {
+                        Authorization: `Bearer ${get().token}`
+                    }
+                }).then((res) => {
+                    set({ pendingContacts: res.data.baseUserData.pendingContact })
+                    // console.log("new length:" + res.data.baseUserData.pendingContact.length)
+                    set({ newContactRequestLength: res.data.baseUserData.pendingContact.length })
                 })
             },
             fetchContacts: async (userIds: string[]) => {
@@ -117,7 +138,19 @@ export const useZustand = create<store>()(
                 const onlineUsersInRooms = get().onlineUsersInRooms;
                 onlineUsersInRooms[roomId] = availableClients
                 set({ onlineUsersInRooms: onlineUsersInRooms })
-            }
+            },
+            newUnseenMessageLength: () =>{
+                let counter = 0;
+                for (let i = 0; i < get().chatrooms?.length; i++) {
+                    get().chatrooms[i].messages.forEach((msg: any) => {
+                        const isMeInSeeen = msg.seen?.find((user: any) => user.userId === get().user._id);
+                        if (!isMeInSeeen && msg.sender !== get().user._id) {
+                            counter++;
+                        }
+                    })
+                }
+                return counter
+            },
         }),
         {
             name: 'bear-store',

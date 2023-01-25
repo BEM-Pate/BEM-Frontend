@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useZustand } from '../../../zustand/store';
 import ActiveChat from './ActiveChat';
@@ -11,7 +10,7 @@ export default function ChatRoom() {
 
     let targetedUser = contacts.find((contact: any) => contact._id === id)
     let pickedChatRoom = chatRooms.find((chatroom: any) => chatroom.participants.includes(id))
-
+    console.log(pickedChatRoom)
     return <>
         <div className="Chatroom"
             style={{
@@ -19,7 +18,7 @@ export default function ChatRoom() {
                 height: '100%',
             }}
         >
-            {pickedChatRoom?.messages.length === 0 ?
+            {pickedChatRoom?.message === null  || pickedChatRoom?.messages.length === 0 ?
                 <LandingChat
                     targetedUser={targetedUser}
                     room={pickedChatRoom}
