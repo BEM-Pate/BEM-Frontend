@@ -6,6 +6,7 @@
   height: 90%;
   display: flex;
   flex-direction: column;
+
   &ProfilePictures {
     border-radius: 15px;
     height: 100%;
@@ -24,7 +25,8 @@
       margin-right: 2%;
       margin-left: 1%;
     }
-}
+  }
+
   &ContainerContacts {
     display: flex;
     background-color: rgba(110, 135, 129, 0);
@@ -33,23 +35,38 @@
     white-space: nowrap;
     margin-bottom: 5%;
     padding: 10px;
+
     &Images {
       width: 50px;
       height: 50px;
     }
-    &AvatarContainer{
+
+    &AvatarContainer {
       width: 100px;
       height: 100px;
       position: relative;
       cursor: pointer;
-      &image{
-        height:100%;
+
+      &Images {
+        height: 100%;
         width: 100%;
         border-radius: 16px;
+      }
+
+      &StatusCircle {
+        width: 20px;
+        height: 20px;
+        borderRadius: 50%;
+        border: 2px solid white;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transition: background .3s;
       }
     }
 
   }
+
   &ContainerMessages {
     background-color: white;
     border: 0.5px solid black;
@@ -61,32 +78,123 @@
     flex: 1;
     //height: 600px;
 
-    &Messages {
-      margin: 1.5%;
-      background-color: rgba(211, 202, 202, 0.638);
-      border-radius: 15px;
+    &MsgContainer {
+      display: flex;
+      flexDirection: column;
+
+      &Msg {
+        borderBottom: 1px solid rgba(34, 23, 42, .08);
+        //display: flex;
+        gap: 10px;
+        alignItems: center;
+        width: 100%;
+        padding: 10px;
+
+        &Content {
+          flex: 1;
+          overflow: hidden;
+
+          &Font {
+            font-size: large;
+          }
+
+          &Header {
+            display: flex;
+
+            &Span {
+              display: inline-flex;
+              height: 25px;
+              width: 25px;
+              backgroundColor: #98C8BC;
+              borderRadius: 50%;
+              alignItems: center;
+              justifyContent: center;
+              marginLeft: auto;
+            }
+
+            &b {
+              fontSize: large;
+            }
+          ;
+          }
+
+          &Body {
+            display: flex;
+
+            &Time {
+              marginLeft: auto;
+              color: #9EA3AE;
+            }
+
+            &Preview {
+              width: 85%;
+              overflow: hidden;
+              whiteSpace: nowrap;
+              textOverflow: ellipsis;
+            }
+          }
+        }
+
+        &Avatar {
+          height: 50px;
+          width: 50px;
+          position: relative;
+          cursor: pointer;
+
+          &StatusCircle {
+            width: 20px;
+            height: 20px;
+            borderRadius: 50%;
+            border: 2px solid white;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transition: background .3s
+          }
+
+          &Images {
+            height: 100%;
+            width: 100%;
+            borderRadius: 50%;
+          }
+        }
+
+
+      }
     }
-    &Text {
-      &Name {
-        font-weight: bold;
-        font-size: 20px;
-      }
-      &Message {
-        margin-left: 5%;
-      }
-      &Date {
-        color: #00000076;
-        align-items: right;
-      }
-    }
-  
+
+    //TODO not used?
+    //&Messages {
+    //  margin: 1.5%;
+    //  background-color: rgba(211, 202, 202, 0.638);
+    //  border-radius: 15px;
+    //}
+
+    //&Text {
+    //  &Name {
+    //    font-weight: bold;
+    //    font-size: 20px;
+    //  }
+    //
+    //  &Message {
+    //    margin-left: 5%;
+    //  }
+    //
+    //  &Date {
+    //    color: #00000076;
+    //    align-items: right;
+    //  }
+    //}
+
   }
+
   &Header {
     padding: 2%;
     text-align: center;
     color: white;
   }
-  &Subheader{
+
+  &Subheader {
     color: white;
     padding: 10px
   }
