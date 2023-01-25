@@ -1,21 +1,32 @@
-@import '../../../styles/mixins.module';
+@import "../../../styles/mixins.module";
 
 .Settings {
-    &Profile{
-        @include page;
-        padding: 16px;
-        row-gap: 8px;
-        align-items: center;
-        background-color: var(--color-primary-darker);
-        &Picture {
-            border-radius: 50%;
-            height: 100px;
-        }
-        &Title{
-            color: var(--color-white);
-        }
+  &Header {
+    height: 45vh;
+    width: 100%;
+    background-color: var(--color-body-bg-white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50px;
     }
-    &Preferences {
-        padding: 16px;
+    &HeadlineName {
+      color: var(--color-black);
+      margin: 0;
     }
+    &HeadlineLocation {
+      color: var(--color-black);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 140%;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+  }
 }

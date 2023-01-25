@@ -21,15 +21,14 @@ const getUserAvatar = async (id:string) => {
   return '';
 };
 
-const getBaseUserData = async (token: string) :
-Promise<UserData> => {
+const getBaseUserData = async (token: string) : Promise<UserData | PateData> => {
   const response: AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata`, {
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
-
+  
   return response.data;
 };
 
@@ -43,6 +42,16 @@ const getPate = async (id:string) : Promise<PateData> => {
   return response.data;
 }
 
-const API = { getUserAvatar, getBaseUserData, getPate };
+const getUser = async (id:string) : Promise<UserData> => {
+  const response : AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata/${id}`, {
+    headers: {
+      accept: 'application/json',
+    },
+  });
+
+  return response.data;
+}
+
+const API = { getUserAvatar, getBaseUserData, getPate, getUser };
 
 export default API;
