@@ -6,7 +6,7 @@ import axios from "axios";
 import styles from "./Profile.module.scss";
 import API from "../../../helpers/api";
 import Textfield from "../../Textfield/Textfield";
-import { BaseUserData, NormalUserData, PateData } from "../../../util/types";
+import { UserData, PateData } from "../../../util/types";
 import { API_ADDRESS } from "../../../helpers/env";
 import Button from "../../Button/Button";
 import Textarea from "../../Textarea/Textarea";
@@ -27,7 +27,7 @@ const Profile = (props: Props) => {
   const enumRoutes = ['ageranges', 'diseases', 'genders', 'languages', 'meetings', 'occupations', 'processbem', 'supports'];
 
   /* eslint-disable */
-  const [oldUserBaseData, setOldUserBaseData] = useState<NormalUserData | BaseUserData | PateData>();
+  const [oldUserBaseData, setOldUserBaseData] = useState<UserData | PateData>();
   const [newBaseUserData, setNewBaseUserData] = useState({});
   const [newMeetingPreference, setNewMeetingPreference] = useState({});
 
@@ -106,7 +106,7 @@ const Profile = (props: Props) => {
     />
   } 
 
-  console.log(userData)
+  console.log(oldUserBaseData)
 
   //ToDo: Hasan Labels übersetzen
   return (
@@ -114,15 +114,15 @@ const Profile = (props: Props) => {
       <Textfield
         id={`${t("labelFirstName")}`}
         label={`${t("labelFirstName")}`}
-        defaultValue={oldUserBaseData?.firstName}
+        defaultValue={oldUserBaseData?.baseUserData?.firstName!}
         placeholder={`${t("labelFirstName")}`}
         onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, firstName: e }))}
       ></Textfield>
       <Textfield
         id={`${t("labelLastName")}`}
         label={`${t("labelLastName")}`}
-        defaultValue={oldUserBaseData?.lastName}
-        placeholder={oldUserBaseData?.lastName}
+        defaultValue={oldUserBaseData?.baseUserData?.lastName!}
+        placeholder={oldUserBaseData?.baseUserData?.lastName!}
         onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, lastName: e }))}
       ></Textfield>
       {/* ToDo FIX Location Update */}
@@ -137,14 +137,14 @@ const Profile = (props: Props) => {
       id="Experience"
       label="Experience"
       placeholder="Experience"
-      defaultValue={oldUserBaseData.experience}
+      defaultValue={oldUserBaseData.baseUserData.experience}
       onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, experience: e }))}
       ></Textarea> : ""}
       {userIsPate(oldUserBaseData) ? <Textarea
       id="Motivation"
       label="Motivation"
       placeholder="Motivation"
-      defaultValue={oldUserBaseData.motivation}
+      defaultValue={oldUserBaseData.baseUserData.motivation}
       onChange={(e) => setNewBaseUserData((prev) => (prev = { ...prev, motivation: e }))}
       ></Textarea> : ""}
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./Search.module.scss";
 import { API_ADDRESS } from "../../../helpers/env";
 import ResultCard from "./ResultCard/ResultCard";
-import { BaseUserData, PateData } from "../../../util/types";
+import { BaseUserData, Match, PateData } from "../../../util/types";
 import Headline from "../../Headline/Headline";
 import Button from "../../Button/Button";
 import magnifier from "../../../images/icons/ui/magnifier.svg";
@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface ResultProps {
-  paten: PateData[];
+  paten: Match[];
   userAttributes: any;
   token: string;
 }
@@ -31,11 +31,11 @@ const Results = (props: ResultProps) => {
   const { paten, userAttributes, token } = props;
   return (
     <div className={classNames(styles.SearchResults)}>
-      {paten.map((pate: PateData, index: any) => (
+      {paten.map((match: Match, index: any) => (
         <ResultCard
           token={token}
           key={index}
-          pate={pate}
+          match={match}
           userAttributes={userAttributes.baseUserData}
         />
       ))}
@@ -45,7 +45,7 @@ const Results = (props: ResultProps) => {
 
 const Search = (props: Props) => {
   const { userData } = props;
-  const [matches, setMatches] = useState<PateData[]>();
+  const [matches, setMatches] = useState<Match[]>();
   const [userAttributes, setUserAttributes] = useState<BaseUserData>();
   const [diseases, setDiseases] = useState<string[]>([]);
 

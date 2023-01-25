@@ -55,7 +55,7 @@ const Settings = (props: Props) => {
         <Headline headline="h2" className={classNames(styles.SettingsProfileTitle)}>
           {`${userAttributes ? userAttributes.baseUserData.firstName : ''} ${userAttributes ? userAttributes.baseUserData.lastName : ''}`}
         </Headline>
-        <Link to="/dashboard/profile">
+        <Link to="/dashboard/settings/profile">
           <Button styling="outline">Edit Profile</Button>
         </Link>
       </div>

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { Buffer } from 'buffer';
-import { BaseUserData, NormalUserData, PateData } from '../util/types';
+import { UserData, PateData } from '../util/types';
 import { API_ADDRESS } from './env';
 
 const getUserAvatar = async (id:string) => {
@@ -22,7 +22,7 @@ const getUserAvatar = async (id:string) => {
 };
 
 const getBaseUserData = async (token: string) :
-Promise<PateData | NormalUserData | BaseUserData> => {
+Promise<UserData> => {
   const response: AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata`, {
     headers: {
       accept: 'application/json',
@@ -30,9 +30,19 @@ Promise<PateData | NormalUserData | BaseUserData> => {
     },
   });
 
-  return response.data.baseUserData;
+  return response.data;
 };
 
-const API = { getUserAvatar, getBaseUserData };
+const getPate = async (id:string) : Promise<PateData> => {
+  const response : AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata/${id}`, {
+    headers: {
+      accept: 'application/json',
+    },
+  });
+
+  return response.data;
+}
+
+const API = { getUserAvatar, getBaseUserData, getPate };
 
 export default API;
