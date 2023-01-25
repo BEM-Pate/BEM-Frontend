@@ -20,6 +20,7 @@ import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import Settings from './components/Container/Settings/Settings';
 import ChatRoom from './components/Container/Messages/Chatroom';
 import { useZustand, socket } from './zustand/store';
+import UserProfile from './components/Container/Search/UserProfile/UserProfile';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
@@ -50,10 +51,11 @@ const App = () => {
             <Route path="dashboard">
               <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
+                <Route path="search/user/:id" element={authenticationSwitch(<UserProfile userData={userData} />, '/login')} />
               <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
               <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
               <Route path="settings" element={authenticationSwitch(<Settings userData={userData} />, '/login')} />
-              <Route path="profile" element={authenticationSwitch(<Profile userData={userData} />, '/login')} />
+                <Route path="settings/profile" element={authenticationSwitch(<Profile userData={userData} />, '/login')} />
             </Route>
           </Route>
 

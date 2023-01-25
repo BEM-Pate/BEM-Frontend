@@ -32,6 +32,7 @@ Promise<PateData | NormalUserData | BaseUserData> => {
 
   return response.data.baseUserData;
 };
+
 const API = { getUserAvatar, getBaseUserData };
 
 export default API;
