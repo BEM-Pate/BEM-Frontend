@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
-import axios from "axios";
-import { Link } from "react-router-dom";
 import styles from "./Settings.module.scss";
-import { API_ADDRESS } from "../../../helpers/env";
 import Headline from "../../Headline/Headline";
 import API from "../../../helpers/api";
 import Button from "../../Button/Button";
-import LanguageDropdown from "../../LanguageDropdown/LanguageDropdown";
 import placeholder from "../../../images/default.png";
 import { useNavigate } from "react-router-dom";
 import { PateData, UserData } from "../../../util/types";
 import profilePercentage from "../../../helpers/profilePercentage";
+import languages from "../../../images/icons/ui/languages.svg";
+import settings from "../../../images/icons/ui/settings_outline.svg";
+import account from "../../../images/icons/ui/account.svg";
 
 interface Props {
   userData: any;
@@ -33,8 +32,6 @@ const Settings = (props: Props) => {
       }
     };
     getUserData();
-
-    
   }, [userData.token]);
 
   useEffect(() => {
@@ -49,16 +46,48 @@ const Settings = (props: Props) => {
     }
   }, [userAttributes]);
 
-  console.log(profilePercentage(userAttributes!));
-
   return (
     <div className={classNames(styles.Settings)}>
       <div className={classNames(styles.SettingsHeader)}>
         <img src={imageData} alt="profile_pic"></img>
-        <Headline className={classNames(styles.SettingsHeaderHeadlineName)} headline="h2">{`${userAttributes?.baseUserData.firstName} ${userAttributes?.baseUserData.lastName}`}</Headline>
-        <Headline className={classNames(styles.SettingsHeaderHeadlineLocation)} headline="h2">{userAttributes?.meetingPreference.location}</Headline>
+        <Headline
+          className={classNames(styles.SettingsHeaderHeadlineName)}
+          headline="h2"
+        >{`${userAttributes?.baseUserData.firstName} ${userAttributes?.baseUserData.lastName}`}</Headline>
+        <Headline
+          className={classNames(styles.SettingsHeaderHeadlineLocation)}
+          headline="h2"
+        >
+          {userAttributes?.meetingPreference.location}
+        </Headline>
+        <div className={classNames(styles.SettingsHeaderProfile)}>
+          <div className={classNames(styles.SettingsHeaderProfileStatus)}>
+            <span>{`${profilePercentage(userAttributes!)}%`}</span>
+            <p>{profilePercentage(userAttributes!) === 100 ? "Ihr Profil ist vollständig!" : "Vervollständigen Sie Ihr Profil." }</p>
+          </div>
+          <Button onClick={() => navigate("/dashboard/settings/profile")}>Profil ändern</Button>
+        </div>
       </div>
-      <Button onClick={() => navigate("/login")}>Logout</Button>
+     <div className={classNames(styles.SettingsButtons)}>
+     <Button styling='setting' onClick={() => navigate("/dashboard/settings/account")}>
+      <div>
+        <img src={account} alt="arrow"></img>
+        <>Mein Konto</>
+      </div>
+     </Button>
+     <Button styling='setting' onClick={() => navigate("/dashboard/settings/language")}>
+      <div>
+        <img src={languages} alt="arrow"></img>
+        <>Meine Sprachen</>
+      </div>
+     </Button>
+     <Button styling='setting' onClick={() => navigate("/dashboard/settings/edit")}>
+      <div>
+        <img src={settings} alt="arrow"></img>
+        <>Einstellungen</>
+      </div>
+     </Button>
+     </div>
     </div>
   );
 };

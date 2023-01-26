@@ -52,6 +52,16 @@ const getUser = async (id:string) : Promise<UserData> => {
   return response.data;
 }
 
-const API = { getUserAvatar, getBaseUserData, getPate, getUser };
+const getEnums = async (route:string) : Promise<string[]> => {
+  const response : AxiosResponse = await axios.get(`${API_ADDRESS}/get/enums/${route}`, {
+    headers: {
+      accept: 'application/json',
+    },
+  });
+
+  return response.data;
+}
+
+const API = { getUserAvatar, getBaseUserData, getPate, getUser, getEnums };
 
 export default API;
