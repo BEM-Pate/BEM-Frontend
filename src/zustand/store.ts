@@ -155,7 +155,7 @@ export const useZustand = create<store>()(
         }),
         {
             name: 'bear-store',
-            getStorage: () => localStorage,
+            getStorage: () => sessionStorage,
         }
     )
 )

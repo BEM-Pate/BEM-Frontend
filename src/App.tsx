@@ -11,7 +11,6 @@ import Groups from './components/Container/Groups/Groups';
 import Profile from './components/Container/Profile/Profile';
 import Messages from './components/Container/Messages/Messages';
 import LoginPage from './pages/LoginPage/LoginPage';
-import useSessionStorage from './helpers/useSessionStorage';
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
@@ -20,14 +19,15 @@ import Settings from './components/Container/Settings/Settings';
 import ChatRoom from './components/Container/Messages/Chatroom';
 import PateProfile from './components/Container/Search/UserProfile/PateProfile';
 import BetroffenerProfile from "./components/Container/Search/UserProfile/BetroffenerProfile";
+import {useZustand} from "./zustand/store";
 
 const App = () => {
-  const [userData, setUserData] = useSessionStorage('userData', null);
   const navigate = useNavigate();
   const location = useLocation();
+  const userData = useZustand((state) => state.user);
 
   const isBaseDataVerified = useCallback(
-    () => userData !== null && userData?.account?.isBaseDataVerified,
+    () => userData !== null && userData?.isBaseDataVerified,
     [userData],
   );
 
@@ -45,7 +45,7 @@ const App = () => {
     if ((path.startsWith('/register') || path.startsWith('/login'))
       && isSignedIn()
       && isBaseDataVerified()) {
-      navigate('/dashboard/profile');
+      navigate('/');
       return;
     }
 
@@ -63,21 +63,13 @@ const App = () => {
     <>
       <Routes>
         <Route index element={<LandingPage />} />
-        <Route path="login" element={<LoginPage setUserData={setUserData} />} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="onboardingseeker" element={<OnboardingSeeker />} />
         <Route path="onboardingpate" element={<OnboardingPate />} />
         <Route path="onboardingshg" element={<OnboardingSHG />} />
-        <Route path="register" element={<RegisterPage setUserData={setUserData} />} />
+        <Route path="register" element={<RegisterPage />} />
         <Route path="register">
-          <Route
-            path="user"
-            element={(
-              <RegisterUserPage
-                userData={userData}
-                setUserData={setUserData}
-              />
-              )}
-          />
+          <Route path="user" element={<RegisterUserPage />} />
         </Route>
         <Route element={<DashboardPage />}>
           <Route path="dashboard">

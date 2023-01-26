@@ -15,17 +15,13 @@ import genderFemale from '../../images/icons/ui/gender_female.svg';
 import genderDivers from '../../images/icons/ui/gender_divers.svg';
 import Validators from '../../helpers/validators';
 import FileInput from '../../components/FileInput/FileInput';
+import {useZustand} from "../../zustand/store";
 
-interface Props {
-  userData: any;
-  setUserData: (s: any) => void;
-  children?: React.ReactNode;
-}
-
-const RegisterUserPage = (props: Props) => {
-  const { userData, setUserData, children } = props;
+const RegisterUserPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const userData = useZustand((state) => state.user);
+  const setUserData = useZustand((state) => state.setUser);
 
   const [userFirstName, setUserFirstName] = useState<string>();
   const [userLastName, setUserLastName] = useState<string>();
@@ -94,7 +90,6 @@ const RegisterUserPage = (props: Props) => {
 
   return (
     <div className={classNames(styles.RegisterAffectedPage)}>
-      {children}
       <FormularStepper
         dataLabels={{
           email: t('labelEMail'),
@@ -154,7 +149,7 @@ const RegisterUserPage = (props: Props) => {
               { value: '30TO39', label: '30-39' },
               { value: '40TO49', label: '40-49' },
               { value: '50TO59', label: '50-59' },
-              { value: '60PLUS', label: '60 und älter' },
+              { value: 'OLDER59', label: '60 und älter' },
             ]}
             onChange={setUserAgeRange}
             required

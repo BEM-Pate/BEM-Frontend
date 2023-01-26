@@ -11,16 +11,12 @@ import { API_ADDRESS } from '../../helpers/env';
 import PhoneNumberInput from '../../components/PhoneNumberInput/PhoneNumberInput';
 import PinInput from '../../components/PinInput/PinInput';
 import Validators from '../../helpers/validators';
-
-interface Props {
-  setUserData: (s: any) => void;
-}
+import {useZustand} from "../../zustand/store";
 
 type RegisterType = 'phone' | 'email';
 type RequestState = 'OTP' | 'AUTH';
 
-const RegisterPage = (props: Props) => {
-  const { setUserData } = props;
+const RegisterPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -30,6 +26,7 @@ const RegisterPage = (props: Props) => {
   const [otpCode, setOtpCode] = useState<string | null>(null);
   const [validators, setValidators] = useState<any[]>([]);
   const [requesting, setRequesting] = useState(false);
+  const setUser = useZustand((state) => state.setUser);
 
   useEffect(() => {
     setState('OTP');
@@ -81,7 +78,7 @@ const RegisterPage = (props: Props) => {
         code: otpCode,
       }).then((res) => {
         if (res.status === 200) {
-          setUserData(res.data);
+          setUser(res.data);
           navigate('/register/user');
         }
       }).finally(() => {
@@ -90,7 +87,7 @@ const RegisterPage = (props: Props) => {
     } catch (err) {
       console.error('failed', err);
     }
-  }, [accountName, otpCode, navigate, setUserData]);
+  }, [accountName, otpCode, navigate, setUser]);
 
   return (
     <div className={classNames(styles.RegisterPage)}>

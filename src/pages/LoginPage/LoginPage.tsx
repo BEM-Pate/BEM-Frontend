@@ -13,15 +13,10 @@ import PinInput from '../../components/PinInput/PinInput';
 import Validators from '../../helpers/validators';
 import { useZustand } from '../../zustand/store';
 
-interface Props {
-  setUserData: (s: any) => void;
-}
-
 type LoginType = 'phone' | 'email';
 type RequestState = 'OTP' | 'AUTH';
 
-const LoginPage = (props: Props) => {
-  const { setUserData } = props;
+const LoginPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -80,9 +75,8 @@ const LoginPage = (props: Props) => {
         code: otpCode,
       }).then((res) => {
         if (res.status === 200) {
-          setUserData(res.data);
           setUser(res.data);
-          navigate('/dashboard/groups');
+          navigate('/');
         }
       }).finally(() => {
         setRequesting(false);
@@ -90,7 +84,7 @@ const LoginPage = (props: Props) => {
     } catch (err) {
       console.error('failed', err);
     }
-  }, [accountName, otpCode, navigate, setUser, setUserData]);
+  }, [accountName, otpCode, navigate, setUser]);
 
   return (
     <div className={classNames(styles.LoginPage)}>
