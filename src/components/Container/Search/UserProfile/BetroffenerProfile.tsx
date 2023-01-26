@@ -169,7 +169,7 @@ const BetroffenerProfile = (props: Props) => {
                     <Paragraph collapse>
                         {betroffenerData?.meetingPreference.support.map((value) => {
                             return (
-                                <p> {value == "CONSULTATION" ? "- BEM-Beratung allgemein" : "- BEM-Beratung auf ein bestimmtes Krankheitsbild bezogen"}</p>)
+                                <p> {value === "CONSULTATION" ? "- BEM-Beratung allgemein" : "- BEM-Beratung auf ein bestimmtes Krankheitsbild bezogen"}</p>)
                         })}
                         <br/>
                         <br/>

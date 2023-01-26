@@ -26,5 +26,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: 'create env file'
+      run: |
+        touch .env
+        echo ESLINT_NO_DEV_ERRORS=true >> .env
+        echo REACT_APP_API_ADDRESS=${{ secrets.REACT_APP_API_ADDRESS }} >> .env
+        cat .env
     - run: npm ci
     - run: npm run build

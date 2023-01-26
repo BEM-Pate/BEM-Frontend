@@ -8,5 +8,23 @@
       @include input-label-required;
     }
   }
-  &Input {}
+  &Preview {
+    align-items: center;
+    background-color: var(--color-white);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+    &Image {
+      height: auto;
+      width: 100%;
+      max-width: 104px;
+    }
+  }
+  &Input {
+    display: none;
+  }
 }

@@ -3,6 +3,8 @@
 .FormularStepper {
   display: flex;
   flex-flow: column nowrap;
+  width: 100%;
+  max-width: 512px;
 
   &Form {
     flex: 1 1 auto;
