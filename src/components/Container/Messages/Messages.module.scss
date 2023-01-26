@@ -3,32 +3,63 @@
 .Messages {
   //@include dashboard-container;
   background-color: rgb(99, 131, 123);
+  height: 90%;
+  display: flex;
+  flex-direction: column;
   &ProfilePictures {
     border-radius: 15px;
-    height: 50px;
-    width: 50px;
+    height: 100%;
+    width: 100%;
     margin-top: 1%;
     margin-bottom: 4%;
     margin-right: 2%;
     margin-left: 1%;
+
+    &MsgGroup {
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+      margin-top: 1%;
+      margin-bottom: 4%;
+      margin-right: 2%;
+      margin-left: 1%;
+    }
 }
   &ContainerContacts {
-    background-color: rgba(110, 135, 129, 0.768);
+    display: flex;
+    background-color: rgba(110, 135, 129, 0);
     overflow: auto;
+    gap: 1rem;
     white-space: nowrap;
     margin-bottom: 5%;
+    padding: 10px;
     &Images {
       width: 50px;
       height: 50px;
     }
+    &AvatarContainer{
+      width: 100px;
+      height: 100px;
+      position: relative;
+      cursor: pointer;
+      &image{
+        height:100%;
+        width: 100%;
+        border-radius: 16px;
+      }
+    }
+
   }
   &ContainerMessages {
     background-color: white;
     border: 0.5px solid black;
-    border-radius: 25px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom: none;
     overflow: auto;
     white-space: nowrap;
-    height: 600px;
+    flex: 1;
+    //height: 600px;
 
     &Messages {
       margin: 1.5%;
@@ -57,5 +88,6 @@
   }
   &Subheader{
     color: white;
+    padding: 10px
   }
 }

@@ -1,0 +1,21 @@
+@import '../../../styles/mixins.module';
+
+.Settings {
+    &Profile{
+        @include page;
+        padding: 16px;
+        row-gap: 8px;
+        align-items: center;
+        background-color: var(--color-primary-darker);
+        &Picture {
+            border-radius: 50%;
+            height: 100px;
+        }
+        &Title{
+            color: var(--color-white);
+        }
+    }
+    &Preferences {
+        padding: 16px;
+    }
+}

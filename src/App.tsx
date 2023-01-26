@@ -13,17 +13,20 @@ import Messages from './components/Container/Messages/Messages';
 import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
 import LoginPage from './pages/LoginPage/LoginPage';
 import useSessionStorage from './helpers/useSessionStorage';
-import EditProfile from './components/Container/Profile/EditProfile/EditProfile';
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import Button from './components/Button/Button';
+import Settings from './components/Container/Settings/Settings';
+import ChatRoom from './components/Container/Messages/Chatroom';
+import { useZustand } from './zustand/store';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
   const navigate = useNavigate();
   const location = useLocation();
+  const route = useZustand((state) => state.route);
 
   const isBaseDataVerified = useCallback(
     () => userData !== null && userData?.account?.isBaseDataVerified,
@@ -62,10 +65,9 @@ const App = () => {
   }, [userData]);
 
   return (
-    <div>
+    <>
+      {!route?.includes('chatroom') && <TopNavigationBar />}
       {userData && <Button onClick={logout}>Logout</Button>}
-
-      <TopNavigationBar />
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path="login" element={<LoginPage setUserData={setUserData} />} />
@@ -86,15 +88,16 @@ const App = () => {
         </Route>
         <Route element={<DashboardPage />}>
           <Route path="dashboard">
+            <Route path="chatroom/:id" element={<ChatRoom />} />
             <Route path="search" element={<Search userData={userData} />} />
             <Route path="messages" element={<Messages />} />
             <Route path="groups" element={<Groups />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="editprofile" element={<EditProfile />} />
+            <Route path="settings" element={<Settings userData={userData} />} />
           </Route>
         </Route>
       </Routes>
-    </div>
+    </>
   );
 };
 

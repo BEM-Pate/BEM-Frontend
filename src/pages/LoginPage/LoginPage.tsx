@@ -11,6 +11,7 @@ import { API_ADDRESS } from '../../helpers/env';
 import PhoneNumberInput from '../../components/PhoneNumberInput/PhoneNumberInput';
 import PinInput from '../../components/PinInput/PinInput';
 import Validators from '../../helpers/validators';
+import { useZustand } from '../../zustand/store';
 
 interface Props {
   setUserData: (s: any) => void;
@@ -30,6 +31,7 @@ const LoginPage = (props: Props) => {
   const [otpCode, setOtpCode] = useState<string | null>(null);
   const [validators, setValidators] = useState<any[]>([]);
   const [requesting, setRequesting] = useState(false);
+  const setUser = useZustand((state) => state.setUser);
 
   useEffect(() => {
     setState('OTP');
@@ -79,6 +81,7 @@ const LoginPage = (props: Props) => {
       }).then((res) => {
         if (res.status === 200) {
           setUserData(res.data);
+          setUser(res.data);
           navigate('/');
         }
       }).finally(() => {
