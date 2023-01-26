@@ -90,7 +90,7 @@ const RegisterPage = (props: Props) => {
     } catch (err) {
       console.error('failed', err);
     }
-  }, [accountName, otpCode]);
+  }, [accountName, otpCode, navigate, setUserData]);
 
   return (
     <div className={classNames(styles.RegisterPage)}>

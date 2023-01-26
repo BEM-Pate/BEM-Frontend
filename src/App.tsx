@@ -44,7 +44,9 @@ const App = () => {
       return;
     }
 
-    if ((path.startsWith('/register') || path.startsWith('/login')) && isSignedIn()) {
+    if ((path.startsWith('/register') || path.startsWith('/login')) 
+      && isSignedIn() 
+      && isBaseDataVerified()) {
       navigate('/dashboard/profile');
       return;
     }
@@ -57,12 +59,12 @@ const App = () => {
     if (path === '/register/user' && !isSignedIn()) {
       navigate('/login');
     }
-  }, [location, userData]);
+  }, [isBaseDataVerified, isSignedIn, location, navigate, userData]);
 
   const logout = useCallback(() => {
     setUserData(null);
     navigate('/login');
-  }, [userData]);
+  }, [navigate, setUserData]);
 
   return (
     <>
@@ -92,7 +94,7 @@ const App = () => {
             <Route path="search" element={<Search userData={userData} />} />
             <Route path="messages" element={<Messages />} />
             <Route path="groups" element={<Groups />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<Profile userData={userData} />} />
             <Route path="settings" element={<Settings userData={userData} />} />
           </Route>
         </Route>

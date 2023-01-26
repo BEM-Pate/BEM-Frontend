@@ -88,6 +88,8 @@ const RegisterUserPage = (props: Props) => {
     userLanguages,
     userOccupation,
     userAvatar,
+    navigate,
+    setUserData,
   ]);
 
   return (

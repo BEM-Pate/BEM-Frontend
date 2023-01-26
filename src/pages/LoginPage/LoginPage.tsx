@@ -90,7 +90,7 @@ const LoginPage = (props: Props) => {
     } catch (err) {
       console.error('failed', err);
     }
-  }, [accountName, otpCode]);
+  }, [accountName, otpCode, navigate, setUser, setUserData]);
 
   return (
     <div className={classNames(styles.LoginPage)}>
