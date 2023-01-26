@@ -72,7 +72,6 @@ const App = () => {
           <Route path="user" element={<RegisterUserPage />} />
         </Route>
         <Route element={<DashboardPage />}>
-          <Route path="dashboard">
             <Route path="dashboard">
               <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="search" element={<Search userData={userData} />} />
@@ -82,7 +81,6 @@ const App = () => {
               <Route path="settings" element={<Settings userData={userData} />} />
               <Route path="settings/profile" element={<Profile userData={userData} />} />
             </Route>
-          </Route>
         </Route>
       </Routes>
     </>
