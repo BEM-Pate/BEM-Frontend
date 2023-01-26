@@ -1,0 +1,52 @@
+@import "src/styles/variables.module";
+
+.TileSelect {
+  margin: 0 -8px;
+
+  &Tile {
+    background-color: var(--color-white);
+    border: var(--border-transparent);
+    border-radius: 24px;
+    box-shadow: var(--box-shadow-input);
+    display: inline-block;
+    margin: 8px;
+    position: relative;
+    width: calc(50% - 16px);
+
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+      pointer-events: none;
+    }
+
+    &Inner {
+      align-items: center;
+      bottom: 0;
+      display: inline-flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    &Checkmark {
+      display: none;
+      position: absolute;
+      right: 10%;
+      top: 10%;
+    }
+
+    &.selected {
+      border: var(--border);
+
+      .TileSelectTile {
+        &Checkmark {
+          display: block;
+        }
+      }
+    }
+  }
+}

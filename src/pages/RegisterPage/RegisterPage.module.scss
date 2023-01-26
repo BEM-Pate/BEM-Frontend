@@ -1,6 +1,6 @@
 @import "src/styles/variables.module";
 
-.LoginPage {
+.RegisterPage {
   align-items: center;
   background-color: var(--color-body-bg);
   display: flex;
@@ -55,7 +55,7 @@
       align-self: center;
     }
 
-    &Register {
+    &Login {
       padding-top: 16px;
       text-align: center;
     }
