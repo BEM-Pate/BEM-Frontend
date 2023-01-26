@@ -20,11 +20,12 @@ import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import Settings from './components/Container/Settings/Settings';
 import ChatRoom from './components/Container/Messages/Chatroom';
 import { useZustand, socket } from './zustand/store';
-import PateProfile from './components/Container/Search/PateProfile/PateProfile';
+import PateProfile from './components/Container/Search/UserProfile/PateProfile';
+import BetroffenerProfile from "./components/Container/Search/UserProfile/BetroffenerProfile";
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
-  const route = useZustand(state => state.route)
+  // const route = useZustand(state => state.route)
 
   const authenticationSwitch = useCallback(
     (
@@ -35,7 +36,7 @@ const App = () => {
   );
   return (
       <BrowserRouter>
-        {!route?.includes('chatroom') && <TopNavigationBar />}
+        {/*{!route?.includes('chatroom') && <TopNavigationBar />}*/}
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage setUserData={setUserData} />} />
@@ -51,7 +52,7 @@ const App = () => {
             <Route path="dashboard">
               <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
-                <Route path="search/user/:id" element={authenticationSwitch(<PateProfile userData={userData} />, '/login')} />
+                <Route path="search/user/:id" element={authenticationSwitch(userData?.role ==="normal_user" ? <PateProfile userData={userData} /> : <BetroffenerProfile userData={userData} />, '/login')} />
               <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
               <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
               <Route path="settings" element={authenticationSwitch(<Settings userData={userData} />, '/login')} />

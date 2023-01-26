@@ -40,3 +40,14 @@
  filter: unset;
  }
 }
+
+.Badge {
+  position: absolute;
+  top: 1px;
+  background-color: var(--color-required);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
