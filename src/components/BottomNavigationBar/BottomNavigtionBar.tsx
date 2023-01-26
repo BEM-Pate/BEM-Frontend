@@ -8,18 +8,28 @@ import search from '../../images/icons/navigation/search.svg';
 import groups from '../../images/icons/navigation/groups.svg';
 import settings from '../../images/icons/navigation/settings.svg';
 import ChatRoom from '../Container/Messages/Chatroom';
+import {useZustand} from "../../zustand/store";
 
-const BottomNavigtionBar = () => (
+const BottomNavigtionBar = () => {
+
+  const [newContactRequestLength, newUnseenMessageLength] = useZustand((state) =>
+      [state.newContactRequestLength, state.newUnseenMessageLength])
+
+  return (
+
   <nav className={classNames(styles.Navigation)}>
     <ul>
       <li className={classNames(styles.Elements)}>
         <NavLink to="/dashboard/search" className={({ isActive }) => (isActive ? classNames(styles.Link, styles.ActiveLink) : styles.Link)}>
           <img src={search} alt="search" />
+          {newContactRequestLength > 0 && <span className={classNames(styles.Badge)}>{newContactRequestLength}</span>}
+
         </NavLink>
       </li>
       <li>
         <NavLink to="/dashboard/messages" className={({ isActive }) => (isActive ? classNames(styles.Link, styles.ActiveLink) : styles.Link)}>
           <img src={messages} alt="messages" />
+          {newUnseenMessageLength() > 0 && <span className={styles.Badge}>{newUnseenMessageLength()}</span>}
         </NavLink>
       </li>
    
@@ -37,5 +47,5 @@ const BottomNavigtionBar = () => (
     </ul>
   </nav>
 );
-
+}
 export default BottomNavigtionBar;

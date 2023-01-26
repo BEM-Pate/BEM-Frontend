@@ -13,6 +13,8 @@ export interface BaseUserData {
   isMeetingPreferenceVerified: boolean;
   baseUserData: string;
   meetingPreference: MeetingPreference;
+  pendingContact: string[];
+  verifiedContact: string[];
 }
 
 export interface PateBaseUserData extends BaseUserData{
@@ -47,6 +49,7 @@ export interface Match {
 }
 
 export interface UserData {
+  _id: string;
   account: string;
   isAccountVerified: boolean;
   isBaseDataVerified: boolean;

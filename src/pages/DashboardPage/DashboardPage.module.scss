@@ -4,3 +4,21 @@
     display: flex;
     flex-direction: column;
 }
+
+.ModalButton{
+        border: 2px solid var(--color-primary);
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 18px;
+        background-color: var(--color-primary);
+        box-shadow: none;
+        img {
+            height: 22px;
+        }
+        span {
+            margin-left: 10px;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+}

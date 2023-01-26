@@ -1,4 +1,4 @@
-.PateProfile {
+.UserProfile {
   &Header {
     position: relative;
     height: 540px;
@@ -35,6 +35,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        &ButtonContainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+        }
         &Name {
           text-align: center;
           font-weight: 700;

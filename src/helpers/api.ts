@@ -32,7 +32,7 @@ const getBaseUserData = async (token: string) : Promise<UserData | PateData> => 
   return response.data;
 };
 
-const getPate = async (id:string) : Promise<PateData> => {
+const getPate = async (id:string) : Promise<PateData | UserData> => {
   const response : AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata/${id}`, {
     headers: {
       accept: 'application/json',
@@ -52,6 +52,6 @@ const getUser = async (id:string) : Promise<UserData> => {
   return response.data;
 }
 
-const API = { getUserAvatar, getBaseUserData, getPate, getUser };
+const API = { getUserAvatar, getBaseUserData, getPublicUser: getPate, getUser };
 
 export default API;
