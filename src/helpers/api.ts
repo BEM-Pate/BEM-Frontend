@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { Buffer } from 'buffer';
-import { BaseUserData, NormalUserData, PateData } from '../util/types';
+import { UserData, PateData } from '../util/types';
 import { API_ADDRESS } from './env';
 
 const getUserAvatar = async (id:string) => {
@@ -21,17 +21,47 @@ const getUserAvatar = async (id:string) => {
   return '';
 };
 
-const getBaseUserData = async (token: string) :
-Promise<PateData | NormalUserData | BaseUserData> => {
+const getBaseUserData = async (token: string) : Promise<UserData | PateData> => {
   const response: AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata`, {
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
-
-  return response.data.baseUserData;
+  
+  return response.data;
 };
-const API = { getUserAvatar, getBaseUserData };
+
+const getPate = async (id:string) : Promise<PateData | UserData> => {
+  const response : AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata/${id}`, {
+    headers: {
+      accept: 'application/json',
+    },
+  });
+
+  return response.data;
+}
+
+const getUser = async (id:string) : Promise<UserData> => {
+  const response : AxiosResponse = await axios.get(`${API_ADDRESS}/user/userdata/${id}`, {
+    headers: {
+      accept: 'application/json',
+    },
+  });
+
+  return response.data;
+}
+
+const getEnums = async (route:string) : Promise<string[]> => {
+  const response : AxiosResponse = await axios.get(`${API_ADDRESS}/get/enums/${route}`, {
+    headers: {
+      accept: 'application/json',
+    },
+  });
+
+  return response.data;
+}
+
+const API = { getUserAvatar, getBaseUserData, getPublicUser: getPate, getUser , getEnums };
 
 export default API;

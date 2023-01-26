@@ -7,9 +7,14 @@ import io, { Socket } from 'socket.io-client';
 interface store {
     user: null | any,
     contacts: null | any,
+    newContactRequestLength: number,
+    newUnseenMessageLength: () => number,
+    setNewUnseenMessageLength: () => void,
+    pendingContacts: null | any,
     chatrooms: null | any,
     fetchChatroom: () => void,
     fetchContacts: (userIds: string[]) => Promise<void>,
+    fetchPendingContacts: () => void,
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
@@ -29,6 +34,7 @@ interface store {
 
 
 const BASE_URL = `http://141.45.146.171/api`
+// const BASE_URL = `http://localhost:5000`
 
 export const SOCKET_URL =
     `http://141.45.146.171`
@@ -51,6 +57,22 @@ export const useZustand = create<store>()(
             user: null,
             token: null,
             socketConfig: null,
+            pendingContacts: null,
+            newContactRequestLength: 0,
+            newUnseenMessageLength: () =>{
+                let counter = 0;
+                for (let i = 0; i < get().chatrooms?.length; i++) {
+                    get().chatrooms[i].messages.forEach((msg: any) => {
+                        const isMeInSeeen = msg.seen?.find((user: any) => user.userId === get().user._id);
+                        if (!isMeInSeeen && msg.sender !== get().user._id) {
+                            counter++;
+                        }
+                    })
+                }
+                return counter
+            },
+            setNewUnseenMessageLength: () => {
+            },
             setUser: (data: any) => {
                 console.log(data)
                 set({ user:data.account })
@@ -93,6 +115,18 @@ export const useZustand = create<store>()(
                 }
 
                 set({ contacts: users.filter((user) => user._id !== get().user._id) })
+            },
+            fetchPendingContacts: () => {
+                console.log('fetching pending contacts')
+                axios.get(`${BASE_URL}/user/userData`, {
+                    headers: {
+                        Authorization: `Bearer ${get().token}`
+                    }
+                }).then((res) => {
+                    set({ pendingContacts: res.data.baseUserData.pendingContact })
+                    // console.log("new length:" + res.data.baseUserData.pendingContact.length)
+                    set({ newContactRequestLength: res.data.baseUserData.pendingContact.length })
+                })
             },
             setCurrentRoute: (route: string) => {
                 set({ route })

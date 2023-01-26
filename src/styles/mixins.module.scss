@@ -61,7 +61,7 @@
 @mixin dashboard-container {
   @include font-sm;
   width: 100%;
-  padding: 0 10px;
+  padding: 16px;
   overflow-y: auto;
   height: 90%;
 }
