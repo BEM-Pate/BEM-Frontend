@@ -3,20 +3,12 @@
 .Search {
     @include dashboard-container;
 
-    &Bar {
-        padding: 10px 0px;
-    }
     &Results {
-       max-width: 66.6666%;
-       margin: 0px auto;
-       display: grid;
-       grid-template-columns: repeat(1, 1fr);
-       gap: 20px;
-
-       @media (max-width: 768px) {
-        max-width: 100%;
-       }
-       
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
+    margin-left: -0.4rem;
+    margin-bottom: 24px;
     }
     &Loading {
         animation: loading 0.7s ease-in-out infinite alternate;
@@ -26,8 +18,46 @@
         align-items: center;
         font-size: 50px;
     }
+    &Headers {
+       display: flex;
+       align-items: flex-end;
+       justify-content: space-between;
+        &HeadlineH1 {
+            margin: 0px;
+            display: inline;
+            color: var(--color-black);
+        }
+        &HeadlineH2 {
+            font-size: 20px;
+            color: var(--color-black);
+            margin-bottom: 16px;
+        }
+        margin-bottom: 24px;
+       button {
+        margin-left: 12px;
+       }
+       &Button {
+        box-shadow: none;
+        border: 2px solid rgba($color: #63837B, $alpha: 0.2) !important;
+        img {
+            height: 45%;
+        }
+       }
+    }
 
+    &Map {
+        width: 100%;
+        img {
+            height: 420px;
+            border-radius: 20px;
+            width: inherit;
+            object-fit: cover;
+            object-position: center;
+            overflow: hidden;
+        }
+    }
 
+    
 }
 
 @keyframes loading {

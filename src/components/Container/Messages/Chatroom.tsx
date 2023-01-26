@@ -19,7 +19,7 @@ export default function ChatRoom() {
                 height: '100%',
             }}
         >
-            {pickedChatRoom?.messages.length === 0 ?
+            {pickedChatRoom?.message === null  || pickedChatRoom?.messages.length === 0 ?
                 <LandingChat
                     targetedUser={targetedUser}
                     room={pickedChatRoom}

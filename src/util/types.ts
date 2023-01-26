@@ -13,18 +13,18 @@ export interface BaseUserData {
   isMeetingPreferenceVerified: boolean;
   baseUserData: string;
   meetingPreference: MeetingPreference;
-  score?: number;
+  pendingContact: string[];
+  verifiedContact: string[];
 }
 
-export interface PateData extends BaseUserData {
+export interface PateBaseUserData extends BaseUserData{
   processBEM: boolean;
   experience: string;
   motivation: string;
-  isCertificateVerified: boolean;
 }
 
-export interface NormalUserData extends BaseUserData {
-  processBEM: string;
+export interface PateData extends UserData {
+  baseUserData: PateBaseUserData;
 }
 
 export interface MeetingPreference {
@@ -33,4 +33,29 @@ export interface MeetingPreference {
   meeting: string[];
   location: string;
   time: Date;
+}
+
+export interface Match {
+  account: string;
+  firstName: string;
+  lastName: string;
+  occupation: string;
+  languages: string[];
+  experience: string;
+  motivation: string;
+  meetingPreference: MeetingPreference;
+  score: number;
+  date: Date;
+}
+
+export interface UserData {
+  _id: string;
+  account: string;
+  isAccountVerified: boolean;
+  isBaseDataVerified: boolean;
+  isMeetingPreferencesVerified: boolean;
+  baseUserData: BaseUserData;
+  meetingPreference: MeetingPreference;
+  createdAt: Date;
+  updatedAt: Date;
 }

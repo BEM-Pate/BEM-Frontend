@@ -1,87 +1,90 @@
 @import "src/styles/variables.module";
 
 .ResultCard {
-    overflow: hidden;
-    background-color: var(--color-body-bg);
-    border-radius: 10px;
-    filter: drop-shadow(2px 2px 4px var(--color-border));
-    display: grid;
-    column-gap: 20px;
-    row-gap: 6px;
-    border: var(--color-primary-darker-transparent) 1px solid;
-    padding: 20px;
+    margin: 0.4rem; 
+    border-radius: 20px;
+    position: relative;
+    height: 160px;
+    width: 105px;
+    img {
+        border-radius: inherit;
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+   }
+   &NewTag {
+    height: 22px;
+    position: absolute;
+    font-size: 11px;
+    border: var(--color-primary) 2px solid;
+    top: 8px;
+    left: 12px;
+    color: white;
+    border-radius: 12px;
+    line-height: 16px;
+    background-color: #63837B;
+    padding: 2px 6px;
+   }
+   &Details {
+    >div {
+        padding: 8px 0px;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    }
     
-    &Essentials {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: 1fr 2fr;
-        &ImageScore {
-            position: relative;
-            width: 100%;
-            span {
-                position: absolute;
-                bottom: -5px;
-                right: -5px;
-                border-radius: 50px;
-                padding: 3px 6px;
-
-                color: var(--color-white);
-                background-color: var(--color-primary-darker);
-            }
-            img {          
-                width: 100%;
-                border-radius: 100%;
-            }
-        }
-      
-        p {
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-    }
-    &Additional {
-        display: grid;
-        column-gap: 20px;
-        grid-template-columns: 1fr 2fr;
-        p {
-            width: 100%;
-            text-align: end;
-            margin-bottom: 0.5rem;
-        }
-        img {
-            max-height: 50%;
-            opacity: .3;
-        }
-    }
-   
-    &Tag {
-        padding: 0px 16px;
-        border-radius: 50px;
-        margin-left: 8px;
+    border-radius: 0px 0px 20px 20px;
+    position: absolute;
+    height: 54px;
+    width: 100%;
+    bottom: 0px;
+    &Name {
+        word-wrap: break-word;
+        text-align: center;
+        z-index: 1;
+        margin: 0px;
+        font-size: 14px;
         font-weight: bold;
-        color: rgba($color: #000000, $alpha: 0.2);
-        border: solid rgba($color: #000000, $alpha: 0.2) 2px;
-        &Active {
-           opacity: 0.8;
-            color: var(--color-primary-darker);
-            border: solid var(--color-primary-darker) 2px;
-        }
+        color: var(--color-white);
     }
-
-    &Arrow {
+    &Location {
+        word-wrap: break-word;
+        z-index: 1;
+        margin: 0px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 11px;
+        opacity: 0.7;
+        color: var(--color-white);
+        text-align: center;
+        inline-size: 100%;
+        overflow: hidden;
+    }
+    &Background{
+        z-index: 0;
+        border-radius: 0px 0px 20px 20px;
         position: absolute;
+        width: 100%;
+        height: 100%;
+        /* opacity: 0.7; */
+        /*  background: rgb(99,131,123);
+        background: linear-gradient(0deg, 
+        rgba(99,131,123,0) 0%,
+        rgba(99,131,123,0.7) 5%,
+        rgba(99,131,123,1) 20%,
+        rgba(99,131,123,1) 80%,
+        rgba(99,131,123,0.7) 95%,
+        rgba(99,131,123,0) 100%); */
+        background-color: rgba($color: #63837B , $alpha: 0.8);
+ filter: blur(4px) ;
+        
+        
     }
+  
 
-    @media (min-width: 768px) {
-        &Essentials {
-            grid-template-columns: 150px 2fr;
-            img {
-                height: 150px;
-                width: 150px;
-            }
-        }
-       
-    }
+   }
 }

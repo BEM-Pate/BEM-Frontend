@@ -8,11 +8,12 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 500;
-    margin-right: 9px;
+    margin-right: 8px;
     margin-bottom: 12px;
     background-color: var(--color-white);
     color: var(--color-primary-darker);
     border: 2px solid var(--color-primary-darker-transparent);
+    text-transform: lowercase; /* ToDo delete later */
     &Active {
         background-color: var(--color-primary-darker);
         border: 2px solid var(--color-primary-darker);
