@@ -11,8 +11,18 @@ interface Props extends FormControl {
 
 const Textarea = (props: Props) => {
   const {
-    placeholder, id, name, disabled, onChange, label, required, resizable, rows = 5,
+    placeholder,
+    id,
+    name,
+    disabled,
+    onChange,
+    label,
+    required,
+    resizable,
+    rows = 5,
+    defaultValue,
   } = props;
+
   return (
     <div className={classNames(styles.Textarea)}>
       {label
@@ -33,6 +43,7 @@ const Textarea = (props: Props) => {
         placeholder={placeholder}
         rows={rows}
         onChange={onChange && ((e) => onChange(e.target.value))}
+        defaultValue={defaultValue}
       />
     </div>
   );

@@ -13,14 +13,16 @@ const Dropdown = (props: Props) => {
   const {
     disabled,
     id,
-    name,
     label,
     multiple,
     options,
     required,
     onChange,
+    defaultValue,
   } = props;
-  const [value, setValue] = useState<string | string[] | undefined>(multiple ? [] : undefined);
+  const [value, setValue] = useState<string | string[] | undefined>(
+    defaultValue || (multiple ? [] : undefined),
+  );
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const updateValue = useCallback((e: any, newValue: any) => {
     e.preventDefault();
@@ -41,6 +43,10 @@ const Dropdown = (props: Props) => {
       setIsOpen(false);
     }
   }, [multiple, value]);
+
+  useEffect(() => {
+    if (onChange) onChange(value);
+  }, [value]);
 
   const toggleList = useCallback((e: any) => {
     e.preventDefault();
@@ -70,6 +76,7 @@ const Dropdown = (props: Props) => {
     }
     return value === selectedValue;
   }, [multiple, value]);
+
   return (
     <div
       className={classNames(
@@ -118,15 +125,6 @@ const Dropdown = (props: Props) => {
           ))}
         </div>
       </div>
-      <select
-        className={classNames(styles.hidden)}
-        value={value}
-        name={name}
-        onChange={onChange && ((e) => onChange(e.target.value))}
-        multiple={multiple}
-      >
-        {options.map((option, i) => <option key={i} value={option.value}>{option.value}</option>)}
-      </select>
     </div>
   );
 };

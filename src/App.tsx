@@ -1,11 +1,10 @@
-import React, { ReactElement, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './App.module.scss';
 import {
-  BrowserRouter, Routes, Route, Navigate,
+  Routes, Route, useNavigate, useLocation,
 } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
-import RegisterSeekerPage from './pages/RegisterSeekerPage/RegisterSeekerPage';
-import RegisterPatePage from './pages/RegisterPatePage/RegisterPatePage';
+import RegisterUserPage from './pages/RegisterSeekerPage/RegisterUserPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import Search from './components/Container/Search/Search';
 import Groups from './components/Container/Groups/Groups';
@@ -18,42 +17,83 @@ import EditProfile from './components/Container/Profile/EditProfile/EditProfile'
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import Button from './components/Button/Button';
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const authenticationSwitch = useCallback(
-    (
-      component: ReactElement,
-      redirectPath: string,
-    ) => (userData ? component : <Navigate replace to={redirectPath} />),
+  const isBaseDataVerified = useCallback(
+    () => userData !== null && userData?.account?.isBaseDataVerified,
     [userData],
   );
+
+  const isSignedIn = useCallback(() => userData !== null, [userData]);
+
+  // Authentication
+  useEffect(() => {
+    const path = location.pathname;
+
+    if (path.startsWith('/dashboard') && !isSignedIn()) {
+      navigate('/login');
+      return;
+    }
+
+    if ((path.startsWith('/register') || path.startsWith('/login')) && isSignedIn()) {
+      navigate('/dashboard/profile');
+      return;
+    }
+
+    if (isSignedIn() && !isBaseDataVerified() && path !== '/register/user') {
+      navigate('/register/user');
+      return;
+    }
+
+    if (path === '/register/user' && !isSignedIn()) {
+      navigate('/login');
+    }
+  }, [location, userData]);
+
+  const logout = useCallback(() => {
+    setUserData(null);
+    navigate('/login');
+  }, [userData]);
+
   return (
     <div>
-      <BrowserRouter>
-        <TopNavigationBar />
-        <Routes>
-          <Route index element={<LandingPage />} />
-          <Route path="login" element={<LoginPage setUserData={setUserData} />} />
-          <Route path="onboardingseeker" element={<OnboardingSeeker />} />
-          <Route path="onboardingpate" element={<OnboardingPate />} />
-          <Route path="onboardingshg" element={<OnboardingSHG />} />
-          <Route path="register">
-            <Route path="seeker" element={<RegisterSeekerPage />} />
-            <Route path="pate" element={<RegisterPatePage />} />
+      {userData && <Button onClick={logout}>Logout</Button>}
+
+      <TopNavigationBar />
+      <Routes>
+        <Route index element={<LandingPage />} />
+        <Route path="login" element={<LoginPage setUserData={setUserData} />} />
+        <Route path="onboardingseeker" element={<OnboardingSeeker />} />
+        <Route path="onboardingpate" element={<OnboardingPate />} />
+        <Route path="onboardingshg" element={<OnboardingSHG />} />
+        <Route path="register" element={<RegisterPage setUserData={setUserData} />} />
+        <Route path="register">
+          <Route
+            path="user"
+            element={(
+              <RegisterUserPage
+                userData={userData}
+                setUserData={setUserData}
+              />
+              )}
+          />
+        </Route>
+        <Route element={<DashboardPage />}>
+          <Route path="dashboard">
+            <Route path="search" element={<Search userData={userData} />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="groups" element={<Groups />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="editprofile" element={<EditProfile />} />
           </Route>
-          <Route element={<DashboardPage />}>
-            <Route path="dashboard">
-              <Route path="search" element={authenticationSwitch(<Search userData={userData} />, '/login')} />
-              <Route path="messages" element={authenticationSwitch(<Messages />, '/login')} />
-              <Route path="groups" element={authenticationSwitch(<Groups />, '/login')} />
-              <Route path="profile" element={authenticationSwitch(<Profile />, '/login')} />
-              <Route path="editprofile" element={authenticationSwitch(<EditProfile />, '/login')} />
-            </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+        </Route>
+      </Routes>
     </div>
   );
 };

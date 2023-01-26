@@ -10,11 +10,17 @@ interface Props extends FormControl {
 
 const Textfield = (props: Props) => {
   const {
-    placeholder, type = 'text', id, name, disabled, onChange, label, required, onBlur,
+    placeholder,
+    type = 'text',
+    id,
+    name,
+    disabled,
+    onChange,
+    label,
+    required,
+    onBlur,
+    defaultValue,
   } = props;
-
-  // const [touched, setTouched] = useState(false);
-  // const [valid, setValid] = useState(false);
 
   return (
     <div className={classNames(styles.Textfield)}>
@@ -38,6 +44,7 @@ const Textfield = (props: Props) => {
         onChange={onChange && ((e) => onChange(e.target.value))}
         onBlur={onBlur}
         required={required}
+        defaultValue={defaultValue}
       />
     </div>
   );

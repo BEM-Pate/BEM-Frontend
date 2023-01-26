@@ -2,9 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './FormularStepper.module.scss';
 import Headline from '../Headline/Headline';
+import { Validator } from '../../helpers/validators';
 
 interface Props {
   title: string;
+  // eslint-disable-next-line react/no-unused-prop-types
+  validation?: { value: any, validation: Validator[] }[];
   active?: boolean;
   children?: React.ReactNode;
 }
