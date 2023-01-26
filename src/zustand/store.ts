@@ -75,7 +75,7 @@ export const useZustand = create<store>()(
             },
             setUser: (data: any) => {
                 console.log(data)
-                set({ user:data.account })
+                set({ user: {...data.account, token: data.token} })
                 set({token: data.token})
                 set({
                     socketConfig: {
