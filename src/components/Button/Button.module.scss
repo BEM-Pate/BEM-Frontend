@@ -32,6 +32,35 @@
     text-decoration: underline;
   }
 
+  &.setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-body-bg-white);
+    color: var(--color-black);
+    width: 100%;
+    text-align: unset;
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 16px;
+    border: 2px solid var(--color-body-bg-white);
+    box-shadow: none;
+    position: relative;
+    >div {
+      display:flex;
+      align-items: center;
+      height: 50%;
+      img {
+        margin-right: 16px;
+        height: 100%;
+      }
+    }
+    img {
+      height: 50%;
+    }
+  }
+
   &:disabled {
     opacity: 0.36;
   }

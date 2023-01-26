@@ -1,21 +1,77 @@
-@import '../../../styles/mixins.module';
+@import "../../../styles/mixins.module";
 
 .Settings {
-    &Profile{
-        @include page;
-        padding: 16px;
-        row-gap: 8px;
+  &Header {
+    padding: 24px;
+    height: 45vh;
+    width: 100%;
+    background-color: var(--color-body-bg-white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50px;
+    }
+    &HeadlineName {
+      color: var(--color-black);
+      margin: 0;
+    }
+    &HeadlineLocation {
+      color: var(--color-black);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 140%;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    &Profile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 16px;
+      width: 100%;
+      background-color: var(--color-primary);
+      padding: 14px;
+      button {
+        height: 36px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 140%;
+        white-space: nowrap;
+      }
+      &Status {
+        width: 50%;
+        display: flex;
         align-items: center;
-        background-color: var(--color-primary-darker);
-        &Picture {
-            border-radius: 50%;
-            height: 100px;
+        span {
+            margin-right: 16px;
+          background-color: white;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 250%;
+          text-align: center;
+          border-radius: 24px;
+          padding: 5px;
+          color: var(--color-primary-darker);
         }
-        &Title{
-            color: var(--color-white);
+        p {
+          margin: 0px;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 135%;
+          color: var(--color-white);
         }
+      }
     }
-    &Preferences {
-        padding: 16px;
-    }
+  }
+  &Buttons {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+  }
 }

@@ -10,23 +10,21 @@ import Search from './components/Container/Search/Search';
 import Groups from './components/Container/Groups/Groups';
 import Profile from './components/Container/Profile/Profile';
 import Messages from './components/Container/Messages/Messages';
-import TopNavigationBar from './components/TopNavigationBar/TopNavigationBar';
 import LoginPage from './pages/LoginPage/LoginPage';
 import useSessionStorage from './helpers/useSessionStorage';
 import OnboardingSeeker from './pages/OnboardingPages/OnboardingSeeker/OnboardingSeeker';
 import OnboardingPate from './pages/OnboardingPages/OnboardingPate/OnboardingPate';
 import OnboardingSHG from './pages/OnboardingPages/OnboardingSHG/OnboardingSHG';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import Button from './components/Button/Button';
 import Settings from './components/Container/Settings/Settings';
 import ChatRoom from './components/Container/Messages/Chatroom';
-import { useZustand } from './zustand/store';
+import PateProfile from './components/Container/Search/UserProfile/PateProfile';
+import BetroffenerProfile from "./components/Container/Search/UserProfile/BetroffenerProfile";
 
 const App = () => {
   const [userData, setUserData] = useSessionStorage('userData', null);
   const navigate = useNavigate();
   const location = useLocation();
-  const route = useZustand((state) => state.route);
 
   const isBaseDataVerified = useCallback(
     () => userData !== null && userData?.account?.isBaseDataVerified,
@@ -44,8 +42,8 @@ const App = () => {
       return;
     }
 
-    if ((path.startsWith('/register') || path.startsWith('/login')) 
-      && isSignedIn() 
+    if ((path.startsWith('/register') || path.startsWith('/login'))
+      && isSignedIn()
       && isBaseDataVerified()) {
       navigate('/dashboard/profile');
       return;
@@ -61,15 +59,8 @@ const App = () => {
     }
   }, [isBaseDataVerified, isSignedIn, location, navigate, userData]);
 
-  const logout = useCallback(() => {
-    setUserData(null);
-    navigate('/login');
-  }, [navigate, setUserData]);
-
   return (
     <>
-      {!route?.includes('chatroom') && <TopNavigationBar />}
-      {userData && <Button onClick={logout}>Logout</Button>}
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path="login" element={<LoginPage setUserData={setUserData} />} />
@@ -90,12 +81,15 @@ const App = () => {
         </Route>
         <Route element={<DashboardPage />}>
           <Route path="dashboard">
-            <Route path="chatroom/:id" element={<ChatRoom />} />
-            <Route path="search" element={<Search userData={userData} />} />
-            <Route path="messages" element={<Messages />} />
-            <Route path="groups" element={<Groups />} />
-            <Route path="profile" element={<Profile userData={userData} />} />
-            <Route path="settings" element={<Settings userData={userData} />} />
+            <Route path="dashboard">
+              <Route path="chatroom/:id" element={<ChatRoom />} />
+              <Route path="search" element={<Search userData={userData} />} />
+              <Route path="search/user/:id" element={userData?.role === 'normal_user' ? <PateProfile userData={userData} /> : <BetroffenerProfile userData={userData} />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="groups" element={<Groups />} />
+              <Route path="settings" element={<Settings userData={userData} />} />
+              <Route path="settings/profile" element={<Profile userData={userData} />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

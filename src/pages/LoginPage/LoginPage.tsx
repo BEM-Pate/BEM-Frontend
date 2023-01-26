@@ -82,7 +82,7 @@ const LoginPage = (props: Props) => {
         if (res.status === 200) {
           setUserData(res.data);
           setUser(res.data);
-          navigate('/');
+          navigate('/dashboard/groups');
         }
       }).finally(() => {
         setRequesting(false);

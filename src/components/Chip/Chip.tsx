@@ -9,14 +9,17 @@ interface Props {
   className?: string | undefined;
   children?: React.ReactNode;
   onClick?: (e: any) => void;
+  toggleAble?: boolean;
 }
 
 const Chip = (props: Props) => {
-  const { emoji, id, selected, className, children, onClick } = props;
+  const { emoji, id, selected, className, children, onClick, toggleAble = true } = props;
   const [isSelected, setIsSelected] = useState<boolean>(selected!);
 
   const handleClick = () => {
+   if(toggleAble) {
     setIsSelected(!isSelected);
+   }
     if (onClick) {
       onClick(id);
     }
