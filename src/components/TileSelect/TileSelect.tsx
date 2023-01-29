@@ -16,20 +16,20 @@ const TileSelect = (props: Props) => {
     id, options, multiple, onChange,
   } = props;
 
-  const [selected, setSelected] = useState<FormOption | FormOption[] | null>(multiple ? [] : null);
+  const [selected, setSelected] = useState<string | string[] | null>(multiple ? [] : null);
 
-  const change = useCallback((e: MouseEvent<HTMLButtonElement>, value: FormOption) => {
+  const change = useCallback((e: MouseEvent<HTMLButtonElement>, newValue: string) => {
     e.preventDefault();
     if (multiple) {
-      const selectedOptions = selected as FormOption[];
+      const selectedOptions = selected as string[];
 
-      if (selectedOptions.some((o) => o.value === value.value)) {
-        setSelected([...selectedOptions].filter((o) => o.value !== value.value));
+      if (selectedOptions.some((o) => o === newValue)) {
+        setSelected([...selectedOptions].filter((o) => o !== newValue));
       } else {
-        setSelected([...selectedOptions, value]);
+        setSelected([...selectedOptions, newValue]);
       }
     } else {
-      setSelected(value);
+      setSelected(newValue);
     }
   }, [multiple, selected]);
 
@@ -45,18 +45,18 @@ const TileSelect = (props: Props) => {
     if (onChange) {
       onChange(selected);
     }
-  }, [selected]);
+  }, [onChange, selected]);
 
   return (
     <div id={id} className={classNames(styles.TileSelect)}>
       {options.map((option, i) => (
         <button
-          onClick={(e) => change(e, option)}
+          onClick={(e) => change(e, option.value)}
           key={i}
           className={classNames(styles.TileSelectTile, {
             [styles.selected]: multiple
-              ? (selected as FormOption[]).some((o) => o.value === option.value)
-              : (selected as FormOption)?.value === option.value,
+              ? (selected as string[]).some((o) => o === option.value)
+              : (selected as string) === option.value,
           })}
         >
           <div className={classNames(styles.TileSelectTileInner)}>
