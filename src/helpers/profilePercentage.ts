@@ -6,7 +6,6 @@ import {
 } from "../util/types";
 
 const profilePercentage = (profile: PateData | UserData): number => {
-    console.log(profile);
   const baseData = [
     "firstName",
     "lastName",

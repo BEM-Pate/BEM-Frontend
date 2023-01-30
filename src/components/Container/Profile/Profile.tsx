@@ -52,7 +52,7 @@ const Profile = (props: Props) => {
     const setUpPage = async () => {
       const data = await API.getBaseUserData(userData.token);
       const avatar = await API.getUserAvatar(
-        userData.account.baseUserData.account
+        userData.baseUserData.account
       );
       const diseases = await API.getEnums("diseases");
       setDiseases(diseases);
