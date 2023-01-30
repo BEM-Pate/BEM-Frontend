@@ -1,6 +1,6 @@
 @import "src/styles/variables.module";
 
-.RadioList {
+.CheckboxList {
   &Label {
     @include input-label;
 
@@ -21,7 +21,6 @@
       align-items: center;
       background-color: var(--color-white);
       border: 1px solid transparent;
-      border-radius: 50%;
       display: inline-flex;
       flex: 0 0 auto;
       height: 24px;
@@ -32,7 +31,6 @@
 
       &::before {
         background-color: var(--color-primary);
-        border-radius: 50%;
         display: inline-block;
         content: '';
         height: 0;

@@ -12,7 +12,7 @@ import Validators, { Validator } from '../../helpers/validators';
 
 interface Props {
   dataLabels: any;
-  dataFields: any;
+  dataFields: { [s: string]: any };
   submitAction: () => void;
   children?: React.ReactNode;
 }
@@ -35,7 +35,7 @@ const FormularStepper = (props: Props) => {
     if (currentStep <= Children.count(children)) {
       setCurrentStep(currentStep + 1);
     }
-  }, [currentStep]);
+  }, [children, currentStep]);
 
   useEffect(() => {
     const validators = ((Children.toArray(children)[currentStep - 1] as any)
@@ -46,7 +46,7 @@ const FormularStepper = (props: Props) => {
     );
 
     setCurrentStepIsValid(valid);
-  }, [currentStep, children, dataFields]);
+  }, [currentStep, children]);
 
   const submit = async () => {
     setIsSubmitting(true);
@@ -77,18 +77,13 @@ const FormularStepper = (props: Props) => {
         >
           <Headline headline="h2">Summary</Headline>
           <div className={classNames(styles.FormularDataTable)}>
-            {Object.entries(dataFields).map(([key, value]) => (
+            {Object.entries(dataFields).map(([fieldName, fieldValue]) => (
               <div className={classNames(styles.FormularDataTableRow)}>
                 <span className={classNames(styles.FormularDataTableKey)}>
-                  {dataLabels[key] || key}
+                  {dataLabels[fieldName] || fieldName}
                 </span>
                 <span className={classNames(styles.FormularDataTableValue)}>
-                  {/* eslint-disable-next-line no-nested-ternary */}
-                  {typeof value === 'string'
-                    ? value
-                    : Array.isArray(value)
-                      ? value.join(', ')
-                      : '???'}
+                  {fieldValue}
                 </span>
               </div>
             ))}

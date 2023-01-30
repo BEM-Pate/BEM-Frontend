@@ -4,7 +4,7 @@ import {
   Routes, Route, useNavigate, useLocation,
 } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
-import RegisterUserPage from './pages/RegisterSeekerPage/RegisterUserPage';
+import RegisterUserPage from './pages/RegisterUserPage/RegisterUserPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import Search from './components/Container/Search/Search';
 import Groups from './components/Container/Groups/Groups';
@@ -20,6 +20,7 @@ import ChatRoom from './components/Container/Messages/Chatroom';
 import PateProfile from './components/Container/Search/UserProfile/PateProfile';
 import BetroffenerProfile from "./components/Container/Search/UserProfile/BetroffenerProfile";
 import {useZustand} from "./zustand/store";
+import RegisterPreferencesPage from "./pages/RegisterPreferencesPage/RegisterPreferencesPage";
 
 const App = () => {
   const navigate = useNavigate();
@@ -33,6 +34,10 @@ const App = () => {
 
   const isSignedIn = useCallback(() => userData !== null, [userData]);
 
+  const hasPreferencesSet = useCallback(
+    () => userData !== null && userData?.isMeetingPreferencesVerified,
+    [userData]);
+
   // Authentication
   useEffect(() => {
     const path = location.pathname;
@@ -44,7 +49,8 @@ const App = () => {
 
     if ((path.startsWith('/register') || path.startsWith('/login'))
       && isSignedIn()
-      && isBaseDataVerified()) {
+      && isBaseDataVerified()
+      && hasPreferencesSet()) {
       navigate('/');
       return;
     }
@@ -54,10 +60,18 @@ const App = () => {
       return;
     }
 
-    if (path === '/register/user' && !isSignedIn()) {
+    if (isSignedIn()
+      && isBaseDataVerified()
+      && hasPreferencesSet()
+      && path === '/register/preferences') {
+      navigate('/');
+      return;
+    }
+
+    if ((path === '/register/user' || path === '/register/preferences') && !isSignedIn()) {
       navigate('/login');
     }
-  }, [isBaseDataVerified, isSignedIn, location, navigate, userData]);
+  }, [hasPreferencesSet, isBaseDataVerified, isSignedIn, location, navigate, userData]);
 
   return (
     <>
@@ -69,7 +83,8 @@ const App = () => {
         <Route path="onboardingshg" element={<OnboardingSHG />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="register">
-          <Route path="user" element={<RegisterUserPage />} />
+          <Route path="user" element={<RegisterUserPage redirectOnSuccess="/" />} />
+          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/"/>} />
         </Route>
         <Route element={<DashboardPage />}>
             <Route path="dashboard">
