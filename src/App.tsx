@@ -26,7 +26,6 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const userData = useZustand((state) => state.user);
-
   const isBaseDataVerified = useCallback(
     () => userData !== null && userData?.isBaseDataVerified,
     [userData],
@@ -41,8 +40,8 @@ const App = () => {
   // Authentication
   useEffect(() => {
     const path = location.pathname;
-
     if (path.startsWith('/dashboard') && !isSignedIn()) {
+      console.log('redirecting to login');
       navigate('/login');
       return;
     }
@@ -88,10 +87,10 @@ const App = () => {
         </Route>
         <Route element={<DashboardPage />}>
             <Route path="dashboard">
-              <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="search" element={<Search userData={userData} />} />
-              <Route path="search/user/:id" element={userData?.role === 'normal_user' ? <PateProfile userData={userData} /> : <BetroffenerProfile userData={userData} />} />
+              <Route path="search/user/:id" element={userData?.baseUserData?.role === 'normal_user' ? <PateProfile userData={userData} /> : userData?.baseUserData?.role === 'pate' ? <BetroffenerProfile userData={userData}  /> : ("<Bug>: Role error")}  />
               <Route path="messages" element={<Messages />} />
+              <Route path="chatroom/:id" element={<ChatRoom />} />
               <Route path="groups" element={<Groups />} />
               <Route path="settings" element={<Settings userData={userData} />} />
               <Route path="settings/profile" element={<Profile userData={userData} />} />

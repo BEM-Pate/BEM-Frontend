@@ -3,7 +3,6 @@ import ChatBox from "./ChatBox"
 import {useEffect, useRef, useState} from "react";
 import {socket, useZustand} from "../../../zustand/store";
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 export default function ActiveChat({room, targetedUser}: { room: any, targetedUser: any }) {
     const [show, setShow] = useState(false);
@@ -14,9 +13,14 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     const elementRef = useRef(null)
     const lastMessage = room.messages[room.messages.length - 1]
 
+    useEffect(() => {
+        if (room && socket) {
+            console.log("oke")
+            socket.emit('check-available-status-in-room', {roomId: room._id})
+        }
+    },[])
 
     useEffect(() => {
-        console.log('')
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
     }, [room.messages.length, lastMessage.seen.length])
@@ -161,7 +165,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
 
     }}>
         <BackHeader
-            targetedUser={targetedUser}
+            targetedUser={targetedUser} room={room}
         />
 
         {/* <h1>{baseUserData.firstName} {baseUserData.lastName}</h1> */}

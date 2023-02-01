@@ -18,24 +18,31 @@ const DashboardPage = () => {
     const handleShow = () => setShow(true);
     const [pate, setPate] = useState<any>({});
     const navigate = useNavigate();
+    const [isSocketSet, setIsSocketSet] = useState(socket !== null);
 
     useEffect(() => {
+        console.log("here")
         if (!socket) return
-        if (chatRooms?.length === 0) return
 
+        console.log("socket set!")
         socket.removeAllListeners()
-
-        for (const chatroom of chatRooms) {
-            console.log('joining chatroom')
-            socket.emit('join-chatroom', {roomId: chatroom._id})
-            socket.emit('check-available-status-in-room', {roomId: chatroom._id})
+        if(chatRooms.length>0) {
+            for (const chatroom of chatRooms) {
+                console.log('joining chatroom')
+                socket.emit('join-chatroom', {roomId: chatroom._id})
+                socket.emit('check-available-status-in-room', {roomId: chatroom._id})
+            }
         }
+        socket.on("connect", () => {
+            console.log("socket server connected")
+            })
 
         socket.on('new-message', ({roomId, messageObj}) => {
             setChatRoom(roomId, messageObj)
         })
 
         socket.on('available-clients', (data) => {
+            console.log("set available clients")
             setOnlineUsersInRooms(data)
         })
 
@@ -44,10 +51,24 @@ const DashboardPage = () => {
         })
 
         socket.on('user-disconnected', (data) => {
-            console.log(`user is offline: ${data.userId}}`)
-            let usersInRoom = onlineUsersInRooms[data.roomId]
-            const availableClients = usersInRoom.filter((id: any) => id !== data.userId)
-            setOnlineUsersInRooms({availableClients, roomId: data.roomId})
+            console.log(`user is offline: ${data.userId}`)
+            // let usersInRoom = onlineUsersInRooms[data.roomId]
+            // const availableClients = usersInRoom.filter((id: any) => id !== data.userId)
+            // setOnlineUsersInRooms({availableClients, roomId: data.roomId})
+            socket?.emit('check-available-status-in-room', {roomId: data.roomId})
+        })
+
+        socket.on('user-connected', (data) => {
+            if(chatRooms.length === 0) return
+            for (const chatroom of chatRooms) {
+                // const chatroomId = chatroom._id
+                // if (onlineUsersInRooms[chatroomId] && !onlineUsersInRooms[chatroomId].includes(data.account)) {
+                //     let availableClients = onlineUsersInRooms[chatroomId]
+                //     availableClients.push(data.account)
+                //     setOnlineUsersInRooms({availableClients, roomId: chatroomId})
+                // }
+                socket?.emit('check-available-status-in-room', {roomId: chatroom._id})
+            }
         })
 
         socket.on('notify-contact-request', (data) => {
@@ -63,13 +84,19 @@ const DashboardPage = () => {
             handleShow()
         })
 
+        socket.on('new-chatroom',() => {
+            console.log('new-chatroom')
+            fetchChatroom()
+        })
 
-    }, [chatRooms, socket])
+    }, [socket,chatRooms,isSocketSet])
 
     useEffect(() => {
         if (socketConfig && !socket) {
             initiliazeSocket(socketConfig)
+            setIsSocketSet(true)
         }
+
 
     }, [socketConfig])
 

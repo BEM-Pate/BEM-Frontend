@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import BackHeader from "./BackHeader";
 import ChatBox from "./ChatBox";
-import {useZustand} from "../../../zustand/store";
+import {socket, useZustand} from "../../../zustand/store";
+import {useEffect} from "react";
 
 export default function LandingChat({ room, targetedUser }: { room: any, targetedUser: any }) {
     const baseUserData = targetedUser.baseUserData
@@ -10,6 +11,14 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
     const b64 = btoa(
         baseUserData.avatar.data.data.reduce((data: any, byte: any) => data + String.fromCharCode(byte), '')
     )
+
+    useEffect(() => {
+        if (room && socket) {
+            console.log("oke")
+            socket.emit('check-available-status-in-room', {roomId: room._id})
+        }
+    },[])
+
     const checkIfUserIsOnline = (userData: any) => {
         for (const room in onlineUsersInRooms) {
             if(onlineUsersInRooms.hasOwnProperty(room)){
@@ -62,7 +71,9 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
 
             }}
         >
-            <BackHeader/>
+            <BackHeader
+                targetedUser={targetedUser} room={room}
+            />
 
             <div style={{
                 flex: '1',
