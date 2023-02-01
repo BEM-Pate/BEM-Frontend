@@ -3,7 +3,6 @@ import ChatBox from "./ChatBox"
 import {useEffect, useRef, useState} from "react";
 import {socket, useZustand} from "../../../zustand/store";
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 export default function ActiveChat({room, targetedUser}: { room: any, targetedUser: any }) {
     const [show, setShow] = useState(false);
@@ -13,7 +12,6 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
     const lastMessage = room.messages[room.messages.length - 1]
-
 
     useEffect(() => {
         //@ts-ignore

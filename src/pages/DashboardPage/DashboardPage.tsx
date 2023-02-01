@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {Outlet, useLocation} from 'react-router-dom';
 import styles from './DashboardPage.module.scss';
 import BottomNavigtionBar from '../../components/BottomNavigationBar/BottomNavigtionBar';
-import {getSocket, initiliazeSocket, socket, SOCKET_URL, useZustand} from '../../zustand/store';
+import {initiliazeSocket, socket, SOCKET_URL, useZustand} from '../../zustand/store';
 import {Modal} from "react-bootstrap";
 import Button from "../../components/Button/Button";
 import request_chat from "../../images/icons/ui/request_chat.svg";
@@ -18,8 +18,10 @@ const DashboardPage = () => {
     const handleShow = () => setShow(true);
     const [pate, setPate] = useState<any>({});
     const navigate = useNavigate();
+    const [isSocketSet, setIsSocketSet] = useState(socket !== null);
 
     useEffect(() => {
+        console.log("here")
         if (!socket) return
 
         console.log("socket set!")
@@ -40,6 +42,7 @@ const DashboardPage = () => {
         })
 
         socket.on('available-clients', (data) => {
+            console.log("set available clients")
             setOnlineUsersInRooms(data)
         })
 
@@ -86,11 +89,12 @@ const DashboardPage = () => {
             fetchChatroom()
         })
 
-    }, [chatRooms, socket])
+    }, [socket,chatRooms,isSocketSet])
 
     useEffect(() => {
         if (socketConfig && !socket) {
             initiliazeSocket(socketConfig)
+            setIsSocketSet(true)
         }
 
 

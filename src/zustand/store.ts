@@ -49,7 +49,6 @@ export const initiliazeSocket = (
     console.log('initializing socket')
     socket = io(SOCKET_URL, socketConfig)
 }
-export const getSocket = () => socket
 
 export const useZustand = create<store>()(
     persist(
@@ -151,6 +150,7 @@ export const useZustand = create<store>()(
                 let onlineUsersInRooms = get().onlineUsersInRooms;
                 onlineUsersInRooms[roomId] = availableClients
                 set({ onlineUsersInRooms: onlineUsersInRooms })
+                console.log(get().onlineUsersInRooms)
             }
         }),
         {
