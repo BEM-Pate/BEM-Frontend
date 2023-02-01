@@ -46,7 +46,7 @@ const Dropdown = (props: Props) => {
 
   useEffect(() => {
     if (onChange) onChange(value);
-  }, [value]);
+  }, [onChange, value]);
 
   const toggleList = useCallback((e: any) => {
     e.preventDefault();
@@ -102,6 +102,7 @@ const Dropdown = (props: Props) => {
             { [styles.DropdownValueEmpty]: isEmpty() },
           )}
           onClick={(e) => toggleList(e)}
+          disabled={disabled}
         >
           {options[options.findIndex((option) => option.value === value)]?.label || 'Please select...'}
           <img
@@ -119,6 +120,7 @@ const Dropdown = (props: Props) => {
               )}
               key={index}
               onClick={(e) => updateValue(e, option.value)}
+              disabled={disabled}
             >
               {option.label}
             </button>
