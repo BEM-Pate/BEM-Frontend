@@ -94,6 +94,7 @@ const Search = (props: Props) =>
     const [diseases, setDiseases] = useState<string[]>([]);
 
     useEffect(() => {
+        if (userData === null) return
         axios
             .get(`${API_ADDRESS}/user/userdata`, {
                 headers: {
@@ -133,7 +134,7 @@ const Search = (props: Props) =>
                     setDiseases(res.data);
                 }
             });
-    }, []);
+    }, [userData]);
 
     return (
         <div className={classNames(styles.Search)}>

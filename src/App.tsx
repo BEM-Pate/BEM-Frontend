@@ -85,8 +85,8 @@ const App = () => {
           <Route path="user" element={<RegisterUserPage redirectOnSuccess="/" />} />
           <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/"/>} />
         </Route>
-        <Route element={<DashboardPage />}>
-            <Route path="dashboard">
+        <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="dashboard">
               <Route path="search" element={<Search userData={userData} />} />
               <Route path="search/user/:id" element={userData?.baseUserData?.role === 'normal_user' ? <PateProfile userData={userData} /> : userData?.baseUserData?.role === 'pate' ? <BetroffenerProfile userData={userData}  /> : ("<Bug>: Role error")}  />
               <Route path="messages" element={<Messages />} />
@@ -95,7 +95,6 @@ const App = () => {
               <Route path="settings" element={<Settings userData={userData} />} />
               <Route path="settings/profile" element={<Profile userData={userData} />} />
             </Route>
-        </Route>
       </Routes>
     </>
   );
