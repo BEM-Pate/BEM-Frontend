@@ -14,6 +14,13 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     const lastMessage = room.messages[room.messages.length - 1]
 
     useEffect(() => {
+        if (room && socket) {
+            console.log("oke")
+            socket.emit('check-available-status-in-room', {roomId: room._id})
+        }
+    },[])
+
+    useEffect(() => {
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
     }, [room.messages.length, lastMessage.seen.length])
