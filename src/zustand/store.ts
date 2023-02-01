@@ -49,7 +49,7 @@ export const initiliazeSocket = (
     console.log('initializing socket')
     socket = io(SOCKET_URL, socketConfig)
 }
-
+export const getSocket = () => socket
 
 export const useZustand = create<store>()(
     persist(
@@ -148,7 +148,7 @@ export const useZustand = create<store>()(
             onlineUsersInRooms: [],
             setOnlineUsersInRooms: (obj: any) => {
                 const {roomId, availableClients} = obj
-                const onlineUsersInRooms = get().onlineUsersInRooms;
+                let onlineUsersInRooms = get().onlineUsersInRooms;
                 onlineUsersInRooms[roomId] = availableClients
                 set({ onlineUsersInRooms: onlineUsersInRooms })
             }

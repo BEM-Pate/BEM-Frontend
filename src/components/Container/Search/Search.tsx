@@ -14,6 +14,7 @@ import getEmoji from "../../../helpers/emoji";
 import map_placeholder from "../../../images/map_placeholder.png"
 import {useZustand} from "../../../zustand/store";
 import RequestedContactCard from "./ResultCard/RequestedContactCard";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     userData: any;
@@ -86,6 +87,7 @@ const ResultsOfPate = (props: ContactRequest) => {
 
 const Search = (props: Props) =>
 {
+
     const {userData} = props;
     const [matches, setMatches] = useState<Match[]>();
     const [userAttributes, setUserAttributes] = useState<any>();
@@ -105,18 +107,20 @@ const Search = (props: Props) =>
                 }
             });
 
-        axios
-            .get(`${API_ADDRESS}/match/pate`, {
-                headers: {
-                    accept: "application/json",
-                    Authorization: `Bearer ${userData.token}`,
-                },
-            })
-            .then((res) => {
-                if (res.status === 200) {
-                    setMatches(res.data);
-                }
-            });
+        if(userData?.baseUserData?.role === "normal_user") {
+            axios
+                .get(`${API_ADDRESS}/match/pate`, {
+                    headers: {
+                        accept: "application/json",
+                        Authorization: `Bearer ${userData.token}`,
+                    },
+                })
+                .then((res) => {
+                    if (res.status === 200) {
+                        setMatches(res.data);
+                    }
+                });
+        }
 
         axios
             .get(`${API_ADDRESS}/get/enums/diseases`, {

@@ -62,7 +62,9 @@ export default function LandingChat({ room, targetedUser }: { room: any, targete
 
             }}
         >
-            <BackHeader/>
+            <BackHeader
+                targetedUser={targetedUser} room={room}
+            />
 
             <div style={{
                 flex: '1',

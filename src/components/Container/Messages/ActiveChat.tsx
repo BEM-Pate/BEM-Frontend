@@ -16,7 +16,6 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
 
 
     useEffect(() => {
-        console.log('')
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
     }, [room.messages.length, lastMessage.seen.length])
@@ -161,7 +160,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
 
     }}>
         <BackHeader
-            targetedUser={targetedUser}
+            targetedUser={targetedUser} room={room}
         />
 
         {/* <h1>{baseUserData.firstName} {baseUserData.lastName}</h1> */}

@@ -10,6 +10,7 @@ const Messages = () => {
     const navigate = useNavigate();
 
     const [me, chatrooms, fetchChatroom, contacts, setRoute, onlineUsersInRooms] = useZustand((state) => [state.user, state.chatrooms, state.fetchChatroom, state.contacts, state.setCurrentRoute, state.onlineUsersInRooms])
+    console.log('onlineUsersInRooms', onlineUsersInRooms)
     useEffect(() => {
             fetchChatroom();
         },
