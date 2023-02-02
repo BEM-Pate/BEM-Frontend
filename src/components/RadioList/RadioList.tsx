@@ -13,12 +13,15 @@ const RadioList = (props: RadioListProps) => {
   } = props;
   return (
     <div className={classNames(styles.RadioList)}>
-      <span className={styles.RadioListLabel}>
-        {title}
-        {required && <span className={classNames(styles.RadioListLabelRequired)}>*</span>}
-      </span>
+      {title && (
+        <span className={styles.RadioListLabel}>
+          {title}
+          {required && <span className={classNames(styles.RadioListLabelRequired)}>*</span>}
+        </span>
+      )}
+
       {options.map(({ value, label }, i) => (
-        <div className={classNames(styles.RadioListOption)}>
+        <div className={classNames(styles.RadioListOption)} key={i}>
           <input
             type="radio"
             value={value}

@@ -22,6 +22,7 @@ import BetroffenerProfile from "./components/Container/Search/UserProfile/Betrof
 import {useZustand} from "./zustand/store";
 import RegisterPreferencesPage from "./pages/RegisterPreferencesPage/RegisterPreferencesPage";
 import Category from './components/Container/Search/Category/Category';
+import RegisterPatePage from "./pages/RegisterPatePage/RegisterPatePage";
 
 const App = () => {
   const navigate = useNavigate();
@@ -38,6 +39,10 @@ const App = () => {
     () => userData !== null && userData?.isMeetingPreferencesVerified,
     [userData]);
 
+  const isPate = useCallback(
+    () => userData !== null && userData?.baseUserData?.processBEM === 'DONE',
+    [userData]);
+
   // Authentication
   useEffect(() => {
     const path = location.pathname;
@@ -47,11 +52,16 @@ const App = () => {
       return;
     }
 
+    if (path === '/register/pate' && isPate()) {
+      navigate('/dashboard/search');
+      return;
+    }
+
     if ((path.startsWith('/register') || path.startsWith('/login'))
       && isSignedIn()
       && isBaseDataVerified()
       && hasPreferencesSet()) {
-      navigate('/');
+      navigate('/dashboard/search');
       return;
     }
 
@@ -64,14 +74,14 @@ const App = () => {
       && isBaseDataVerified()
       && hasPreferencesSet()
       && path === '/register/preferences') {
-      navigate('/');
+      navigate('/dashboard/search');
       return;
     }
 
     if ((path === '/register/user' || path === '/register/preferences') && !isSignedIn()) {
       navigate('/login');
     }
-  }, [hasPreferencesSet, isBaseDataVerified, isSignedIn, location, navigate, userData]);
+  }, [hasPreferencesSet, isBaseDataVerified, isPate, isSignedIn, location, navigate, userData]);
 
   return (
     <>
@@ -84,7 +94,8 @@ const App = () => {
         <Route path="register" element={<RegisterPage />} />
         <Route path="register">
           <Route path="user" element={<RegisterUserPage redirectOnSuccess="/" />} />
-          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/"/>} />
+          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/" />} />
+          <Route path="pate" element={<RegisterPatePage redirectOnSuccess="/" />} />
         </Route>
         <Route element={<DashboardPage />}>
             <Route path="dashboard">

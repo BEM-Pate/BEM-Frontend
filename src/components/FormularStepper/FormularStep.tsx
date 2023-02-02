@@ -8,6 +8,8 @@ interface Props {
   title: string;
   // eslint-disable-next-line react/no-unused-prop-types
   validation?: { value: any, validation: Validator[] }[];
+  // eslint-disable-next-line react/no-unused-prop-types
+  nextStepAction?: () => boolean;
   active?: boolean;
   children?: React.ReactNode;
 }

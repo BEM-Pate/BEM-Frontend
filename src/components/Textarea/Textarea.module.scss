@@ -10,17 +10,17 @@
   }
 
   &Input {
-    @include font-sm;
-    font-family: var(--font-family);
-    width: 100%;
-    border: 2px solid var(--color-border);
-    padding: 12px 8px;
-    border-radius: 5px;
+    @include input-text;
+    border: 1.5px solid transparent;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-input);
     display: block;
-    resize: none;
+    min-height: 56px;
+    padding: 16px;
+    width: 100%;
 
-    &.resizable {
-      resize: vertical;
+    &:focus {
+      border-color: var(--color-primary);
     }
   }
 }

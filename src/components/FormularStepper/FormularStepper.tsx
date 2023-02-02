@@ -32,6 +32,11 @@ const FormularStepper = (props: Props) => {
   }, [currentStep]);
 
   const nextStep = useCallback(() => {
+    const nextStepAction = ((Children.toArray(children)[currentStep - 1] as any)
+      ?.props?.nextStepAction ?? (() => true));
+
+    if (!nextStepAction()) return;
+
     if (currentStep <= Children.count(children)) {
       setCurrentStep(currentStep + 1);
     }
@@ -77,8 +82,8 @@ const FormularStepper = (props: Props) => {
         >
           <Headline headline="h2">Summary</Headline>
           <div className={classNames(styles.FormularDataTable)}>
-            {Object.entries(dataFields).map(([fieldName, fieldValue]) => (
-              <div className={classNames(styles.FormularDataTableRow)}>
+            {Object.entries(dataFields).map(([fieldName, fieldValue], i) => (
+              <div className={classNames(styles.FormularDataTableRow)} key={i}>
                 <span className={classNames(styles.FormularDataTableKey)}>
                   {dataLabels[fieldName] || fieldName}
                 </span>
