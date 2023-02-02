@@ -222,7 +222,7 @@ const Search = (props: Props) => {
                     className={classNames(styles.SearchHeadersHeadlineH1)}
                     headline="h1"
                 >
-                    {userAttributes?.baseUserData?.role == "normal_user"
+                    {userAttributes?.baseUserData?.role === "normal_user"
                         ? " BEM-Pate finden"
                         : "BEM-Kontaktanfragen"}
                 </Headline>
@@ -246,13 +246,13 @@ const Search = (props: Props) => {
                 </div>
             </div>
             <>
-                {matches && userAttributes?.baseUserData?.role == "normal_user" ? (
+                {matches && userAttributes?.baseUserData?.role === "normal_user" ? (
                     <Results
                         token={userData.token}
                         paten={matches}
                         userAttributes={userAttributes}
                     />
-                ) : userAttributes?.baseUserData?.role == "pate" ? (
+                ) : userAttributes?.baseUserData?.role === "pate" ? (
                     <ResultsOfPate
                         token={userData.token}
                         userAttributes={userAttributes}
@@ -289,7 +289,7 @@ const Search = (props: Props) => {
                 className={classNames(styles.SearchHeadersHeadlineH2)}
                 headline="h2"
             >
-                {userAttributes?.baseUserData?.role == "normal_user"
+                {userAttributes?.baseUserData?.role === "normal_user"
                     ? "Standorte von BEM-Paten"
                     : "Standorte von BEM-Betroffenen"}
             </Headline>
