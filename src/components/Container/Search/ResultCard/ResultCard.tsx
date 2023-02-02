@@ -42,7 +42,7 @@ const ResultCard = (props: Props) => {
             })
         }
 
-    }, []);
+    }, [match, userAttributes]);
 
     function within7Days(dateString: Date): boolean {
         const diff = new Date().getTime() - new Date(dateString).getTime();

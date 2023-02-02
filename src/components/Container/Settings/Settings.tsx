@@ -11,6 +11,7 @@ import profilePercentage from "../../../helpers/profilePercentage";
 import languages from "../../../images/icons/ui/languages.svg";
 import settings from "../../../images/icons/ui/settings_outline.svg";
 import account from "../../../images/icons/ui/account.svg";
+import LanguageDropdown from "../../LanguageDropdown/LanguageDropdown";
 
 interface Props {
   userData: any;
@@ -45,6 +46,8 @@ const Settings = (props: Props) => {
       setUserAvatar();
     }
   }, [userAttributes]);
+
+  console.log(userData.token)
 
   return (
     <div className={classNames(styles.Settings)}>
@@ -88,6 +91,7 @@ const Settings = (props: Props) => {
       </div>
      </Button>
      </div>
+     <LanguageDropdown ></LanguageDropdown>
     </div>
   );
 };

@@ -5,11 +5,12 @@ import styles from './CheckboxList.module.scss';
 
 interface Props extends FormControl {
   options: FormOption[];
+  className?: any | undefined; 
 }
 
 const CheckboxList = (props: Props) => {
   const {
-    options, name, onChange, label: title, required,
+    options, name, onChange, label: title, required, className
   } = props;
 
   const [value, setValue] = useState<string[]>([]);
@@ -25,7 +26,7 @@ const CheckboxList = (props: Props) => {
   }
 
   return (
-    <div className={classNames(styles.CheckboxList)}>
+    <div className={classNames(styles.CheckboxList, className)}>
       <span className={styles.CheckboxListLabel}>
         {title}
         {required && <span className={classNames(styles.CheckboxListLabelRequired)}>*</span>}
