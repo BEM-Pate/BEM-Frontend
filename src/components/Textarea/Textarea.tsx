@@ -42,7 +42,7 @@ const Textarea = (props: Props) => {
         name={name}
         placeholder={placeholder}
         rows={rows}
-        onChange={onChange && ((e) => onChange(e.target.value))}
+        onChange={onChange && ((e) => onChange(e.target.value.trim()))}
         defaultValue={defaultValue}
       />
     </div>
