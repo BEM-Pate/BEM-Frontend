@@ -22,6 +22,7 @@ import BetroffenerProfile from "./components/Container/Search/UserProfile/Betrof
 import {useZustand} from "./zustand/store";
 import RegisterPreferencesPage from "./pages/RegisterPreferencesPage/RegisterPreferencesPage";
 import Category from './components/Container/Search/Category/Category';
+import RegisterPatePage from "./pages/RegisterPatePage/RegisterPatePage";
 
 const App = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const App = () => {
       && isSignedIn()
       && isBaseDataVerified()
       && hasPreferencesSet()) {
-      navigate('/');
+      //navigate('/');
       return;
     }
 
@@ -84,7 +85,8 @@ const App = () => {
         <Route path="register" element={<RegisterPage />} />
         <Route path="register">
           <Route path="user" element={<RegisterUserPage redirectOnSuccess="/" />} />
-          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/"/>} />
+          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/" />} />
+          <Route path="pate" element={<RegisterPatePage redirectOnSuccess="/" />} />
         </Route>
         <Route element={<DashboardPage />}>
             <Route path="dashboard">

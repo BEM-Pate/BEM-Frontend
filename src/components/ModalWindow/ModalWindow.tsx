@@ -12,7 +12,7 @@ import warningIcon from '../../images/icons/modalwindow/warning.svg';
 
 interface Props {
   isVisible: boolean;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: 'success' | 'error' | 'warning' | undefined;
   headline?: string | undefined;
   text?: string | undefined;

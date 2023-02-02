@@ -27,12 +27,14 @@ const CheckboxList = (props: Props) => {
 
   return (
     <div className={classNames(styles.CheckboxList, className)}>
-      <span className={styles.CheckboxListLabel}>
-        {title}
-        {required && <span className={classNames(styles.CheckboxListLabelRequired)}>*</span>}
-      </span>
+      {title && (
+        <span className={styles.CheckboxListLabel}>
+          {title}
+          {required && <span className={classNames(styles.CheckboxListLabelRequired)}>*</span>}
+        </span>
+      )}
       {options.map(({ value, label }, i) => (
-        <div className={classNames(styles.CheckboxListOption)}>
+        <div className={classNames(styles.CheckboxListOption)} key={i}>
           <input
             type="checkbox"
             value={value}
