@@ -11,7 +11,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     const handleShow = () => setShow(true);
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
-    const lastMessage = room.messages[room.messages.length - 1]
+    const lastMessage = room?.messages[room.messages.length - 1]
 
     useEffect(() => {
         if (room && socket) {
@@ -23,7 +23,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     useEffect(() => {
         //@ts-ignore
         elementRef?.current?.scrollIntoView()
-    }, [room.messages.length, lastMessage.seen.length])
+    }, [room?.messages.length, lastMessage?.seen.length])
 
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     }, [socket, lastMessage])
 
     const objects = []
-    for (let i = 0; i < room.messages.length; i++) {
+    for (let i = 0; i < room?.messages.length; i++) {
         const message = room.messages[i]
         const date = new Date(message.time)
 

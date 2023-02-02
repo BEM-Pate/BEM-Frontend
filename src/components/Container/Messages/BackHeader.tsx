@@ -8,7 +8,7 @@ export default function BackHeader({targetedUser, room}: { targetedUser?: any, r
     const userData = targetedUser?.baseUserData
     const navigate = useNavigate()
     const checkIfUserIsOnline = (userData: any) => {
-        return onlineUsersInRooms[room._id]?.includes(userData?.account);
+        return onlineUsersInRooms[room?._id]?.includes(userData?.account);
     }
     return <>
         <div

@@ -48,7 +48,7 @@ const PateProfile = (props: Props) => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        pendingContacts.includes(id) ?
+        pendingContacts?.includes(id) ?
             setIsPendingContact(true)
             :
             setIsPendingContact(false)
