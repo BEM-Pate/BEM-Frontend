@@ -1,8 +1,62 @@
 .Category {
-    padding: 16px;
-    display: grid;
-    gap: 24px;
-    &Headline {
-        color: var(--color-black);
+background-color: var(--color-body-bg-white);
+  padding: 16px;
+  display: grid;
+  gap: 24px;
+  &Headline {
+    color: var(--color-black);
+  }
+  &List {
+    &Card {
+    padding: 16px 0px ;
+      display: flex;
+      width: 100%;
+      height: 104px;
+      justify-content: space-between;
+      border-bottom: 1px var(--color-border) solid;
+      &Details {
+        display: flex;
+        flex-direction: column;
+        &Headline {
+            font-size: 16px;
+            line-height: 150%;
+            color: var(--color-black);
+            span {
+              color: var(--color-primary);
+            }
+          }
+        &Preview {
+            display: flex;
+            align-items: center;
+            
+          >div {
+            height: 32px;
+            img {
+             border: 2px solid white;
+             margin-right: -8px;
+                border-radius: 32px;
+                height: 100%;
+            }
+            
+          }
+          span {
+            margin-left: 16px;
+            opacity: 0.5;
+        }
+        }
+      }
+      &Icon {
+        background-color: var(--color-white);
+        border-radius: 150px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+
+            height: 45px;
+        }
+      }
     }
+  }
 }
