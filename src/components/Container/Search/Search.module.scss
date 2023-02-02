@@ -57,6 +57,31 @@
         }
     }
 
+    &Filter {
+        padding: 16px 24px;
+        display: grid;
+        gap: 24px;
+        &Headline {
+            color: var(--color-black);
+            text-align: center;
+        }
+        &Subtitle {
+            color: var(--color-black);
+            font-size: 18px;
+        }
+        &Box {
+           display: flex;
+          color: var(--color-body-text-secondary);
+
+        }
+        &Buttons {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: space-between;
+        }
+    }
+
     
 }
 

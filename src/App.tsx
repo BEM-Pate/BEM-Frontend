@@ -21,6 +21,7 @@ import PateProfile from './components/Container/Search/UserProfile/PateProfile';
 import BetroffenerProfile from "./components/Container/Search/UserProfile/BetroffenerProfile";
 import {useZustand} from "./zustand/store";
 import RegisterPreferencesPage from "./pages/RegisterPreferencesPage/RegisterPreferencesPage";
+import Category from './components/Container/Search/Category/Category';
 
 const App = () => {
   const navigate = useNavigate();
@@ -94,6 +95,7 @@ const App = () => {
               <Route path="groups" element={<Groups />} />
               <Route path="settings" element={<Settings userData={userData} />} />
               <Route path="settings/profile" element={<Profile userData={userData} />} />
+              <Route path="category" element={<Category userData={userData} />} />
             </Route>
         </Route>
       </Routes>

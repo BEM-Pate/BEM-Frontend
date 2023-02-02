@@ -12,6 +12,10 @@ const getEmoji = (value: string) :string => {
           return "💥";
         case "FEAR":
           return "⚡️";
+          case "BIPOLAR":
+            return "🧲";
+            case "LONG_COVID":
+              return "🦠";
         default:
           return "🤷‍♀️";
       }

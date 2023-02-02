@@ -38,14 +38,21 @@ const PateProfile = (props: Props) => {
     const [pateAvatar, setUserPateAvatar] = useState<any>(placeholder);
     const [pateData, setPateData] = useState<PateData>();
     const [userAttributes, setUserAttributes] = useState<UserData>();
-    const [setRoute] = useZustand(state => [state.setCurrentRoute]);
+    const [setRoute, pendingContacts] = useZustand(state => [state.setCurrentRoute, state.pendingContacts]);
 
-    const [isPending, setIsPending] = useState<Boolean>(false);
+    const [isPendingContact, setIsPendingContact] = useState<Boolean>(false);
     const [isVerifiedContact, setIsVerifiedContact] = useState<Boolean>();
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        pendingContacts?.includes(id) ?
+            setIsPendingContact(true)
+            :
+            setIsPendingContact(false)
+    }, [pendingContacts])
 
     useEffect(() => {
         const getPateData = async () => {
@@ -55,7 +62,7 @@ const PateProfile = (props: Props) => {
             setUserAttributes(user);
             setUserPateAvatar(avatar);
             setPateData(data as PateData);
-            setIsPending(user.baseUserData.pendingContact.includes(data._id));
+            setIsPendingContact(user.baseUserData.pendingContact.includes(data._id));
             setIsVerifiedContact(user?.baseUserData?.verifiedContact.includes(data?._id));
         };
         getPateData();
@@ -73,7 +80,7 @@ const PateProfile = (props: Props) => {
             ).then((res) => {
                 console.log(res);
                 if (res.status === 200) {
-                    setIsPending(true);
+                    setIsPendingContact(true);
                 }
 
             })
@@ -96,7 +103,8 @@ const PateProfile = (props: Props) => {
                 },
             ).then((res) => {
                 if (res.status === 200) {
-                    setIsPending(false);
+                    setIsVerifiedContact(false);
+                    setIsPendingContact(false)
                     setShow(false)
                 }
             })
@@ -150,7 +158,7 @@ const PateProfile = (props: Props) => {
                                     <span>Befreundet. Hallo sagen!</span>
                                 </Button>
                             ) :
-                                isPending ? (
+                                isPendingContact ? (
                                 <div className={classNames(
                                     styles.UserProfileHeaderContainerDetailsButtonContainer
                                 )}>
@@ -261,7 +269,7 @@ const PateProfile = (props: Props) => {
                     >
                         Standort
                     </Headline>
-                    <img src={map_placeholder} alt="map"></img>
+                    <img src={map_placeholder} alt="map"/>
                 </div>
             </div>
             <Modal caria-labelledby="example-custom-modal-styling-title" show={show} onHide={handleClose} size="lg" centered>

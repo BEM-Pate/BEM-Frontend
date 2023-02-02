@@ -106,9 +106,6 @@ export const useZustand = create<store>()(
                 const users: any[] = []
                 for (const userId of userIds) {
                     const user = (await axios.get(`${BASE_URL}/user/userdata/${userId}`, {
-                        // headers: {
-                        //     Authorization: `Bearer ${get().token}`
-                        // }
                     })).data
                     users.push(user)
                 }
@@ -117,14 +114,13 @@ export const useZustand = create<store>()(
             },
             fetchPendingContacts: () => {
                 console.log('fetching pending contacts')
-                axios.get(`${BASE_URL}/user/userData`, {
+                axios.get(`${BASE_URL}/match/get-pending-contact`, {
                     headers: {
                         Authorization: `Bearer ${get().token}`
                     }
                 }).then((res) => {
-                    set({ pendingContacts: res.data.baseUserData.pendingContact })
-                    // console.log("new length:" + res.data.baseUserData.pendingContact.length)
-                    set({ newContactRequestLength: res.data.baseUserData.pendingContact.length })
+                    set({ pendingContacts: res.data.pendingContact})
+                    set({ newContactRequestLength: res.data.pendingContact.length })
                 })
             },
             setCurrentRoute: (route: string) => {

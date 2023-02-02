@@ -13,7 +13,6 @@
     background-color: var(--color-white);
     color: var(--color-primary-darker);
     border: 2px solid var(--color-primary-darker-transparent);
-    text-transform: lowercase; /* ToDo delete later */
     &Active {
         background-color: var(--color-primary-darker);
         border: 2px solid var(--color-primary-darker);
