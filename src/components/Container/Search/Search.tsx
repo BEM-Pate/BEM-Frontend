@@ -201,6 +201,12 @@ const Search = (props: Props) => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(filterDiseases)
+    applyFilter();
+  }, [filterDiseases])
+
+ 
  
 /* TEMP */
   function handleChipClick(e: string) {
@@ -213,7 +219,7 @@ const Search = (props: Props) => {
         newArray.splice(index, 1);
         setFilterDiseases(newArray);
     }
-    applyFilter();
+    
   }
 
   return (
@@ -277,9 +283,9 @@ const Search = (props: Props) => {
                 id={disease?.value}
                 key={index}
                 onClick={(e) => handleChipClick(e)}
-                selected={userAttributes?.meetingPreference.diseaseConsultation.includes(
+/*                 selected={userAttributes?.meetingPreference.diseaseConsultation.includes(
                   disease.value
-                )}
+                )} */
               >
                 {disease.label}
               </Chip>
