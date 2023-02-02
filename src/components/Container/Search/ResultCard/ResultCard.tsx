@@ -22,6 +22,7 @@ const ResultCard = (props: Props) => {
     const [betroffenerData, setBetroffenerData] = useState<any>(null)
 
     useEffect( () => {
+        console.log("result card")
         if (userAttributes?.baseUserData?.role == "normal_user") {
             const setUserAvatar = async () => {
                 const userAvatar = await API.getUserAvatar(match.account);
