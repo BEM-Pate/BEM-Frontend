@@ -51,11 +51,9 @@
     "modalWindowDefaultHeadline": "Etwas ist schief gelaufen!",
     "modalWindowDefaultText": "Bitte drücke auf OK",
 
-
     "messagesPageHeader": "Nachrichten",
     "messagesPageSubHeader": "Ihre Kontakte",
     "messagesPageMessages": "Ihre Nachrichten",
-
 
     "onboardingPageSeekerHeader": "BEM-Beratung auf Augenhöhe",
     "onboardingPageSeekerDescription": "Finden Sie Antworten zum Thema BEM aufgrund psychischer Beeinträchtigungen",
@@ -124,5 +122,26 @@
 
     "enum_meetings": "Meeting-Präferenzen",
     "enum_meetings_IN_PERSON": "persönlich",
-    "enum_meetings_VIRTUAL": "virtuell"
+    "enum_meetings_VIRTUAL": "virtuell",
+
+    "enum_regions": "Regionen",
+    "enum_regions_BW": "Bayern",
+    "enum_regions_BV": "Baden-Württemberg",
+    "enum_regions_BE": "Berlin",
+    "enum_regions_BB": "Brandenburg",
+    "enum_regions_HB": "Bremen",
+    "enum_regions_HH": "Hamburg",
+    "enum_regions_HE": "Hessen",
+    "enum_regions_NI": "Niedersachsen",
+    "enum_regions_MV": "Mecklemburg-Vorpommern",
+    "enum_regions_NW": "Nordrhein-Westfahlen",
+    "enum_regions_RP": "Rheinland-Pfalz",
+    "enum_regions_SL": "Saarland",
+    "enum_regions_SN": "Sachsen",
+    "enum_regions_ST": "Sachsen-Anhalt",
+    "enum_regions_SH": "Schleßwig-Holstein",
+    "enum_regions_TH": "Thüringen",
+
+    "activeChatDelivered": "versandt",
+    "activeChatRead": "gelesen"
 }

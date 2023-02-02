@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {socket, useZustand} from "../../../zustand/store";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { useTranslation } from "react-i18next";
 
 export default function ActiveChat({room, targetedUser}: { room: any, targetedUser: any }) {
     const [show, setShow] = useState(false);
@@ -13,6 +14,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
     const lastMessage = room.messages[room.messages.length - 1]
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -197,7 +199,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     {/*TODO : Hasan*/}
-                    Delivered: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[0]?.date)}</span>
+                    {t('activeChatDelivered')}: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[0]?.date)}</span>
                 </div>
                 {checkValidDate(new Date(targetedMessage?.seen[1]?.date)) &&
 
@@ -218,7 +220,7 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
                         </defs>
                     </svg>
                     {/*TODO : Hasan*/}
-                    Read: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[1]?.date)}</span></div>
+                    {t('activeChatRead')}: <span style={{marginLeft: "auto"}}>{getTime(targetedMessage?.seen[1]?.date)}</span></div>
 
                 }
                 </Modal.Body>
