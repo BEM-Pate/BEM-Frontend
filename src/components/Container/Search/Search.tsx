@@ -2,17 +2,17 @@ import React, { useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
 import axios from "axios";
 import styles from "./Search.module.scss";
-import { API_ADDRESS } from "../../../helpers/env";
+import {API_ADDRESS} from "../../../helpers/env";
 import ResultCard from "./ResultCard/ResultCard";
-import { BaseUserData, Match, PateData } from "../../../util/types";
+import {BaseUserData, Match, PateData} from "../../../util/types";
 import Headline from "../../Headline/Headline";
 import Button from "../../Button/Button";
 import magnifier from "../../../images/icons/ui/magnifier.svg";
 import filter from "../../../images/icons/ui/filter.svg";
 import Chip from "../../Chip/Chip";
 import getEmoji from "../../../helpers/emoji";
-import map_placeholder from "../../../images/map_placeholder.png";
-import { useZustand } from "../../../zustand/store";
+import map_placeholder from "../../../images/map_placeholder.png"
+import {useZustand} from "../../../zustand/store";
 import RequestedContactCard from "./ResultCard/RequestedContactCard";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
@@ -26,13 +26,13 @@ import { FormOption } from "../../FormularStepper/FormularTypes";
 import LanguageDropdown from "../../LanguageDropdown/LanguageDropdown";
 
 interface Props {
-  userData: any;
+    userData: any;
 }
 
 interface ResultProps {
-  paten: Match[];
-  userAttributes: any;
-  token: string;
+    paten: Match[];
+    userAttributes: any;
+    token: string;
 }
 
 interface ContactRequest {
@@ -181,21 +181,33 @@ const Search = (props: Props) => {
         }
       });
 
-    if (userData?.baseUserData?.role === "normal_user") {
-      axios
-        .get(`${API_ADDRESS}/match/pate`, {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${userData.token}`,
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            setMatches(res.data);
-          }
-        });
-    }
-  }, []);
+        if(userData?.baseUserData?.role === "normal_user") {
+            axios
+                .get(`${API_ADDRESS}/match/pate`, {
+                    headers: {
+                        accept: "application/json",
+                        Authorization: `Bearer ${userData.token}`,
+                    },
+                })
+                .then((res) => {
+                    if (res.status === 200) {
+                        setMatches(res.data);
+                    }
+                });
+        }
+
+        axios
+            .get(`${API_ADDRESS}/get/enums/diseases`, {
+                headers: {
+                    accept: "application/json",
+                },
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    setDiseases(res.data);
+                }
+            });
+    }, []);
 
   console.log(filterData)
 

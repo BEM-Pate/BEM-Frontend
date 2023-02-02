@@ -13,10 +13,16 @@ const DashboardPage = () => {
     const location = useLocation()
     const [fetchPendingContacts, fetchChatroom, setChatRoom, chatRooms, socketConfig, setSeen, setOnlineUsersInRooms, onlineUsersInRooms, setRoute] = useZustand((state) =>
         [state.fetchPendingContacts,state.fetchChatroom, state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms, state.setCurrentRoute])
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showContactAccepted, setShowContactAccepted] = useState(false);
+    const handleAcceptedClose = () => setShowContactAccepted(false);
+    const handleAcceptedShow = () => setShowContactAccepted(true);
+
+    const [showContactRejected, setShowContactRejected] = useState(false);
+    const handleRejectedClose = () => setShowContactRejected(false);
+    const handleRejectedShow = () => setShowContactRejected(true);
     const [pate, setPate] = useState<any>({});
+    const [rejectedPate, setRejectedPate] = useState<any>({});
+    const [reason, setReason] = useState('');
     const navigate = useNavigate();
     const [isSocketSet, setIsSocketSet] = useState(socket !== null);
 
@@ -81,13 +87,22 @@ const DashboardPage = () => {
             console.log('new-pate-matched')
             fetchChatroom()
             setPate(data.pate)
-            handleShow()
+            handleAcceptedShow()
+        })
+
+        socket.on('new-pate-rejected', (data) => {
+            console.log('new-pate-rejected')
+            fetchPendingContacts()
+            setRejectedPate(data.data.user)
+            setReason(data.data.reason)
+            handleRejectedShow()
         })
 
         socket.on('new-chatroom',() => {
             console.log('new-chatroom')
             fetchChatroom()
         })
+
 
     }, [socket,chatRooms,isSocketSet])
 
@@ -107,17 +122,17 @@ const DashboardPage = () => {
             <Outlet/>
             {!location.pathname.includes('chat') && <BottomNavigtionBar/>}
 
-            <Modal caria-labelledby="example-custom-modal-styling-title" show={show} onHide={handleClose} size="lg"
+            <Modal show={showContactAccepted} onHide={handleAcceptedClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Herzlichen Glückwunsch, it's a MATCH !</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Du bist nun in Verbindung
-                        mit {pate?.firstName} {pate?.lastName}</p>
+                        mit <b>{pate?.firstName} {pate?.lastName}</b></p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className={classNames(styles.ModalButton)} onClick={handleClose}>
+                    <Button className={classNames(styles.ModalButton)} onClick={handleAcceptedClose}>
                         Schließen
                     </Button>
                     <Button
@@ -125,10 +140,27 @@ const DashboardPage = () => {
                         onClick={() => {
                             navigate(`/dashboard/chatroom/${pate?.account}`)
                             setRoute(`/dashboard/chatroom/${pate?.account}`)
-                            handleClose()
+                            handleAcceptedClose()
                         }}>
                         <img src={request_chat} alt="add_friend"/>
                         <span> Hallo sagen</span>
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showContactRejected} onHide={handleRejectedClose} size="lg"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Schade! &#128551;</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p><b>{rejectedPate?.firstName} {rejectedPate?.lastName}</b> hat deine Kontakt-Anfrage abgelehnt</p>
+                    <p>Folgender Grund:</p>
+                    <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {reason} "</i></p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className={classNames(styles.ModalButton)} onClick={handleRejectedClose}>
+                        Schließen
                     </Button>
                 </Modal.Footer>
             </Modal>

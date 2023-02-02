@@ -12,8 +12,8 @@ import {useZustand} from "../../zustand/store";
 
 const BottomNavigtionBar = () => {
 
-  const [newContactRequestLength, newUnseenMessageLength] = useZustand((state) =>
-      [state.newContactRequestLength, state.newUnseenMessageLength])
+  const [newContactRequestLength, newUnseenMessageLength, user] = useZustand((state) =>
+      [state.newContactRequestLength, state.newUnseenMessageLength, state.user])
 
   return (
 
@@ -22,8 +22,7 @@ const BottomNavigtionBar = () => {
       <li className={classNames(styles.Elements)}>
         <NavLink to="/dashboard/search" className={({ isActive }) => (isActive ? classNames(styles.Link, styles.ActiveLink) : styles.Link)}>
           <img src={search} alt="search" />
-          {newContactRequestLength > 0 && <span className={classNames(styles.Badge)}>{newContactRequestLength}</span>}
-
+          {(newContactRequestLength > 0 && user?.baseUserData?.role == "pate" ) && <span className={classNames(styles.Badge)}>{newContactRequestLength}</span>}
         </NavLink>
       </li>
       <li>

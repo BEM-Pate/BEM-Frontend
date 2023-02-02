@@ -30,11 +30,11 @@ const RegisterPreferencesPage = (props: Props) => {
   const [userDiseaseConsultation, setUserDiseaseConsultation] = useState<string[]>();
   const [userMeeting, setUserMeeting] = useState<string[]>();
   const [userLocation, setUserLocation] = useState<string>();
-  const [userTime, setUserTime] = useState<string>();
 
   const [supports, setSupports] = useState<FormOption[]>([]);
   const [diseases, setDiseases] = useState<FormOption[]>([]);
   const [meetings, setMeetings] = useState<FormOption[]>([]);
+  const [locations, setLocations] = useState<FormOption[]>([]);
 
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -63,6 +63,24 @@ const RegisterPreferencesPage = (props: Props) => {
           value: s,
           label: t(`enum_meetings_${s}`),
         } as FormOption)));
+        setLocations([
+          'BW',
+          'BV',
+          'BE',
+          'BB',
+          'HB',
+          'HH',
+          'HE',
+          'NI',
+          'MV',
+          'NW',
+          'RP',
+          'SL',
+          'SN',
+          'ST',
+          'SH',
+          'TH',
+        ].map((value) => ({ value: value, label: t(`enum_regions_${value}`)})));
       } catch (e) {
         console.error(e);
       }
@@ -74,13 +92,17 @@ const RegisterPreferencesPage = (props: Props) => {
     if (!userData) return;
 
     try {
-      const registerPreferencesResult = await axios.post(`${API_ADDRESS}/user/register/normalUser/meetingPreference`, {
+      const userMeetingPreferenceData: any = {
         support: userSupport,
         diseaseConsultation: userDiseaseConsultation,
         meeting: userMeeting,
-        location: userLocation,
-        time: userTime,
-      }, {
+      };
+
+      if (userMeeting?.includes('IN_PERSON')) {
+        userMeetingPreferenceData.location = userLocation;
+      }
+
+      const registerPreferencesResult = await axios.post(`${API_ADDRESS}/user/register/normalUser/meetingPreference`, userMeetingPreferenceData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -106,7 +128,6 @@ const RegisterPreferencesPage = (props: Props) => {
     userDiseaseConsultation,
     userMeeting,
     userLocation,
-    userTime,
     token,
     setUserData,
   ]);
@@ -132,7 +153,6 @@ const RegisterPreferencesPage = (props: Props) => {
             (meeting) => t(`enum_meetings_${meeting}`),
           ).join(', '),
           location: userLocation,
-          time: userTime,
         }}
         submitAction={registerPreferences}
       >
@@ -140,7 +160,7 @@ const RegisterPreferencesPage = (props: Props) => {
           title="Bedarf"
           validation={[
             { value: userSupport, validation: [Validators.isArray, Validators.isNotEmpty] },
-            { value: userDiseaseConsultation, validation: [Validators.isArray, Validators.isNotEmpty] },
+            { value: userDiseaseConsultation, validation: userSupport?.includes('DISEASE_CONSULTATION') ? [Validators.isArray, Validators.isNotEmpty] : [Validators.isArray] },
           ]}
         >
           <CheckboxList
@@ -156,6 +176,7 @@ const RegisterPreferencesPage = (props: Props) => {
             label={t('enum_diseases')!}
             options={diseases}
             onChange={setUserDiseaseConsultation}
+            disabled={!userSupport?.includes('DISEASE_CONSULTATION')}
             multiple
           />
         </FormularStep>
@@ -171,6 +192,12 @@ const RegisterPreferencesPage = (props: Props) => {
             label={t('enum_meetings')!}
             options={meetings}
             onChange={setUserMeeting}
+          />
+          <Dropdown
+            id="dropdown-location"
+            options={locations}
+            onChange={setUserLocation}
+            disabled={!userMeeting?.includes('IN_PERSON')}
           />
         </FormularStep>
       </FormularStepper>

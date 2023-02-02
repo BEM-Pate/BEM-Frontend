@@ -26,6 +26,7 @@ import Paragraph from "../../../Paragraph/Paragraph";
 import {useZustand} from "../../../../zustand/store";
 import {Modal} from "react-bootstrap";
 import mail from "../../../../images/icons/ui/mail.svg";
+import Textarea from "../../../Textarea/Textarea";
 
 
 interface Props {
@@ -39,12 +40,20 @@ const BetroffenerProfile = (props: Props) => {
     const [betroffenerAvatar, setBetroffenerAvatar] = useState<any>(placeholder);
     const [betroffenerData, setBetroffenerData] = useState<UserData>();
     const [userAttributes, setUserAttributes] = useState<UserData>();
-    const [fetchChatroom, setRoute] = useZustand(state => [state.fetchChatroom, state.setCurrentRoute]);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [fetchChatroom, setRoute, pendingContacts, fetchPendingContacts] = useZustand(state => [state.fetchChatroom, state.setCurrentRoute, state.pendingContacts, state.fetchPendingContacts]);
+    const [showNewContact, setShowNewContact] = useState(false);
+    const handleCloseNewContact = () => setShowNewContact(false);
+    const handleShowNewContact = () => setShowNewContact(true);
+    const [showDeclineContact, setShowDeclineContact] = useState(false);
+    const handleCloseDeclineContact = () => setShowDeclineContact(false);
+    const handleShowDeclineContact = () => setShowDeclineContact(true);
     const [isVerifiedContact, setIsVerifiedContact] = useState<Boolean>();
-
+    const [declineReason, setDeclineReason] = useState<string>("");
+    const [required, setRequired] = useState<boolean>(declineReason.length === 0);
+    const [isRejectedContact, setIsRejectedContact] = useState<Boolean>(false);
+    const [isPendingContact, setIsPendingContact] = useState<Boolean>(false);
+    console.log("ispending? ",isPendingContact)
+    console.log("contact", pendingContacts)
     useEffect(() => {
         const getPateData = async () => {
             const avatar = await API.getUserAvatar(id!);
@@ -53,12 +62,26 @@ const BetroffenerProfile = (props: Props) => {
             setUserAttributes(user);
             setBetroffenerAvatar(avatar);
             setBetroffenerData(data as UserData);
-            console.log(user)
-            console.log(data)
             setIsVerifiedContact(user?.baseUserData?.verifiedContact.includes(data?._id));
         };
         getPateData();
     }, [userData.token, id]);
+    useEffect(() => {fetchPendingContacts()}, [])
+    useEffect(() => {
+        console.log("trigger pendding")
+        if (pendingContacts.includes(id))  {
+            console.log("pedsf")
+            setIsRejectedContact(false)
+            setIsPendingContact(true)
+        }
+        else {
+            setIsPendingContact(false)
+        }
+
+    }, [pendingContacts])
+    useEffect(() => {
+        if (declineReason.length > 0) setRequired(false)
+    }, [declineReason]);
 
     const acceptRequest = () => {
         try {
@@ -76,11 +99,43 @@ const BetroffenerProfile = (props: Props) => {
                 if (res.status === 200) {
                     fetchChatroom()
                     setIsVerifiedContact(true)
-                    handleShow()
+                    handleShowNewContact()
                 }
             })
         } catch (err) {
             console.error(err);
+        }
+    }
+
+    const declineRequest = () => {
+        console.log(declineReason)
+        if (declineReason.length === 0) {
+            console.log("set require")
+            setRequired(true)
+        } else {
+            try {
+                axios.post(
+                    `${API_ADDRESS}/match/reject-contact/${id}`,
+                    {
+                        "reason": declineReason
+                    },
+                    {
+                        headers: {
+                            accept: 'application/json',
+                            Authorization: `Bearer ${userData.token}`,
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                    },
+                ).then((res) => {
+                    if (res.status === 200) {
+                        handleCloseDeclineContact()
+                        setIsRejectedContact(true)
+                        setDeclineReason("")
+                    }
+                })
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
@@ -128,7 +183,16 @@ const BetroffenerProfile = (props: Props) => {
                                 <img src={request_chat} alt="add_friend"/>
                                 <span> Hallo sagen</span>
                             </Button>
-                        ) : (
+                        ) : isRejectedContact ? (
+                            <Button
+                                className={classNames(
+                                    styles.UserProfileHeaderContainerDetailsRequest
+                                )}
+                                disabled>
+
+                                <span> Kontakt abgelehnt</span>
+                            </Button>
+                        ) : isPendingContact ? (
                             <div className={classNames(
                                 styles.UserProfileHeaderContainerDetailsButtonContainer
                             )}>
@@ -146,12 +210,13 @@ const BetroffenerProfile = (props: Props) => {
                                     className={classNames(
                                         styles.UserProfileHeaderContainerDetailsRequest
                                     )}
+                                    onClick={handleShowDeclineContact}
                                 >
                                     <img src={cross} alt="reject-icon"/>
                                     <span> Ablehnen</span>
                                 </Button>
                             </div>
-                        )
+                        ) : null
                         }
 
                     </div>
@@ -250,17 +315,17 @@ const BetroffenerProfile = (props: Props) => {
                 </div>
             </div>
 
-            <Modal caria-labelledby="example-custom-modal-styling-title" show={show} onHide={handleClose} size="lg"
+            <Modal show={showNewContact} onHide={handleCloseNewContact} size="lg"
                    centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Herzlichen Glückwunsch</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Du bist nun in Verbindung
-                        mit {betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName}</p>
+                        mit <b>{betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName}</b></p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleCloseNewContact}>
                         Schließen
                     </Button>
                     <Button
@@ -273,6 +338,33 @@ const BetroffenerProfile = (props: Props) => {
                         }}>
                         <img src={request_chat} alt="add_friend"/>
                         <span> Hallo sagen</span>
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showDeclineContact} onHide={handleCloseDeclineContact} size="lg"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Kontakt ablehnen</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Bitte einen Grund eingeben, warum du Kontakt
+                        mit {betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName} ablehnen
+                        möchtest?</p>
+                    {required && (<span style={{color: "red"}}>Bitte einen Grund eingeben</span>)}
+                    <Textarea id="decline" onChange={setDeclineReason}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={handleCloseDeclineContact}>
+                        Schließen
+                    </Button>
+                    <Button
+                        className={classNames(
+                            styles.UserProfileHeaderContainerDetailsRequest
+                        )}
+                        onClick={declineRequest}
+                    >
+                        <span>Bestätigen</span>
                     </Button>
                 </Modal.Footer>
             </Modal>
