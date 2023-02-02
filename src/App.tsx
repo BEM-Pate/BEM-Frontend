@@ -39,6 +39,10 @@ const App = () => {
     () => userData !== null && userData?.isMeetingPreferencesVerified,
     [userData]);
 
+  const isPate = useCallback(
+    () => userData !== null && userData?.baseUserData?.processBEM === 'DONE',
+    [userData]);
+
   // Authentication
   useEffect(() => {
     const path = location.pathname;
@@ -48,11 +52,16 @@ const App = () => {
       return;
     }
 
+    if (path === '/register/pate' && isPate()) {
+      navigate('/dashboard/search');
+      return;
+    }
+
     if ((path.startsWith('/register') || path.startsWith('/login'))
       && isSignedIn()
       && isBaseDataVerified()
       && hasPreferencesSet()) {
-      //navigate('/');
+      navigate('/dashboard/search');
       return;
     }
 
@@ -65,14 +74,14 @@ const App = () => {
       && isBaseDataVerified()
       && hasPreferencesSet()
       && path === '/register/preferences') {
-      navigate('/');
+      navigate('/dashboard/search');
       return;
     }
 
     if ((path === '/register/user' || path === '/register/preferences') && !isSignedIn()) {
       navigate('/login');
     }
-  }, [hasPreferencesSet, isBaseDataVerified, isSignedIn, location, navigate, userData]);
+  }, [hasPreferencesSet, isBaseDataVerified, isPate, isSignedIn, location, navigate, userData]);
 
   return (
     <>
