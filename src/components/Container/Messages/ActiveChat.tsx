@@ -14,10 +14,10 @@ export default function ActiveChat({room, targetedUser}: { room: any, targetedUs
     const handleShow = () => setShow(true);
     const me = useZustand(state => state.user)
     const elementRef = useRef(null)
-    
+    const { t } = useTranslation();
     const lastMessage = room.messages[room.messages.length - 1]
     
-    const { t } = useTranslation();
+
 
 
     useEffect(() => {
