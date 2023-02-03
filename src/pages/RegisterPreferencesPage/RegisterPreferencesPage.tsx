@@ -137,7 +137,7 @@ const RegisterPreferencesPage = (props: Props) => {
         submitAction={registerPreferences}
       >
         <FormularStep
-          title="Bedarf"
+          title={t('registerPreferencesNeed')}
           validation={[
             { value: userSupport, validation: [Validators.isArray, Validators.isNotEmpty] },
             { value: userDiseaseConsultation, validation: [Validators.isArray, Validators.isNotEmpty] },
@@ -160,7 +160,7 @@ const RegisterPreferencesPage = (props: Props) => {
           />
         </FormularStep>
         <FormularStep
-          title="Treffen"
+          title={t('registerPreferencesMeet')}
           validation={[
             { value: userMeeting, validation: [Validators.isArray, Validators.isNotEmpty] },
           ]}
@@ -177,8 +177,8 @@ const RegisterPreferencesPage = (props: Props) => {
       <ModalWindow
         isVisible={submitSuccess}
         type="success"
-        headline="Sie wurden registriert!"
-        text="Ihr Profil ist eingerichtet und Sie können jetzt BEM-Paten oder Selbsthilfegruppen suchen."
+        headline={t('registerPreferencesModalWindowHeader')!}
+        text={t('registerPreferencesModalWindowText')!}
         onClick={() => navigate(redirectOnSuccess)}
       />
     </div>

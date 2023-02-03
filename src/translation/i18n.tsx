@@ -10,33 +10,33 @@ import pl from './polish/translation.json';
 import ua from './ukranian/translation.json';
 
 const resources = {
-  DE: {
+  Deutsch: {
     translation: de,
     country_code: 'DE',
   },
-  EN: {
+  English: {
     translation: en,
     country_code: 'EN',
   },
-  TR: {
+  Türkçe: {
     translation: tr,
-    country_code: 'tr',
+    country_code: 'TR',
   },
-  FR: {
+  Français: {
     translation: fr,
-    country_code: 'fr',
+    country_code: 'FR',
   },
-  ES: {
+  Español: {
     translation: es,
-    country_code: 'es',
+    country_code: 'ES',
   },
-  PL: {
+  Polska: {
     translation: pl,
-    country_code: 'pl',
+    country_code: 'PL',
   },
-  UA: {
+  Українська: {
     translation: ua,
-    country_code: 'ua',
+    country_code: 'UA',
   },
 };
 

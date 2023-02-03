@@ -195,55 +195,55 @@ const RegisterUserPage = (props: Props) => {
           />
         </FormularStep>
         <FormularStep
-          title="Altersgruppe"
+          title={t('enum_ageranges')!}
           validation={[
             { value: userAgeRange, validation: [Validators.isString, Validators.isNotEmpty] },
           ]}
         >
           <Dropdown
             id="dropdown-age"
-            label="Alter"
+            label={t('labelAge')!}
             options={ageranges}
             onChange={setUserAgeRange}
             required
           />
         </FormularStep>
         <FormularStep
-          title="Geschlecht"
+          title={t('enum_genders')!}
           validation={[
             { value: userGender, validation: [Validators.isString, Validators.isNotEmpty] },
           ]}
         >
           <TileSelect
             id="tile-select-gender"
-            label="Geschlecht"
+            label={t('enum_genders')!}
             options={genders}
             onChange={setUserGender}
           />
         </FormularStep>
         <FormularStep
-          title="Beruf"
+          title={t('labelJob')!}
           validation={[
             { value: userOccupation, validation: [Validators.isString, Validators.isNotEmpty] },
           ]}
         >
           <Dropdown
             id="dropdown-occupation"
-            label="Berufsfeld"
+            label={t('enum_occupations')!}
             options={occupations}
             onChange={setUserOccupation}
             required
           />
         </FormularStep>
         <FormularStep
-          title="Sprache"
+          title={t('appLanguage')!}
           validation={[
             { value: userLanguages, validation: [Validators.isArray, Validators.isNotEmpty] },
           ]}
         >
           <Dropdown
             id="dropdown-languages"
-            label="Meine Sprachen"
+            label={t('labelMyLanaguae')!}
             options={languages}
             onChange={setUserLanguages}
             multiple
@@ -261,7 +261,7 @@ const RegisterUserPage = (props: Props) => {
         isVisible={submitSuccess}
         type="success"
         headline="Sie wurden verifiziert!"
-        text="Ihr Basis-Konto ist eingerichtet - im nächsten Schritt können Sie bestimmen, was Sie konkret machen möchten."
+        text={t('modalWindowSuccsess')!}
         onClick={() => navigate(redirectOnSuccess)}
       />
     </div>
