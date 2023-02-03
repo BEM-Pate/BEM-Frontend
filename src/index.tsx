@@ -5,15 +5,20 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './translation/i18n';
+import NotificationToastService
+  from './components/NotificationToastService/NotificationToastService';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    <NotificationToastService />
+  </>
   // </React.StrictMode>,
 );
 

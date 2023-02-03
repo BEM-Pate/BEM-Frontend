@@ -1,0 +1,29 @@
+.NotificationToastService {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 4px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+
+  .Toast {
+    align-items: center;
+    background-color: var(--color-white);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-button);
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 4px;
+    padding: 8px;
+    width: 256px;
+
+    &Icon {
+      align-self: start;
+      margin-right: 4px;
+      width: 32px;
+    }
+
+    &Message {}
+  }
+}
