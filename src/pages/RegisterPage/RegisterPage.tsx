@@ -12,6 +12,7 @@ import PhoneNumberInput from '../../components/PhoneNumberInput/PhoneNumberInput
 import PinInput from '../../components/PinInput/PinInput';
 import Validators from '../../helpers/validators';
 import {useZustand} from "../../zustand/store";
+import LanguageDropdown from '../../components/LanguageDropdown/LanguageDropdown';
 
 type RegisterType = 'phone' | 'email';
 type RequestState = 'OTP' | 'AUTH';
@@ -93,8 +94,9 @@ const RegisterPage = () => {
     <div className={classNames(styles.RegisterPage)}>
       <div className={classNames(styles.RegisterPageContainer)}>
         <Headline headline="h3" className={classNames(styles.RegisterPageHeadline)}>
-          Register
+        {t("labelRegister")}
         </Headline>
+        <LanguageDropdown/>
         <div className={classNames(styles.RegisterPageForm)}>
           {state === 'OTP' && (
             <>
@@ -102,7 +104,7 @@ const RegisterPage = () => {
                 && (
                   <>
                     <span className={classNames(styles.RegisterPageFormInstruction)}>
-                      E-Mail eingeben zum Anmelden
+                    {t("labelTextEmail")}
                     </span>
                     <Textfield
                       id="register-email"
@@ -118,7 +120,7 @@ const RegisterPage = () => {
                 && (
                   <>
                     <span className={classNames(styles.RegisterPageFormInstruction)}>
-                      Telefonnummer eingeben zum Anmelden
+                    {t("labelTextNumber")}
                     </span>
                     <PhoneNumberInput
                       id="register-phone"
@@ -133,7 +135,7 @@ const RegisterPage = () => {
                   onClick={requestOTP}
                   disabled={Validators.validate(accountName, validators) || requesting}
                 >
-                  Request OTP Code
+                  {t("labelOTP")}
                 </Button>
               </div>
             </>
@@ -149,9 +151,9 @@ const RegisterPage = () => {
               />
               <div className={classNames(styles.RegisterPageFormActions)}>
                 <span className={classNames(styles.RegisterPageFormActionsResendOTP)}>
-                  Code nicht erhalten?&nbsp;
+                {t("labelCode")}
                   <Button onClick={requestOTP} styling="link">
-                    Code nochmal senden
+                  {t("labelCodeReturn")}
                   </Button>
                 </span>
                 <Button
@@ -164,7 +166,7 @@ const RegisterPage = () => {
             </>
           )}
 
-          <span className={classNames(styles.RegisterPageFormOr)}>or</span>
+          <span className={classNames(styles.RegisterPageFormOr)}>{t('labelOr')}</span>
 
           <Button
             className={styles.RegisterPageFormModeSwitch}
@@ -173,13 +175,13 @@ const RegisterPage = () => {
               ? setMode('phone')
               : setMode('email'))}
           >
-            {mode === 'email' && 'Register with phone number'}
-            {mode === 'phone' && 'Register with email'}
+            {mode === 'email' && t('labelRegisterPhone')}
+            {mode === 'phone' && t('labelRegisterEmail')}
           </Button>
 
           <div className={classNames(styles.RegisterPageFormLogin)}>
-            <span>Already have an account? </span>
-            <Button styling="link" onClick={() => navigate('/login')}>Login instead</Button>
+            <span>{t('labelAccountText')}</span>
+            <Button styling="link" onClick={() => navigate('/login')}>{t('loginPageButtonLogin')}</Button>
           </div>
         </div>
       </div>

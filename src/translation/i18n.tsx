@@ -3,15 +3,40 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './english/translation.json';
 import de from './german/translation.json';
+import tr from './turkish/translation.json';
+import fr from './french/translation.json';
+import es from './spanish/translation.json';
+import pl from './polish/translation.json';
+import ua from './ukranian/translation.json';
 
 const resources = {
-  de: {
+  Deutsch: {
     translation: de,
-    country_code: 'ger',
+    country_code: 'DE',
   },
-  en: {
+  English: {
     translation: en,
-    country_code: 'gb',
+    country_code: 'EN',
+  },
+  Türkçe: {
+    translation: tr,
+    country_code: 'TR',
+  },
+  Français: {
+    translation: fr,
+    country_code: 'FR',
+  },
+  Español: {
+    translation: es,
+    country_code: 'ES',
+  },
+  Polska: {
+    translation: pl,
+    country_code: 'PL',
+  },
+  Українська: {
+    translation: ua,
+    country_code: 'UA',
   },
 };
 
