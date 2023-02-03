@@ -29,6 +29,9 @@ interface store {
     setSeen: (chatroomId: string, messageId: string) => void,
     onlineUsersInRooms: null | any,
     setOnlineUsersInRooms: (onlineUsers: any) => void,
+    notifications: null | any[];
+    addNotification: (message: string, type: 'success' | 'warning' | 'error') => void,
+    resetNotifications: () => void,
 }
 
 
@@ -148,6 +151,27 @@ export const useZustand = create<store>()(
                 onlineUsersInRooms[roomId] = availableClients
                 set({ onlineUsersInRooms: onlineUsersInRooms })
                 console.log(get().onlineUsersInRooms)
+            },
+            notifications: [],
+            addNotification: (message: string, type: 'success' | 'warning' | 'error') => {
+                const id = Date.now();
+                let notifications = get().notifications;
+                if (notifications !== null) {
+                    notifications.push({ id, message, type });
+                } else {
+                    notifications = [{ id, message, type }];
+                }
+                set({ notifications });
+
+                setTimeout(() => {
+                    let notifications1 = get().notifications;
+                    if (notifications1 !== null) {
+                        set({ notifications: notifications1.filter((n) => n.id !== id) });
+                    }
+                }, 3000);
+            },
+            resetNotifications: () => {
+                set({ notifications: [] });
             }
         }),
         {
