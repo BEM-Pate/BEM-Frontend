@@ -1,10 +1,11 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import classnames from 'classnames';
-import placeholder from '../../../images/logo.svg';
-import Button from '../../../components/Button/Button';
-import styles from './OnboardingSHG.module.scss';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import classnames from "classnames";
+import placeholder from "../../../images/icons/ui/OB3.jpeg";
+import Button from "../../../components/Button/Button";
+import styles from "./OnboardingSHG.module.scss";
+import AlreadyAccount from "../../../components/alreadyAccount/alreadyAccount";
 
 const OnboardingSHG = () => {
   const { t } = useTranslation();
@@ -19,17 +20,19 @@ const OnboardingSHG = () => {
       </div>
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
-          {t('onboardingSHGHeader')}
+          {t("onboardingSHGHeader")}
         </h1>
       </div>
 
       <div className={classnames(styles.buttonContainer)}>
-        <Button className={classnames(styles.buttonContainerbutton)}>{t('labelRegister')}</Button>
+        <Link to="/register">
+          <Button className={classnames(styles.buttonContainerbuttonNext)}>
+            {t("labelRegister")}
+          </Button>
+        </Link>
       </div>
       <hr />
-      <Link to="/login" className={classnames(styles.LoginContainertext)}>
-        <p>{t('labelLogin')}</p>
-      </Link>
+      <AlreadyAccount />
     </div>
   );
 };
