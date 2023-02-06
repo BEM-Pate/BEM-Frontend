@@ -1,15 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import classnames from 'classnames';
-import { useTranslation } from 'react-i18next';
-import styles from './OnboardingSeeker.module.scss';
-import Button from '../../../components/Button/Button';
-import placeholder from '../../../images/logo.svg';
+import React from "react";
+import { Link } from "react-router-dom";
+import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import styles from "./OnboardingSeeker.module.scss";
+import Button from "../../../components/Button/Button";
+import placeholder from "../../../images/icons/ui/OB1.jpeg";
+import AlreadyAccount from "../../../components/alreadyAccount/alreadyAccount";
 
 const OnboardingSeeker = () => {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className={classnames(styles.Container)}>
       <div className={classnames(styles.imageContainer)}>
         <img
           src={placeholder}
@@ -20,21 +21,24 @@ const OnboardingSeeker = () => {
 
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
-          {t('onboardingPageSeekerHeader')}
+          {t("onboardingPageSeekerHeader")}
         </h1>
-        <p>{t('onboardingPageSeekerDescription')}</p>
+        <p>{t("onboardingPageSeekerDescription")}</p>
       </div>
       <div className={classnames(styles.buttonContainer)}>
-        <Link to="/register/seeker">
+        <Link to="/onboardingpate">
           <Button className={classnames(styles.buttonContainerbutton)}>
-            {t('labelRegister')}
+            {t("labelNext")}
+          </Button>
+        </Link>
+        <Link to="/register/seeker">
+          <Button className={classnames(styles.buttonContainerbuttonNext)}>
+            {t("labelRegister")}
           </Button>
         </Link>
       </div>
       <hr />
-      <Link to="/login" className={classnames(styles.LoginContainertext)}>
-        <p>{t('labelLogin')}</p>
-      </Link>
+      <AlreadyAccount />
     </div>
   );
 };

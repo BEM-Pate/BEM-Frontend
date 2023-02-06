@@ -1,24 +1,40 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames';
-import styles from './LanguageDropdown.module.scss';
-import { availableLanguages } from '../../translation/i18n';
+import React, { useState } from "react";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+import styles from "./LanguageDropdown.module.scss";
+import { availableLanguages } from "../../translation/i18n";
 
 const LanguageDropdown = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleChange = (item: string) => {
+    i18n.changeLanguage(item);
+  };
+
   return (
-    <div className={classNames(styles.Position)}>
-      <select
-        defaultValue={i18n.language}
-        onChange={(e) => i18n.changeLanguage(e.target.value)}
-        className="btn dropdown-toggle"
+    <div>
+      <hr />
+      <Dropdown
+        show={dropdownOpen}
+        onToggle={() => setDropdownOpen(!dropdownOpen)}
       >
-        {availableLanguages.map((language) => (
-          <option key={language}>
-            <li>{language}</li>
-          </option>
-        ))}
-      </select>
+        <DropdownButton
+          title={selectedOption || t("appLanguage")}
+          defaultValue={i18n.language}
+          menuVariant="dark"
+          variant="secondary"
+        >
+          {availableLanguages.map((item) => (
+            <Dropdown.Item key={item} onClick={() => handleChange(item)} >
+              {item}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+      </Dropdown>
+      <hr />
     </div>
   );
 };

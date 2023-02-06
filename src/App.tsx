@@ -23,6 +23,7 @@ import {useZustand} from "./zustand/store";
 import RegisterPreferencesPage from "./pages/RegisterPreferencesPage/RegisterPreferencesPage";
 import Category from './components/Container/Search/Category/Category';
 import RegisterPatePage from "./pages/RegisterPatePage/RegisterPatePage";
+import SplashScreenPage from './pages/OnboardingPages/SplashScreen/SplashScreenPage';
 
 const App = () => {
   const navigate = useNavigate();
@@ -86,8 +87,10 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route index element={<LandingPage />} />
+        <Route index element={<SplashScreenPage />} />
+        <Route path="landingpage" element={<LandingPage />} />
         <Route path="login" element={<LoginPage />} />
+        <Route path="splashscreen" element={<SplashScreenPage />} />
         <Route path="onboardingseeker" element={<OnboardingSeeker />} />
         <Route path="onboardingpate" element={<OnboardingPate />} />
         <Route path="onboardingshg" element={<OnboardingSHG />} />
