@@ -11,6 +11,7 @@ import profilePercentage from "../../../helpers/profilePercentage";
 import languages from "../../../images/icons/ui/languages.svg";
 import settings from "../../../images/icons/ui/settings_outline.svg";
 import account from "../../../images/icons/ui/account.svg";
+import logout from "../../../images/icons/ui/logout.svg";
 import LanguageDropdown from "../../LanguageDropdown/LanguageDropdown";
 import { useZustand } from "../../../zustand/store";
 
@@ -51,7 +52,7 @@ const Settings = (props: Props) => {
 
   console.log(userData)
 
-  const logout = useCallback(() => {
+  const logoutUser = useCallback(() => {
     setUser({});
     navigate('/login');
   }, [setUser, navigate]);
@@ -97,14 +98,14 @@ const Settings = (props: Props) => {
         <>Einstellungen</>
       </div>
      </Button>
-     <Button styling='setting' onClick={logout}>
+     <Button styling='setting' onClick={logoutUser}>
       <div>
-        <img src={settings} alt="arrow"></img>
+        <img src={logout} alt="arrow"></img>
         <>Logout</>
       </div>
      </Button>
-     </div>
      <LanguageDropdown ></LanguageDropdown>
+     </div>
     </div>
   );
 };
