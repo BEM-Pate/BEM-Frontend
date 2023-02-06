@@ -96,7 +96,6 @@ const RegisterPage = () => {
         <Headline headline="h3" className={classNames(styles.RegisterPageHeadline)}>
         {t("labelRegister")}
         </Headline>
-        <LanguageDropdown/>
         <div className={classNames(styles.RegisterPageForm)}>
           {state === 'OTP' && (
             <>
@@ -180,7 +179,7 @@ const RegisterPage = () => {
           </Button>
 
           <div className={classNames(styles.RegisterPageFormLogin)}>
-            <span>{t('labelAccountText')}</span>
+            <span>{t('labelAccountText')}  </span>
             <Button styling="link" onClick={() => navigate('/login')}>{t('loginPageButtonLogin')}</Button>
           </div>
         </div>

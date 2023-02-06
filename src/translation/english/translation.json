@@ -59,7 +59,6 @@
   "registerSeekerMeetingHeaderOption1": "in person",
   "registerSeekerMeetingHeaderOption2": "virtual",
   "regusterSeekerSummary": "summary of your entered data",
-
   "registerPreferencesNeed": "Need",
   "registerPreferencesMeet": "Meet",
   "registerPreferencesModalWindowHeader": "You have been registered!",
@@ -73,6 +72,8 @@
   "modalWindowDefaultText": "Please press OK",
   "modalWindowSuccsess": "Your basic account is set up - in the next step you can determine what you want to do specifically.",
 
+  "splashscreenText": "The exchange and mediation portal for all BEM beneficiaries with mental impairments.",
+  
   "onboardingPageSeekerHeader": "BEM consultation at eye level",
   "onboardingPageSeekerDescription": "Find answers on the topic of BEM due to mental impairments",
 
@@ -133,23 +134,23 @@
   "enum_occupations_OFFSHORE": "Extra-territorial organizations and bodies",
 
   "enum_supports": "Support forms",
-"enum_supports_CONSULTATION": "BEM consultation in general",
-"enum_supports_DISEASE_CONSULTATION": "BEM consultation related to a specific disease",
+  "enum_supports_CONSULTATION": "BEM consultation in general",
+  "enum_supports_DISEASE_CONSULTATION": "BEM consultation related to a specific disease",
 
-"enum_diseases": "Disease images",
-"enum_diseases_ACUTE_CRISIS": "acute crisis",
-"enum_diseases_LONG_COVID": "Long-Covid",
-"enum_diseases_BIPOLAR": "Bipolar disorder",
-"enum_diseases_OVERLOAD": "Overload",
-"enum_diseases_DEPRESSION": "Depression",
-"enum_diseases_ADDICTION": "Addiction (addiction)",
-"enum_diseases_BURNOUT": "Burnout",
-"enum_diseases_FEAR": "Anxiety",
-"enum_diseases_NONE": "no diagnosis",
+  "enum_diseases": "Disease images",
+  "enum_diseases_ACUTE_CRISIS": "acute crisis",
+  "enum_diseases_LONG_COVID": "Long-Covid",
+  "enum_diseases_BIPOLAR": "Bipolar disorder",
+  "enum_diseases_OVERLOAD": "Overload",
+  "enum_diseases_DEPRESSION": "Depression",
+  "enum_diseases_ADDICTION": "Addiction (addiction)",
+  "enum_diseases_BURNOUT": "Burnout",
+  "enum_diseases_FEAR": "Anxiety",
+  "enum_diseases_NONE": "no diagnosis",
 
-"enum_meetings": "Meeting preferences",
-"enum_meetings_IN_PERSON": "in person",
-"enum_meetings_VIRTUAL": "virtual",
+  "enum_meetings": "Meeting preferences",
+  "enum_meetings_IN_PERSON": "in person",
+  "enum_meetings_VIRTUAL": "virtual",
 
   "enum_regions": "Regions",
   "enum_regions_BW": "Bavaria",

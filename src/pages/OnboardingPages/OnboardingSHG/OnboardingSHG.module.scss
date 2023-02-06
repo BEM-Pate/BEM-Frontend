@@ -1,30 +1,39 @@
-.imageContainer{
-    align-items: 'center';
-    justify-self: 'center';
-    display: 'flex';
-    margin: 10%;
-
-    &image{
-        width: 300px;
-        height: 300px;
-    }
+.imageContainer {
+  align-items: "center";
+  justify-self: "center";
+  display: "flex";
+  margin-bottom: 10%;
+  &image {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+    border: 10px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 2px black;
+  }
 }
-.textContainer{
+.textContainer {
+  text-align: center;
+  &header {
+    font-weight: bold;
+    color: rgb(99, 131, 123);
+  }
+}
+.buttonContainer {
+  text-align: center;
+  &button {
+    width: 80%;
+    margin: 1%;
+  }
+  &buttonNext {
+    background-color: rgb(245, 248, 249);
+    width: 80%;
+    color: rgb(99, 131, 123);
+  }
+}
+.LoginContainer {
+  align-items: center;
+  &text {
     text-align: center;
-    &header{
-        font-weight: bold;
-        color: rgb(99,131,123);
-    }
-}
-.buttonContainer{
-    text-align: center;
-    &button{
-        width: 80%;
-    }
-}
-.LoginContainer{
-    align-items: center;
-    &text{
-        text-align: center;
-    }
+  }
 }

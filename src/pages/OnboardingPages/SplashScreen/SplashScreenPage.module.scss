@@ -1,0 +1,58 @@
+.Container {
+  background-color: rgb(152, 200, 188);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  background-image: url('../../../images/icons/ui/SplashScreenBubble.png');
+  background-size: cover;
+  background-position: center;
+  &upperDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &img {
+      margin: 10px;
+    }
+    &header {
+      font-size: 50px;
+      margin: 15px;
+      color: white;
+    }
+  }
+  &Description {
+    color: white;
+    text-align: center;
+    margin: 40px;
+    opacity: 0.8;
+  }
+}
+.buttonContainer {
+  text-align: center;
+  width: 200%;
+  &button {
+    width: 40%;
+    background-color: rgb(245, 249, 248);
+    color: rgb(99, 131, 123);
+  }
+}
+.LoginContainer {
+  &text {
+    color: white;
+  }
+}
+.FadeIn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  &FadeInAnimation {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+}
+.fade-in {
+  opacity: 1;
+}
