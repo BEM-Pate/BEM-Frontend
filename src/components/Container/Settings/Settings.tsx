@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
 import styles from "./Settings.module.scss";
 import Headline from "../../Headline/Headline";
@@ -12,6 +12,7 @@ import languages from "../../../images/icons/ui/languages.svg";
 import settings from "../../../images/icons/ui/settings_outline.svg";
 import account from "../../../images/icons/ui/account.svg";
 import LanguageDropdown from "../../LanguageDropdown/LanguageDropdown";
+import { useZustand } from "../../../zustand/store";
 
 interface Props {
   userData: any;
@@ -22,6 +23,7 @@ const Settings = (props: Props) => {
   const navigate = useNavigate();
   const [userAttributes, setUserAttributes] = useState<PateData | UserData>();
   const [imageData, setImageData] = useState<any>(placeholder);
+  const setUser = useZustand((state) => state.setUser);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -47,7 +49,12 @@ const Settings = (props: Props) => {
     }
   }, [userAttributes]);
 
-  console.log(userData.token)
+  console.log(userData)
+
+  const logout = useCallback(() => {
+    setUser({});
+    navigate('/login');
+  }, [setUser, navigate]);
 
   return (
     <div className={classNames(styles.Settings)}>
@@ -56,7 +63,7 @@ const Settings = (props: Props) => {
         <Headline
           className={classNames(styles.SettingsHeaderHeadlineName)}
           headline="h2"
-        >{`${userAttributes?.baseUserData.firstName} ${userAttributes?.baseUserData.lastName}`}</Headline>
+        >{`${userData.baseUserData.firstName || userAttributes?.baseUserData.firstName} ${userData.baseUserData.lastName || userAttributes?.baseUserData.lastName}`}</Headline>
         <Headline
           className={classNames(styles.SettingsHeaderHeadlineLocation)}
           headline="h2"
@@ -65,7 +72,7 @@ const Settings = (props: Props) => {
         </Headline>
         <div className={classNames(styles.SettingsHeaderProfile)}>
           <div className={classNames(styles.SettingsHeaderProfileStatus)}>
-            <span>{`${profilePercentage(userAttributes!)}%`}</span>
+            <div><span>{`${profilePercentage(userAttributes!)}%`}</span></div>
             <p>{profilePercentage(userAttributes!) === 100 ? "Ihr Profil ist vollständig!" : "Vervollständigen Sie Ihr Profil." }</p>
           </div>
           <Button onClick={() => navigate("/dashboard/settings/profile")}>Profil ändern</Button>
@@ -88,6 +95,12 @@ const Settings = (props: Props) => {
       <div>
         <img src={settings} alt="arrow"></img>
         <>Einstellungen</>
+      </div>
+     </Button>
+     <Button styling='setting' onClick={logout}>
+      <div>
+        <img src={settings} alt="arrow"></img>
+        <>Logout</>
       </div>
      </Button>
      </div>

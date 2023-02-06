@@ -52,8 +52,15 @@
       border: none;
       bottom: 5px;
       height: 36px;
-      img {
+      &Input {
+       display: none;
+      }
+      label {
         height: 100%;
+        color: var(--color-white) !important; 
+        img {
+          height: 100%;
+        }
       }
     }
   }
@@ -66,9 +73,6 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #9ea3ae;
-  }
-  &Diseases{
-    
   }
   label {
     color: var(--color-black);

@@ -37,12 +37,14 @@ export interface MeetingPreference {
 
 export interface Match {
   account: string;
+  ageRange: string[];
   firstName: string;
   lastName: string;
   occupation: string;
   languages: string[];
   experience: string;
   motivation: string;
+  gender: string;
   meetingPreference: MeetingPreference;
   score: number;
   date: Date;
