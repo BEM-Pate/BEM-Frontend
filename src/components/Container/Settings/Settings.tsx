@@ -50,8 +50,6 @@ const Settings = (props: Props) => {
     }
   }, [userAttributes]);
 
-  console.log(userData)
-
   const logoutUser = useCallback(() => {
     setUser({});
     navigate('/login');
@@ -86,7 +84,7 @@ const Settings = (props: Props) => {
         <>Mein Konto</>
       </div>
      </Button>
-     <Button styling='setting' onClick={() => navigate("/dashboard/settings/language")}>
+     <Button styling='setting' onClick={() => navigate("/dashboard/settings/languages")}>
       <div>
         <img src={languages} alt="arrow"></img>
         <>Meine Sprachen</>
@@ -104,7 +102,6 @@ const Settings = (props: Props) => {
         <>Logout</>
       </div>
      </Button>
-     <LanguageDropdown ></LanguageDropdown>
      </div>
     </div>
   );

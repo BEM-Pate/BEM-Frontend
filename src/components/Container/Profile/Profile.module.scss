@@ -3,34 +3,10 @@
 .Profile {
   display: grid;
   align-items: center;
-  padding: 24px;
+  padding: 16px;
   gap: 24px;
   width: 100%;
-  &Header {
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    &Button {
-      box-shadow: none;
-      position: absolute;
-      width: 40px !important;
-      height: 40px;
-      background-color: transparent !important;
-      border: 2px solid var(--color-border);
-      filter: brightness(0) saturate(100%) invert(5%) sepia(23%) saturate(3155%)
-        hue-rotate(245deg) brightness(93%) contrast(89%);
-    }
-    &Headline {
-      text-align: center;
-      margin: 0;
-      width: 100%;
-      font-style: normal;
-      color: var(--color-black);
-    }
-  }
-
-  &Picture {
+   &Picture {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -72,7 +48,7 @@
     line-height: 140%;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #9ea3ae;
+    color: var(--color-headline-secondary);
   }
   label {
     color: var(--color-black);

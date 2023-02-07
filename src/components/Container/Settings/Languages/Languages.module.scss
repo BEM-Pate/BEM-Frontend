@@ -1,0 +1,33 @@
+.Languages {
+  display: grid;
+  gap: 16px;
+  
+}
+
+.LanguagesButton {
+    display: flex;
+    justify-content: space-between;
+  width: 100%;
+  background-color: var(--color-body-bg-white);
+  appearance: none;
+  border: none;
+  margin: 0px;
+  padding: 16px;
+  border-radius: 16px;
+  &Details {
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0px;
+      }
+      img {
+        border-radius: 6px;
+        height: 24px;
+      }
+  }
+  
+  &Active {
+    color: red;
+  }
+}

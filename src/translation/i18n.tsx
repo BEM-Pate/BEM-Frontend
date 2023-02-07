@@ -8,6 +8,8 @@ import fr from './french/translation.json';
 import es from './spanish/translation.json';
 import pl from './polish/translation.json';
 import ua from './ukranian/translation.json';
+import { FormOption } from '../components/FormularStepper/FormularTypes';
+import getFlagFromCountry from '../util/getFlagFromCountry';
 
 const resources = {
   Deutsch: {
@@ -16,7 +18,7 @@ const resources = {
   },
   English: {
     translation: en,
-    country_code: 'EN',
+    country_code: 'GB',
   },
   Türkçe: {
     translation: tr,
@@ -41,7 +43,11 @@ const resources = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const availableLanguages = Object.keys(resources);
+
+export const availableLanguages = Object.entries(resources).map(([language, { country_code }]) => ({
+  value: language,
+  label: `${getFlagFromCountry(country_code)} ${language}`,
+}) as FormOption);
 
 i18n.use(initReactI18next)
   .use(LanguageDetector)

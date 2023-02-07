@@ -2,25 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import styles from "./LanguageDropdown.module.scss";
-import { availableLanguages } from "../../translation/i18n";
-import { FormOption } from "../FormularStepper/FormularTypes";
+import { availableLanguages} from "../../translation/i18n";
 import Dropdown from "../Dropdown/Dropdown";
 
-const LanguageDropdown = () => {
+interface Props {
+  className?: any | undefined;
+}
+
+const LanguageDropdown = (props: Props) => {
   const { t, i18n } = useTranslation();
+  const { className } = props;
+
   const [language, setLanguage] = useState<string>();
-  const [languages] = useState<FormOption[]>((availableLanguages.map((item) => ({
-    value: item,
-    label: item,
-  } as FormOption))));
 
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language, i18n])
 
   return (
-    <div>
-      <Dropdown id="languages" options={languages} onChange={setLanguage} label={`${t("appLanguage")}`}></Dropdown>
+    <div className={classNames(styles.LanguageDropdown, className)}>
+      <Dropdown id="languages" options={availableLanguages} onChange={setLanguage} label={`${t("appLanguage")}`}></Dropdown>
     </div>
   );
 };

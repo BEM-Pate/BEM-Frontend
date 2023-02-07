@@ -223,19 +223,10 @@ const Profile = (props: Props) => {
 
   return (
     <div className={classNames(styles.Profile)}>
-      <div className={classNames(styles.ProfileHeader)}>
-        <Button
-          icon
-          onClick={() => navigate(-1)}
-          className={classNames(styles.ProfileHeaderButton)}
-        >
-          <img src={back_arrow} alt="back"></img>
-        </Button>
-        <Headline
-          className={classNames(styles.ProfileHeaderHeadline)}
-          headline="h1"
-        >
-          Profil anpassen
+       <div className={classNames(styles.ProfileHeader)} >
+        <Button icon styling="back" onClick={() => navigate(-1)}></Button>
+        <Headline headline="h1" styling="page">
+          Einstellungen
         </Headline>
       </div>
       <div className={classNames(styles.ProfilePicture)}>

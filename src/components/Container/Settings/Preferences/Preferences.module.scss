@@ -1,0 +1,11 @@
+@import "../../../../styles/mixins.module";
+
+.Preferences{
+    @include dashboard-container;
+    display: grid;
+    gap: 24px;
+    >div {
+        display: grid;
+        gap: 16px;
+    }
+}
