@@ -46,9 +46,9 @@ const App = () => {
 
   // Authentication
   useEffect(() => {
+    // TODO: /register/pate authorisierung
     const path = location.pathname;
-    if (path.startsWith('/dashboard') && !isSignedIn()) {
-      console.log('redirecting to login');
+    if ((path.startsWith('/dashboard') || path === '/landingpage') && !isSignedIn()) {
       navigate('/login');
       return;
     }
@@ -96,9 +96,9 @@ const App = () => {
         <Route path="onboardingshg" element={<OnboardingSHG />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="register">
-          <Route path="user" element={<RegisterUserPage redirectOnSuccess="/" />} />
-          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/" />} />
-          <Route path="pate" element={<RegisterPatePage redirectOnSuccess="/" />} />
+          <Route path="user" element={<RegisterUserPage redirectOnSuccess="/landingpage" />} />
+          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/dashboard/search" />} />
+          <Route path="pate" element={<RegisterPatePage redirectOnSuccess="/dashboard/search" />} />
         </Route>
         <Route element={<DashboardPage />}>
             <Route path="dashboard">

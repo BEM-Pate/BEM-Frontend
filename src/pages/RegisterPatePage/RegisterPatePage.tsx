@@ -310,7 +310,7 @@ const RegisterPatePage = (props: Props) => {
         text="Denn dazu muss man bereits selbst erfolgreich einen BEM-Prozess durchlaufen haben. Sie können aber eine Selbsthilfegruppe gründen."
       >
         <Button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/dashboard/groups')}
         >
           Selbsthilfegruppe Gründen
         </Button>

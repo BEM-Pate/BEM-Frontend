@@ -27,7 +27,6 @@ const NotificationToastService = () => {
   const [toasts, setToasts] = useState<any[]>([]);
 
   useEffect(() => resetNotifications(), [resetNotifications]);
-  useEffect(() => addNotification('Please select a smaller file Please select a smaller file', 'success'), [addNotification]);
 
   useEffect(() => setToasts(notifications ?? []), [notifications]);
 

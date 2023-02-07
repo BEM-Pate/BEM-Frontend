@@ -13,6 +13,7 @@ import {useZustand} from "../../zustand/store";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import CheckboxList from "../../components/CheckboxList/CheckboxList";
 import Validators from "../../helpers/validators";
+import Button from "../../components/Button/Button";
 
 interface Props {
   redirectOnSuccess: string;
@@ -206,8 +207,19 @@ const RegisterPreferencesPage = (props: Props) => {
         type="success"
         headline={t('registerPreferencesModalWindowHeader')!}
         text={t('registerPreferencesModalWindowText')!}
-        onClick={() => navigate(redirectOnSuccess)}
-      />
+      >
+        <Button
+          onClick={() => navigate(redirectOnSuccess)}
+        >
+          Los gehts!
+        </Button>
+        <Button
+          styling="outline"
+          onClick={() => navigate('/dashboard/settings/profile')}
+        >
+          Zu meinem Profil
+        </Button>
+      </ModalWindow>
     </div>
   );
 }
