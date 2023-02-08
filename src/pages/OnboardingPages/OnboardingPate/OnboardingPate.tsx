@@ -5,24 +5,17 @@ import classnames from "classnames";
 import placeholder from "../../../images/icons/ui/OB2.jpeg";
 import Button from "../../../components/Button/Button";
 import styles from "./OnboardingPate.module.scss";
-import AlreadyAccount from "../../../components/alreadyAccount/alreadyAccount";
 
 const OnboardingPate = () => {
   const { t } = useTranslation();
   return (
-    <div>
-      <div className={classnames(styles.imageContainer)}>
-        <img
-          src={placeholder}
-          className={classnames(styles.imageContainerimage)}
-          alt="placeholder"
-        />
-      </div>
+    <div className={classnames(styles.Container)}>
+      <div className={classnames(styles.imageContainer)} style={{backgroundImage: `url(${placeholder})`}}></div>
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
           {t("onboardingPateHeader")}
         </h1>
-        <p>{t("onboardingPateDescription")}</p>
+        <p className={classnames(styles.textContainertext)}>{t("onboardingPateDescription")}</p>
       </div>
       <div className={classnames(styles.buttonContainer)}>
         <Link to="/onboardingshg">
@@ -36,8 +29,11 @@ const OnboardingPate = () => {
           </Button>
         </Link>
       </div>
-      <hr />
-      <AlreadyAccount />
+      <div className={classnames(styles.loginLink)}>
+        <Link to="/login">
+          <span>{t("labelLogin")}</span>
+        </Link>
+      </div>
     </div>
   );
 };

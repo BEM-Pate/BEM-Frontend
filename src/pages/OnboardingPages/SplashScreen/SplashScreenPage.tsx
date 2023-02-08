@@ -44,11 +44,11 @@ const SplashScreenPage = () => {
                     {t("labelNext")}
                   </Button>
                 </Link>
+                <LanguageDropdown className={styles.buttonContainerdropdown} />
               </div>
-              <div>
-                <LanguageDropdown />
-              </div>
-              <AlreadyAccount />
+              <Link to="/login" className={classnames(styles.LoginContainertext)}>
+                <span className="link">{t("labelLogin")}</span>
+              </Link>
             </>
           ) : null}
         </div>

@@ -1,43 +1,72 @@
 .Container {
+  background-color: #ffffff;
+  min-height: 100%;
 }
 .imageContainer {
-  align-items: "center";
-  justify-self: "center";
-  display: "flex";
-  margin-bottom: 10%;
-  &image {
-    width: 100%;
-    height: auto;
-    opacity: 0.9;
-    border: 10px;
-    border-radius: 30px;
-    box-shadow: 2px 2px 2px black;
+  background-color: #ffffff;
+  height: 376px;
+  position: relative;
+  &left {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 128px;
+  }
+  &right {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 115px;
   }
 }
 .textContainer {
+  background-color: #ffffff;
+  padding: 24px;
   text-align: center;
+  color: #22172A;
   &header {
     font-weight: bold;
-    color: rgb(99, 131, 123);
+  }
+  &text {
+    margin: 0;
+    opacity: 0.7;
   }
 }
 .buttonContainer {
+  background-color: #ffffff;
+  padding: 24px;
   text-align: center;
   &button {
-    width: 80%;
-    margin: 1%;
+    width: 100%;
+    margin-bottom: 16px;
   }
   &buttonNext {
     background-color: rgb(245, 248, 249);
-    width: 80%;
+    width: 100%;
     color: rgb(99, 131, 123);
+    border: none;
   }
 }
 .LoginContainer {
+  background-color: #ffffff;
   display: grid;
   align-items: center;
   flex-direction: column;
   &text {
     text-align: center;
   }
+}
+
+.loginLink {
+  background-color: #ffffff;
+  padding: 24px;
+  text-align: center;
 }

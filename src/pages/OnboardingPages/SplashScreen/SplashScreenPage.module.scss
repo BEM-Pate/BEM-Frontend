@@ -30,16 +30,30 @@
 }
 .buttonContainer {
   text-align: center;
-  width: 200%;
+  padding: 24px;
+  width: 100%;
   &button {
-    width: 40%;
+    width: 100%;
     background-color: rgb(245, 249, 248);
     color: rgb(99, 131, 123);
+    border: none;
+    &:hover {
+      background-color: rgb(245, 249, 248) !important;
+    }
+  }
+  &dropdown {
+    margin-top: 24px;
+    width: 100%;
+    & > * {
+      width: 100%;
+    }
   }
 }
 .LoginContainer {
   &text {
-    color: white;
+    color: white !important;
+    text-decoration: underline;
+    margin-top: 8px;
   }
 }
 .FadeIn {

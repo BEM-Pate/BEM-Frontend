@@ -21,7 +21,7 @@ const LanguageDropdown = (props: Props) => {
 
   return (
     <div className={classNames(styles.LanguageDropdown, className)}>
-      <Dropdown id="languages" options={availableLanguages} onChange={setLanguage} label={`${t("appLanguage")}`}></Dropdown>
+      <Dropdown id="languages" options={availableLanguages} onChange={setLanguage} placeholder={`${t("appLanguage")}`}></Dropdown>
     </div>
   );
 };

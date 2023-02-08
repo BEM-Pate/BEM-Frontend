@@ -4,26 +4,23 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import styles from "./OnboardingSeeker.module.scss";
 import Button from "../../../components/Button/Button";
-import placeholder from "../../../images/icons/ui/OB1.jpeg";
-import AlreadyAccount from "../../../components/alreadyAccount/alreadyAccount";
+import placeholderleft from "../../../images/onboarding/seeker_left.png";
+import placeholderright from "../../../images/onboarding/seeker_right.png";
 
 const OnboardingSeeker = () => {
   const { t } = useTranslation();
   return (
     <div className={classnames(styles.Container)}>
       <div className={classnames(styles.imageContainer)}>
-        <img
-          src={placeholder}
-          className={classnames(styles.imageContainerimage)}
-          alt="Placeholder"
-        />
+        <div className={classnames(styles.imageContainerleft)} style={{backgroundImage: `url(${placeholderleft})`}}></div>
+        <div className={classnames(styles.imageContainerright)} style={{backgroundImage: `url(${placeholderright})`}}></div>
       </div>
 
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
           {t("onboardingPageSeekerHeader")}
         </h1>
-        <p>{t("onboardingPageSeekerDescription")}</p>
+        <p className={classnames(styles.textContainertext)}>{t("onboardingPageSeekerDescription")}</p>
       </div>
       <div className={classnames(styles.buttonContainer)}>
         <Link to="/onboardingpate">
@@ -37,8 +34,11 @@ const OnboardingSeeker = () => {
           </Button>
         </Link>
       </div>
-      <hr />
-      <AlreadyAccount />
+      <div className={classnames(styles.loginLink)}>
+        <Link to="/login">
+          <span>{t("labelLogin")}</span>
+        </Link>
+      </div>
     </div>
   );
 };

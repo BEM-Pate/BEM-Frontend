@@ -7,6 +7,7 @@ import expand from '../../images/icons/ui/expand.svg';
 interface Props extends FormControl {
   multiple?: boolean;
   options: FormOption[];
+  placeholder?: string;
 }
 
 const Dropdown = (props: Props) => {
@@ -19,6 +20,7 @@ const Dropdown = (props: Props) => {
     required,
     onChange,
     defaultValue,
+    placeholder,
   } = props;
   const [value, setValue] = useState<string | string[] | undefined>(
     defaultValue || (multiple ? [] : undefined),
@@ -100,7 +102,7 @@ const Dropdown = (props: Props) => {
           onClick={(e) => toggleList(e)}
           disabled={disabled}
         >
-          {options[options.findIndex((option) => option.value === value)]?.label || 'Please select...'}
+          {options[options.findIndex((option) => option.value === value)]?.label || placeholder || 'Please select...'}
           <img
             className={classNames(styles.DropdownValueIcon)}
             src={expand}
