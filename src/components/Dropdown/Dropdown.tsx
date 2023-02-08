@@ -29,14 +29,10 @@ const Dropdown = (props: Props) => {
     if (multiple) {
       const values = value as any[];
       const newValueIsPresent = values.some((v) => v === newValue);
-      if (e.shiftKey || e.ctrlKey) {
-        if (newValueIsPresent) {
-          setValue(values.filter((v) => v !== newValue));
-        } else {
-          setValue([...values, newValue]);
-        }
+      if (newValueIsPresent) {
+        setValue(values.filter((v) => v !== newValue));
       } else {
-        setValue([newValue]);
+        setValue([...values, newValue]);
       }
     } else {
       setValue(newValue);

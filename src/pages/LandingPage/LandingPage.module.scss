@@ -5,6 +5,11 @@
     justify-content: center;
     padding: 16px;
 
+    &Headline {
+        text-align: center;
+        margin: 64px 0 21px;
+    }
+
     &Buttons {
         align-items: center;
         display: flex;
@@ -17,7 +22,7 @@
         display: flex;
         background-color: var(--color-white);
         border-radius: 16px;
-        box-shadow: var(--color-body-text);
+        box-shadow: var(--box-shadow-input);
         color: var(--color-font);
         flex-flow: column nowrap;
         justify-content: center;

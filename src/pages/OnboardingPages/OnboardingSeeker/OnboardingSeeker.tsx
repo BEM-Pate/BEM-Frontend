@@ -31,7 +31,7 @@ const OnboardingSeeker = () => {
             {t("labelNext")}
           </Button>
         </Link>
-        <Link to="/register/seeker">
+        <Link to="/register">
           <Button className={classnames(styles.buttonContainerbuttonNext)}>
             {t("labelRegister")}
           </Button>

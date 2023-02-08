@@ -30,13 +30,10 @@
   "labelJob": "Beruf",
   "labelMyLanaguae": "Meine Sprachen",
 
-  "landingPageWelcome": "Willkommen beim BEMpsy Selbsthilfe-Portal",
-  "landingPageIntroduction": "Ein Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
   "landingPageCTA": "Was möchtest du tun?",
-  "landingPageLinkFindPate": "Bem-Pate finden",
+  "landingPageLinkFindPate": "Bem-Pate oder Selbsthilfegruppe finden",
   "landingPageLinkBecomePate": "BEM-Pate werden",
-  "landingPageLinkOrLabel": "oder",
-  "landingPageLinkVideos": "Betroffene erzählen (Videos)",
+  "landingPageLinkCreateSHG": "Erstelle eine Selbsthilfegruppe",
 
   "loginPageHeadline": "Mit bestehendem Account anmelden",
   "loginPageButtonLogin": "Anmelden",
@@ -101,7 +98,7 @@
 
   "enum_languages": "Sprachen",
   "enum_languages_DE": "Deutsch",
-  "enum_languages_EN": "Englisch",
+  "enum_languages_GB": "Englisch",
   "enum_languages_TR": "Türkisch",
   "enum_languages_ES": "Spanisch",
   "enum_languages_UA": "Ukrainisch",

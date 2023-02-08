@@ -37,13 +37,10 @@ interface store {
 
 
 
-const BASE_URL = `http://141.45.146.171/api`
-// const BASE_URL = `http://localhost:5000`
 
-export const SOCKET_URL =
-    `http://141.45.146.171`
-    // ||
-    // `http://localhost:5000`
+const BASE_URL = process.env.REACT_APP_API_ADDRESS ?? 'http://141.45.146.171/api'
+
+export const SOCKET_URL = BASE_URL === 'http://141.45.146.171/api' ? 'http://141.45.146.171' : 'http://localhost:5000'
 
 export let socket: null | Socket = null
 
@@ -82,7 +79,7 @@ export const useZustand = create<store>()(
                 set({token: data.token})
                 set({
                     socketConfig: {
-                        path: '/api/socket.io',
+                        path: SOCKET_URL === 'http://141.45.146.171' ? '/api/socket.io': '',
                         extraHeaders: {
                             Authorization: `Bearer ${data.token}`
                         }
