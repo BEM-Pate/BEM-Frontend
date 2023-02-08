@@ -16,7 +16,7 @@ const LandingPage = () => {
         <Headline headline="h3" className={styles.LandingPageHeadline}>{t('landingPageCTA')}</Headline>
       </div>
       <div className={styles.LandingPageButtons}>
-        <Link to="/dashboard/search" className={classNames(styles.LandingPageButton)}>
+        <Link to="/register/preferences" className={classNames(styles.LandingPageButton)}>
           <img src={findGroup} alt="Find a Group" />
           <span>{t('landingPageLinkFindPate')}</span>
         </Link>
