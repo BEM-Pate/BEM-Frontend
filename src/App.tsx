@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import './App.module.scss';
 import {
-  Routes, Route, useNavigate, useLocation,
+  Routes, Route, useNavigate, useLocation, Navigate,
 } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
 import RegisterUserPage from './pages/RegisterUserPage/RegisterUserPage';
@@ -44,43 +44,116 @@ const App = () => {
     () => userData !== null && userData?.baseUserData?.processBEM === 'DONE',
     [userData]);
 
+  const userHome = '/dashboard/search';
+
   // Authentication
   useEffect(() => {
-    // TODO: /register/pate authorisierung
-    const path = location.pathname;
-    if ((path.startsWith('/dashboard') || path === '/landingpage') && !isSignedIn()) {
-      navigate('/login');
-      return;
+    let path = location.pathname;
+
+    // Remove variables from path
+    if (path.startsWith('/dashboard/chatroom')) {
+      path = '/dashboard/chatroom';
+    }
+    if (path.startsWith('/dashboard/search/user')) {
+      path = '/dashboard/search/user';
     }
 
-    if (path === '/register/pate' && isPate()) {
-      navigate('/dashboard/search');
-      return;
-    }
-
-    if ((path.startsWith('/register') || path.startsWith('/login'))
-      && isSignedIn()
-      && isBaseDataVerified()
-      && hasPreferencesSet()) {
-      navigate('/dashboard/search');
-      return;
-    }
-
-    if (isSignedIn() && !isBaseDataVerified() && path !== '/register/user') {
-      navigate('/register/user');
-      return;
-    }
-
-    if (isSignedIn()
-      && isBaseDataVerified()
-      && hasPreferencesSet()
-      && path === '/register/preferences') {
-      navigate('/dashboard/search');
-      return;
-    }
-
-    if ((path === '/register/user' || path === '/register/preferences') && !isSignedIn()) {
-      navigate('/login');
+    switch (path) {
+      case '/splashscreen':
+      case '/': {
+        if (isSignedIn()) {
+          setTimeout(() => navigate(userHome), 1000);
+          return;
+        }
+        break;
+      }
+      case '/landingpage': {
+        if (!isSignedIn()) {
+          navigate('/login');
+          return;
+        }
+        break;
+      }
+      case '/login': {
+        if (isSignedIn()) {
+          navigate(userHome);
+          return;
+        }
+        break;
+      }
+      case '/onboardingseeker':
+      case '/onboardingpate':
+      case '/onboardingshg': {
+        if (isSignedIn()) {
+          navigate(userHome);
+          return;
+        }
+        break;
+      }
+      case '/register': {
+        if (isSignedIn()) {
+          navigate(userHome);
+          return;
+        }
+        break;
+      }
+      case '/register/user': {
+        if (!isSignedIn()) {
+          navigate('/login');
+          return;
+        }
+        if (isSignedIn() && isBaseDataVerified()) {
+          navigate(userHome);
+          return;
+        }
+        break;
+      }
+      case '/register/preferences': {
+        if (!isSignedIn()) {
+          navigate('/login');
+          return;
+        }
+        if (isSignedIn() && hasPreferencesSet()) {
+          navigate(userHome);
+          return;
+        }
+        break;
+      }
+      case '/register/pate': {
+        if (!isSignedIn()) {
+          navigate('/login');
+          return;
+        }
+        if (isSignedIn() && isPate()) {
+          navigate(userHome);
+          return;
+        }
+        break;
+      }
+      case '/dashboard':
+      case '/dashboard/chatroom':
+      case '/dashboard/search':
+      case '/dashboard/search/user':
+      case '/dashboard/messages':
+      case '/dashboard/groups':
+      case '/dashboard/settings':
+      case '/dashboard/settings/profile':
+      case '/dashboard/category': {
+        if (!isSignedIn()) {
+          navigate('/login');
+          return;
+        }
+        if (!isBaseDataVerified()) {
+          navigate('/register/user');
+          return;
+        }
+        if (!hasPreferencesSet() || !isPate()) {
+          navigate('/landingpage');
+          return;
+        }
+        break;
+      }
+      default:
     }
   }, [hasPreferencesSet, isBaseDataVerified, isPate, isSignedIn, location, navigate, userData]);
 
@@ -97,8 +170,8 @@ const App = () => {
         <Route path="register" element={<RegisterPage />} />
         <Route path="register">
           <Route path="user" element={<RegisterUserPage redirectOnSuccess="/landingpage" />} />
-          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess="/dashboard/search" />} />
-          <Route path="pate" element={<RegisterPatePage redirectOnSuccess="/dashboard/search" />} />
+          <Route path="preferences" element={<RegisterPreferencesPage redirectOnSuccess={userHome} />} />
+          <Route path="pate" element={<RegisterPatePage redirectOnSuccess={userHome} />} />
         </Route>
         <Route element={<DashboardPage />}>
             <Route path="dashboard">
@@ -112,6 +185,7 @@ const App = () => {
               <Route path="category" element={<Category userData={userData} />} />
             </Route>
         </Route>
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>
     </>
   );
