@@ -15,6 +15,7 @@ interface store {
     fetchChatroom: () => void,
     fetchContacts: (userIds: string[]) => Promise<void>,
     fetchPendingContacts: () => void,
+    deleteEverything: () => void,
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
@@ -130,7 +131,7 @@ export const useZustand = create<store>()(
             setCurrentRoute: (route: string) => {
                 set({ route })
             },
-
+            deleteEverything: () => set({}, true),
             pushMessageToChatRoom: (chatRoomId: string, messageObject: any) => {
                 const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
                 let chatrooms = get().chatrooms

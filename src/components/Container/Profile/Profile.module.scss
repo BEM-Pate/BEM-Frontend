@@ -6,6 +6,14 @@
   padding: 16px;
   gap: 24px;
   width: 100%;
+  background-color: var(--color-white-transparent);
+  &Header {
+    position: relative;
+    button {
+        position: absolute;
+    }
+}
+
    &Picture {
     width: 100%;
     display: flex;
@@ -39,16 +47,6 @@
         }
       }
     }
-  }
-
-  &Headline {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--color-headline-secondary);
   }
   label {
     color: var(--color-black);

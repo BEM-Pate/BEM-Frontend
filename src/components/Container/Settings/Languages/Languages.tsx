@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import API from "../../../../helpers/api";
 import { availableLanguages } from "../../../../translation/i18n";
 import styles from "./Languages.module.scss";
 
-import EN from "../../../../images/icons/flags/EN.svg";
+import GB from "../../../../images/icons/flags/GB.svg";
 import DE from "../../../../images/icons/flags/DE.svg";
-import TU from "../../../../images/icons/flags/TU.svg";
+import TR from "../../../../images/icons/flags/TR.svg";
 import FR from "../../../../images/icons/flags/FR.svg";
 import ES from "../../../../images/icons/flags/ES.svg";
 import PL from "../../../../images/icons/flags/PL.svg";
-import UR from "../../../../images/icons/flags/UR.svg";
+import UA from "../../../../images/icons/flags/UA.svg";
 import classNames from "classnames";
 import check from "../../../../images/icons/ui/check.svg";
+import { useNavigate } from "react-router-dom";
+import Button from "../../../Button/Button";
+import Headline from "../../../Headline/Headline";
+import axios from "axios";
+import { API_ADDRESS } from "../../../../helpers/env";
 
 interface Props {
   userData: any;
@@ -19,20 +24,20 @@ interface Props {
 
 function getFlag(countryCode: string) {
   switch (countryCode) {
-    case "EN":
-      return EN;
+    case "GB" || "EN":
+      return GB;
     case "DE":
       return DE;
-    case "TU":
-      return TU;
+    case "TR":
+      return TR;
     case "FR":
       return FR;
     case "ES":
       return ES;
     case "PL":
       return PL;
-    case "UR":
-      return UR;
+    case "UA":
+      return UA;
     default:
       return DE;
   }
@@ -40,18 +45,19 @@ function getFlag(countryCode: string) {
 
 const Languages = (props: Props) => {
   const { userData } = props;
+  const navigate = useNavigate();
+
   const [userAttributes, setUserAttributes] = useState<any>();
   const [languages, setLanguages] = useState<any>();
-  const [userLanguages, setUserLanguages] = useState<string[]>([]);
 
-  const [values, setValues] = useState<string[]>([]);
+  const [updatedLanguages, setUpdatedLanguages] = useState<string[]>([]);
 
   const handleChange = (clickedValue: string) => {
-    const newState = values?.includes(clickedValue)
-      ? values.filter((s) => s !== clickedValue)
-      : [...values, clickedValue];
+    const newState = updatedLanguages?.includes(clickedValue)
+      ? updatedLanguages.filter((s) => s !== clickedValue)
+      : [...updatedLanguages, clickedValue];
 
-    setValues(newState);
+    setUpdatedLanguages(newState);
   };
 
   useEffect(() => {
@@ -60,15 +66,51 @@ const Languages = (props: Props) => {
       const languages = await API.getEnums("languages");
       setUserAttributes(response);
       setLanguages(languages);
-      setValues(response.baseUserData.languages);
+      setUpdatedLanguages(response.baseUserData.languages);
     };
     init();
   }, [userData]);
 
-  console.log(values);
+  const updateLanguage = useCallback(() => {
+    try {
+      axios
+        .put(
+          `${API_ADDRESS}/user/userdata`,
+          {
+            baseUserData: {
+              languages: updatedLanguages,
+            },
+          },
+          {
+            headers: {
+              accept: "*/*",
+              Authorization: `Bearer ${userData.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => console.log(res));
+    } catch (err) {
+      console.error(err);
+    }
+  }, [updatedLanguages, userData]);
 
   return (
     <div className={classNames(styles.Languages)}>
+      <div className={classNames(styles.LanguagesHeader)}>
+        <Button
+          icon
+          styling="back"
+          onClick={() => {
+            navigate(-1);
+            updateLanguage();
+          }}
+        ></Button>
+        <Headline headline="h1" styling="page">
+          Languages
+        </Headline>
+      </div>
+      <div className={classNames(styles.LanguagesList)}>
       {languages?.map((language: any, index: any) => {
         return (
           <button
@@ -76,7 +118,9 @@ const Languages = (props: Props) => {
             name={language}
             className={classNames(
               styles.LanguagesButton,
-              values?.includes(language) ? styles.LanguagesButtonActive : ""
+              updatedLanguages?.includes(language)
+                ? styles.LanguagesButtonActive
+                : ""
             )}
             onClick={(e: any) => handleChange(e.target.name)}
           >
@@ -84,10 +128,13 @@ const Languages = (props: Props) => {
               <img src={getFlag(language)} alt={language}></img>
               <p>{language}</p>
             </div>
-            <div>{ values?.includes(language) ? <img src={check} alt="check"></img> : "" }</div>
+            <div className={classNames(styles.LanguagesButtonCheck)}>
+              {updatedLanguages?.includes(language) && <img src={check} alt="check"></img>}
+            </div>
           </button>
         );
       })}
+      </div>
     </div>
   );
 };

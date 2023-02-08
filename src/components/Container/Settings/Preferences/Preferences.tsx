@@ -1,6 +1,6 @@
 import axios from "axios";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../../../helpers/api";
@@ -28,6 +28,11 @@ const Preferences = (props: Props) => {
   const [locations, setLocations] = useState<FormOption[]>([]);
   const [meetings, setMeetings] = useState<FormOption[]>([]);
   const [supports, setSupports] = useState<FormOption[]>([]);
+
+
+  const [updatedLocations, setUpdatedLocations] = useState<string>("");
+  const [updatedMeetings, setUpdatedMeetings] = useState<string[]>([]);
+  const [updatedSupports, setUpdatedSupports] = useState<string[]>([]);
 
   const [pageUrl, setPageUrl] = useState<string>("");
 
@@ -103,16 +108,47 @@ const Preferences = (props: Props) => {
     window.location.href = `${pageUrl}`;
   };
 
+  const updateUserData = useCallback(() => {
+    try {
+      axios
+        .put(
+          `${API_ADDRESS}/user/userdata`,
+          {
+            meetingPreference: {
+              support: updatedSupports,
+              meeting: updatedMeetings,
+              location: updatedLocations,
+            },
+          },
+          {
+            headers: {
+              accept: "*/*",
+              Authorization: `Bearer ${userData.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => console.log(res));
+    } catch (err) {
+      console.error(err);
+    }
+  }, [
+    updatedSupports,
+    updatedMeetings,
+    updatedLocations,
+    userData
+  ]);
+
   return (
     <div className={classNames(styles.Preferences)}>
-      <div>
-      <Button icon styling="back" onClick={() => navigate(-1)}></Button>
+      <div className={classNames(styles.PreferencesHeader)}>
+      <Button icon styling="back" onClick={() => {navigate(-1); updateUserData()}}></Button>
         <Headline headline="h1" styling="page">
           Einstellungen
         </Headline>
        
       </div>
-      <div>
+      <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
           Sichtbarkeit
         </Headline>
@@ -121,9 +157,10 @@ const Preferences = (props: Props) => {
           id="locations"
           label="Locations"
           defaultValue={["BW"]}
+          onChange={setUpdatedLocations}
         ></Dropdown>
       </div>
-      <div>
+      <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
           treffen / austausch
         </Headline>
@@ -131,15 +168,17 @@ const Preferences = (props: Props) => {
           id="meetings"
           options={meetings}
           label="Meetings"
+          onChange={setUpdatedMeetings}
           defaultValue={userAttributes?.meetingPreference.meeting}
         ></CheckboxList>
         <Dropdown
           options={supports}
-          id="locations"
+          id="supports"
           label="Ich biete"
+          onChange={setUpdatedSupports}
         ></Dropdown>
       </div>
-      <div>
+      <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
           Privatsphäre
         </Headline>
@@ -154,7 +193,7 @@ const Preferences = (props: Props) => {
           Datenschutz
         </Button>
       </div>
-      <div>
+      <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
           app
         </Headline>

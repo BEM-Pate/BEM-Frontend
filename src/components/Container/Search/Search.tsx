@@ -109,23 +109,27 @@ const Search = (props: Props) => {
   const { t } = useTranslation();
 
   const applyFilter = useCallback(async () => {
-    console.log("fire")
-    const encodedJson = encodeURIComponent(JSON.stringify({location: filterLocation, meeting: filterMeeting, diseases: filterDiseases, ageRange: filterAgeRange}));
-    try {
-      axios
-        .get(`${API_ADDRESS}/match/pate?filterobject=${encodedJson}`, {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${userData.token}`,
-          },
-        })
-        .then((res) => {
-          setMatches(res.data);
-        });
-    } catch (error) {
-      console.error(error);
+    if(userAttributes?.baseUserData.role === "normal_user") {
+      const encodedJson = encodeURIComponent(JSON.stringify({location: filterLocation, meeting: filterMeeting, diseases: filterDiseases, ageRange: filterAgeRange}));
+      try {
+        axios
+          .get(`${API_ADDRESS}/match/pate?filterobject=${encodedJson}`, {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${userData.token}`,
+            },
+          })
+          .then((res) => {
+            setMatches(res.data);
+          });
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, [filterLocation, userData, filterMeeting, filterAgeRange, filterDiseases]);
+   
+  }, [filterLocation, userData, filterMeeting, filterAgeRange, filterDiseases, userAttributes]);
+
+  
 
   useEffect(() => {
     const init = async () => {

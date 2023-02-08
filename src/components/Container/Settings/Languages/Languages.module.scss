@@ -1,33 +1,56 @@
-.Languages {
-  display: grid;
-  gap: 16px;
-  
-}
+@import "../../../../styles/mixins.module";
 
-.LanguagesButton {
-    display: flex;
-    justify-content: space-between;
-  width: 100%;
-  background-color: var(--color-body-bg-white);
-  appearance: none;
-  border: none;
-  margin: 0px;
-  padding: 16px;
-  border-radius: 16px;
-  &Details {
+.Languages {
+  @include dashboard-container;
+
+  &Header {
+    position: relative;
+    margin-bottom: 32px;
+    button {
+      position: absolute;
+    }
+  }
+
+  .LanguagesList {
+    display: grid;
     gap: 16px;
+  }
+
+  &Button {
     display: flex;
-    align-items: center;
-    p {
+
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--color-body-bg-white);
+    appearance: none;
+    border: 2px solid var( --color-border);
+    margin: 0px;
+    padding: 16px;
+    border-radius: 16px;
+    transition: all ease-in-out .25s;
+    &Details {
+      gap: 16px;
+      display: flex;
+      align-items: center;
+      p {
         margin: 0px;
       }
       img {
         border-radius: 6px;
         height: 24px;
       }
-  }
-  
-  &Active {
-    color: red;
+    }
+    &Check {
+      img {
+        height: 24px;
+      
+      }
+    
+    }
+
+    &Active {
+      border: 2px solid var( --color-primary);
+      transition: all ease-in-out .25s;
+    }
   }
 }

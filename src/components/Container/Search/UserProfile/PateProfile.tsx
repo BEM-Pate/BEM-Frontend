@@ -64,27 +64,22 @@ const PateProfile = (props: Props) => {
   }, [pendingContacts]);
 
   useEffect(() => {
-    if (!location.state) {
-      const getPateData = async () => {
-        console.log("Location is null");
-        const avatar = await API.getUserAvatar(id!);
-        const data = await API.getPublicUser(id!);
-        const user = await API.getBaseUserData(userData.token);
-        setUserAttributes(user);
-        setUserPateAvatar(avatar);
-        setPateData(data as PateData);
-        setIsPendingContact(
-          user.baseUserData.pendingContact.includes(data._id)
-        );
-        setIsVerifiedContact(
-          user?.baseUserData?.verifiedContact.includes(data?._id)
-        );
-      };
-      getPateData();
-    } else {
-      setUserPateAvatar(location.state.imageSrc);
-      setMatch(location.state.match);
-    }
+    setUserPateAvatar(location.state.imageSrc);
+    setMatch(location.state.match);
+       
+    const getPateData = async () => {
+      const user = await API.getBaseUserData(userData.token);
+      const data = await API.getPublicUser(id!);
+      setIsPendingContact(user.baseUserData.pendingContact.includes(data._id));
+      setIsVerifiedContact(
+        user?.baseUserData?.verifiedContact.includes(data?._id)
+      );
+      const avatar = await API.getUserAvatar(id!);     
+      setUserAttributes(user);
+      setUserPateAvatar(avatar);
+      setPateData(data as PateData);  
+    };
+    getPateData();
   }, [userData, id, location]);
 
   const requestContact = () => {
@@ -241,10 +236,9 @@ const PateProfile = (props: Props) => {
                 return (
                   <Chip
                     toggleAble={false}
-
                     key={index}
                     id={disease}
-                    selected={(userAttributes?.meetingPreference.diseaseConsultation)?.includes(
+                    selected={userAttributes?.meetingPreference.diseaseConsultation?.includes(
                       disease
                     )}
                     emoji={getEmoji(disease)}
@@ -271,7 +265,13 @@ const PateProfile = (props: Props) => {
               >
                 Geschlecht
               </Headline>
-              <p>{t(`enum_genders_${match?.gender || pateData?.baseUserData.gender}`)}</p>
+              <p>
+                {t(
+                  `enum_genders_${
+                    match?.gender || pateData?.baseUserData.gender
+                  }`
+                )}
+              </p>
             </div>
           </div>
           <div className={classNames(styles.UserProfileMiscItem)}>
@@ -285,7 +285,13 @@ const PateProfile = (props: Props) => {
               >
                 Alter
               </Headline>
-              <p>{t(`enum_ageranges_${match?.ageRange || pateData?.baseUserData.ageRange}`)}</p>
+              <p>
+                {t(
+                  `enum_ageranges_${
+                    match?.ageRange || pateData?.baseUserData.ageRange
+                  }`
+                )}
+              </p>
             </div>
           </div>
           <div className={classNames(styles.UserProfileMiscItem)}>
@@ -300,10 +306,16 @@ const PateProfile = (props: Props) => {
                 Treffen
               </Headline>
               <p>
-                {(match?.meetingPreference.meeting || pateData?.meetingPreference.meeting)?.map((meeting, index) => {
+                {(
+                  match?.meetingPreference.meeting ||
+                  pateData?.meetingPreference.meeting
+                )?.map((meeting, index) => {
                   return (
                     <div key={index}>
-                      <span>{index > 0 ? " & " : ""}{t(`enum_meetings_${meeting}`)}</span>
+                      <span>
+                        {index > 0 ? " & " : ""}
+                        {t(`enum_meetings_${meeting}`)}
+                      </span>
                       <br />
                     </div>
                   );
@@ -320,7 +332,11 @@ const PateProfile = (props: Props) => {
             Berufsfeld
           </Headline>
           <Chip id="occupation">
-            {t(`enum_occupations_${match?.occupation || pateData?.baseUserData.occupation}`)}
+            {t(
+              `enum_occupations_${
+                match?.occupation || pateData?.baseUserData.occupation
+              }`
+            )}
           </Chip>
         </div>
         <div className={classNames(styles.UserProfileInformationBaseContainer)}>

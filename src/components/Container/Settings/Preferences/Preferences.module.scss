@@ -4,7 +4,13 @@
     @include dashboard-container;
     display: grid;
     gap: 24px;
-    >div {
+    &Header {
+        position: relative;
+        button {
+            position: absolute;
+        }
+    }
+    &Section {
         display: grid;
         gap: 16px;
     }

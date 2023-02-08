@@ -187,13 +187,6 @@ const Profile = (props: Props) => {
     updatedMotivation,
   ]);
 
-  const updateAvatar = useCallback(
-    (e: any) => {
-      console.log(e);
-    },
-    [updatedAvatar]
-  );
-
   function userIsPate(object: any): object is PateData {
     return object === undefined ? false : object.baseUserData.role === "pate";
   }
@@ -212,18 +205,18 @@ const Profile = (props: Props) => {
               "Content-Type": "multipart/form-data",
             },
           }
-          );
-          if( avatarResult.status === 200) {
-            setAvatar(URL.createObjectURL(updatedAvatar))
-          }
-        };
-        init();
+        );
+        if (avatarResult.status === 200) {
+          setAvatar(URL.createObjectURL(updatedAvatar));
+        }
+      };
+      init();
     }
   }, [updatedAvatar, userData]);
 
   return (
     <div className={classNames(styles.Profile)}>
-       <div className={classNames(styles.ProfileHeader)} >
+      <div className={classNames(styles.ProfileHeader)}>
         <Button icon styling="back" onClick={() => navigate(-1)}></Button>
         <Headline headline="h1" styling="page">
           Einstellungen
@@ -248,7 +241,7 @@ const Profile = (props: Props) => {
           </label>
         </Button>
       </div>
-      <Headline headline="h2" className={styles.ProfileHeadline}>
+      <Headline headline="h2" styling="caps">
         persönliche angaben
       </Headline>
       <Textfield
@@ -288,24 +281,12 @@ const Profile = (props: Props) => {
         ></ChipList>
       </div>
 
-      <CheckboxList
-        id="meeting"
-        label="Meeting"
-        options={meetings}
-        onChange={setUpdatededMeetings}
-        defaultValue={userAttributes?.meetingPreference.meeting}
-      ></CheckboxList>
-
       <Dropdown
-        id="locations"
-        onChange={setUpdatedLocations}
-        options={locations}
-        label="Location"
+        onChange={setUpdatededOccupation}
+        id="occupations"
+        options={occupations}
+        label="Occupations"
       ></Dropdown>
-
-      {/* <Dropdown id="supports" onChange={setUpdatededSupports} options={supports} label="Support"></Dropdown> */}
-
-      {/*  <Dropdown onChange={setUpdatededOccupation} id="occupations" options={occupations} label="Occupations"></Dropdown> */}
       <Button onClick={updateUserData}>Änderungen speichern</Button>
     </div>
   );

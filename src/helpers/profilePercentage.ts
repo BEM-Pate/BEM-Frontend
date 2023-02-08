@@ -40,7 +40,7 @@ const profilePercentage = (profile: PateData | UserData): number => {
     }
   }
 
-  let result = (fieldComplete / (baseData.length + meetingPreference.length))*100;
+  let result = Math.round((fieldComplete / (baseData.length + meetingPreference.length))*100);
 
   return result;
 };

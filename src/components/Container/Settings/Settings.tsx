@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import styles from "./Settings.module.scss";
 import Headline from "../../Headline/Headline";
@@ -12,7 +12,6 @@ import languages from "../../../images/icons/ui/languages.svg";
 import settings from "../../../images/icons/ui/settings_outline.svg";
 import account from "../../../images/icons/ui/account.svg";
 import logout from "../../../images/icons/ui/logout.svg";
-import LanguageDropdown from "../../LanguageDropdown/LanguageDropdown";
 import { useZustand } from "../../../zustand/store";
 
 interface Props {
@@ -23,8 +22,11 @@ const Settings = (props: Props) => {
   const { userData } = props;
   const navigate = useNavigate();
   const [userAttributes, setUserAttributes] = useState<PateData | UserData>();
+
+  
+
   const [imageData, setImageData] = useState<any>(placeholder);
-  const setUser = useZustand((state) => state.setUser);
+  const deleteEverything = useZustand((state) => state.deleteEverything);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -50,10 +52,10 @@ const Settings = (props: Props) => {
     }
   }, [userAttributes]);
 
-  const logoutUser = useCallback(() => {
-    setUser({});
-    navigate('/login');
-  }, [setUser, navigate]);
+  const logoutUser = () => {
+    navigate('/login'); //TODO: Login Page is blank
+    deleteEverything();
+  };
 
   return (
     <div className={classNames(styles.Settings)}>
@@ -96,7 +98,7 @@ const Settings = (props: Props) => {
         <>Einstellungen</>
       </div>
      </Button>
-     <Button styling='setting' onClick={logoutUser}>
+     <Button styling='setting' onClick={() => logoutUser()}>
       <div>
         <img src={logout} alt="arrow"></img>
         <>Logout</>
