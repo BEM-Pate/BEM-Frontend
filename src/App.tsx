@@ -74,6 +74,10 @@ const App = () => {
           navigate('/login');
           return;
         }
+        if (!isBaseDataVerified()) {
+          navigate('/register/user');
+          return;
+        }
         break;
       }
       case '/login': {
@@ -115,6 +119,10 @@ const App = () => {
           navigate('/login');
           return;
         }
+        if (!isBaseDataVerified()) {
+          navigate('/register/user');
+          return;
+        }
         if (isSignedIn() && hasPreferencesSet()) {
           navigate(userHome);
           return;
@@ -124,6 +132,10 @@ const App = () => {
       case '/register/pate': {
         if (!isSignedIn()) {
           navigate('/login');
+          return;
+        }
+        if (!isBaseDataVerified()) {
+          navigate('/register/user');
           return;
         }
         if (isSignedIn() && isPate()) {
