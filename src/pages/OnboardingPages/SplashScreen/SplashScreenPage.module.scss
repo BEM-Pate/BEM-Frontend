@@ -3,15 +3,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100%;
   flex-direction: column;
   background-image: url('../../../images/icons/ui/SplashScreenBubble.png');
   background-size: cover;
   background-position: center;
+  flex: 0 0 auto;
+  padding-bottom: 24px;
   &upperDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 0 0 auto;
     &img {
       margin: 10px;
     }
@@ -26,6 +29,7 @@
     text-align: center;
     margin: 40px;
     opacity: 0.8;
+    flex: 0 0 auto;
   }
 }
 .buttonContainer {

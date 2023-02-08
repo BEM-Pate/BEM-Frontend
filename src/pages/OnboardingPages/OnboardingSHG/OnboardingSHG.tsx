@@ -11,12 +11,12 @@ const OnboardingSHG = () => {
   return (
     <div className={classnames(styles.Container)}>
       <div className={classnames(styles.imageContainer)} style={{backgroundImage: `url(${placeholder})`}}></div>
+      <div className={classnames(styles.spacer)}></div>
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
           {t("onboardingSHGHeader")}
         </h1>
       </div>
-
       <div className={classnames(styles.buttonContainer)}>
         <Link to="/onboardingseeker">
           <Button className={classnames(styles.buttonContainerbutton)}>

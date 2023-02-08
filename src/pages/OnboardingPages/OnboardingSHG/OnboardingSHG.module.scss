@@ -1,6 +1,11 @@
 .Container {
   background-color: #ffffff;
   min-height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  &>* {
+    flex: 0 0 auto;
+  }
 }
 .imageContainer {
   background-color: #ffffff;
@@ -37,6 +42,7 @@
     color: rgb(99, 131, 123);
     border: none;
   }
+  z-index: 1;
 }
 .LoginContainer {
   background-color: #ffffff;
@@ -52,4 +58,7 @@
   background-color: #ffffff;
   padding: 24px;
   text-align: center;
+}
+.spacer {
+  flex: 1 1 auto;
 }
