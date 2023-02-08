@@ -161,7 +161,7 @@ const App = () => {
           navigate('/register/user');
           return;
         }
-        if (!hasPreferencesSet() || !isPate()) {
+        if (!hasPreferencesSet() && !isPate()) {
           navigate('/landingpage');
           return;
         }
