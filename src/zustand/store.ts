@@ -15,6 +15,7 @@ interface store {
     fetchChatroom: () => void,
     fetchContacts: (userIds: string[]) => Promise<void>,
     fetchPendingContacts: () => void,
+    deleteEverything: () => void,
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
@@ -36,10 +37,10 @@ interface store {
 
 
 
+
 const BASE_URL = process.env.REACT_APP_API_ADDRESS ?? 'http://141.45.146.171/api'
 
 export const SOCKET_URL = BASE_URL === 'http://141.45.146.171/api' ? 'http://141.45.146.171' : 'http://localhost:5000'
-
 
 export let socket: null | Socket = null
 
@@ -127,7 +128,7 @@ export const useZustand = create<store>()(
             setCurrentRoute: (route: string) => {
                 set({ route })
             },
-
+            deleteEverything: () => set({}, true),
             pushMessageToChatRoom: (chatRoomId: string, messageObject: any) => {
                 const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
                 let chatrooms = get().chatrooms

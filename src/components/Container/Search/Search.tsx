@@ -9,8 +9,6 @@ import Headline from "../../Headline/Headline";
 import Button from "../../Button/Button";
 import magnifier from "../../../images/icons/ui/magnifier.svg";
 import filter from "../../../images/icons/ui/filter.svg";
-import Chip from "../../Chip/Chip";
-import getEmoji from "../../../helpers/emoji";
 import map_placeholder from "../../../images/map_placeholder.png";
 import { useZustand } from "../../../zustand/store";
 import RequestedContactCard from "./ResultCard/RequestedContactCard";
@@ -22,6 +20,7 @@ import Textfield from "../../Textfield/Textfield";
 import { useTranslation } from "react-i18next";
 import API from "../../../helpers/api";
 import { FormOption } from "../../FormularStepper/FormularTypes";
+import ChipList from "../../ChipList/ChipList";
 
 interface Props {
   userData: any;
@@ -36,13 +35,6 @@ interface ResultProps {
 interface ContactRequest {
   userAttributes: any;
   token: string;
-}
-
-interface FilterData {
-  diseases?: string[];
-  location?: string;
-  meeting?: string[];
-  ageRange?: string[];
 }
 
 const Loading = () => (
@@ -77,8 +69,6 @@ const ResultsOfPate = (props: ContactRequest) => {
     state.fetchPendingContacts,
   ]);
 
-  console.log(pendingContacts);
-
   useEffect(() => {
     fetchPendingContacts();
   }, []);
@@ -106,7 +96,6 @@ const Search = (props: Props) => {
   const [matches, setMatches] = useState<Match[]>();
   const [userAttributes, setUserAttributes] = useState<any>();
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-  const [filterData, setfilterData] = useState<FilterData>({});
 
   const [filterAgeRange, setFilterAgeRange] = useState<string[]>([]);
   const [filterMeeting, setFilterMeeting] = useState<string[]>([]);
@@ -119,29 +108,28 @@ const Search = (props: Props) => {
 
   const { t } = useTranslation();
 
-  const handleChange = (value: string, name: string) => {
-    setfilterData({ ...filterData, [name]: value });
-  };
-
   const applyFilter = useCallback(async () => {
-    const encodedJson = encodeURIComponent(JSON.stringify({location: filterLocation, meeting: filterMeeting, diseases: filterDiseases, ageRange: filterAgeRange}));
-    try {
-      axios
-        .get(`${API_ADDRESS}/match/pate?filterobject=${encodedJson}`, {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${userData.token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          setMatches(res.data);
-        });
-    } catch (error) {
-      console.error(error);
+    if(userAttributes?.baseUserData.role === "normal_user") {
+      const encodedJson = encodeURIComponent(JSON.stringify({location: filterLocation, meeting: filterMeeting, diseases: filterDiseases, ageRange: filterAgeRange}));
+      try {
+        axios
+          .get(`${API_ADDRESS}/match/pate?filterobject=${encodedJson}`, {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${userData.token}`,
+            },
+          })
+          .then((res) => {
+            setMatches(res.data);
+          });
+      } catch (error) {
+        console.error(error);
+      }
     }
-    setOpenFilter(false);
-  }, [filterLocation, userData, filterMeeting, filterAgeRange, filterDiseases]);
+   
+  }, [filterLocation, userData, filterMeeting, filterAgeRange, filterDiseases, userAttributes]);
+
+  
 
   useEffect(() => {
     const init = async () => {
@@ -202,25 +190,10 @@ const Search = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log(filterDiseases)
-    applyFilter();
+    applyFilter(); 
   }, [filterDiseases])
 
- 
- 
-/* TEMP */
-  function handleChipClick(e: string) {
-    const index = filterDiseases.indexOf(e);
-    if (index === -1) {
-        setFilterDiseases([...filterDiseases, e])
-      
-    } else {
-        let newArray = [...filterDiseases];
-        newArray.splice(index, 1);
-        setFilterDiseases(newArray);
-    }
-    
-  }
+  
 
   return (
     <div className={classNames(styles.Search)}>
@@ -229,7 +202,7 @@ const Search = (props: Props) => {
           className={classNames(styles.SearchHeadersHeadlineH1)}
           headline="h1"
         >
-          {userAttributes?.baseUserData?.role === "normal_user"
+          {userData?.baseUserData?.role === "normal_user"
             ? " BEM-Pate finden"
             : "BEM-Kontaktanfragen"}
         </Headline>
@@ -272,32 +245,17 @@ const Search = (props: Props) => {
         className={classNames(styles.SearchHeadersHeadlineH2)}
         headline="h2"
       >
-        Krankheitsbild
+        Krankheitsbilder
       </Headline>
       <div className={classNames(styles.SearchDiseases)}>
-        {userAttributes! &&
-          diseases.map((disease, index) => {
-            return (
-              <Chip
-                emoji={getEmoji(disease?.value)}
-                id={disease?.value}
-                key={index}
-                onClick={(e) => handleChipClick(e)}
-/*                 selected={userAttributes?.meetingPreference.diseaseConsultation.includes(
-                  disease.value
-                )} */
-              >
-                {disease.label}
-              </Chip>
-            );
-          })}
+        <ChipList id="d" options={diseases} onChange={setFilterDiseases}></ChipList>
       </div>
 
       <Headline
         className={classNames(styles.SearchHeadersHeadlineH2)}
         headline="h2"
       >
-        {userAttributes?.baseUserData?.role === "normal_user"
+        {userData?.baseUserData?.role === "normal_user"
           ? "Standorte von BEM-Paten"
           : "Standorte von BEM-Betroffenen"}
       </Headline>
@@ -361,7 +319,7 @@ const Search = (props: Props) => {
             <Button styling="outline" onClick={() => setOpenFilter(false)}>
               Cancel
             </Button>
-            <Button onClick={applyFilter}>Submit</Button>
+            <Button onClick={() => {setOpenFilter(false); applyFilter()}}>Submit</Button>
           </div>
         </div>
       </BottomSheet>

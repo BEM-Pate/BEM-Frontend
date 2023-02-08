@@ -24,6 +24,8 @@ import RegisterPreferencesPage from "./pages/RegisterPreferencesPage/RegisterPre
 import Category from './components/Container/Search/Category/Category';
 import RegisterPatePage from "./pages/RegisterPatePage/RegisterPatePage";
 import SplashScreenPage from './pages/OnboardingPages/SplashScreen/SplashScreenPage';
+import Preferences from './components/Container/Settings/Preferences/Preferences';
+import Languages from './components/Container/Settings/Languages/Languages';
 
 const App = () => {
   const navigate = useNavigate();
@@ -181,8 +183,10 @@ const App = () => {
               <Route path="messages" element={<Messages />} />
               <Route path="groups" element={<Groups />} />
               <Route path="settings" element={<Settings userData={userData} />} />
-              <Route path="settings/profile" element={<Profile userData={userData} />} />
-              <Route path="category" element={<Category userData={userData} />} />
+                <Route path="settings/profile" element={<Profile userData={userData} />} />
+                <Route path="settings/edit" element={<Preferences userData={userData}/>} />
+                <Route path="settings/languages" element={<Languages userData={userData}/>} />
+              <Route path="category/:id" element={<Category userData={userData} />} />
             </Route>
         </Route>
         <Route path="*" element={<Navigate to={'/'} />} />

@@ -68,8 +68,7 @@
     padding: 11px 14px;
     text-align: left;
     text-overflow: ellipsis;
-    white-space: nowrap;
-
+   /*  white-space: nowrap; */
     &Selected {
       background-color: var(--color-primary-transparent);
     }

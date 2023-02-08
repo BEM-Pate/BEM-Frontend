@@ -5,6 +5,7 @@
 
     &Results {
     display: flex;
+    grid-template-columns: repeat(50, 4fr);
     overflow: auto;
     white-space: nowrap;
     margin-left: -0.4rem;

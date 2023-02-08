@@ -8,7 +8,7 @@ import placeholder from '../../../../images/default.png';
 import API from '../../../../helpers/api';
 import {API_ADDRESS} from '../../../../helpers/env';
 import Button from '../../../Button/Button';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 interface Props {
     userAttributes: UserData;
@@ -20,6 +20,8 @@ const ResultCard = (props: Props) => {
     const {userAttributes, match, token} = props;
     const [imageSrc, setImageSrc] = useState<any>(placeholder);
     const [betroffenerData, setBetroffenerData] = useState<any>(null)
+
+    const navigate = useNavigate();
 
     useEffect( () => {
         if (userAttributes?.baseUserData?.role == "normal_user") {
@@ -53,8 +55,8 @@ const ResultCard = (props: Props) => {
     return (
         userAttributes?.baseUserData?.role == "normal_user" ?
             (
-                <Link
-                    to={`/dashboard/search/user/${match.account}`} >
+                <div
+                    onClick={() => navigate(`/dashboard/search/user/${match.account}`, { state: {match , imageSrc}  })} >
                     <div className={classNames(styles.ResultCard)}>
                         {within7Days(match.date!) && <div className={classNames(styles.ResultCardNewTag)}>NEW</div>}
                         <img src={imageSrc} alt={match.firstName}/>
@@ -68,7 +70,7 @@ const ResultCard = (props: Props) => {
                             </div>
                         </div>
                     </div>
-                </Link>
+                </div>
             ) :
             userAttributes?.baseUserData?.role == "pate" ?
                 (

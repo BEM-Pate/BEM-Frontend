@@ -16,50 +16,131 @@ import Headline from "../../Headline/Headline";
 import placeholder from "../../../images/default.png";
 import camera from "../../../images/icons/ui/camera.svg";
 import { useNavigate } from "react-router-dom";
-import Chip from "../../Chip/Chip";
-import getEmoji from "../../../helpers/emoji";
+import { t } from "i18next";
+import ChipList from "../../ChipList/ChipList";
+import CheckboxList from "../../CheckboxList/CheckboxList";
+import FileInput from "../../FileInput/FileInput";
 
 interface Props {
   userData: any;
 }
 
-interface EnumProps {
-  route: string;
-}
-
 const Profile = (props: Props) => {
   const { userData } = props;
-  const enumRoutes = [
-    "ageranges",
-    "diseases",
-    "genders",
-    "languages",
-    "meetings",
-    "occupations",
-    "processbem",
-    "supports",
-  ];
 
-  /* eslint-disable */
   const [userAttributes, setUserAttributes] = useState<UserData | PateData>();
-  const [newBaseUserData, setNewBaseUserData] = useState({});
-  const [profilePicture, setProfilePicture] = useState<any>(placeholder);
-  const [diseases, setDiseases] = useState<string[]>([]);
-  const [newMeetingPreference, setNewMeetingPreference] = useState({});
+  const [avatar, setAvatar] = useState<any>(placeholder);
+
+  const [updatedDiseases, setUpdatededDiseases] = useState<string[]>();
+  const [updatedMeetings, setUpdatededMeetings] = useState<string[]>();
+  const [updatedSupports, setUpdatededSupports] = useState<string[]>();
+  const [updatedLocations, setUpdatedLocations] = useState<string>();
+
+  const [updatedMotivation, setupdatedMotivation] = useState<string>();
+  const [updatedExperience, setUpdatedExperience] = useState<string>();
+
+  const [updatedOccupation, setUpdatededOccupation] = useState<string>();
+  const [updatedAvatar, setUpdatedAvatar] = useState<File | null>(null);
+
+  const [updatedFirstName, setUpdatededFirstName] = useState<string>();
+  const [updatedLastName, setUpdatededLastName] = useState<string>();
+
+  const [diseases, setDiseases] = useState<FormOption[]>([]);
+  const [supports, setSupports] = useState<FormOption[]>([]); //TODO: Dropdown gets to large
+  const [meetings, setMeetings] = useState<FormOption[]>([]);
+  const [locations, setLocations] = useState<FormOption[]>([]);
+  const [occupations, setOccupations] = useState<FormOption[]>([]); //TODO: Dropdown gets to large
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const setUpPage = async () => {
+    const init = async () => {
       const data = await API.getBaseUserData(userData.token);
-      const avatar = await API.getUserAvatar(
-        userData.baseUserData.account
-      );
-      const diseases = await API.getEnums("diseases");
-      setDiseases(diseases);
-      setProfilePicture(avatar);
+      const avatar = await API.getUserAvatar(userData.baseUserData.account);
+
+      try {
+        const [sup, d, m, o] = await Promise.all([
+          (
+            await axios.get(`${API_ADDRESS}/get/enums/supports`)
+          ).data as string[],
+          (
+            await axios.get(`${API_ADDRESS}/get/enums/diseases`)
+          ).data as string[],
+          (
+            await axios.get(`${API_ADDRESS}/get/enums/meetings`)
+          ).data as string[],
+          (
+            await axios.get(`${API_ADDRESS}/get/enums/occupations`)
+          ).data as string[],
+        ]);
+
+        setSupports(
+          sup.map(
+            (s) =>
+              ({
+                value: s,
+                label: t(`enum_supports_${s}`),
+              } as FormOption)
+          )
+        );
+        setDiseases(
+          d.map(
+            (s) =>
+              ({
+                value: s,
+                label: t(`enum_diseases_${s}`),
+              } as FormOption)
+          )
+        );
+        setMeetings(
+          m.map(
+            (s) =>
+              ({
+                value: s,
+                label: t(`enum_meetings_${s}`),
+              } as FormOption)
+          )
+        );
+        setLocations(
+          [
+            "BW",
+            "BV",
+            "BE",
+            "BB",
+            "HB",
+            "HH",
+            "HE",
+            "NI",
+            "MV",
+            "NW",
+            "RP",
+            "SL",
+            "SN",
+            "ST",
+            "SH",
+            "TH",
+          ].map((value) => ({
+            value: value,
+            label: t(`enum_regions_${value}`),
+          }))
+        );
+        setOccupations(
+          o.map(
+            (s) =>
+              ({
+                value: s,
+                label: t(`enum_occupations_${s}`),
+              } as FormOption)
+          )
+        );
+      } catch (e) {
+        console.error(e);
+      }
+
+      setAvatar(avatar);
       setUserAttributes(data);
     };
-    setUpPage();
+    init();
   }, []);
 
   const updateUserData = useCallback(() => {
@@ -69,10 +150,17 @@ const Profile = (props: Props) => {
           `${API_ADDRESS}/user/userdata`,
           {
             baseUserData: {
-              ...newBaseUserData,
+              firstName: updatedFirstName,
+              lastName: updatedLastName,
+              occupation: updatedOccupation,
+              experience: updatedExperience,
+              motivation: updatedMotivation,
             },
             meetingPreference: {
-              ...newMeetingPreference,
+              diseaseConsultation: updatedDiseases,
+              support: updatedSupports,
+              meeting: updatedMeetings,
+              location: updatedLocations,
             },
           },
           {
@@ -87,79 +175,77 @@ const Profile = (props: Props) => {
     } catch (err) {
       console.error(err);
     }
-  }, [newMeetingPreference, newBaseUserData]);
+  }, [
+    updatedFirstName,
+    updatedLastName,
+    updatedOccupation,
+    updatedDiseases,
+    updatedSupports,
+    updatedMeetings,
+    updatedLocations,
+    updatedExperience,
+    updatedMotivation,
+  ]);
 
   function userIsPate(object: any): object is PateData {
     return object === undefined ? false : object.baseUserData.role === "pate";
   }
 
-  const Enum = (props: EnumProps) => {
-    const { route } = props;
-    const FormOptions: FormOption[] = [];
-    try {
-      axios
-        .get(`${API_ADDRESS}/get/enums/${route}`, {
-          headers: {
-            accept: "application/json",
-          },
-        })
-        .then((res) => {
-          res.data.map((data: string) => {
-            const tempFormOption: FormOption = { label: data, value: data };
-            FormOptions.push(tempFormOption);
-          });
-        });
-    } catch (err) {
-      console.error(err);
+  useEffect(() => {
+    if (updatedAvatar) {
+      const init = async () => {
+        const avatarData = new FormData();
+        avatarData.append("avatar", updatedAvatar, updatedAvatar.name);
+        const avatarResult = await axios.post(
+          `${API_ADDRESS}/user/avatar`,
+          avatarData,
+          {
+            headers: {
+              Authorization: `Bearer ${userData.token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        if (avatarResult.status === 200) {
+          setAvatar(URL.createObjectURL(updatedAvatar));
+        }
+      };
+      init();
     }
-    return (
-      <Dropdown
-        id={route}
-        name={route}
-        options={FormOptions}
-        label={route.toUpperCase()!}
-      />
-    );
-  };
-
-  function foo(e:any) {
-    setNewMeetingPreference((prev) => {
-      console.log(prev);
-      return prev = { ...prev, diseaseConsultation: [e]};
-    })
-  }
+  }, [updatedAvatar, userData]);
 
   return (
     <div className={classNames(styles.Profile)}>
       <div className={classNames(styles.ProfileHeader)}>
-        <Button
-          icon
-          onClick={() => navigate(-1)}
-          className={classNames(styles.ProfileHeaderButton)}
-        >
-          <img src={back_arrow} alt="back"></img>
-        </Button>
-        <Headline
-          className={classNames(styles.ProfileHeaderHeadline)}
-          headline="h1"
-        >
-          Profil anpassen
+        <Button icon styling="back" onClick={() => navigate(-1)}></Button>
+        <Headline headline="h1" styling="page">
+          Einstellungen
         </Headline>
       </div>
       <div className={classNames(styles.ProfilePicture)}>
-        <img src={profilePicture} alt="profile_picture"></img>
+        <img src={avatar} alt="profile_picture"></img>
         <Button className={classNames(styles.ProfilePictureButton)}>
-          <img src={camera} alt="change_photo"></img>
-          <>Foto ändern</>
+          <label htmlFor="updateAvatar">
+            <img src={camera} alt="change_photo"></img>
+            Foto Ändern
+            <input
+              multiple={false}
+              id="updateAvatar"
+              accept="image/png, image/jpeg, image/jpeg4, image/jpeg"
+              className={classNames(styles.ProfilePictureButtonInput)}
+              onChange={(e) =>
+                setUpdatedAvatar(e.target.files && e.target.files[0])
+              }
+              type="file"
+            ></input>
+          </label>
         </Button>
       </div>
-      <Headline headline="h2" className={styles.ProfileHeadline}>
+      <Headline headline="h2" styling="caps">
         persönliche angaben
       </Headline>
       <Textfield
-        onChange={(e) =>
-          setNewBaseUserData((prev) => (prev = { ...prev, firstName: e }))
-        }
+        onChange={setUpdatededFirstName}
         id="firstName"
         label="Vorname"
         defaultValue={userAttributes?.baseUserData.firstName}
@@ -167,57 +253,40 @@ const Profile = (props: Props) => {
       <Textfield
         id="lastName"
         label="Nachname"
-        onChange={(e) =>
-          setNewBaseUserData((prev) => (prev = { ...prev, lastName: e }))
-        }
+        onChange={setUpdatededLastName}
         defaultValue={userAttributes?.baseUserData.lastName}
       ></Textfield>
       {userIsPate(userAttributes) && (
         <Textarea
           label="Erfahrung"
-          onChange={(e) =>
-            setNewBaseUserData((prev) => (prev = { ...prev, experience: e }))
-          }
+          onChange={setUpdatedExperience}
           defaultValue={userAttributes?.baseUserData.experience}
           id="experince"
         ></Textarea>
       )}
       {userIsPate(userAttributes) && (
         <Textarea
-        label="Motivation"
-          onChange={(e) =>
-            setNewBaseUserData((prev) => (prev = { ...prev, motivation: e }))
-          }
+          label="Motivation"
+          onChange={setupdatedMotivation}
           defaultValue={userAttributes?.baseUserData.motivation}
           id="motivation"
         ></Textarea>
       )}
       <div className={classNames(styles.ProfileDiseases)}>
-        {diseases.map((disease, index) => {
-          return (
-            <Chip
-              id={disease}
-              key={index}
-              selected={userAttributes?.meetingPreference.diseaseConsultation.includes(disease)}
-              onClick={(e) => foo(e)}
-              emoji={getEmoji(disease)}
-            >
-              
-              {disease}
-            </Chip>
-          );
-        })}
+        <ChipList
+          id="diseases"
+          onChange={setUpdatededDiseases}
+          options={diseases}
+          defaultValue={userAttributes?.meetingPreference.diseaseConsultation}
+        ></ChipList>
       </div>
-      <Enum route="occupations"></Enum>
-      <Textfield
-        id="location"
-        label="Region"
-        onChange={(e) =>
-          setNewMeetingPreference((prev) => (prev = { ...prev, location: e }))
-        }
-        defaultValue={userAttributes?.meetingPreference.location}
-      ></Textfield>
-      <Enum route="genders"></Enum>
+
+      <Dropdown
+        onChange={setUpdatededOccupation}
+        id="occupations"
+        options={occupations}
+        label="Occupations"
+      ></Dropdown>
       <Button onClick={updateUserData}>Änderungen speichern</Button>
     </div>
   );
