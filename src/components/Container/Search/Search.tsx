@@ -11,7 +11,6 @@ import magnifier from "../../../images/icons/ui/magnifier.svg";
 import filter from "../../../images/icons/ui/filter.svg";
 import map_placeholder from "../../../images/map_placeholder.png";
 import { useZustand } from "../../../zustand/store";
-import RequestedContactCard from "./ResultCard/RequestedContactCard";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import Dropdown from "../../Dropdown/Dropdown";
