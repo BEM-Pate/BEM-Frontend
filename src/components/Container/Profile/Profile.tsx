@@ -53,12 +53,14 @@ const Profile = (props: Props) => {
 
   const navigate = useNavigate();
 
+  console.log(userData)
+
   useEffect(() => {
     const init = async () => {
       const data = await API.getBaseUserData(userData.token);
-      const avatar = await API.getUserAvatar(userData.baseUserData.account);
-
+      
       try {
+        const avatar = await API.getUserAvatar(userData._id);
         const [sup, d, m, o] = await Promise.all([
           (
             await axios.get(`${API_ADDRESS}/get/enums/supports`)
@@ -133,11 +135,11 @@ const Profile = (props: Props) => {
               } as FormOption)
           )
         );
+        setAvatar(avatar);
       } catch (e) {
         console.error(e);
       }
 
-      setAvatar(avatar);
       setUserAttributes(data);
     };
     init();
