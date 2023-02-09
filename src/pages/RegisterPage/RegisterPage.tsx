@@ -12,7 +12,6 @@ import PhoneNumberInput from '../../components/PhoneNumberInput/PhoneNumberInput
 import PinInput from '../../components/PinInput/PinInput';
 import Validators from '../../helpers/validators';
 import {useZustand} from "../../zustand/store";
-import LanguageDropdown from '../../components/LanguageDropdown/LanguageDropdown';
 
 type RegisterType = 'phone' | 'email';
 type RequestState = 'OTP' | 'AUTH';
@@ -28,6 +27,7 @@ const RegisterPage = () => {
   const [validators, setValidators] = useState<any[]>([]);
   const [requesting, setRequesting] = useState(false);
   const setUser = useZustand((state) => state.setUser);
+  const addNotification = useZustand((state) => state.addNotification);
 
   useEffect(() => {
     setState('OTP');
@@ -59,17 +59,20 @@ const RegisterPage = () => {
       }).then((res) => {
         if (res.status === 200) {
           // already exists
+          addNotification(t(`notificationAccountAlreadyExists`), 'success');
         }
         if (res.status === 201) {
+          addNotification(t(`notificationOTPSent_${mode}`), 'success');
           setState('AUTH');
         }
       }).finally(() => {
         setRequesting(false);
       });
     } catch (err) {
+      addNotification(t('notificationOTPError'), 'error');
       console.error('failed', err);
     }
-  }, [accountName, mode]);
+  }, [accountName, addNotification, mode, t]);
 
   const requestRegister = useCallback(() => {
     try {
@@ -86,9 +89,10 @@ const RegisterPage = () => {
         setRequesting(false);
       });
     } catch (err) {
+      addNotification(t('notificationOTPError'), 'error');
       console.error('failed', err);
     }
-  }, [accountName, otpCode, navigate, setUser]);
+  }, [accountName, otpCode, setUser, navigate, addNotification, t]);
 
   return (
     <div className={classNames(styles.RegisterPage)}>

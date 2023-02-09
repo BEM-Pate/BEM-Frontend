@@ -21,8 +21,6 @@ function getModalImage(type:string) {
 const NotificationToastService = () => {
   const notifications = useZustand((state) => state.notifications);
   const resetNotifications = useZustand((state) => state.resetNotifications);
-  const addNotification = useZustand((state) => state.addNotification);
-
 
   const [toasts, setToasts] = useState<any[]>([]);
 
@@ -33,7 +31,7 @@ const NotificationToastService = () => {
   return (
     <div className={classNames(styles.NotificationToastService)}>
       {toasts?.map((toast) => (
-        <div className={classNames(styles.Toast)}>
+        <div className={classNames(styles.Toast)} key={toast?.id}>
           <img
             className={classNames(styles.ToastIcon)}
             src={getModalImage(toast?.type)}

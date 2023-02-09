@@ -14,6 +14,8 @@ import axios from "axios";
 import {API_ADDRESS} from "../../helpers/env";
 import {FormOption} from "../../components/FormularStepper/FormularTypes";
 import Textarea from "../../components/Textarea/Textarea";
+import classNames from "classnames";
+import styles from './RegisterPatePage.module.scss';
 
 interface Props {
   redirectOnSuccess: string;
@@ -153,7 +155,7 @@ const RegisterPatePage = (props: Props) => {
   ]);
 
   return (
-    <>
+    <div className={classNames(styles.RegisterPatePage)}>
       <FormularStepper
         dataLabels={{
           support: t(`enum_supports`),
@@ -329,7 +331,7 @@ const RegisterPatePage = (props: Props) => {
         text={"Ihr Profil ist eingerichtet und Sie sind als BEM-Pate in der Suche auffindbar. Sie können auch eine Selbsthilfegruppe gründen."}
         onClick={() => navigate(redirectOnSuccess)}
       />
-    </>
+    </div>
   )
 };
 

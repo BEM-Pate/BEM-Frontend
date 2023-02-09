@@ -40,6 +40,10 @@
 
       &ResendOTP {
         align-self: center;
+
+        button {
+          margin-left: 4px;
+        }
       }
 
       & > *:not(:last-child) {

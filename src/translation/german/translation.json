@@ -15,9 +15,9 @@
   "labelLogin": "Mit bestehendem Account anmelden",
   "labelTextEmail": "E-Mail eingeben zum Anmelden",
   "labelTextNumber": "Telefonnummer eingeben zum Anmelden",
-  "labelOTP": "Request OTP Code",
+  "labelOTP": "Einmal-Passwort erhalten",
   "labelCode": "Code nicht erhalten?",
-  "labelCodeRetrun": "Code nochmal senden",
+  "labelCodeReturn": "Code nochmal senden",
   "labelAccountless": "Sie haben noch kein Account?  ",
   "labelRegisterhere": "Hier Registrieren!",
   "labelLoginEmail": "Mit E-Mail anmelden",
@@ -169,5 +169,11 @@
   "enum_regions_TH": "Thüringen",
 
   "activeChatDelivered": "versandt",
-  "activeChatRead": "gelesen"
+  "activeChatRead": "gelesen",
+  "notificationAccountAlreadyExists": "Es existiert bereits ein Account mit diesen Daten",
+  "notificationOTPSent_email": "Ein Einmal-Passwort wurde an deine Email-Adresse gesendet",
+  "notificationOTPSent_phone": "Ein Einmal-Passwort wurde an deine Telefonnummer gesendet",
+  "notificationOTPError": "Es ist ein Fehler aufgetreten",
+  "notificationLoginError": "Es ist ein Fehler aufgetreten",
+  "notificationRegisterError": "Es ist ein Fehler aufgetreten"
 }

@@ -27,6 +27,7 @@ const LoginPage = () => {
   const [validators, setValidators] = useState<any[]>([]);
   const [requesting, setRequesting] = useState(false);
   const setUser = useZustand((state) => state.setUser);
+  const addNotification = useZustand((state) => state.addNotification);
 
   useEffect(() => {
     setState("OTP");
@@ -53,6 +54,7 @@ const LoginPage = () => {
         })
         .then((res) => {
           if (res.status === 201) {
+            addNotification(t(`notificationOTPSent_${mode}`), 'success');
             setState("AUTH");
           }
         })
@@ -60,9 +62,10 @@ const LoginPage = () => {
           setRequesting(false);
         });
     } catch (err) {
+      addNotification(t('notificationOTPError'), 'error');
       console.error("failed", err);
     }
-  }, [accountName, mode]);
+  }, [accountName, addNotification, mode, t]);
 
   const requestLogin = useCallback(() => {
     try {
@@ -78,13 +81,17 @@ const LoginPage = () => {
             navigate("/");
           }
         })
+        .catch(() => {
+          addNotification(t(`notificationLoginError`), 'error');
+        })
         .finally(() => {
           setRequesting(false);
         });
     } catch (err) {
+      addNotification(t(`notificationLoginError`), 'error');
       console.error("failed", err);
     }
-  }, [accountName, otpCode, navigate, setUser]);
+  }, [accountName, otpCode, setUser, navigate, addNotification, t]);
 
   return (
     <div className={classNames(styles.LoginPage)}>
@@ -162,7 +169,7 @@ const LoginPage = () => {
                     Validators.validate(accountName, validators) || requesting
                   }
                 >
-                  {t("labelButtonLogin")}
+                  {t("loginPageButtonLogin")}
                 </Button>
               </div>
             </>
@@ -177,7 +184,7 @@ const LoginPage = () => {
               mode === "email" ? setMode("phone") : setMode("email")
             }
           >
-            {mode === "email" && "labelLoginPhone"}
+            {mode === "email" && t("labelLoginPhone")}
             {mode === "phone" && t("labelLoginEmail")}
           </Button>
 

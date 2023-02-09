@@ -1,0 +1,6 @@
+@import '../../styles/mixins.module';
+
+.RegisterPatePage {
+  @include page;
+  align-items: center;
+}

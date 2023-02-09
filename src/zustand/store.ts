@@ -167,7 +167,7 @@ export const useZustand = create<store>()(
                 const id = Date.now();
                 let notifications = get().notifications;
                 if (notifications !== null) {
-                    notifications.push({ id, message, type });
+                    notifications = [...notifications, { id, message, type }];
                 } else {
                     notifications = [{ id, message, type }];
                 }
@@ -178,7 +178,7 @@ export const useZustand = create<store>()(
                     if (notifications1 !== null) {
                         set({ notifications: notifications1.filter((n) => n.id !== id) });
                     }
-                }, 3000);
+                }, 4000);
             },
             resetNotifications: () => {
                 set({ notifications: [] });
