@@ -9,11 +9,12 @@
 }
 .imageContainer {
   background-color: #ffffff;
-  height: 376px;
+  min-height: 376px;
   position: relative;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  flex: 1 1 auto;
 }
 .textContainer {
   background-color: #ffffff;

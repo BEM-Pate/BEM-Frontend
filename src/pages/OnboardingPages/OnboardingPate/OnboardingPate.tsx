@@ -11,7 +11,6 @@ const OnboardingPate = () => {
   return (
     <div className={classnames(styles.Container)}>
       <div className={classnames(styles.imageContainer)} style={{backgroundImage: `url(${placeholder})`}}></div>
-      <div className={classnames(styles.spacer)}></div>
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
           {t("onboardingPateHeader")}

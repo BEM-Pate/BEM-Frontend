@@ -15,7 +15,6 @@ const OnboardingSeeker = () => {
         <div className={classnames(styles.imageContainerleft)} style={{backgroundImage: `url(${placeholderleft})`}}></div>
         <div className={classnames(styles.imageContainerright)} style={{backgroundImage: `url(${placeholderright})`}}></div>
       </div>
-      <div className={classnames(styles.spacer)}></div>
       <div className={classnames(styles.textContainer)}>
         <h1 className={classnames(styles.textContainerheader)}>
           {t("onboardingPageSeekerHeader")}

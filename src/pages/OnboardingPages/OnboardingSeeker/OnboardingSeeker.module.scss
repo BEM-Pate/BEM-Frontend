@@ -9,8 +9,9 @@
 }
 .imageContainer {
   background-color: #ffffff;
-  height: 376px;
+  min-height: 376px;
   position: relative;
+  flex: 1 1 auto;
   &left {
     background-size: contain;
     background-repeat: no-repeat;
@@ -19,7 +20,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    width: 128px;
+    width: 256px;
   }
   &right {
     background-size: contain;
@@ -29,7 +30,7 @@
     top: 0;
     bottom: 0;
     right: 0;
-    width: 115px;
+    width: 230px;
   }
 }
 .textContainer {
@@ -75,7 +76,4 @@
   background-color: #ffffff;
   padding: 24px;
   text-align: center;
-}
-.spacer {
-  flex: 1 1 auto;
 }
