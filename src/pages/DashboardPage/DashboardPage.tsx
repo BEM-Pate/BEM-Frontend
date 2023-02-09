@@ -13,6 +13,7 @@ const DashboardPage = () => {
     const location = useLocation()
     const [fetchPendingContacts, fetchChatroom, setChatRoom, chatRooms, socketConfig, setSeen, setOnlineUsersInRooms, onlineUsersInRooms, setRoute] = useZustand((state) =>
         [state.fetchPendingContacts,state.fetchChatroom, state.pushMessageToChatRoom, state.chatrooms, state.socketConfig, state.setSeen, state.setOnlineUsersInRooms, state.onlineUsersInRooms, state.setCurrentRoute])
+
     const [showContactAccepted, setShowContactAccepted] = useState(false);
     const handleAcceptedClose = () => setShowContactAccepted(false);
     const handleAcceptedShow = () => setShowContactAccepted(true);
@@ -20,6 +21,13 @@ const DashboardPage = () => {
     const [showContactRejected, setShowContactRejected] = useState(false);
     const handleRejectedClose = () => setShowContactRejected(false);
     const handleRejectedShow = () => setShowContactRejected(true);
+
+    const [showNewContactRequest, setshowNewContactRequest] = useState(false);
+    const handleNewContactRequestClose = () => setshowNewContactRequest(false);
+    const handleNewContactRequestShow = () => setshowNewContactRequest(true);
+    const [newContact, setNewContact] = useState<any>({});
+    const [message, setMessage] = useState('');
+
     const [pate, setPate] = useState<any>({});
     const [rejectedPate, setRejectedPate] = useState<any>({});
     const [reason, setReason] = useState('');
@@ -98,6 +106,14 @@ const DashboardPage = () => {
             handleRejectedShow()
         })
 
+        socket.on('new-contact-request', (data) => {
+            console.log('new-contact-request')
+            fetchPendingContacts()
+            setNewContact(data.data.user)
+            setMessage(data.data.message)
+            handleNewContactRequestShow()
+        })
+
         socket.on('new-chatroom',() => {
             console.log('new-chatroom')
             fetchChatroom()
@@ -165,6 +181,30 @@ const DashboardPage = () => {
                 </Modal.Footer>
             </Modal>
 
+            <Modal show={showNewContactRequest} onHide={handleNewContactRequestClose} size="lg"
+                   centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Neue Kontaktanfrage</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p><b>{newContact?.firstName} {newContact?.lastName}</b> möchte dich als Kontakt hinzufügen</p>
+                    <p>Nachricht:</p>
+                    <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {message} "</i></p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className={classNames(styles.ModalButton)} onClick={handleNewContactRequestClose}>
+                        Schließen
+                    </Button>
+                    <Button
+                        className={classNames(styles.ModalButton)}
+                        onClick={() => {
+                            navigate(`/dashboard/search/user/${newContact?.account}`)
+                            handleNewContactRequestClose()
+                        }}>
+                        <span>Profil anzeigen</span>
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 };
