@@ -57,6 +57,7 @@ const Groups = () => {
     return (
         <div className={classNames(styles.Groups)}>
             <div className={classNames(styles.GroupsLocationFilter)}>
+                {/*TODO: Hasan*/}
                 <img src={LocationIcon} alt="search"/>
                 Bundesweit
                 <img src={LocationDropdown} alt="search"/>
@@ -70,6 +71,7 @@ const Groups = () => {
                         className={classNames(styles.GroupsHeadersHeadlineH1)}
                         headline="h1"
                     >
+                        {/*TODO: Hasan*/}
                         Selbsthilfegruppen finden
                     </Headline>
                 }
@@ -77,6 +79,7 @@ const Groups = () => {
                     isSearchClicked &&
                     <div className={classNames(styles.GroupsHeadersSearch)}>
                         <img className={classNames(styles.GroupsHeadersSearchImg)} src={magnifier} alt="search"/>
+                        {/*TODO: Hasan*/}
                         <input onChange={handleOnChange} className={classNames(styles.GroupsHeadersSearchInput)}
                                type={"text"} placeholder={"Suche nach Gruppen"} value={searchValue}/>
                     </div>
@@ -104,12 +107,13 @@ const Groups = () => {
             </div>
             <div className={classNames(styles.GroupsFilterContainer)}>
                 <div className={classNames(styles.GroupsFilterContainerFilter)} onClick={sortMembers}>
+                    {/*TODO: Hasan*/}
                     Beliebt
                     <img src={IconFilter} alt="search"/>
                 </div>
             </div>
             <div className={classNames(styles.GroupsContent)}>
-
+                {/*TODO: Hasan*/}
                 {groups.length === 0 && <div>Keine Ergebnisse für <span
                     className={classNames(styles.GroupsContentNoResults)}>{searchValue}</span> gefunden</div>}
                 {groups.map((group) => (
@@ -125,6 +129,7 @@ const Groups = () => {
                                 {group.title}
                             </div>
                             <p className={classNames(styles.GroupsContentGroupMembers)}>
+                                {/*TODO: Hasan*/}
                                 {group.members} Mitglieder
                             </p>
                         </div>

@@ -52,8 +52,6 @@ const BetroffenerProfile = (props: Props) => {
     const [required, setRequired] = useState<boolean>(declineReason.length === 0);
     const [isRejectedContact, setIsRejectedContact] = useState<Boolean>(false);
     const [isPendingContact, setIsPendingContact] = useState<Boolean>(false);
-    console.log("ispending? ",isPendingContact)
-    console.log("contact", pendingContacts)
     useEffect(() => {
         const getPateData = async () => {
             const avatar = await API.getUserAvatar(id!);
@@ -68,9 +66,7 @@ const BetroffenerProfile = (props: Props) => {
     }, [userData.token, id]);
     useEffect(() => {fetchPendingContacts()}, [])
     useEffect(() => {
-        console.log("trigger pendding")
         if (pendingContacts.includes(id))  {
-            console.log("pedsf")
             setIsRejectedContact(false)
             setIsPendingContact(true)
         }
@@ -189,7 +185,7 @@ const BetroffenerProfile = (props: Props) => {
                                     styles.UserProfileHeaderContainerDetailsRequest
                                 )}
                                 disabled>
-
+                                {/*TODO: Hasan*/}
                                 <span> Kontakt abgelehnt</span>
                             </Button>
                         ) : isPendingContact ? (
@@ -203,6 +199,7 @@ const BetroffenerProfile = (props: Props) => {
                                     onClick={acceptRequest}
                                 >
                                     <img src={success} alt="accept-icon"/>
+                                    {/*TODO: Hasan*/}
                                     <span> Annehmen</span>
                                 </Button>
 
@@ -213,6 +210,7 @@ const BetroffenerProfile = (props: Props) => {
                                     onClick={handleShowDeclineContact}
                                 >
                                     <img src={cross} alt="reject-icon"/>
+                                    {/*TODO: Hasan*/}
                                     <span> Ablehnen</span>
                                 </Button>
                             </div>
@@ -229,10 +227,12 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
+                        {/*TODO: Hasan*/}
                         Ich brauche Hilfe bei
                     </Headline>
                     <Paragraph collapse>
                         {betroffenerData?.meetingPreference.support.map((value) => {
+                            {/*TODO: Hasan*/}
                             return (
                                 <p> {value === "CONSULTATION" ? "- BEM-Beratung allgemein" : "- BEM-Beratung auf ein bestimmtes Krankheitsbild bezogen"}</p>)
                         })}
@@ -245,6 +245,7 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
+                        {/*TODO: Hasan*/}
                         Krankheitsbild
                     </Headline>
                     <div>
@@ -266,6 +267,7 @@ const BetroffenerProfile = (props: Props) => {
                             <img src={betroffenerData?.baseUserData.gender === "FEMALE" ? female : male} alt="gender"/>
                         </div>
                         <div>
+                            {/*TODO: Hasan*/}
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
                                       headline="h6">Geschlecht</Headline>
                             <p>{betroffenerData?.baseUserData.gender}</p>
@@ -276,6 +278,7 @@ const BetroffenerProfile = (props: Props) => {
                             <img src={calendar} alt="calendar"/>
                         </div>
                         <div>
+                            {/*TODO: Hasan*/}
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
                                       headline="h6">Alter</Headline>
                             <p>{betroffenerData?.baseUserData.ageRange}</p>
@@ -286,6 +289,7 @@ const BetroffenerProfile = (props: Props) => {
                             <img src={meeting} alt="meeting"/>
                         </div>
                         <div>
+                            {/*TODO: Hasan*/}
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
                                       headline="h6">Treffen</Headline>
                             <p>{betroffenerData?.meetingPreference.meeting?.map((meeting) => {
@@ -299,6 +303,7 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
+                        {/*TODO: Hasan*/}
                         Berufsfeld
                     </Headline>
                     <Chip
@@ -309,6 +314,7 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
+                        {/*TODO: Hasan*/}
                         Standort
                     </Headline>
                     <img src={map_placeholder} alt="map"></img>
@@ -318,13 +324,16 @@ const BetroffenerProfile = (props: Props) => {
             <Modal show={showNewContact} onHide={handleCloseNewContact} size="lg"
                    centered>
                 <Modal.Header closeButton>
+                    {/*TODO: Hasan*/}
                     <Modal.Title>Herzlichen Glückwunsch</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {/*TODO: Hasan*/}
                     <p>Du bist nun in Verbindung
                         mit <b>{betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName}</b></p>
                 </Modal.Body>
                 <Modal.Footer>
+                    {/*TODO: Hasan*/}
                     <Button onClick={handleCloseNewContact}>
                         Schließen
                     </Button>
@@ -337,6 +346,7 @@ const BetroffenerProfile = (props: Props) => {
                             setRoute(`/dashboard/chatroom/${betroffenerData?._id}`)
                         }}>
                         <img src={request_chat} alt="add_friend"/>
+                        {/*TODO: Hasan*/}
                         <span> Hallo sagen</span>
                     </Button>
                 </Modal.Footer>
@@ -345,9 +355,11 @@ const BetroffenerProfile = (props: Props) => {
             <Modal show={showDeclineContact} onHide={handleCloseDeclineContact} size="lg"
                    centered>
                 <Modal.Header closeButton>
+                    {/*TODO: Hasan*/}
                     <Modal.Title>Kontakt ablehnen</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {/*TODO: Hasan*/}
                     <p>Bitte einen Grund eingeben, warum du Kontakt
                         mit {betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName} ablehnen
                         möchtest?</p>
@@ -355,6 +367,7 @@ const BetroffenerProfile = (props: Props) => {
                     <Textarea id="decline" onChange={setDeclineReason} defaultValue={declineReason.length > 0 ? declineReason : null}/>
                 </Modal.Body>
                 <Modal.Footer>
+                    {/*TODO: Hasan*/}
                     <Button onClick={handleCloseDeclineContact}>
                         Schließen
                     </Button>
@@ -364,6 +377,7 @@ const BetroffenerProfile = (props: Props) => {
                         )}
                         onClick={declineRequest}
                     >
+                        {/*TODO: Hasan*/}
                         <span>Bestätigen</span>
                     </Button>
                 </Modal.Footer>

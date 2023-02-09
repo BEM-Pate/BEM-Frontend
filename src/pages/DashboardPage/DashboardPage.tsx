@@ -35,10 +35,7 @@ const DashboardPage = () => {
     const [isSocketSet, setIsSocketSet] = useState(socket !== null);
 
     useEffect(() => {
-        console.log("here")
         if (!socket) return
-
-        console.log("socket set!")
         socket.removeAllListeners()
         if(chatRooms.length>0) {
             for (const chatroom of chatRooms) {
@@ -88,7 +85,6 @@ const DashboardPage = () => {
         socket.on('notify-contact-request', (data) => {
             console.log("notify triggered")
             fetchPendingContacts()
-            console.log(data)
         })
 
         socket.on('new-pate-matched', (data) => {
@@ -141,13 +137,16 @@ const DashboardPage = () => {
             <Modal show={showContactAccepted} onHide={handleAcceptedClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
+                    {/*TODO: Hasan*/}
                     <Modal.Title>Herzlichen Glückwunsch, it's a MATCH !</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {/*TODO: Hasan*/}
                     <p>Du bist nun in Verbindung
                         mit <b>{pate?.firstName} {pate?.lastName}</b></p>
                 </Modal.Body>
                 <Modal.Footer>
+                    {/*TODO: Hasan*/}
                     <Button className={classNames(styles.ModalButton)} onClick={handleAcceptedClose}>
                         Schließen
                     </Button>
@@ -159,6 +158,7 @@ const DashboardPage = () => {
                             handleAcceptedClose()
                         }}>
                         <img src={request_chat} alt="add_friend"/>
+                        {/*TODO: Hasan*/}
                         <span> Hallo sagen</span>
                     </Button>
                 </Modal.Footer>
@@ -167,14 +167,17 @@ const DashboardPage = () => {
             <Modal show={showContactRejected} onHide={handleRejectedClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
+                    {/*TODO: Hasan*/}
                     <Modal.Title>Schade! &#128551;</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {/*TODO: Hasan*/}
                     <p><b>{rejectedPate?.firstName} {rejectedPate?.lastName}</b> hat deine Kontakt-Anfrage abgelehnt</p>
                     <p>Folgender Grund:</p>
                     <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {reason} "</i></p>
                 </Modal.Body>
                 <Modal.Footer>
+                    {/*TODO: Hasan*/}
                     <Button className={classNames(styles.ModalButton)} onClick={handleRejectedClose}>
                         Schließen
                     </Button>
@@ -184,14 +187,17 @@ const DashboardPage = () => {
             <Modal show={showNewContactRequest} onHide={handleNewContactRequestClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
+                    {/*TODO: Hasan*/}
                     <Modal.Title>Neue Kontaktanfrage</Modal.Title>
                 </Modal.Header>
+                {/*TODO: Hasan*/}
                 <Modal.Body>
                     <p><b>{newContact?.firstName} {newContact?.lastName}</b> möchte dich als Kontakt hinzufügen</p>
                     <p>Nachricht:</p>
                     <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {message} "</i></p>
                 </Modal.Body>
                 <Modal.Footer>
+                    {/*TODO: Hasan*/}
                     <Button className={classNames(styles.ModalButton)} onClick={handleNewContactRequestClose}>
                         Schließen
                     </Button>
@@ -201,6 +207,7 @@ const DashboardPage = () => {
                             handleNewContactRequestClose();
                             navigate(`/dashboard/search/user/${newContact?.account}`);
                         }}>
+                        {/*TODO: Hasan*/}
                         <span>Profil anzeigen</span>
                     </Button>
                 </Modal.Footer>
