@@ -15,7 +15,7 @@ interface store {
     fetchChatroom: () => void,
     fetchContacts: (userIds: string[]) => Promise<void>,
     fetchPendingContacts: () => void,
-    deleteEverything: () => void,
+    logout: () => void,
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
@@ -35,7 +35,18 @@ interface store {
     resetNotifications: () => void,
 }
 
-
+const initialState = {
+    user: null,
+    token: null,
+    socketConfig: null,
+    route: null,
+    pendingContacts: null,
+    onlineUsersInRooms: [],
+    notifications: [],
+    newContactRequestLength: 0,
+    contacts: [],
+    chatrooms: []
+}
 
 
 const BASE_URL = process.env.REACT_APP_API_ADDRESS ?? 'http://141.45.146.171/api'
@@ -54,6 +65,7 @@ export const initiliazeSocket = (
 export const useZustand = create<store>()(
     persist(
         (set, get, props) => ({
+            ...initialState,
             user: null,
             token: null,
             socketConfig: null,
@@ -128,7 +140,7 @@ export const useZustand = create<store>()(
             setCurrentRoute: (route: string) => {
                 set({ route })
             },
-            deleteEverything: () => set({}, true),
+            logout: () => {set(initialState); socket?.disconnect(); socket = null;get().resetNotifications(); get().addNotification('You have been logged out', 'success')},
             pushMessageToChatRoom: (chatRoomId: string, messageObject: any) => {
                 const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
                 let chatrooms = get().chatrooms

@@ -11,7 +11,7 @@ import profilePercentage from "../../../helpers/profilePercentage";
 import languages from "../../../images/icons/ui/languages.svg";
 import settings from "../../../images/icons/ui/settings_outline.svg";
 import account from "../../../images/icons/ui/account.svg";
-import logout from "../../../images/icons/ui/logout.svg";
+import logoutIcon from "../../../images/icons/ui/logout.svg";
 import { useZustand } from "../../../zustand/store";
 
 interface Props {
@@ -26,11 +26,11 @@ const Settings = (props: Props) => {
   
 
   const [imageData, setImageData] = useState<any>(placeholder);
-  const deleteEverything = useZustand((state) => state.deleteEverything);
+  const logout = useZustand((state) => state.logout);
 
   useEffect(() => {
     const getUserData = async () => {
-      const data = await API.getBaseUserData(userData.token);
+      const data = await API.getBaseUserData(userData?.token);
       if (data.baseUserData.role === "pate") {
         setUserAttributes(data as PateData);
       } else if (data.baseUserData.role === "normal_user") {
@@ -38,7 +38,7 @@ const Settings = (props: Props) => {
       }
     };
     getUserData();
-  }, [userData.token]);
+  }, [userData?.token]);
 
   useEffect(() => {
     if (userAttributes) {
@@ -53,8 +53,8 @@ const Settings = (props: Props) => {
   }, [userAttributes]);
 
   const logoutUser = () => {
-    navigate('/login'); //TODO: Login Page is blank
-    deleteEverything();
+      logout();
+      navigate('/login'); //TODO: Login Page is blank
   };
 
   return (
@@ -64,7 +64,7 @@ const Settings = (props: Props) => {
         <Headline
           className={classNames(styles.SettingsHeaderHeadlineName)}
           headline="h2"
-        >{`${userData.baseUserData.firstName || userAttributes?.baseUserData.firstName} ${userData.baseUserData.lastName || userAttributes?.baseUserData.lastName}`}</Headline>
+        >{`${userData?.baseUserData?.firstName || userAttributes?.baseUserData?.firstName} ${userData?.baseUserData?.lastName || userAttributes?.baseUserData?.lastName}`}</Headline>
         <Headline
           className={classNames(styles.SettingsHeaderHeadlineLocation)}
           headline="h2"
@@ -100,7 +100,7 @@ const Settings = (props: Props) => {
      </Button>
      <Button styling='setting' onClick={() => logoutUser()}>
       <div>
-        <img src={logout} alt="arrow"></img>
+        <img src={logoutIcon} alt="arrow"></img>
         <>Logout</>
       </div>
      </Button>
