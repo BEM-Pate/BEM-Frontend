@@ -10,8 +10,7 @@
       object-fit: cover;
     }
     &Container {
-      padding: 24px;
-      padding-bottom: 72px;
+      padding: 24px 24px 72px;
       height: 100%;
       width: 100%;
       display: flex;
@@ -40,6 +39,19 @@
           align-items: center;
           justify-content: center;
           gap: 5px;
+        }
+        &Score{
+          margin-bottom: 15px;
+          padding: 8px 12px;
+          font-family: 'Roboto', serif;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 20px;
+          color: #FFFFFF;
+          background: #63837B;
+          border: 1.5px solid #98C8BC;
+          border-radius: 32px
         }
         &Name {
           text-align: center;
