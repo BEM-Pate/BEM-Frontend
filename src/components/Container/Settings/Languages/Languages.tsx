@@ -17,6 +17,7 @@ import Button from "../../../Button/Button";
 import Headline from "../../../Headline/Headline";
 import axios from "axios";
 import { API_ADDRESS } from "../../../../helpers/env";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userData: any;
@@ -46,6 +47,7 @@ function getFlag(countryCode: string) {
 const Languages = (props: Props) => {
   const { userData } = props;
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   const [userAttributes, setUserAttributes] = useState<any>();
   const [languages, setLanguages] = useState<any>();
@@ -126,7 +128,7 @@ const Languages = (props: Props) => {
           >
             <div className={classNames(styles.LanguagesButtonDetails)}>
               <img src={getFlag(language)} alt={language}></img>
-              <p>{language}</p>
+              <p>{t(`enum_languages_${language}`)}</p>
             </div>
             <div className={classNames(styles.LanguagesButtonCheck)}>
               {updatedLanguages?.includes(language) && <img src={check} alt="check"></img>}

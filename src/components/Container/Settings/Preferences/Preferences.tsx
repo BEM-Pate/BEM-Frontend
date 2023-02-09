@@ -157,6 +157,7 @@ const Preferences = (props: Props) => {
           id="locations"
           label="Locations"
           defaultValue={["BW"]}
+          placeholder={`${t(`enum_regions_${userAttributes?.meetingPreference.location}`)}`}
           onChange={setUpdatedLocations}
         ></Dropdown>
       </div>
@@ -175,6 +176,7 @@ const Preferences = (props: Props) => {
           options={supports}
           id="supports"
           label="Ich biete"
+          placeholder={`${t(`enum_supports_${userAttributes?.meetingPreference.support}`)}`}
           onChange={setUpdatedSupports}
         ></Dropdown>
       </div>

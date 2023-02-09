@@ -18,8 +18,7 @@ import camera from "../../../images/icons/ui/camera.svg";
 import { useNavigate } from "react-router-dom";
 import { t } from "i18next";
 import ChipList from "../../ChipList/ChipList";
-import CheckboxList from "../../CheckboxList/CheckboxList";
-import FileInput from "../../FileInput/FileInput";
+import { useZustand } from "../../../zustand/store";
 
 interface Props {
   userData: any;
@@ -52,6 +51,7 @@ const Profile = (props: Props) => {
   const [occupations, setOccupations] = useState<FormOption[]>([]); //TODO: Dropdown gets to large
 
   const navigate = useNavigate();
+  const addNotification = useZustand(state => state.addNotification);
 
   console.log(userData)
 
@@ -173,7 +173,11 @@ const Profile = (props: Props) => {
             },
           }
         )
-        .then((res) => console.log(res));
+        .then((res) => {
+          if(res.status === 200) {
+            addNotification("Profile successfully updated", "success")
+          }
+        });
     } catch (err) {
       console.error(err);
     }
@@ -285,10 +289,10 @@ const Profile = (props: Props) => {
 
       <Dropdown
         onChange={setUpdatededOccupation}
+        placeholder={`${t(`enum_occupations_${userAttributes?.baseUserData.occupation}`)}`}
         id="occupations"
         options={occupations}
-        label="Occupations"
-        defaultValue={userAttributes?.baseUserData.occupation}
+        label="Occupations"   
       ></Dropdown>
       <Button onClick={updateUserData}>Änderungen speichern</Button>
     </div>

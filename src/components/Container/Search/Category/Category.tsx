@@ -135,12 +135,13 @@ const Category = (props: Props) => {
 
   return (
     <div className={classNames(styles.Category)}>
-      <Button icon onClick={() => navigate(-1)}>
-        <img src={back_arrow} alt="back"></img>
+      <div className={classNames(styles.CategoryHeader)}>
+      <Button styling="back" icon onClick={() => navigate(-1)}>
       </Button>
-      <Headline className={classNames(styles.CategoryHeadline)} headline="h1">
-        Nach Krankheitsbildern
+      <Headline styling="page"headline="h1">
+        Krankheitsbilder
       </Headline>
+      </div>
       <div className={classNames(styles.CategoryList)}>
         {diseases?.map((disease, index) => {
           return (

@@ -13,6 +13,7 @@ import settings from "../../../images/icons/ui/settings_outline.svg";
 import account from "../../../images/icons/ui/account.svg";
 import logoutIcon from "../../../images/icons/ui/logout.svg";
 import { useZustand } from "../../../zustand/store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userData: any;
@@ -22,6 +23,7 @@ const Settings = (props: Props) => {
   const { userData } = props;
   const navigate = useNavigate();
   const [userAttributes, setUserAttributes] = useState<PateData | UserData>();
+  const {t} = useTranslation();
 
   
 
@@ -69,7 +71,7 @@ const Settings = (props: Props) => {
           className={classNames(styles.SettingsHeaderHeadlineLocation)}
           headline="h2"
         >
-          {userAttributes?.meetingPreference.location}
+          {t(`enum_regions_${userAttributes?.meetingPreference.location}`)}
         </Headline>
         <div className={classNames(styles.SettingsHeaderProfile)}>
           <div className={classNames(styles.SettingsHeaderProfileStatus)}>
