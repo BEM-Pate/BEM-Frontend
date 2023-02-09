@@ -352,7 +352,7 @@ const BetroffenerProfile = (props: Props) => {
                         mit {betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName} ablehnen
                         möchtest?</p>
                     {required && (<span style={{color: "red"}}>Bitte einen Grund eingeben</span>)}
-                    <Textarea id="decline" onChange={setDeclineReason}/>
+                    <Textarea id="decline" onChange={setDeclineReason} defaultValue={declineReason.length > 0 ? declineReason : null}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleCloseDeclineContact}>

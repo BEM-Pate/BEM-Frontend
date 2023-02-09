@@ -93,6 +93,9 @@ const PateProfile = (props: Props) => {
     }, [message]);
 
     const requestContact = () => {
+        if (message.length === 0) {
+            setRequired(true)
+        } else {
         try {
             axios
                 .post(`${API_ADDRESS}/match/request-contact/${id}`,
@@ -110,10 +113,12 @@ const PateProfile = (props: Props) => {
                     if (res.status === 200) {
                         setIsPendingContact(true);
                         handleCloseAddModal();
+                        setMessage("")
                     }
                 });
         } catch (err) {
             console.error(err);
+        }
         }
     };
 
@@ -394,7 +399,7 @@ const PateProfile = (props: Props) => {
                 <Modal.Body>
                     <p>Erzähl doch bitte etwas über dich!</p>
                     {required && (<span style={{color: "red"}}>Icebreaker-Text darf nicht leer sein</span>)}
-                    <Textarea id="decline" onChange={setMessage}/>
+                    <Textarea id="decline" onChange={setMessage} defaultValue={message.length > 0 ? message : null} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleCloseAddModal}>
