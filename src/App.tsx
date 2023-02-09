@@ -198,6 +198,7 @@ const App = () => {
                 <Route path="settings/profile" element={<Profile userData={userData} />} />
                 <Route path="settings/edit" element={<Preferences userData={userData}/>} />
                 <Route path="settings/languages" element={<Languages userData={userData}/>} />
+              <Route path="category" element={<Category userData={userData} />} />
               <Route path="category/:id" element={<Category userData={userData} />} />
             </Route>
         </Route>

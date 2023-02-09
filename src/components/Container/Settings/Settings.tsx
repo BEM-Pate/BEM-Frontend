@@ -54,7 +54,7 @@ const Settings = (props: Props) => {
 
   const logoutUser = () => {
       logout();
-      navigate('/login'); //TODO: Login Page is blank
+      navigate('/login');
   };
 
   return (
@@ -64,7 +64,7 @@ const Settings = (props: Props) => {
         <Headline
           className={classNames(styles.SettingsHeaderHeadlineName)}
           headline="h2"
-        >{`${userData?.baseUserData?.firstName || userAttributes?.baseUserData?.firstName} ${userData?.baseUserData?.lastName || userAttributes?.baseUserData?.lastName}`}</Headline>
+        >{`${userAttributes?.baseUserData?.firstName || userData?.baseUserData?.firstName} ${userAttributes?.baseUserData?.lastName || userData?.baseUserData?.lastName}`}</Headline>
         <Headline
           className={classNames(styles.SettingsHeaderHeadlineLocation)}
           headline="h2"

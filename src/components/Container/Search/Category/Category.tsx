@@ -71,13 +71,10 @@ const Preview = (props: PreviewProps) => {
     
   }, [matches])
 
-  console.log(matches)
-
   return <div className={classNames(className)}>
     <div>
     {
     matches.map((matches, index) => {
-      
       return <img src={imgs[index] || placeholder} alt="asd"></img>
     })
     }
