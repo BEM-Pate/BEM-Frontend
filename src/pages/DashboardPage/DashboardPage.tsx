@@ -198,8 +198,8 @@ const DashboardPage = () => {
                     <Button
                         className={classNames(styles.ModalButton)}
                         onClick={() => {
-                            navigate(`/dashboard/search/user/${newContact?.account}`)
-                            handleNewContactRequestClose()
+                            handleNewContactRequestClose();
+                            navigate(`/dashboard/search/user/${newContact?.account}`);
                         }}>
                         <span>Profil anzeigen</span>
                     </Button>
