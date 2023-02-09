@@ -29,6 +29,45 @@
   "labelAge": "Alter",
   "labelJob": "Beruf",
   "labelMyLanaguae": "Meine Sprachen",
+  "labelAboutBEM": "Über BEMpsy",
+  "labelOpenLink": "Link öffnen",
+  "labelStayHere": "Ich bleibe hier!",
+  "labelAboutApp": "Über die App",
+  "labelPrivacy": "Privatsphäre",
+  "labelVisibility": "Sichtbarkeit",
+  "labelSettings": "Einstellungen",
+  "labelMeeting": "treffen / austausch",
+  "labelOffer": "Ich biete",
+  "labelNotifcation": "Benachrichtigung",
+  "labelTermOfUse": "Nutzungsbedingungen",
+  "labelCancel": "Abbrechen",
+  "labelLocation": "Standort",
+
+  "searchPageFindPate":"BEM-Pate finde",
+  "searchPageContact":"BEM-Kontaktanfragen",
+  "searchPageLocationSeeker": "Standorte von BEM-Betroffenen",
+  "searchPageLocationPate": "Standorte von BEM-Paten",
+  "searchPageFilter": "Filter",
+  "searchPageMeeting":"Präferenzen für Treffen",
+
+  "seekerProfileSayHello": " Sage Hallo!",
+  "seekerProfileRejectContact": " Kontakt ablehnen",
+  "seekerProfileAccept": " Annehmen",
+  "seekerProfileReject": " Ablehnen",
+  "seekerProfileNeedHelp": " Ich brauche hilfe mit",
+  "seekerProfileCongratulation": "Herzlichen Glückwunsch!",
+  "seekerProfileNowConnected": "Du bist jetzt in Kontakt mit ",
+  "seekerProfileClose": "Schließen",
+  "seekerPageReason": "Gib einen Grund an, warum du den Kontakt ablehnst mit ",
+
+  "pateProfileSayHelloToFriend": "Du bist in Kontakt, sage Hallo!",
+  "pateProfileSentContact": "Kontaktanfrage gesendet",
+  "pateProfileContactRequest": "Kontakt anfrage",
+  "pateProfileExperienceMotivation": "Erfahrung & Motivation",
+  "pateProfileCancelRequest": "Wollen Sie die Anfrage wirklich stornieren mit ",
+  "pateProfileContact": "Kontakt aufnehmen",
+  "pateProfileTellMore" :"Bitte erzähl uns etwas über sich!",
+  "pateProfileConfirm" :"Bestätigen",
 
   "landingPageCTA": "Was möchtest du tun?",
   "landingPageLinkFindPate": "Bem-Pate oder Selbsthilfegruppe finden",
@@ -69,11 +108,14 @@
   "modalWindowDefaultHeadline": "Etwas ist schief gelaufen!",
   "modalWindowDefaultText": "Bitte drücke auf OK",
   "modalWindowSuccsess": "Ihr Basis-Konto ist eingerichtet - im nächsten Schritt können Sie bestimmen, was Sie konkret machen möchten.",
+  "modalPreferencesLeave": "Sie verlassen jetzt die Seite!",
+
+  "preferencesPageMoreInfo": "weitere Infos",
 
   "messagesPageHeader": "Nachrichten",
   "messagesPageSubHeader": "Ihre Kontakte",
   "messagesPageMessages": "Ihre Nachrichten",
-  
+
   "splashscreenText": "Das Austausch- und Vermittlungsportal für alle BEM-Berechtigten mit psychischen Beeinträchtigungen.",
 
   "onboardingPageSeekerHeader": "BEM-Beratung auf Augenhöhe",
@@ -168,8 +210,9 @@
   "enum_regions_SH": "Schleßwig-Holstein",
   "enum_regions_TH": "Thüringen",
 
-  "activeChatDelivered": "versandt",
-  "activeChatRead": "gelesen",
+  "activeChatDelivered": "Versandt",
+  "activeChatRead": "Gelesen",
+  
   "notificationAccountAlreadyExists": "Es existiert bereits ein Account mit diesen Daten",
   "notificationOTPSent_email": "Ein Einmal-Passwort wurde an deine Email-Adresse gesendet",
   "notificationOTPSent_phone": "Ein Einmal-Passwort wurde an deine Telefonnummer gesendet",

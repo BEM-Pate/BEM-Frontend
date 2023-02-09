@@ -27,6 +27,7 @@ import {useZustand} from "../../../../zustand/store";
 import {Modal} from "react-bootstrap";
 import mail from "../../../../images/icons/ui/mail.svg";
 import Textarea from "../../../Textarea/Textarea";
+import { useTranslation } from "react-i18next";
 
 
 interface Props {
@@ -52,6 +53,7 @@ const BetroffenerProfile = (props: Props) => {
     const [required, setRequired] = useState<boolean>(declineReason.length === 0);
     const [isRejectedContact, setIsRejectedContact] = useState<Boolean>(false);
     const [isPendingContact, setIsPendingContact] = useState<Boolean>(false);
+    const { t } = useTranslation();
     console.log("ispending? ",isPendingContact)
     console.log("contact", pendingContacts)
     useEffect(() => {
@@ -181,7 +183,7 @@ const BetroffenerProfile = (props: Props) => {
                                     setRoute(`/dashboard/chatroom/${betroffenerData?._id}`)
                                 }}>
                                 <img src={request_chat} alt="add_friend"/>
-                                <span> Hallo sagen</span>
+                                <span>{t('seekerProfileSayHello')}</span>
                             </Button>
                         ) : isRejectedContact ? (
                             <Button
@@ -190,7 +192,7 @@ const BetroffenerProfile = (props: Props) => {
                                 )}
                                 disabled>
 
-                                <span> Kontakt abgelehnt</span>
+                                <span>{t('seekerProfileRejectContact')}</span>
                             </Button>
                         ) : isPendingContact ? (
                             <div className={classNames(
@@ -203,7 +205,7 @@ const BetroffenerProfile = (props: Props) => {
                                     onClick={acceptRequest}
                                 >
                                     <img src={success} alt="accept-icon"/>
-                                    <span> Annehmen</span>
+                                    <span>{t('seekerProfileAccept')}</span>
                                 </Button>
 
                                 <Button
@@ -213,7 +215,7 @@ const BetroffenerProfile = (props: Props) => {
                                     onClick={handleShowDeclineContact}
                                 >
                                     <img src={cross} alt="reject-icon"/>
-                                    <span> Ablehnen</span>
+                                    <span>{t('seekerProfileReject')}</span>
                                 </Button>
                             </div>
                         ) : null
@@ -229,12 +231,12 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Ich brauche Hilfe bei
+                        {t('seekerProfileNeedHelp')}
                     </Headline>
                     <Paragraph collapse>
                         {betroffenerData?.meetingPreference.support.map((value) => {
                             return (
-                                <p> {value === "CONSULTATION" ? "- BEM-Beratung allgemein" : "- BEM-Beratung auf ein bestimmtes Krankheitsbild bezogen"}</p>)
+                                <p> {value === "CONSULTATION" ? "- " + t('registerSeekerNeedsOption2') : "- " + t('enum_supports_DISEASE_CONSULTATION')}</p>)
                         })}
                         <br/>
                         <br/>
@@ -245,7 +247,7 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Krankheitsbild
+                        {t('labelDiseaseProfile')}
                     </Headline>
                     <div>
                         {
@@ -299,7 +301,7 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Berufsfeld
+                        {t('enum_occupations')}
                     </Headline>
                     <Chip
                         id={betroffenerData?.baseUserData.occupation!}>{betroffenerData?.baseUserData.occupation}</Chip>{" "}
@@ -309,7 +311,7 @@ const BetroffenerProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Standort
+                        {t('labelLocation')}
                     </Headline>
                     <img src={map_placeholder} alt="map"></img>
                 </div>
@@ -318,15 +320,15 @@ const BetroffenerProfile = (props: Props) => {
             <Modal show={showNewContact} onHide={handleCloseNewContact} size="lg"
                    centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Herzlichen Glückwunsch</Modal.Title>
+                    <Modal.Title>{t('seekerProfileCongratulation')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Du bist nun in Verbindung
-                        mit <b>{betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName}</b></p>
+                    <p>{t('seekerProfileNowConnected')}
+                         <b>{betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName}</b></p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleCloseNewContact}>
-                        Schließen
+                        {t('seekerProfileClose')}
                     </Button>
                     <Button
                         className={classNames(
@@ -337,7 +339,7 @@ const BetroffenerProfile = (props: Props) => {
                             setRoute(`/dashboard/chatroom/${betroffenerData?._id}`)
                         }}>
                         <img src={request_chat} alt="add_friend"/>
-                        <span> Hallo sagen</span>
+                        <span>{t('seekerProfileSayHello')}</span>
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -345,18 +347,16 @@ const BetroffenerProfile = (props: Props) => {
             <Modal show={showDeclineContact} onHide={handleCloseDeclineContact} size="lg"
                    centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Kontakt ablehnen</Modal.Title>
+                    <Modal.Title>{t('seekerProfileRejectContact')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Bitte einen Grund eingeben, warum du Kontakt
-                        mit {betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName} ablehnen
-                        möchtest?</p>
+                    <p>{t('seekerPageReason')} {betroffenerData?.baseUserData?.firstName} {betroffenerData?.baseUserData?.lastName} </p>
                     {required && (<span style={{color: "red"}}>Bitte einen Grund eingeben</span>)}
                     <Textarea id="decline" onChange={setDeclineReason} defaultValue={declineReason.length > 0 ? declineReason : null}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleCloseDeclineContact}>
-                        Schließen
+                        {t('seekerProfileClose')}
                     </Button>
                     <Button
                         className={classNames(
@@ -364,7 +364,7 @@ const BetroffenerProfile = (props: Props) => {
                         )}
                         onClick={declineRequest}
                     >
-                        <span>Bestätigen</span>
+                        <span>{'seekerProfileAccept'}</span>
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -144,13 +144,13 @@ const Preferences = (props: Props) => {
       <div className={classNames(styles.PreferencesHeader)}>
       <Button icon styling="back" onClick={() => {navigate(-1); updateUserData()}}></Button>
         <Headline headline="h1" styling="page">
-          Einstellungen
+          {t('labelSettings')}
         </Headline>
        
       </div>
       <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
-          Sichtbarkeit
+          {t('labelVisibility')}
         </Headline>
         <Dropdown
           options={locations}
@@ -163,7 +163,7 @@ const Preferences = (props: Props) => {
       </div>
       <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
-          treffen / austausch
+          {t('labelMeeting')}
         </Headline>
         <CheckboxList
           id="meetings"
@@ -175,16 +175,16 @@ const Preferences = (props: Props) => {
         <Dropdown
           options={supports}
           id="supports"
-          label="Ich biete"
+          label={t('labelOffer')!}
           placeholder={`${t(`enum_supports_${userAttributes?.meetingPreference.support}`)}`}
           onChange={setUpdatedSupports}
         ></Dropdown>
       </div>
       <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
-          Privatsphäre
+          {t('labelPrivacy')}
         </Headline>
-        <Button styling="setting">Benachrichtigungen</Button>
+        <Button styling="setting">{t('labelNotifcation')}</Button>
         <Button
           styling="setting"
           onClick={() => {
@@ -192,21 +192,21 @@ const Preferences = (props: Props) => {
             toggleModal();
           }}
         >
-          Datenschutz
+          {t('labelPrivacy')}
         </Button>
       </div>
       <div className={classNames(styles.PreferencesSection)}>
         <Headline headline="h2" styling="caps">
-          app
+          {t('labelAboutApp')}
         </Headline>
         <LanguageDropdown />
       </div>
       <div>
         <Headline headline="h2" styling="caps">
-          weitere Infos
+          {t('preferencesPageMoreInfo')}
         </Headline>
         <Button onClick={toggleModal} styling="setting">
-          Nutzungsbedingungen
+          {t('labelTermOfUse')}
         </Button>
         <Button
           styling="setting"
@@ -224,20 +224,20 @@ const Preferences = (props: Props) => {
             toggleModal();
           }}
         >
-          Über BEMpsy
+          {t('labelAboutBEM')}
         </Button>
       </div>
       <ModalWindow
         isVisible={isVisible}
         type="warning"
-        headline="You are about to leave this website!"
+        headline={t('modalPreferencesLeave')!}
         text={pageUrl}
       >
         <Button styling="outline" onClick={() => handleClicks()}>
-          Neuen Link abrufen
+          {t('labelOpenLink')}
         </Button>
 
-        <Button onClick={toggleModal}>Ich bleib hier!</Button>
+        <Button onClick={toggleModal}>{t('labelStayHere')}</Button>
       </ModalWindow>
     </div>
   );

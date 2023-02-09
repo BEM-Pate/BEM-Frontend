@@ -202,8 +202,8 @@ const Search = (props: Props) => {
           headline="h1"
         >
           {userData?.baseUserData?.role === "normal_user"
-            ? " BEM-Pate finden"
-            : "BEM-Kontaktanfragen"}
+            ? t('searchPageFindPate')
+            : t('searchPageContact')}
         </Headline>
         <div style={{ display: "flex" }}>
           <Button
@@ -244,7 +244,7 @@ const Search = (props: Props) => {
         className={classNames(styles.SearchHeadersHeadlineH2)}
         headline="h2"
       >
-        Krankheitsbilder
+        {t('enum_diseases')}
       </Headline>
       <div className={classNames(styles.SearchDiseases)}>
         <ChipList id="d" options={diseases} onChange={setFilterDiseases}></ChipList>
@@ -255,8 +255,8 @@ const Search = (props: Props) => {
         headline="h2"
       >
         {userData?.baseUserData?.role === "normal_user"
-          ? "Standorte von BEM-Paten"
-          : "Standorte von BEM-Betroffenen"}
+          ? t('searchPageLocationPate')
+          : t('searchPageLocationSeeker')}
       </Headline>
       <div className={classNames(styles.SearchMap)}>
         <img src={map_placeholder} alt="map" />
@@ -267,22 +267,22 @@ const Search = (props: Props) => {
             className={classNames(styles.SearchFilterHeadline)}
             headline="h2"
           >
-            Filter
+            {t('searchPageFilter')}
           </Headline>
           <div>
             <Headline
               className={classNames(styles.SearchFilterSubtitle)}
               headline="h3"
             >
-              Präferenzen für Treffen
+              {t('searchPageMeeting')}
             </Headline>
             <CheckboxList
               className={classNames(styles.SearchFilterBox)}
               onChange={setFilterMeeting}
               id="meeting"
               options={[
-                { label: "In Person", value: "IN_PERSON" },
-                { label: "Virtuell", value: "VIRTUAL" },
+                { label: t('enum_meetings_IN_PERSON'), value: "IN_PERSON" },
+                { label: t('enum_meetings_VIRTUAL'), value: "VIRTUAL" },
               ]}
             />
           </div>
@@ -304,7 +304,7 @@ const Search = (props: Props) => {
               className={classNames(styles.SearchFilterSubtitle)}
               headline="h3"
             >
-              Altersspanne
+              {t('enum_ageranges')}
             </Headline>
             <Dropdown
               defaultValue={filterAgeRange}
@@ -316,7 +316,7 @@ const Search = (props: Props) => {
           </div>
           <div className={classNames(styles.SearchFilterButtons)}>
             <Button styling="outline" onClick={() => setOpenFilter(false)}>
-              Cancel
+             {t('labelCancel')}
             </Button>
             <Button onClick={() => {setOpenFilter(false); applyFilter()}}>Submit</Button>
           </div>

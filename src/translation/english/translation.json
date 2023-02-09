@@ -29,6 +29,45 @@
   "labelAge": "Age",
   "labelJob": "Job",
   "labelMyLanaguae": "My languages",
+  "labelAboutBEM": "About BEMpsy",
+  "labelOpenLink": "Open Link",
+  "labelStayHere": "I stay here!",
+  "labelAboutApp": "About the App",
+  "labelPrivacy": "Privacy",
+  "labelVisibility": "Visibility",
+  "labelSettings": "Settings",
+  "labelMeeting": "meeting / exchange",
+  "labelOffer": "I offer",
+  "labelNotifcation": "Notification",
+  "labelTermOfUse": "Term of use",
+  "labelCancel": "Cancel",
+  "labelLocation": "Location",
+
+  "searchPageFindPate": "Find BEM-Mentor",
+  "searchPageContact": "BEM-contact requests",
+  "searchPageLocationSeeker": "locations of BEM mentors",
+  "searchPageLocationPate": "locations of BEM sponsors",
+  "searchPageFilter": "filter",
+  "searchPageMeeting": "Meeting Preferences",
+
+  "seekerProfileSayHello": " Say Hello!",
+  "seekerProfileRejectContact": " Reject contact",
+  "seekerProfileAccept": " Accept",
+  "seekerProfileReject": " Reject",
+  "seekerProfileNeedHelp": " I need help with",
+  "seekerProfileCongratulation": "Congratulations!",
+  "seekerProfileNowConnected": "You are now connectet with ",
+  "seekerProfileClose": "Close",
+  "seekerPageReason": "Enter a reason why you don't want to have Contact with ",
+
+  "pateProfileSayHelloToFriend": "You are in contact. Say Hello!",
+  "pateProfileSentContact": "Contact request sent",
+  "pateProfileContactRequest": "Contact request",
+  "pateProfileExperienceMotivation": "Experience & Motivation",
+  "pateProfileCancelRequest": "Do you really want to cancel the request to ",
+  "pateProfileContact": "Take contact",
+  "pateProfileTellMore" :"Please tell us something about yourself!",
+  "pateProfileConfirm" :"Confirm",
 
   "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
   "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -71,9 +110,12 @@
   "modalWindowDefaultHeadline": "Something went wrong!",
   "modalWindowDefaultText": "Please press OK",
   "modalWindowSuccsess": "Your basic account is set up - in the next step you can determine what you want to do specifically.",
+  "modalPreferencesLeave": "You are about to leave this website!",
+
+  "preferencesPageMoreInfo": "more Information",
 
   "splashscreenText": "The exchange and mediation portal for all BEM beneficiaries with mental impairments.",
-  
+
   "onboardingPageSeekerHeader": "BEM consultation at eye level",
   "onboardingPageSeekerDescription": "Find answers on the topic of BEM due to mental impairments",
 
@@ -170,6 +212,6 @@
   "enum_regions_SH": "Schleswig-Holstein",
   "enum_regions_TH": "Thuringia",
 
-  "activeChatDelivered": "delivered",
-  "activeChatRead": "read"
+  "activeChatDelivered": "Delivered",
+  "activeChatRead": "Read"
 }

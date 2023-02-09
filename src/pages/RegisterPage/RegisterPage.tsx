@@ -163,7 +163,7 @@ const RegisterPage = () => {
                   onClick={requestRegister}
                   disabled={Validators.validate(accountName, validators) || requesting}
                 >
-                  {t('RegisterPageButtonRegister')}
+                  {t('labelRegister')}
                 </Button>
               </div>
             </>
