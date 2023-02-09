@@ -288,6 +288,7 @@ const Profile = (props: Props) => {
         id="occupations"
         options={occupations}
         label="Occupations"
+        defaultValue={userAttributes?.baseUserData.occupation}
       ></Dropdown>
       <Button onClick={updateUserData}>Änderungen speichern</Button>
     </div>
