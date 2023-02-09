@@ -140,7 +140,7 @@ const RegisterPreferencesPage = (props: Props) => {
           support: t(`enum_supports`),
           diseaseConsultation: t(`enum_diseases`),
           meeting: t(`enum_meetings`),
-          location: t(`labelLocations`),
+          location: t(`enum_regions`),
         }}
         dataFields={{
           support: userSupport?.map(
