@@ -176,7 +176,7 @@ const PateProfile = (props: Props) => {
                             )}
                             headline="h1"
                         >
-                            {t(`enum_regions_${(match?.meetingPreference.location ||
+                            {match?.meetingPreference.location && t(`enum_regions_${(match?.meetingPreference.location ||
                             pateData?.meetingPreference.location)}`)}
                         </Headline>
                         {isVerifiedContact ? (

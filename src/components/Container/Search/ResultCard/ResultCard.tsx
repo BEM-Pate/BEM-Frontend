@@ -9,6 +9,7 @@ import API from '../../../../helpers/api';
 import {API_ADDRESS} from '../../../../helpers/env';
 import Button from '../../../Button/Button';
 import {Link, useNavigate} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     userAttributes: UserData;
@@ -20,6 +21,7 @@ const ResultCard = (props: Props) => {
     const {userAttributes, match, token} = props;
     const [imageSrc, setImageSrc] = useState<any>(placeholder);
     const [betroffenerData, setBetroffenerData] = useState<any>(null)
+    const {t} = useTranslation()
 
     const navigate = useNavigate();
 
@@ -65,7 +67,7 @@ const ResultCard = (props: Props) => {
                                 <Headline className={classNames(styles.ResultCardDetailsName)}
                                           headline='p'>{match.firstName}</Headline>
                                 <Headline className={classNames(styles.ResultCardDetailsLocation)}
-                                          headline='p'>{match.meetingPreference.location}</Headline>
+                                          headline='p'>{match?.meetingPreference.location && t(`enum_regions_${match?.meetingPreference.location}`)}</Headline>
                                 <div className={classNames(styles.ResultCardDetailsBackground)}/>
                             </div>
                         </div>
@@ -84,7 +86,7 @@ const ResultCard = (props: Props) => {
                                     <Headline className={classNames(styles.ResultCardDetailsName)}
                                               headline='p'>{betroffenerData?.baseUserData.firstName}</Headline>
                                     <Headline className={classNames(styles.ResultCardDetailsLocation)}
-                                              headline='p'>{betroffenerData?.meetingPreference.location}</Headline>
+                                              headline='p'>{betroffenerData?.meetingPreference.location && t(`enum_regions_${betroffenerData?.meetingPreference.location}`)}</Headline>
                                     <div className={classNames(styles.ResultCardDetailsBackground)}/>
                                 </div>
                             </div>

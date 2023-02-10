@@ -71,7 +71,7 @@ const MatchList = (props: Props) => {
               <div className={classNames(styles.MatchListItemDetailsInfo)}>
                 <Headline headline="h2">{match?.firstName}</Headline>
                 <Headline styling="caps" headline="h2">
-                  {t(`enum_regions_${match?.meetingPreference.location}`)}
+                  {match?.meetingPreference.location && t(`enum_regions_${match?.meetingPreference.location}`)}
                 </Headline>
               </div>
             </div>
