@@ -189,7 +189,7 @@ const PateProfile = (props: Props) => {
                                 }}
                             >
                                 <img src={request_chat} alt="add_friend"/>
-                                <span>Befreundet. Hallo sagen!</span>
+                                <span>{t('pateProfileSayHelloToFriend')}</span>
                             </Button>
                         ) : isPendingContact ? (
                             <div
@@ -204,7 +204,7 @@ const PateProfile = (props: Props) => {
                                     disabled
                                 >
                                     <img src={mail} alt="add_friend"/>
-                                    <span>Kontaktanfrage gesendet</span>
+                                    <span>{t('pateProfileSentContact')}</span>
                                 </Button>
                                 <Button onClick={handleShow} icon>
                                     X
@@ -218,8 +218,7 @@ const PateProfile = (props: Props) => {
                                 onClick={handleShowAddModal}
                             >
                                 <img src={add_friend} alt="add_friend"/>
-                                {/* TODO Hasan */}
-                                <span>Kontakt anfragen</span>
+                                <span>{t('pateProfileContactRequest')}</span>
                             </Button>
                         )}
                     </div>
@@ -228,12 +227,11 @@ const PateProfile = (props: Props) => {
             <div className={classNames(styles.UserProfileInformation)}>
                 <div className={classNames(styles.UserProfileInformationNotch)}/>
                 <div className={classNames(styles.UserProfileInformationBaseContainer)}>
-                    {/* TODO Hasan */}
                     <Headline
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Erfahrungen & Motivation
+                        {t('pateProfileExperienceMotivation')}
                     </Headline>
                     <Paragraph collapse>
                         {match?.experience || pateData?.baseUserData.experience}
@@ -243,12 +241,11 @@ const PateProfile = (props: Props) => {
                     </Paragraph>
                 </div>
                 <div className={classNames(styles.UserProfileInformationBaseContainer)}>
-                    {/* TODO Hasan */}
                     <Headline
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Krankheitsbild
+                        {t('labelDiseaseProfile')}
                     </Headline>
                     <div>
                         {(pateData || match)?.meetingPreference.diseaseConsultation?.map(
@@ -284,7 +281,7 @@ const PateProfile = (props: Props) => {
                                 className={classNames(styles.UserProfileMiscHeadline)}
                                 headline="h6"
                             >
-                                Geschlecht
+                                {t('enum_genders')}
                             </Headline>
                             <p>
                                 {t(
@@ -305,7 +302,7 @@ const PateProfile = (props: Props) => {
                                 className={classNames(styles.UserProfileMiscHeadline)}
                                 headline="h6"
                             >
-                                Alter
+                                {t('labelAge')}
                             </Headline>
                             <p>
                                 {t(
@@ -326,7 +323,7 @@ const PateProfile = (props: Props) => {
                                 className={classNames(styles.UserProfileMiscHeadline)}
                                 headline="h6"
                             >
-                                Treffen
+                                {t('registerPreferencesMeet')}
                             </Headline>
                             <p>
                                 {(
@@ -353,7 +350,7 @@ const PateProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Berufsfeld
+                        {t('enum_occupations')}
                     </Headline>
                     <Chip id="occupation">
                         {t(
@@ -369,7 +366,7 @@ const PateProfile = (props: Props) => {
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
                     >
-                        Standort
+                        {t('labelLocation')}
                     </Headline>
                     <img src={map_placeholder} alt="map"/>
                 </div>
@@ -387,13 +384,13 @@ const PateProfile = (props: Props) => {
                 <Modal.Body>
                     {/* TODO Hasan */}
                     <p>
-                        Willst du die Anfrage zu {pateData?.baseUserData.firstName}{" "}
-                        {pateData?.baseUserData.lastName} wirklich stornieren?
+                        {t('pateProfileCancelRequest')} {pateData?.baseUserData.firstName}{" "}
+                        {pateData?.baseUserData.lastName} 
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleClose}>Abbrechen</Button>
-                    <Button onClick={cancelRequest}>Ja</Button>
+                    <Button onClick={handleClose}>{t('labelCancel')}</Button>
+                    <Button onClick={cancelRequest}>{t('labelYes')}</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -401,19 +398,19 @@ const PateProfile = (props: Props) => {
             <Modal show={showAddModal} onHide={handleCloseAddModal} size="lg"
                    centered>
                 <Modal.Header closeButton>
-                    {/* TODO Hasan */}
-                    <Modal.Title>Kontakt aufnehmen</Modal.Title>
+
+                    <Modal.Title>{t('pateProfileContact')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* TODO Hasan */}
-                    <p>Erzähl doch bitte etwas über dich!</p>
+                    <p>{t('pateProfileTellMore')}</p>
+
                     {required && (<span style={{color: "red"}}>Icebreaker-Text darf nicht leer sein</span>)}
                     <Textarea id="decline" onChange={setMessage} defaultValue={message.length > 0 ? message : null} />
                 </Modal.Body>
                 <Modal.Footer>
                     {/* TODO Hasan */}
                     <Button onClick={handleCloseAddModal}>
-                        Schließen
+                        {t('seekerProfileClose')}
                     </Button>
                     <Button
                         className={classNames(
@@ -421,8 +418,9 @@ const PateProfile = (props: Props) => {
                         )}
                         onClick={requestContact}
                     >
-                        {/* TODO Hasan */}
-                        <span>Bestätigen</span>
+
+                        <span>{t('pateProfileConfirm')}</span>
+
                     </Button>
                 </Modal.Footer>
             </Modal>
