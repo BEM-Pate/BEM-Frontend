@@ -148,7 +148,7 @@ const Category = (props: Props) => {
       <Button styling="back" icon onClick={diseaseMatches ?  () => setDiseaseMatches(null) : () => navigate("/dashboard/search") }>
       </Button>
       <Headline styling="page"headline="h1">
-        {diseaseMatches ? t(`enum_diseases_${diseaseMatches}`) : "Krankheitsbilder"}
+        {diseaseMatches ? t(`enum_diseases_${diseaseMatches}`) : t("enum_diseases")}
       </Headline>
       </div>
       {diseaseMatches ? <MatchList disease={diseaseMatches} token={userData.token} /> : <div className={classNames(styles.CategoryList)}>
@@ -156,8 +156,8 @@ const Category = (props: Props) => {
           return (
             <div className={classNames(styles.CategoryListCard)} key={index} onClick={() => setDiseaseMatches(disease.value)}>
               <div className={classNames(styles.CategoryListCardDetails)}>
-              <Headline headline="h2" className={classNames(styles.CategoryListCardDetailsHeadline)}>{`Krankheitsbild `}
-              <span>{disease.label}</span>
+              <Headline headline="h2" className={classNames(styles.CategoryListCardDetailsHeadline)}>{t(`labelDiseaseProfile`)}
+              <span> {disease.label}</span>
               </Headline>
               <Preview disease={disease.value} token={userData.token} className={classNames(styles.CategoryListCardDetailsPreview)}></Preview>
                 </div>
