@@ -49,6 +49,8 @@
   "searchPageLocationPate": "BEM sponsorlarının konumları",
   "searchPageFilter": "filtre",
   "searchPageMeeting": "Toplantı Tercihleri",
+  "searchPageNoResultOfSeeker": "Yeni iletişim isteği yok",
+  "searchPageNoResultOfPate": "BEM mentor bulunamadı",
 
   "seekerProfileSayHello": " Merhaba!",
   "seekerProfileRejectContact": " İletişimi reddet",
@@ -91,6 +93,14 @@
   "dashboardReson": "Şu sebeple:",
   "dashboardNewContact": "Yeni İletişim talebi",
   "dashboardAddContact": " sana iletişim olarak eklemek istiyor",
+  "dashboardCongrat": "Tebrikler, EŞLEŞME!",
+  "dashboardConnected": "Şu anda bağlantınız var",
+  "dashboardSadly": "Üzgünüm!",
+  "dashboardReason": "Aşağıdaki nedenle: ",
+  "dashboardNewContact": "Yeni iletişim isteği",
+  "dashboardAddContact": " size iletişim olarak eklemek istiyor",
+  "dashboardModalReject": "iletişim isteğinizi reddetti",
+  "dashboardAddContactRequestMsg": "Karşılama metni:",
 
   "landingPageWelcome": "BEMpsy Kendine Yardım Portalına hoş geldiniz",
   "landingPageIntroduction": "Psikolojik engelleri olan BEM hak sahibi herkes için bir değişim ve eşleştirme portalı.",
@@ -244,5 +254,12 @@
   "notificationOTPSent_phone": "Tek kullanımlık bir şifre, telefon numaranıza gönderildi",
   "notificationOTPError": "Bir hata oluştu",
   "notificationLoginError": "Bir hata oluştu",
-  "notificationRegisterError": "Bir hata oluştu"
+  "notificationRegisterError": "Bir hata oluştu",
+
+  "settingPage1": "Profiliniz tamamlandı!",
+  "settingPage2": "Profilinizi tamamlayın.",
+  "settingAccount": "Hesabım",
+  "settingLanguage": "Dillerim",
+  "settingSettings": "Ayarlar",
+  "settingLogout": "Çıkış Yap"
 }

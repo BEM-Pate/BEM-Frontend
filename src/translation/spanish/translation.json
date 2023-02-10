@@ -49,6 +49,8 @@
   "searchPageLocationPate": "Ubicaciones de patrocinadores BEM",
   "searchPageFilter": "filtrar",
   "searchPageMeeting": "Preferencias de reunión",
+  "searchPageNoResultOfSeeker": "No hay nuevas solicitudes de contacto",
+  "searchPageNoResultOfPate": "No se encontraron mentores BEM",
 
   "seekerProfileSayHello": " ¡Hola!",
   "seekerProfileRejectContact": " Rechazar contacto",
@@ -85,12 +87,14 @@
   "groupsFound": " encontrado",
   "groupsMembers": "Miembros",
 
-  "dashboardCongrat": "¡Felicidades, es un MATCH!",
+  "dashboardCongrat": "¡Felicidades, es un PARTIDO!",
   "dashboardConnected": "Ahora estás conectado con",
-  "dashboardSadly": "Lo siento!",
-  "dashboardReson": "Razón:",
+  "dashboardSadly": "¡Qué lástima!",
+  "dashboardReason": "Por la siguiente razón: ",
   "dashboardNewContact": "Nueva solicitud de contacto",
-  "dashboardAddContact": "quiere agregarte como contacto",
+  "dashboardAddContact": " quiere agregarte como contacto",
+  "dashboardModalReject": "ha rechazado tu solicitud de contacto",
+  "dashboardAddContactRequestMsg": "Texto de saludo:",
 
   "landingPageWelcome": "Bienvenido al portal de autoayuda BEMpsy",
   "landingPageIntroduction": "Un portal de intercambio y mediación para todos los titulares de derechos BEM con problemas psicológicos.",
@@ -244,5 +248,12 @@
   "notificationOTPSent_phone": "Se ha enviado una contraseña única a su número de teléfono",
   "notificationOTPError": "Se ha producido un error",
   "notificationLoginError": "Se ha producido un error",
-  "notificationRegisterError": "Se ha producido un error"
+  "notificationRegisterError": "Se ha producido un error",
+
+  "settingPage1": "¡Tu perfil está completo!",
+  "settingPage2": "Completa tu perfil.",
+  "settingAccount": "Mi cuenta",
+  "settingLanguage": "Mis idiomas",
+  "settingSettings": "Configuraciones",
+  "settingLogout": "Cerrar sesión"
 }

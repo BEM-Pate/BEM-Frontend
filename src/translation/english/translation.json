@@ -88,14 +88,14 @@
   "groupsFound": " found",
   "groupsMembers": "Members",
 
-  "dashboardCongrat": "Congratulations, it's a MATCH!",
-  "dashboardConnected": "You are now connected with",
-  "dashboardSadly": "Too bad!",
-  "dashboardReason": "Following reason: ",
-  "dashboardNewContact": "New contact request",
-  "dashboardAddContact": " wants to add you as a contact",
-  "dashboardModalReject": "has rejected your contact request",
-  "dashboardAddContactRequestMsg": "Greeting text:",
+  "dashboardCongrat": "Félicitations, c'est un MATCH!",
+  "dashboardConnected": "Vous êtes maintenant connecté avec",
+  "dashboardSadly": "Dommage!",
+  "dashboardReason": "Raison suivante: ",
+  "dashboardNewContact": "Nouvelle demande de contact",
+  "dashboardAddContact": "veut vous ajouter en tant que contact",
+  "dashboardModalReject": "a rejeté votre demande de contact",
+  "dashboardAddContactRequestMsg": "Texte de salutation:",
 
 
   "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",

@@ -49,6 +49,8 @@
   "searchPageLocationPate": "Emplacements des parrains BEM",
   "searchPageFilter": "filtre",
   "searchPageMeeting": "Préférences de réunion",
+  "searchPageNoResultOfSeeker": "Aucune nouvelle demande de contact",
+  "searchPageNoResultOfPate": "Aucun mentor BEM trouvé",
 
   "seekerProfileSayHello": " Dire bonjour!",
   "seekerProfileRejectContact": " Rejeter le contact",
@@ -244,5 +246,12 @@
   "notificationOTPSent_phone": "Un mot de passe unique a été envoyé à votre numéro de téléphone",
   "notificationOTPError": "Une erreur s'est produite",
   "notificationLoginError": "Une erreur s'est produite",
-  "notificationRegisterError": "Une erreur s'est produite"
+  "notificationRegisterError": "Une erreur s'est produite",
+
+  "settingPage1": "Votre profil est complet !",
+  "settingPage2": "Complétez votre profil.",
+  "settingAccount": "Mon compte",
+  "settingLanguage": "Mes langues",
+  "settingSettings": "Paramètres",
+  "settingLogout": "Déconnexion"
 }

@@ -49,6 +49,8 @@
   "searchPageLocationPate": "lokalizacje sponsorów BEM",
   "searchPageFilter": "filtr",
   "searchPageMeeting": "Preferencje spotkań",
+  "searchPageNoResultOfSeeker": "Brak nowych prośby o kontakt",
+  "searchPageNoResultOfPate": "Nie znaleziono mentora BEM",
 
   "seekerProfileSayHello": " Powiedz Cześć!",
   "seekerProfileRejectContact": " Odrzuć kontakt",
@@ -85,12 +87,14 @@
   "groupsFound": " znaleziono",
   "groupsMembers": "Członkowie",
 
-  "dashboardCongrat": "Gratulacje, to JEST DOPASOWANIE!",
-  "dashboardConnected": "Jesteś teraz połączony z",
+  "dashboardCongrat": "Gratulacje, to jest DOPASOWANIE!",
+  "dashboardConnected": "Teraz jesteś połączony z",
   "dashboardSadly": "Niestety!",
-  "dashboardReson": "Następujący powód: ",
-  "dashboardNewContact": "Nowa prośba o kontakt",
-  "dashboardAddContact": " chce dodać Cię jako kontakt",
+  "dashboardReason": "Następujący powód: ",
+  "dashboardNewContact": "Nowe żądanie kontaktu",
+  "dashboardAddContact": " chce dodać cię jako kontakt",
+  "dashboardModalReject": "odrzucił twoje żądanie kontaktu",
+  "dashboardAddContactRequestMsg": "Tekst powitania:",
 
   "landingPageWelcome": "Witaj na stronie BEMpsy Self-Help Portal",
   "landingPageIntroduction": "Portal wymiany i pośrednictwa dla osób uprawnionych do BEM z zaburzeniami psychicznymi.",
@@ -244,5 +248,12 @@
   "notificationOTPSent_phone": "Jednorazowe hasło zostało wysłane na twój numer telefonu",
   "notificationOTPError": "Wystąpił błąd",
   "notificationLoginError": "Wystąpił błąd",
-  "notificationRegisterError": "Wystąpił błąd"
+  "notificationRegisterError": "Wystąpił błąd",
+
+  "settingPage1": "Twój profil jest ukończony!",
+  "settingPage2": "Ukończ swój profil.",
+  "settingAccount": "Moje konto",
+  "settingLanguage": "Moje języki",
+  "settingSettings": "Ustawienia",
+  "settingLogout": "Wyloguj się"
 }

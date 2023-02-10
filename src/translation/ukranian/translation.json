@@ -49,6 +49,8 @@
   "searchPageLocationPate": "Lokalizacje sponsorów BEM",
   "searchPageFilter": "filtr",
   "searchPageMeeting": "Preferencje spotkań",
+  "searchPageNoResultOfSeeker": "Немає нових запитів контакту",
+  "searchPageNoResultOfPate": "Не знайдено менторів BEM",
 
   "seekerProfileSayHello": "Кажу Привіт!",
   "seekerProfileRejectContact": " Відхилити контакт",
@@ -86,11 +88,14 @@
   "groupsMembers": "Члени",
 
   "dashboardCongrat": "Вітаємо, це МАТЧ!",
-  "dashboardConnected": "Тепер ви під'єднані до",
-  "dashboardSadly": "На жаль!",
-  "dashboardReson": "Наступна причина:",
-  "dashboardNewContact": "Новий запит на контакт",
-  "dashboardAddContact": " хоче додати вас до контактів",
+  "dashboardConnected": "Тепер ви з'єднані з",
+  "dashboardSadly": "Дуже жаль!",
+  "dashboardReason": "З наступної причини:",
+  "dashboardNewContact": "Новий запит контакту",
+  "dashboardAddContact": "хоче додати вас як контакт",
+  "dashboardModalReject": "відхилив ваш запит контакту",
+  "dashboardAddContactRequestMsg": "Привітальне повідомлення:",
+
 
   "landingPageWelcome": "Ласкаво просимо до порталу для самодопомоги BEMpsy",
   "landingPageIntroduction": "Портал для обміну та посередництва для всіх, у кого є психічні вади.",
@@ -244,5 +249,12 @@
   "notificationOTPSent_phone": "Одноразовий пароль відправлено на ваш номер телефону",
   "notificationOTPError": "Виникла помилка",
   "notificationLoginError": "Виникла помилка",
-  "notificationRegisterError": "Виникла помилка"
+  "notificationRegisterError": "Виникла помилка",
+
+  "settingPage1": "Ваш профіль завершено!",
+  "settingPage2": "Завершіть свій профіль.",
+  "settingAccount": "Мій обліковий запис",
+  "settingLanguage": "Мої мови",
+  "settingSettings": "Налаштування",
+  "settingLogout": "Вийти"
 }
