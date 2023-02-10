@@ -10,6 +10,7 @@ import useModal from "../../../helpers/useModal";
 import axios from "axios";
 import { API_ADDRESS } from "../../../helpers/env";
 import { useZustand } from "../../../zustand/store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userData: any;
@@ -22,6 +23,8 @@ const Account = (props: Props) => {
   const { isVisible, toggleModal } = useModal();
   const addNotification = useZustand(state => state.addNotification);
   const deleteAccount = useZustand((state) => state.deleteAccount);
+
+  const {t} = useTranslation();
 
   const handleDelete = () => {
     try {
@@ -49,14 +52,13 @@ const Account = (props: Props) => {
       <div className={classNames(styles.AccountHeader)}>
         <Button icon styling="back" onClick={() => navigate(-1)} />
         <Headline headline="h1" styling="page">
-          Account
+          {t('accountPageAccount')}
         </Headline>{" "}
-        {/* TODO Hasan */}
       </div>
       <div className={classNames(styles.AccountSection)}>
         <Headline headline="h2" styling="caps">
-          E-Mail / Phone
-        </Headline> {/* TODO Hasan */}
+         {t('accountPageEMailPhone')}
+        </Headline> 
         <Textfield
           id="mail"
           disabled
@@ -65,25 +67,25 @@ const Account = (props: Props) => {
       </div>
       <div className={classNames(styles.AccountSection)}>
         <Headline headline="h2" styling="caps">
-          Account Settings
-        </Headline> {/* TODO Hasan */}
+          {t('accountPageSettingsAccount')}
+        </Headline> 
         <Button
           className={classNames(styles.AccountDelete)}
           onClick={toggleModal}
           styling="setting"
         >
-          Delete Account
-        </Button> {/* TODO Hasan */}
+          {t('accountPageDeleteAccount')}
+        </Button> 
       </div>
       <ModalWindow
         isVisible={isVisible}
-        headline="Are you sure you want to delte your Account?"
-        text="This action is irreversible!"
+        headline={t('accountPageDeleteAccountConfirm')!}
+        text={t('accountPageDeleteAccountConfirmConfrim')!}
         type="warning"
       >
         <Button onClick={toggleModal}>No, I want to stay!</Button>
         <Button className={classNames(styles.AccountDelete)} styling="outline" onClick={() => handleDelete()}>
-          Yes, please delete all my data
+          {t('accountPageDeleteAccountConfirmYes')}
         </Button>
       </ModalWindow>
     </div>

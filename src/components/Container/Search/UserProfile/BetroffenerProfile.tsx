@@ -243,7 +243,6 @@ const BetroffenerProfile = (props: Props) => {
                     </Headline>
                     <Paragraph collapse>
                         {betroffenerData?.meetingPreference.support.map((value) => {
-                            {/*TODO: Hasan*/}
                             return (
                                 <p> {value === "CONSULTATION" ? "- " + t('registerSeekerNeedsOption2') : "- " + t('enum_supports_DISEASE_CONSULTATION')}</p>)
                         })}
@@ -279,12 +278,13 @@ const BetroffenerProfile = (props: Props) => {
                             <img src={betroffenerData?.baseUserData.gender === "FEMALE" ? female : male} alt="gender"/>
                         </div>
                         <div>
-                            {/*TODO: Hasan*/}
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
-                                      headline="h6">Geschlecht</Headline>
+
+                                      headline="h6">{t('enum_genders')}</Headline>
                             <p>{t(
                                     `enum_genders_${betroffenerData?.baseUserData.gender}`)}</p>
                            
+
                         </div>
                     </div>
                     <div className={classNames(styles.UserProfileMiscItem)}>
@@ -292,10 +292,12 @@ const BetroffenerProfile = (props: Props) => {
                             <img src={calendar} alt="calendar"/>
                         </div>
                         <div>
-                            {/*TODO: Hasan*/}
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
-                                      headline="h6">Alter</Headline>
+
+
+                                      headline="h6">{t('labelAge')}</Headline>
                             <p>{t(`enum_ageranges_${betroffenerData?.baseUserData.ageRange}`)}</p>
+
                         </div>
                     </div>
                     <div className={classNames(styles.UserProfileMiscItem)}>
@@ -303,9 +305,9 @@ const BetroffenerProfile = (props: Props) => {
                             <img src={meeting} alt="meeting"/>
                         </div>
                         <div>
-                            {/*TODO: Hasan*/}
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
-                                      headline="h6">Treffen</Headline>
+
+                                      headline="h6">{t('registerPreferencesMeet')}</Headline>
                             <p>{betroffenerData?.meetingPreference.meeting?.map((meeting, index) => {
                                 return (<div key={index}>
                                     <span>
@@ -314,6 +316,7 @@ const BetroffenerProfile = (props: Props) => {
                                     </span>
                                                           <br/>
                                                       </div>)
+
                             })}</p>
                         </div>
                     </div>
@@ -355,7 +358,6 @@ const BetroffenerProfile = (props: Props) => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    {/*TODO: Hasan*/}
                     <Button onClick={handleCloseNewContact}>
                         {t('seekerProfileClose')}
                     </Button>
@@ -388,7 +390,6 @@ const BetroffenerProfile = (props: Props) => {
                     <Textarea id="decline" onChange={setDeclineReason} defaultValue={declineReason.length > 0 ? declineReason : null}/>
                 </Modal.Body>
                 <Modal.Footer>
-                    {/*TODO: Hasan*/}
                     <Button onClick={handleCloseDeclineContact}>
                         {t('seekerProfileClose')}
                     </Button>

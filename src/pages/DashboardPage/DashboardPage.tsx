@@ -8,6 +8,7 @@ import {Modal} from "react-bootstrap";
 import Button from "../../components/Button/Button";
 import request_chat from "../../images/icons/ui/request_chat.svg";
 import {useNavigate} from "react-router";
+import { useTranslation } from 'react-i18next';
 
 const DashboardPage = () => {
     const location = useLocation()
@@ -33,6 +34,8 @@ const DashboardPage = () => {
     const [reason, setReason] = useState('');
     const navigate = useNavigate();
     const [isSocketSet, setIsSocketSet] = useState(socket !== null);
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (!socket) return
@@ -137,18 +140,15 @@ const DashboardPage = () => {
             <Modal show={showContactAccepted} onHide={handleAcceptedClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
-                    {/*TODO: Hasan*/}
-                    <Modal.Title>Herzlichen Glückwunsch, it's a MATCH !</Modal.Title>
+                    <Modal.Title>{t('dashboardCongrat')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/*TODO: Hasan*/}
-                    <p>Du bist nun in Verbindung
-                        mit <b>{pate?.firstName} {pate?.lastName}</b></p>
+                    <p>{t('dashboardConnected')} <b>{pate?.firstName} {pate?.lastName}</b></p>
                 </Modal.Body>
                 <Modal.Footer>
-                    {/*TODO: Hasan*/}
+
                     <Button className={classNames(styles.ModalButton)} onClick={handleAcceptedClose}>
-                        Schließen
+                        {t('seekerProfileClose')}
                     </Button>
                     <Button
                         className={classNames(styles.ModalButton)}
@@ -158,8 +158,7 @@ const DashboardPage = () => {
                             handleAcceptedClose()
                         }}>
                         <img src={request_chat} alt="add_friend"/>
-                        {/*TODO: Hasan*/}
-                        <span> Hallo sagen</span>
+                        <span> {t('seekerProfileSayHello')}</span>
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -167,19 +166,17 @@ const DashboardPage = () => {
             <Modal show={showContactRejected} onHide={handleRejectedClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
-                    {/*TODO: Hasan*/}
-                    <Modal.Title>Schade! &#128551;</Modal.Title>
+                    <Modal.Title>{t('dashboardSadly')} &#128551;</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/*TODO: Hasan*/}
                     <p><b>{rejectedPate?.firstName} {rejectedPate?.lastName}</b> hat deine Kontakt-Anfrage abgelehnt</p>
-                    <p>Folgender Grund:</p>
+                    <p>{t('dashboardReson')}</p>
                     <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {reason} "</i></p>
                 </Modal.Body>
                 <Modal.Footer>
-                    {/*TODO: Hasan*/}
+                   
                     <Button className={classNames(styles.ModalButton)} onClick={handleRejectedClose}>
-                        Schließen
+                    {t('seekerProfileClose')}
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -187,19 +184,17 @@ const DashboardPage = () => {
             <Modal show={showNewContactRequest} onHide={handleNewContactRequestClose} size="lg"
                    centered>
                 <Modal.Header closeButton>
-                    {/*TODO: Hasan*/}
-                    <Modal.Title>Neue Kontaktanfrage</Modal.Title>
+                    <Modal.Title>{t('dashboardNewContact')}</Modal.Title>
                 </Modal.Header>
-                {/*TODO: Hasan*/}
                 <Modal.Body>
-                    <p><b>{newContact?.firstName} {newContact?.lastName}</b> möchte dich als Kontakt hinzufügen</p>
+                    <p><b>{newContact?.firstName} {newContact?.lastName}</b>{t('dashboardAddContact')}</p>
                     <p>Nachricht:</p>
                     <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {message} "</i></p>
                 </Modal.Body>
                 <Modal.Footer>
-                    {/*TODO: Hasan*/}
+                    
                     <Button className={classNames(styles.ModalButton)} onClick={handleNewContactRequestClose}>
-                        Schließen
+                    {t('seekerProfileClose')}
                     </Button>
                     <Button
                         className={classNames(styles.ModalButton)}
@@ -207,8 +202,7 @@ const DashboardPage = () => {
                             handleNewContactRequestClose();
                             navigate(`/dashboard/search/user/${newContact?.account}`);
                         }}>
-                        {/*TODO: Hasan*/}
-                        <span>Profil anzeigen</span>
+                        <span>{t('profilePageYourProfile')}</span>
                     </Button>
                 </Modal.Footer>
             </Modal>

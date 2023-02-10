@@ -66,8 +66,31 @@
   "pateProfileExperienceMotivation": "Experience & Motivation",
   "pateProfileCancelRequest": "Do you really want to cancel the request to ",
   "pateProfileContact": "Take contact",
-  "pateProfileTellMore" :"Please tell us something about yourself!",
-  "pateProfileConfirm" :"Confirm",
+  "pateProfileTellMore": "Please tell us something about yourself!",
+  "pateProfileConfirm": "Confirm",
+  "pateProfileReject": "Cancel request",
+
+  "accountPageEMailPhone": "Email / Phone",
+  "accountPageAccount": "Account",
+  "accountPageDeleteAccount": "Delete account",
+  "accountPageDeleteAccountConfirm": "Are you sure you want to delete your account?",
+  "accountPageDeleteAccountConfirmConfirm": "This action is irreversible!",
+  "accountPageDeleteAccountConfirmYes": "Yes, please delete all my data!",
+  "accountPageSettingsAccount": "Account settings",
+
+  "groupsNationwide": "Nationwide",
+  "groupsFindSupportGroups": "Find support groups",
+  "groupsFindGroup": "Find groups",
+  "groupsLovly": "Popular",
+  "groupsFound": " found",
+  "groupsMembers": "Members",
+
+  "dashboardCongrat": "Congratulations, it's a MATCH!",
+  "dashboardConnected": "You are now connected with",
+  "dashboardSadly": "Too bad!",
+  "dashboardReason": "Following reason: ",
+  "dashboardNewContact": "New contact request",
+  "dashboardAddContact": " wants to add you as a contact",
 
   "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
   "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -213,5 +236,12 @@
   "enum_regions_TH": "Thuringia",
 
   "activeChatDelivered": "Delivered",
-  "activeChatRead": "Read"
+  "activeChatRead": "Read",
+
+  "notificationAccountAlreadyExists": "An account with these details already exists",
+  "notificationOTPSent_email": "A one-time password has been sent to your email address",
+  "notificationOTPSent_phone": "A one-time password has been sent to your phone number",
+  "notificationOTPError": "An error has occurred",
+  "notificationLoginError": "An error has occurred",
+  "notificationRegisterError": "An error has occurred"
 }
