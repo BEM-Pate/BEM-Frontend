@@ -104,6 +104,7 @@ const Search = (props: Props) => {
   const [filterDiseases, setFilterDiseases] = useState<string[]>([]);
   const [filterLocation, setFilterLocation] = useState<string>("");
 
+  const [locations, setLocations] = useState<FormOption[]>([]);
   const [ageranges, setAgeranges] = useState<FormOption[]>([]);
   const [diseases, setDiseases] = useState<FormOption[]>([]);
   const navigate = useNavigate();
@@ -146,6 +147,29 @@ const Search = (props: Props) => {
               label: t(`enum_diseases_${s}`),
             } as FormOption)
         )
+      );
+      setLocations(
+        [
+          "BW",
+          "BV",
+          "BE",
+          "BB",
+          "HB",
+          "HH",
+          "HE",
+          "NI",
+          "MV",
+          "NW",
+          "RP",
+          "SL",
+          "SN",
+          "ST",
+          "SH",
+          "TH",
+        ].map((value) => ({
+          value: value,
+          label: t(`enum_regions_${value}`),
+        }))
       );
       setAgeranges(
         a.map(
@@ -296,11 +320,14 @@ const Search = (props: Props) => {
             >
               Region
             </Headline>
-            <Textfield
+           {/*  <Textfield
               id="filter_location"
               defaultValue={filterLocation!}
               onChange={setFilterLocation}
-            />
+            /> */}
+            <Dropdown id="locs" options={locations} onChange={setFilterLocation} />
+
+            
           </div>
           <div>
             <Headline
