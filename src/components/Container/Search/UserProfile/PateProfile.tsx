@@ -80,8 +80,8 @@ const PateProfile = (props: Props) => {
             setIsVerifiedContact(
                 user?.baseUserData?.verifiedContact.includes(data?._id)
             );
-            const avatar = await API.getUserAvatar(id!);
             setUserAttributes(user);
+            const avatar = await API.getUserAvatar(id!);
             setUserPateAvatar(avatar);
             setPateData(data as PateData);
         };
@@ -175,8 +175,8 @@ const PateProfile = (props: Props) => {
                             )}
                             headline="h1"
                         >
-                            {match?.meetingPreference.location ||
-                            pateData?.meetingPreference.location}
+                            {t(`enum_regions_${(match?.meetingPreference.location ||
+                            pateData?.meetingPreference.location)}`)}
                         </Headline>
                         {isVerifiedContact ? (
                             <Button
@@ -248,7 +248,7 @@ const PateProfile = (props: Props) => {
                         {t('labelDiseaseProfile')}
                     </Headline>
                     <div>
-                        {(pateData || match)?.meetingPreference.diseaseConsultation?.map(
+                        {userAttributes && (pateData || match)?.meetingPreference.diseaseConsultation?.map(
                             (disease, index) => {
                                 return (
                                     <Chip
@@ -352,7 +352,8 @@ const PateProfile = (props: Props) => {
                     >
                         {t('enum_occupations')}
                     </Headline>
-                    <Chip id="occupation">
+                    
+                    <Chip id="occupation" toggleAble={false} selected={(userData?.baseUserData.occupation === match?.occupation)}>
                         {t(
                             `enum_occupations_${
                                 match?.occupation || pateData?.baseUserData.occupation
