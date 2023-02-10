@@ -70,6 +70,9 @@
           font-weight: 500;
           color: var(--color-white-transparent);
         }
+        &Close {
+          height: 50px;
+        }
         &Request {
           border: 2px solid var(--color-primary);
           height: 50px;
