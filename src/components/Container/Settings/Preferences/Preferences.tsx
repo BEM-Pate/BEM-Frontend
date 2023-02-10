@@ -176,7 +176,7 @@ const Preferences = (props: Props) => {
           options={supports}
           id="supports"
           label={t('labelOffer')!}
-          placeholder={`${t(`enum_supports_${userAttributes?.meetingPreference.support}`)}`}
+          placeholder={`${t(`enum_supports_${userAttributes?.meetingPreference.support[0]}`)}`}
           onChange={setUpdatedSupports}
         ></Dropdown>
       </div>

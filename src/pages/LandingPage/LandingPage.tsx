@@ -24,7 +24,7 @@ const LandingPage = () => {
           <img src={becomePate} alt="Become a Pate" />
           <span>{t('landingPageLinkBecomePate')}</span>
         </Link>
-        <Link to="/dashboard/groups" className={classNames(styles.LandingPageButton)}>
+        <Link to="/dashboard/groups" className={classNames(styles.LandingPageButton, styles.LandingPageButtonDisabled)}>
           <img src={createGroup} alt="Create a Group" />
           <span>{t('landingPageLinkCreateSHG')}</span>
         </Link>
