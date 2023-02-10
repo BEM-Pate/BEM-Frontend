@@ -170,7 +170,7 @@ const BetroffenerProfile = (props: Props) => {
                             )}
                             headline="h1"
                         >
-                            {t(`enum_regions_${betroffenerData?.meetingPreference.location}`)}
+                            {betroffenerData?.meetingPreference.location && t(`enum_regions_${betroffenerData?.meetingPreference.location}`)}
                         </Headline>
 
                         {isVerifiedContact ? (
