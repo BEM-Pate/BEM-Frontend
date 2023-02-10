@@ -403,7 +403,9 @@ const PateProfile = (props: Props) => {
                     <Textarea id="decline" onChange={setMessage} defaultValue={message.length > 0 ? message : null} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleCloseAddModal}>
+                    <Button onClick={handleCloseAddModal}  className={classNames(
+                            styles.UserProfileHeaderContainerDetailsClose
+                        )}>
                         {t('seekerProfileClose')}
                     </Button>
                     <Button
@@ -411,9 +413,7 @@ const PateProfile = (props: Props) => {
                             styles.UserProfileHeaderContainerDetailsRequest
                         )}
                         onClick={requestContact}
-                    >
-
-                        <span>{t('pateProfileConfirm')}</span>
+                    >{t('pateProfileConfirm')}
 
                     </Button>
                 </Modal.Footer>
