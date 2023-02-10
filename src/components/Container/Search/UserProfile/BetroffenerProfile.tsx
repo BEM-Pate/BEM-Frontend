@@ -390,7 +390,9 @@ const BetroffenerProfile = (props: Props) => {
                     <Textarea id="decline" onChange={setDeclineReason} defaultValue={declineReason.length > 0 ? declineReason : null}/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleCloseDeclineContact}>
+                    <Button className={classNames(
+                        styles.UserProfileHeaderContainerDetailsClose
+                    )} onClick={handleCloseDeclineContact}>
                         {t('seekerProfileClose')}
                     </Button>
                     <Button
@@ -399,7 +401,7 @@ const BetroffenerProfile = (props: Props) => {
                         )}
                         onClick={declineRequest}
                     >
-                        <span>{t('seekerProfileReject')}</span>
+                      {t('seekerProfileReject')}
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -205,20 +205,20 @@
   "enum_supports_CONSULTATION": "BEM consultation in general",
   "enum_supports_DISEASE_CONSULTATION": "BEM consultation related to a specific disease",
 
-  "enum_diseases": "Disease images",
-  "enum_diseases_ACUTE_CRISIS": "acute crisis",
+  "enum_diseases": "Diseases",
+  "enum_diseases_ACUTE_CRISIS": "Acute Crisis",
   "enum_diseases_LONG_COVID": "Long-Covid",
   "enum_diseases_BIPOLAR": "Bipolar disorder",
   "enum_diseases_OVERLOAD": "Overload",
   "enum_diseases_DEPRESSION": "Depression",
-  "enum_diseases_ADDICTION": "Addiction (addiction)",
+  "enum_diseases_ADDICTION": "Addiction",
   "enum_diseases_BURNOUT": "Burnout",
   "enum_diseases_FEAR": "Anxiety",
-  "enum_diseases_NONE": "no diagnosis",
+  "enum_diseases_NONE": "No diagnosis",
 
   "enum_meetings": "Meeting preferences",
-  "enum_meetings_IN_PERSON": "in person",
-  "enum_meetings_VIRTUAL": "virtual",
+  "enum_meetings_IN_PERSON": "In person",
+  "enum_meetings_VIRTUAL": "Virtual",
 
   "enum_regions": "Regions",
   "enum_regions_BW": "Bavaria",
@@ -276,7 +276,7 @@
   "registerPateModalSuccessText": "Your profile has been set up and you are searchable as a BEM mentor. You can also establish a self-help group.",
 
   "profileHeadLine": "Settings",
-  "profileHeadLine2": "personal information",
+  "profileHeadLine2": "Personal information",
   "profileChangeFotoText": "Change photo",
   "profileButton": "Save changes"
 }
