@@ -41,7 +41,7 @@ const PateProfile = (props: Props) => {
     const [userAttributes, setUserAttributes] = useState<UserData>();
     const [match, setMatch] = useState<Match>();
     const [matchScore] = useState<number>(Math.ceil(location.state?.match?.score*100));
-
+    console.log(matchScore);
     const navigate = useNavigate();
     const [pateAvatar, setUserPateAvatar] = useState<any>(placeholder);
     const [setRoute, pendingContacts] = useZustand((state) => [
@@ -158,7 +158,8 @@ const PateProfile = (props: Props) => {
                         <img src={back_arrow} alt="back_arrow"/>
                     </Button>
                     <div className={classNames(styles.UserProfileHeaderContainerDetails)}>
-                        {matchScore && <span className={classNames(styles.UserProfileHeaderContainerDetailsScore)}>{matchScore}% Match</span>}
+                        {matchScore == 0 ? <span className={classNames(styles.UserProfileHeaderContainerDetailsScore)}>{0}% Match &#128547;</span>: null}
+                        {matchScore > 0 ? <span className={classNames(styles.UserProfileHeaderContainerDetailsScore)}>{matchScore}% Match</span>: null}
                         <Headline
                             className={classNames(
                                 styles.UserProfileHeaderContainerDetailsName
