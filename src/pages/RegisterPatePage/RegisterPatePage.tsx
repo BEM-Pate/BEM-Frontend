@@ -182,7 +182,7 @@ const RegisterPatePage = (props: Props) => {
         submitAction={registerPate}
       >
         <FormularStep
-          title="Haben Sie bereits einen BEM-Prozess durchlaufen?"
+          title={t('registerPateQuestion')}
           validation={[
             { value: userKOCrit, validation: [Validators.isString, Validators.isNotEmpty] },
           ]}
@@ -190,8 +190,8 @@ const RegisterPatePage = (props: Props) => {
         >
           <RadioList
             options={[
-              { value: 'YES', label: 'Ja' },
-              { value: 'NO', label: 'Nein' },
+              { value: 'YES', label: t('registerPateQuestionYes') },
+              { value: 'NO', label: t('registerPateQuestionNo') },
             ]}
             id="radiolist-bem-process-finished"
             name="bemProcessFinished"
@@ -200,7 +200,7 @@ const RegisterPatePage = (props: Props) => {
           />
         </FormularStep>
         <FormularStep
-          title="Was können Sie anbieten?"
+          title={t('registerPateQuestion')}
           validation={[
             { value: userSupport, validation: [Validators.isArray, Validators.isNotEmpty] },
             { value: userDiseaseConsultation, validation: userSupport?.includes('DISEASE_CONSULTATION') ? [Validators.isArray, Validators.isNotEmpty] : [Validators.isArray] },
@@ -226,7 +226,7 @@ const RegisterPatePage = (props: Props) => {
           />
         </FormularStep>
         <FormularStep
-          title="Wie möchten Sie sich mit BEM-Paten oder anderen BEM-Berechtigten austauschen?"
+          title={t('registerPateQuestion3')}
           validation={[
             { value: userMeeting, validation: [Validators.isArray, Validators.isNotEmpty] },
             { value: userLocation, validation: userMeeting?.includes('IN_PERSON') ? [Validators.isString, Validators.isNotEmpty] : [] },
@@ -250,14 +250,14 @@ const RegisterPatePage = (props: Props) => {
           />
         </FormularStep>
         <FormularStep
-          title="Sind Sie Erfahrungsexpertin mit Zertifizierung?"
+          title={t('registerPateQuestion4')}
         >
           <RadioList
             id="radio-list-hasCertificate"
             name="hasCertificate"
             options={[
-              { value: 'NO', label: 'Nein' },
-              { value: 'YES', label: 'Ja' },
+              { value: 'NO', label: t('registerPateQuestionNo') },
+              { value: 'YES', label: t('registerPateQuestionYes') },
             ]}
             onChange={setUserHasCertificate}
           />
@@ -265,40 +265,40 @@ const RegisterPatePage = (props: Props) => {
             id="dropdown-certificateType"
             label={t('enum_certificates')!}
             options={[
-              { value: 'a', label: 'Begleiter/in für psychosoziale Gesundheit'},
+              { value: 'a', label: t('registerPateOptionCert')},
               { value: 'b', label: 'EX-IN'},
               { value: 'c', label: 'Peers@Work'},
-              { value: 'd', label: 'Andere'},
+              { value: 'd', label: t('registerPateOptionCertOther')},
             ]}
             disabled={userHasCertificate === 'NO'}
             required={userHasCertificate === 'YES'}
           />
           <Button disabled={userHasCertificate === 'NO'}>
-            Zertifikat hochladen
+            {t('registerPateCertUpload')}
           </Button>
         </FormularStep>
         <FormularStep
-          title="Was sind Ihre Erfahrungen in Bezug auf BEM und psychische Erkrankungen?"
+          title={t('registerPateExp')}
           validation={[
             { value: userExperience, validation: [Validators.isString, Validators.isNotEmpty] },
           ]}
         >
           <Textarea
             id="textarea-experience"
-            label="Meine Erfahrungen"
+            label={t('registerPateMyExp')!}
             onChange={setUserExperience}
             required
           />
         </FormularStep>
         <FormularStep
-          title="Was motiviert Sie, BEM-Pate zu werden?"
+          title={t('registerPateMotivation')}
           validation={[
             { value: userMotivation, validation: [Validators.isString, Validators.isNotEmpty] },
           ]}
         >
           <Textarea
             id="textarea-motivation"
-            label="Meine Motivation"
+            label={t('registerPateMyMotivation')!}
             onChange={setUserMotivation}
             required
           />
@@ -308,8 +308,8 @@ const RegisterPatePage = (props: Props) => {
       <ModalWindow
         isVisible={showKOCrit}
         type="warning"
-        headline="Sie können leider kein BEM-Pate werden!"
-        text="Denn dazu muss man bereits selbst erfolgreich einen BEM-Prozess durchlaufen haben. Sie können aber eine Selbsthilfegruppe gründen."
+        headline={t('registerPateModalHeadline')!}
+        text={t('registerPateModalText')!}
       >
         <Button
           onClick={() => navigate('/dashboard/groups')}
@@ -327,8 +327,8 @@ const RegisterPatePage = (props: Props) => {
       <ModalWindow
         isVisible={submitSuccess}
         type="success"
-        headline={"Sie wurden registriert!"}
-        text={"Ihr Profil ist eingerichtet und Sie sind als BEM-Pate in der Suche auffindbar. Sie können auch eine Selbsthilfegruppe gründen."}
+        headline={t('registerPateModalSuccessHeadline')!}
+        text={t('registerPateModalSuccessText')!}
         onClick={() => navigate(redirectOnSuccess)}
       />
     </div>

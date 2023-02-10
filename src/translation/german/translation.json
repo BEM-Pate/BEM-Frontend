@@ -240,7 +240,7 @@
 
   "activeChatDelivered": "Versandt",
   "activeChatRead": "Gelesen",
-  
+
   "notificationAccountAlreadyExists": "Es existiert bereits ein Account mit diesen Daten",
   "notificationOTPSent_email": "Ein Einmal-Passwort wurde an deine Email-Adresse gesendet",
   "notificationOTPSent_phone": "Ein Einmal-Passwort wurde an deine Telefonnummer gesendet",
@@ -253,5 +253,30 @@
   "settingAccount": "Mein Konto",
   "settingLanguage": "Meine Sprachen",
   "settingSettings": "Einstellungen",
-  "settingLogout": "Abmelden"
+  "settingLogout": "Abmelden",
+  "settingProfileChangeButton": "Profil ändern",
+
+  "registerPateQuestion": "Haben Sie bereits einen BEM-Prozess durchlaufen?",
+  "registerPateQuestionYes": "Ja",
+  "registerPateQuestionNo": "Nein",
+  "registerPateQuestion2": "Was können Sie anbieten?",
+  "registerPateQuestion3": "Wie möchten Sie sich mit BEM-Paten oder anderen BEM-Berechtigten austauschen?",
+  "registerPateQuestion4": "Sind Sie Erfahrungsexpertin mit Zertifizierung?",
+  "registerPateOptionCert": "Begleiter/in für psychosoziale Gesundheit",
+  "registerPateOptionCertOther": "Andere",
+  "registerPateCertUpload": "Zertifikat hochladen",
+  "registerPateExp": "Was sind Ihre Erfahrungen in Bezug auf BEM und psychische Erkrankungen?",
+  "registerPateMyExp": "Meine Erfahrungen",
+  "registerPateMotivation": "Was motiviert Sie, BEM-Pate zu werden?",
+  "registerPateMyMotivation": "Meine Motivation",
+  "registerPateModalHeadline": "Sie können leider kein BEM-Pate werden!",
+  "registerPateModalText": "Denn dazu muss man bereits selbst erfolgreich einen BEM-Prozess durchlaufen haben. Sie können aber eine Selbsthilfegruppe gründen.",
+  "registerPateModalSuccessHeadline": "Sie wurden registriert!",
+  "registerPateModalSuccessText": "Ihr Profil ist eingerichtet und Sie sind als BEM-Pate in der Suche auffindbar. Sie können auch eine Selbsthilfegruppe gründen.",
+
+  "profileHeadLine": "Einstellungen",
+  "profileHeadLine2": "persönliche angaben",
+  "profileChangeFotoText": "Foto Ändern",
+  "profileButton": "Änderungen speichern"
 }
+

@@ -102,13 +102,10 @@
   "dashboardModalReject": "iletişim isteğinizi reddetti",
   "dashboardAddContactRequestMsg": "Karşılama metni:",
 
-  "landingPageWelcome": "BEMpsy Kendine Yardım Portalına hoş geldiniz",
-  "landingPageIntroduction": "Psikolojik engelleri olan BEM hak sahibi herkes için bir değişim ve eşleştirme portalı.",
   "landingPageCTA": "Ne yapmak istersin?",
-  "landingPageLinkFindPate": "BEM mentor bul",
-  "landingPageLinkBecomePate": "BEM mentor ol",
-  "landingPageLinkOrLabel": "veya",
-  "landingPageLinkVideos": "Müteahhitler anlatıyor (Videolar)",
+  "landingPageLinkFindPate": "Bir mentor veya destek grubu bulun",
+  "landingPageLinkBecomePate": "Mentor olun",
+  "landingPageLinkCreateSHG": "Destek grubu oluşturun",
 
   "loginPageHeadline": "Mevcut hesabıyla giriş yap",
   "loginPageButtonLogin": "Giriş yap",
@@ -261,5 +258,29 @@
   "settingAccount": "Hesabım",
   "settingLanguage": "Dillerim",
   "settingSettings": "Ayarlar",
-  "settingLogout": "Çıkış Yap"
+  "settingLogout": "Çıkış Yap",
+  "settingProfileChangeButton": "Profil Değiştir",
+
+  "registerPateQuestion": "BEM süreci zaten geçtiniz mi?",
+  "registerPateQuestionYes": "Evet",
+  "registerPateQuestionNo": "Hayır",
+  "registerPateQuestion2": "Ne sunabilirsiniz?",
+  "registerPateQuestion3": "BEM mentorları veya diğer BEM yetkili kişilerle nasıl iletişim kurmak istersiniz?",
+  "registerPateQuestion4": "Deneyimli bir uzman mısınız ve sertifikalı mısınız?",
+  "registerPateOptionCert": "Psikososyal sağlık için eşlikçi",
+  "registerPateOptionCertOther": "Diğer",
+  "registerPateCertUpload": "Sertifika yükle",
+  "registerPateExp": "BEM ve zihinsel hastalıklar konusundaki tecrübeleriniz nelerdir?",
+  "registerPateMyExp": "Benim tecrübelerim",
+  "registerPateMotivation": "BEM mentoru olmak için sizi ne motivasyon eder?",
+  "registerPateMyMotivation": "Benim motivasyonum",
+  "registerPateModalHeadline": "BEM mentoru olamazsınız!",
+  "registerPateModalText": "Çünkü zaten başarılı bir BEM süreci geçirmiş olmanız gerekir. Ancak bir kendine yardım grubu kurabilirsiniz.",
+  "registerPateModalSuccessHeadline": "Kaydedildiniz!",
+  "registerPateModalSuccessText": "Profiliniz oluşturuldu ve BEM mentoru olarak aranabilir hale geldiniz. Ayrıca bir kendine yardım grubu kurabilirsiniz.",
+
+  "profileHeadLine": "Ayarlar",
+  "profileHeadLine2": "kişisel bilgi",
+  "profileChangeFotoText": "Fotoğrafı değiştir",
+  "profileButton": "Değişiklikleri kaydet"
 }

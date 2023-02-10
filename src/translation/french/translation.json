@@ -94,13 +94,10 @@
   "dashboardNewContact": "Nouvelle demande de contact",
   "dashboardAddContact": "veut vous ajouter comme contact",
 
-  "landingPageWelcome": "Bienvenue sur le portail BEMpsy d'auto-assistance",
-  "landingPageIntroduction": "Un portail d'échange et de mise en correspondance pour tous les titulaires BEM ayant des problèmes de santé mentale.",
-  "landingPageCTA": "Que souhaitez-vous faire ?",
-  "landingPageLinkFindPate": "Trouver un mentor BEM",
-  "landingPageLinkBecomePate": "Devenir un mentor BEM",
-  "landingPageLinkOrLabel": "ou",
-  "landingPageLinkVideos": "Des personnes touchées témoignent (vidéos)",
+  "landingPageCTA": "Que voulez-vous faire?",
+  "landingPageLinkFindPate": "Trouver un mentor ou un groupe d'entraide",
+  "landingPageLinkBecomePate": "Devenir mentor",
+  "landingPageLinkCreateSHG": "Créer un groupe d'entraide",
 
   "loginPageHeadline": "Se connecter avec un compte existant",
   "loginPageButtonLogin": "Se connecter",
@@ -253,5 +250,30 @@
   "settingAccount": "Mon compte",
   "settingLanguage": "Mes langues",
   "settingSettings": "Paramètres",
-  "settingLogout": "Déconnexion"
+  "settingLogout": "Déconnexion",
+  "settingProfileChangeButton": "Modifier le profil",
+
+  "registerPateQuestion": "Avez-vous déjà suivi un processus BEM ?",
+  "registerPateQuestionYes": "Oui",
+  "registerPateQuestionNo": "Non",
+  "registerPateQuestion2": "Que pouvez-vous offrir ?",
+  "registerPateQuestion3": "Comment souhaitez-vous communiquer avec les mentors BEM ou d'autres personnes autorisées BEM ?",
+  "registerPateQuestion4": "Êtes-vous un expert en expérience avec une certification ?",
+  "registerPateOptionCert": "Accompagnant pour la santé psychosociale",
+  "registerPateOptionCertOther": "Autre",
+  "registerPateCertUpload": "Télécharger le certificat",
+  "registerPateExp": "Quelles sont vos expériences en ce qui concerne BEM et les troubles mentaux ?",
+  "registerPateMyExp": "Mes expériences",
+  "registerPateMotivation": "Qu'est-ce qui vous motive à devenir mentor BEM ?",
+  "registerPateMyMotivation": "Ma motivation",
+  "registerPateModalHeadline": "Vous ne pouvez pas devenir mentor BEM !",
+  "registerPateModalText": "Cela est dû au fait que vous devez déjà avoir suivi avec succès un processus BEM. Cependant, vous pouvez créer un groupe d'entraide.",
+  "registerPateModalSuccessHeadline": "Vous avez été enregistré !",
+  "registerPateModalSuccessText": "Votre profil a été configuré et vous êtes recherchable en tant que mentor BEM. Vous pouvez également créer un groupe d'entraide.",
+
+  "profileHeadLine": "Paramètres",
+  "profileHeadLine2": "informations personnelles",
+  "profileChangeFotoText": "Modifier la photo",
+  "profileButton": "Enregistrer les modifications"
+
 }

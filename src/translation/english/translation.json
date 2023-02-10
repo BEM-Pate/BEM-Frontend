@@ -98,13 +98,10 @@
   "dashboardAddContactRequestMsg": "Texte de salutation:",
 
 
-  "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
-  "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
-  "landingPageCTA": "What do you want to do?",
-  "landingPageLinkFindPate": "Find a Bem-Pate",
-  "landingPageLinkBecomePate": "Become a BEM-Pate",
-  "landingPageLinkOrLabel": "or",
-  "landingPageLinkVideos": "Hear Stories of Seekers (Videos)",
+  "landingPageCTA": "What would you like to do?",
+  "landingPageLinkFindPate": "Find a mentor or support group",
+  "landingPageLinkBecomePate": "Become a mentor",
+  "landingPageLinkCreateSHG": "Create a support group",
 
   "loginPageHeadline": "Login with existing account",
   "loginPageButtonLogin": "Login",
@@ -256,5 +253,29 @@
   "settingAccount": "My Account",
   "settingLanguage": "My Languages",
   "settingSettings": "Settings",
-  "settingLogout": "Logout"
+  "settingLogout": "Logout",
+  "settingProfileChangeButton": "Change profile",
+
+  "registerPateQuestion": "Have you gone through a BEM process already?",
+  "registerPateQuestionYes": "Yes",
+  "registerPateQuestionNo": "No",
+  "registerPateQuestion2": "What can you offer?",
+  "registerPateQuestion3": "How do you wish to communicate with BEM mentors or other BEM-authorized individuals?",
+  "registerPateQuestion4": "Are you an experience expert with certification?",
+  "registerPateOptionCert": "Companion for psychosocial health",
+  "registerPateOptionCertOther": "Other",
+  "registerPateCertUpload": "Upload certificate",
+  "registerPateExp": "What are your experiences regarding BEM and mental illness?",
+  "registerPateMyExp": "My experiences",
+  "registerPateMotivation": "What motivates you to become a BEM mentor?",
+  "registerPateMyMotivation": "My motivation",
+  "registerPateModalHeadline": "You cannot become a BEM mentor!",
+  "registerPateModalText": "This is because you must have already gone through a successful BEM process. However, you can establish a self-help group.",
+  "registerPateModalSuccessHeadline": "You have been registered!",
+  "registerPateModalSuccessText": "Your profile has been set up and you are searchable as a BEM mentor. You can also establish a self-help group.",
+
+  "profileHeadLine": "Settings",
+  "profileHeadLine2": "personal information",
+  "profileChangeFotoText": "Change photo",
+  "profileButton": "Save changes"
 }

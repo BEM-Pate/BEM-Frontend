@@ -97,13 +97,10 @@
   "dashboardAddContactRequestMsg": "Привітальне повідомлення:",
 
 
-  "landingPageWelcome": "Ласкаво просимо до порталу для самодопомоги BEMpsy",
-  "landingPageIntroduction": "Портал для обміну та посередництва для всіх, у кого є психічні вади.",
-  "landingPageCTA": "Що ви хотіли б зробити?",
-  "landingPageLinkFindPate": "Знайти наставника BEM",
-  "landingPageLinkBecomePate": "Стати наставником BEM",
-  "landingPageLinkOrLabel": "або",
-  "landingPageLinkVideos": "Люди, які страждають, деляться своїми досвідами (відео)",
+  "landingPageCTA": "Що ви хочете зробити?",
+  "landingPageLinkFindPate": "Знайти ментора або групу підтримки",
+  "landingPageLinkBecomePate": "Стати ментором",
+  "landingPageLinkCreateSHG": "Створити групу підтримки",
 
   "loginPageHeadline": "Увійти за існуючим акаунтом",
   "loginPageButtonLogin": "Увійти",
@@ -256,5 +253,29 @@
   "settingAccount": "Мій обліковий запис",
   "settingLanguage": "Мої мови",
   "settingSettings": "Налаштування",
-  "settingLogout": "Вийти"
+  "settingLogout": "Вийти",
+  "settingProfileChangeButton": "Змінити профіль",
+
+  "registerPateQuestion": "Ви вже пройшли процес BEM?",
+  "registerPateQuestionYes": "Так",
+  "registerPateQuestionNo": "Ні",
+  "registerPateQuestion2": "Що ви можете пропонувати?",
+  "registerPateQuestion3": "Як ви бажаєте зв'язуватися з BEM-наставниками або іншими авторизованими особами BEM?",
+  "registerPateQuestion4": "Ви є експертом в досвіді з сертифікатом?",
+  "registerPateOptionCert": "Супроводжувач для психосоціального здоров'я",
+  "registerPateOptionCertOther": "Інше",
+  "registerPateCertUpload": "Завантажити сертифікат",
+  "registerPateExp": "Які ваші досвіди в зв'язку з BEM та психічними захворюваннями?",
+  "registerPateMyExp": "Мої досвіди",
+  "registerPateMotivation": "Що мотивує вас стати BEM-наставником?",
+  "registerPateMyMotivation": "Моя мотивація",
+  "registerPateModalHeadline": "Ви не можете стати BEM-наставником!",
+  "registerPateModalText": "Оскільки ви повинні вже пройти успішний процес BEM. Однак, ви можете заснувати самодопомогу групу.",
+  "registerPateModalSuccessHeadline": "Ви були зареєстровані!",
+  "registerPateModalSuccessText": "Ваш профіль встановлено та ви можете знаходитися як BEM-помічник у пошуку. Ви також можете заснувати групу самодопомоги.",
+
+  "profileHeadLine": "Налаштування",
+  "profileHeadLine2": "особисті відомості",
+  "profileChangeFotoText": "Змінити фото",
+  "profileButton": "Зберегти зміни"
 }

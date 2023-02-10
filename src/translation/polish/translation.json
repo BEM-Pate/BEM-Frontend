@@ -96,13 +96,10 @@
   "dashboardModalReject": "odrzucił twoje żądanie kontaktu",
   "dashboardAddContactRequestMsg": "Tekst powitania:",
 
-  "landingPageWelcome": "Witaj na stronie BEMpsy Self-Help Portal",
-  "landingPageIntroduction": "Portal wymiany i pośrednictwa dla osób uprawnionych do BEM z zaburzeniami psychicznymi.",
   "landingPageCTA": "Co chcesz zrobić?",
-  "landingPageLinkFindPate": "Znajdź mentora BEM",
-  "landingPageLinkBecomePate": "Zostań mentorem BEM",
-  "landingPageLinkOrLabel": "lub",
-  "landingPageLinkVideos": "Osoby dotknięte opowiadają (filmy)",
+  "landingPageLinkFindPate": "Znajdź mentora lub grupę wsparcia",
+  "landingPageLinkBecomePate": "Zostań mentorem",
+  "landingPageLinkCreateSHG": "Utwórz grupę wsparcia",
 
   "loginPageHeadline": "Zaloguj się z istniejącym kontem",
   "loginPageButtonLogin": "Zaloguj się",
@@ -255,5 +252,29 @@
   "settingAccount": "Moje konto",
   "settingLanguage": "Moje języki",
   "settingSettings": "Ustawienia",
-  "settingLogout": "Wyloguj się"
+  "settingLogout": "Wyloguj się",
+  "settingProfileChangeButton": "Zmień profil",
+
+  "registerPateQuestion": "Czy już przeszliście przez proces BEM?",
+  "registerPateQuestionYes": "Tak",
+  "registerPateQuestionNo": "Nie",
+  "registerPateQuestion2": "Co możecie zaoferować?",
+  "registerPateQuestion3": "W jaki sposób chcielibyście komunikować się z mentorem BEM lub innymi upoważnionymi osobami BEM?",
+  "registerPateQuestion4": "Czy jesteście doświadczonym ekspertem z certyfikatem?",
+  "registerPateOptionCert": "Towarzysz zdrowia psychosocjalnego",
+  "registerPateOptionCertOther": "Inne",
+  "registerPateCertUpload": "Prześlij certyfikat",
+  "registerPateExp": "Jakie są twoje doświadczenia dotyczące BEM i chorób psychicznych?",
+  "registerPateMyExp": "Moje doświadczenia",
+  "registerPateMotivation": "Co motywuje cię, aby zostać mentorem BEM?",
+  "registerPateMyMotivation": "Moja motywacja",
+  "registerPateModalHeadline": "Nie możesz zostać mentorem BEM!",
+  "registerPateModalText": "Jest to spowodowane tym, że musisz już przejść pomyślnie przez proces BEM. Możesz jednak założyć grupę wsparcia.",
+  "registerPateModalSuccessHeadline": "Zostałeś zarejestrowany!",
+  "registerPateModalSuccessText": "Twój profil został ustawiony i jesteś wyszukiwalny jako mentor BEM. Możesz także założyć grupę wsparcia.",
+
+  "profileHeadLine": "Ustawienia",
+  "profileHeadLine2": "informacje osobiste",
+  "profileChangeFotoText": "Zmień zdjęcie",
+  "profileButton": "Zapisz zmiany"
 }

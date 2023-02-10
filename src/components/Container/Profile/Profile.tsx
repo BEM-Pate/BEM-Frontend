@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { t } from "i18next";
 import ChipList from "../../ChipList/ChipList";
 import { useZustand } from "../../../zustand/store";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   userData: any;
@@ -52,7 +53,7 @@ const Profile = (props: Props) => {
 
   const navigate = useNavigate();
   const addNotification = useZustand(state => state.addNotification);
-
+  const {t} = useTranslation();
   console.log(userData)
 
   useEffect(() => {
@@ -225,7 +226,7 @@ const Profile = (props: Props) => {
       <div className={classNames(styles.ProfileHeader)}>
         <Button icon styling="back" onClick={() => navigate(-1)}></Button>
         <Headline headline="h1" styling="page">
-          Einstellungen
+            {t("profileHeadLine")}
         </Headline>
       </div>
       <div className={classNames(styles.ProfilePicture)}>
@@ -233,7 +234,7 @@ const Profile = (props: Props) => {
         <Button className={classNames(styles.ProfilePictureButton)}>
           <label htmlFor="updateAvatar">
             <img src={camera} alt="change_photo"></img>
-            Foto Ändern
+              {t('profileChangeFotoText')}
             <input
               multiple={false}
               id="updateAvatar"
@@ -248,7 +249,7 @@ const Profile = (props: Props) => {
         </Button>
       </div>
       <Headline headline="h2" styling="caps">
-        persönliche angaben
+          {t('profileHeadLine2')}
       </Headline>
       <Textfield
         onChange={setUpdatededFirstName}
@@ -294,7 +295,7 @@ const Profile = (props: Props) => {
         options={occupations}
         label="Occupations"   
       ></Dropdown>
-      <Button onClick={updateUserData}>Änderungen speichern</Button>
+      <Button onClick={updateUserData}>{t('profileButton')}</Button>
     </div>
   );
 };
