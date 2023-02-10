@@ -16,12 +16,11 @@ import ADDICTION from "../../../../images/icons/diseases/ADDICTION.svg";
 import BURNOUT from "../../../../images/icons/diseases/BURNOUT.svg";
 import FEAR from "../../../../images/icons/diseases/FEAR.svg";
 import BIPOLAR from "../../../../images/icons/diseases/BIPOLAR.svg";
-
-import back_arrow from "../../../../images/icons/ui/arrow_back.svg";
 import axios from "axios";
 import { API_ADDRESS } from "../../../../helpers/env";
 import { Match } from "../../../../util/types";
 import placeholder from '../../../../images/default.png';
+import MatchList from "../../../MatchList/MatchList";
 
 interface Props {
   userData: any;
@@ -39,6 +38,9 @@ const Preview = (props: PreviewProps) => {
   const [length, setLength] = useState<number>(0);
   const [matches, setMatches] = useState<Match[]>([]);
   const [imgs, setImgs] = useState<any>([]);
+
+  
+  
 
   useEffect(() => {
     const init = async () => {
@@ -91,7 +93,7 @@ const Category = (props: Props) => {
   const navigate = useNavigate();
 
   const [diseases, setDiseases] = useState<FormOption[]>([]);
-  const [filterDiseases, setFilterDiseases] = useState<string[]>([]);
+  const [diseaseMatches, setDiseaseMatches] = useState<string | null>(null);
 
 
   function getDiseaseIcon(disease: string) {
@@ -136,16 +138,16 @@ const Category = (props: Props) => {
   return (
     <div className={classNames(styles.Category)}>
       <div className={classNames(styles.CategoryHeader)}>
-      <Button styling="back" icon onClick={() => navigate(-1)}>
+      <Button styling="back" icon onClick={diseaseMatches ?  () => setDiseaseMatches(null) : () => navigate("/dashboard/search") }>
       </Button>
       <Headline styling="page"headline="h1">
-        Krankheitsbilder
+        {diseaseMatches ? t(`enum_diseases_${diseaseMatches}`) : "Krankheitsbilder"}
       </Headline>
       </div>
-      <div className={classNames(styles.CategoryList)}>
+      {diseaseMatches ? <MatchList disease={diseaseMatches} token={userData.token} /> : <div className={classNames(styles.CategoryList)}>
         {diseases?.map((disease, index) => {
           return (
-            <div className={classNames(styles.CategoryListCard)} key={index} onClick={() => navigate(`/dashboard/search`)}>
+            <div className={classNames(styles.CategoryListCard)} key={index} onClick={() => setDiseaseMatches(disease.value)}>
               <div className={classNames(styles.CategoryListCardDetails)}>
               <Headline headline="h2" className={classNames(styles.CategoryListCardDetailsHeadline)}>{`Krankheitsbild `}
               <span>{disease.label}</span>
@@ -158,7 +160,7 @@ const Category = (props: Props) => {
             </div>
           );
         })}
-      </div>
+      </div>}
     </div>
   );
 };

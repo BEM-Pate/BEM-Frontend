@@ -3,9 +3,11 @@
 .Category {
   @include dashboard-container;
   background-color: var(--color-body-bg-white);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   &Header {
+    height: 50px;
     position: relative;
     button {
       position: absolute;
