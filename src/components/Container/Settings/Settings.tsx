@@ -71,7 +71,7 @@ const Settings = (props: Props) => {
           className={classNames(styles.SettingsHeaderHeadlineLocation)}
           headline="h2"
         >
-          {userAttributes?.meetingPreference.location !== null && t(`enum_regions_${userAttributes?.meetingPreference.location}`)}
+          {userAttributes?.meetingPreference.location && t(`enum_regions_${userAttributes?.meetingPreference.location}`)}
         </Headline>
         <div className={classNames(styles.SettingsHeaderProfile)}>
           <div className={classNames(styles.SettingsHeaderProfileStatus)}>
