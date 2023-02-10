@@ -169,7 +169,7 @@ const DashboardPage = () => {
                     <Modal.Title>{t('dashboardSadly')} &#128551;</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p><b>{rejectedPate?.firstName} {rejectedPate?.lastName}</b> hat deine Kontakt-Anfrage abgelehnt</p>
+                    <p><b>{rejectedPate?.firstName} {rejectedPate?.lastName}</b> {t('dashboardModalReject')}</p>
                     <p>{t('dashboardReson')}</p>
                     <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {reason} "</i></p>
                 </Modal.Body>
@@ -188,7 +188,7 @@ const DashboardPage = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <p><b>{newContact?.firstName} {newContact?.lastName}</b>{t('dashboardAddContact')}</p>
-                    <p>Nachricht:</p>
+                    <p>{t('dashboardAddContactRequestMsg')}</p>
                     <p style={{textAlign:"center", overflowWrap:"break-word"}}><i>" {message} "</i></p>
                 </Modal.Body>
                 <Modal.Footer>

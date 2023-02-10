@@ -49,6 +49,9 @@
   "searchPageLocationPate": "Standorte von BEM-Paten",
   "searchPageFilter": "Filter",
   "searchPageMeeting":"Präferenzen für Treffen",
+  "searchPageNoResultOfSeeker": "Keine neue Kontaktanfragen",
+  "searchPageNoResultOfPate": "Keine BEM-Paten verfügbar",
+
 
   "seekerProfileSayHello": " Sage Hallo!",
   "seekerProfileRejectContact": " Kontakt ablehnen",
@@ -91,6 +94,8 @@
   "dashboardReson": "Folgender Grund: ",
   "dashboardNewContact": "Neue Kontaktanfrage",
   "dashboardAddContact": " möchte dich als Kontakt hinzufügen",
+  "dashboardModalReject": "hat deine Kontakt-Anfrage abgelehnt",
+  "dashboardAddContactRequestMsg": "Grußtext:",
 
   "landingPageCTA": "Was möchtest du tun?",
   "landingPageLinkFindPate": "Bem-Pate oder Selbsthilfegruppe finden",
@@ -241,5 +246,12 @@
   "notificationOTPSent_phone": "Ein Einmal-Passwort wurde an deine Telefonnummer gesendet",
   "notificationOTPError": "Es ist ein Fehler aufgetreten",
   "notificationLoginError": "Es ist ein Fehler aufgetreten",
-  "notificationRegisterError": "Es ist ein Fehler aufgetreten"
+  "notificationRegisterError": "Es ist ein Fehler aufgetreten",
+
+  "settingPage1": "Ihr Profil ist vollständig!",
+  "settingPage2": "Vervollständigen Sie Ihr Profil.",
+  "settingAccount": "Mein Konto",
+  "settingLanguage": "Meine Sprachen",
+  "settingSettings": "Einstellungen",
+  "settingLogout": "Abmelden"
 }

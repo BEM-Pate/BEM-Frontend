@@ -76,7 +76,7 @@ const Settings = (props: Props) => {
         <div className={classNames(styles.SettingsHeaderProfile)}>
           <div className={classNames(styles.SettingsHeaderProfileStatus)}>
             <div><span>{`${profilePercentage(userAttributes!)}%`}</span></div>
-            <p>{profilePercentage(userAttributes!) === 100 ? "Ihr Profil ist vollständig!" : "Vervollständigen Sie Ihr Profil." }</p>
+            <p>{profilePercentage(userAttributes!) === 100 ? t('settingPage1') : t('settingPage2') }</p>
           </div>
           <Button onClick={() => navigate("/dashboard/settings/profile")}>Profil ändern</Button>
         </div>
@@ -85,25 +85,25 @@ const Settings = (props: Props) => {
      <Button styling='setting' onClick={() => navigate("/dashboard/settings/account")}>
       <div>
         <img src={account} alt="arrow"></img>
-        <>Mein Konto</>
+        <>{t('settingAccount')}</>
       </div>
      </Button>
      <Button styling='setting' onClick={() => navigate("/dashboard/settings/languages")}>
       <div>
         <img src={languages} alt="arrow"></img>
-        <>Meine Sprachen</>
+        <>{t('settingLanguage')}</>
       </div>
      </Button>
      <Button styling='setting' onClick={() => navigate("/dashboard/settings/edit")}>
       <div>
         <img src={settings} alt="arrow"></img>
-        <>Einstellungen</>
+        <>{t('settingSettings')}</>
       </div>
      </Button>
      <Button styling='setting' onClick={() => logoutUser()}>
       <div>
         <img src={logoutIcon} alt="arrow"></img>
-        <>Logout</>
+        <>{t('settingLogout')}</>
       </div>
      </Button>
      </div>

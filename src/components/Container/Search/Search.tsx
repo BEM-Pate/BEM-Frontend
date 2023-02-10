@@ -42,6 +42,8 @@ const Loading = () => (
 
 const Results = (props: ResultProps) => {
   const { paten, userAttributes, token } = props;
+  const { t } = useTranslation();
+
   return (
     <div className={classNames(styles.SearchResults)}>
       {paten.length > 0 ? (
@@ -54,7 +56,7 @@ const Results = (props: ResultProps) => {
           />
         ))
       ) : (
-        <p style={{ marginLeft: "0.4rem" }}>Keine BEM-Paten verfügbar</p>
+        <p style={{ marginLeft: "0.4rem" }}>{t('searchPageNoResultOfPate')}</p>
       )}
     </div>
   );
@@ -67,6 +69,7 @@ const ResultsOfPate = (props: ContactRequest) => {
     state.pendingContacts,
     state.fetchPendingContacts,
   ]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchPendingContacts();
@@ -84,7 +87,7 @@ const ResultsOfPate = (props: ContactRequest) => {
           />
         ))
       ) : (
-        <p style={{ marginLeft: "0.4rem" }}>Keine neue Kontaktanfrage</p>
+        <p style={{ marginLeft: "0.4rem" }}>{t('searchPageNoResultOfSeeker')}</p>
       )}
     </div>
   );

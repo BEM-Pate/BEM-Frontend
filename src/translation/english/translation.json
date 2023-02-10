@@ -49,6 +49,9 @@
   "searchPageLocationPate": "locations of BEM sponsors",
   "searchPageFilter": "filter",
   "searchPageMeeting": "Meeting Preferences",
+  "searchPageNoResultOfSeeker": "No new contact requests",
+  "searchPageNoResultOfPate": "No BEM-mentors found",
+
 
   "seekerProfileSayHello": " Say Hello!",
   "seekerProfileRejectContact": " Reject contact",
@@ -91,6 +94,9 @@
   "dashboardReason": "Following reason: ",
   "dashboardNewContact": "New contact request",
   "dashboardAddContact": " wants to add you as a contact",
+  "dashboardModalReject": "has rejected your contact request",
+  "dashboardAddContactRequestMsg": "Greeting text:",
+
 
   "landingPageWelcome": "Welcome to the BEMpsy Self-Help-Portal",
   "landingPageIntroduction": "An exchange and mediation portal for all BEM-authorized persons with mental impairments.",
@@ -243,5 +249,12 @@
   "notificationOTPSent_phone": "A one-time password has been sent to your phone number",
   "notificationOTPError": "An error has occurred",
   "notificationLoginError": "An error has occurred",
-  "notificationRegisterError": "An error has occurred"
+  "notificationRegisterError": "An error has occurred",
+
+  "settingPage1": "Your profile is complete!",
+  "settingPage2": "Complete your profile.",
+  "settingAccount": "My Account",
+  "settingLanguage": "My Languages",
+  "settingSettings": "Settings",
+  "settingLogout": "Logout"
 }
