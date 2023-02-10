@@ -41,7 +41,7 @@ const PateProfile = (props: Props) => {
     const [userAttributes, setUserAttributes] = useState<UserData>();
     const [match, setMatch] = useState<Match>();
     const [matchScore] = useState<number>(Math.ceil(location.state?.match?.score*100));
-
+    console.log(matchScore);
     const navigate = useNavigate();
     const [pateAvatar, setUserPateAvatar] = useState<any>(placeholder);
     const [setRoute, pendingContacts] = useZustand((state) => [
@@ -80,8 +80,8 @@ const PateProfile = (props: Props) => {
             setIsVerifiedContact(
                 user?.baseUserData?.verifiedContact.includes(data?._id)
             );
-            const avatar = await API.getUserAvatar(id!);
             setUserAttributes(user);
+            const avatar = await API.getUserAvatar(id!);
             setUserPateAvatar(avatar);
             setPateData(data as PateData);
         };
@@ -158,7 +158,8 @@ const PateProfile = (props: Props) => {
                         <img src={back_arrow} alt="back_arrow"/>
                     </Button>
                     <div className={classNames(styles.UserProfileHeaderContainerDetails)}>
-                        {matchScore && <span className={classNames(styles.UserProfileHeaderContainerDetailsScore)}>{matchScore}% Match</span>}
+                        {matchScore == 0 ? <span className={classNames(styles.UserProfileHeaderContainerDetailsScore)}>{0}% Match &#128547;</span>: null}
+                        {matchScore > 0 ? <span className={classNames(styles.UserProfileHeaderContainerDetailsScore)}>{matchScore}% Match</span>: null}
                         <Headline
                             className={classNames(
                                 styles.UserProfileHeaderContainerDetailsName
@@ -175,8 +176,8 @@ const PateProfile = (props: Props) => {
                             )}
                             headline="h1"
                         >
-                            {match?.meetingPreference.location ||
-                            pateData?.meetingPreference.location}
+                            {t(`enum_regions_${(match?.meetingPreference.location ||
+                            pateData?.meetingPreference.location)}`)}
                         </Headline>
                         {isVerifiedContact ? (
                             <Button
@@ -248,7 +249,7 @@ const PateProfile = (props: Props) => {
                         {t('labelDiseaseProfile')}
                     </Headline>
                     <div>
-                        {(pateData || match)?.meetingPreference.diseaseConsultation?.map(
+                        {userAttributes && (pateData || match)?.meetingPreference.diseaseConsultation?.map(
                             (disease, index) => {
                                 return (
                                     <Chip
@@ -348,7 +349,8 @@ const PateProfile = (props: Props) => {
                     >
                         {t('enum_occupations')}
                     </Headline>
-                    <Chip id="occupation">
+                    
+                    <Chip id="occupation" toggleAble={false} selected={(userData?.baseUserData.occupation === match?.occupation)}>
                         {t(
                             `enum_occupations_${
                                 match?.occupation || pateData?.baseUserData.occupation

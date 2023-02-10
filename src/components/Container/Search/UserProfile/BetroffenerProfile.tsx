@@ -170,7 +170,7 @@ const BetroffenerProfile = (props: Props) => {
                             )}
                             headline="h1"
                         >
-                            {betroffenerData?.meetingPreference.location}
+                            {t(`enum_regions_${betroffenerData?.meetingPreference.location}`)}
                         </Headline>
 
                         {isVerifiedContact ? (
@@ -265,7 +265,7 @@ const BetroffenerProfile = (props: Props) => {
                                 return <Chip toggleAble={false} key={index} id={disease}
                                              selected={userAttributes?.meetingPreference.diseaseConsultation?.includes(disease)}
                                              emoji={getEmoji(disease)}>
-                                    {disease}
+                                     {t(`enum_diseases_${disease}`)}
                                 </Chip>
 
                             })
@@ -279,8 +279,12 @@ const BetroffenerProfile = (props: Props) => {
                         </div>
                         <div>
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
+
                                       headline="h6">{t('enum_genders')}</Headline>
-                            <p>{betroffenerData?.baseUserData.gender}</p>
+                            <p>{t(
+                                    `enum_genders_${betroffenerData?.baseUserData.gender}`)}</p>
+                           
+
                         </div>
                     </div>
                     <div className={classNames(styles.UserProfileMiscItem)}>
@@ -289,8 +293,11 @@ const BetroffenerProfile = (props: Props) => {
                         </div>
                         <div>
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
+
+
                                       headline="h6">{t('labelAge')}</Headline>
-                            <p>{betroffenerData?.baseUserData.ageRange}</p>
+                            <p>{t(`enum_ageranges_${betroffenerData?.baseUserData.ageRange}`)}</p>
+
                         </div>
                     </div>
                     <div className={classNames(styles.UserProfileMiscItem)}>
@@ -299,9 +306,17 @@ const BetroffenerProfile = (props: Props) => {
                         </div>
                         <div>
                             <Headline className={classNames(styles.UserProfileMiscHeadline)}
+
                                       headline="h6">{t('registerPreferencesMeet')}</Headline>
-                            <p>{betroffenerData?.meetingPreference.meeting?.map((meeting) => {
-                                return <><span>{meeting}</span><br/></>
+                            <p>{betroffenerData?.meetingPreference.meeting?.map((meeting, index) => {
+                                return (<div key={index}>
+                                    <span>
+                                      {index > 0 ? " & " : ""}
+                                        {t(`enum_meetings_${meeting}`)}
+                                    </span>
+                                                          <br/>
+                                                      </div>)
+
                             })}</p>
                         </div>
                     </div>
@@ -316,7 +331,7 @@ const BetroffenerProfile = (props: Props) => {
 
                     </Headline>
                     <Chip
-                        id={betroffenerData?.baseUserData.occupation!}>{betroffenerData?.baseUserData.occupation}</Chip>{" "}
+                        id={betroffenerData?.baseUserData.occupation!}>{t(`enum_occupations_${betroffenerData?.baseUserData.occupation}`)}</Chip>{" "}
                 </div>
                 <div className={classNames(styles.UserProfileInformationBaseContainer)}>
                     <Headline
@@ -384,7 +399,7 @@ const BetroffenerProfile = (props: Props) => {
                         )}
                         onClick={declineRequest}
                     >
-                        <span>{'seekerProfileAccept'}</span>
+                        <span>{t('seekerProfileReject')}</span>
                     </Button>
                 </Modal.Footer>
             </Modal>
