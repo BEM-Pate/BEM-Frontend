@@ -390,7 +390,7 @@ const BetroffenerProfile = (props: Props) => {
                         )}
                         onClick={declineRequest}
                     >
-                        <span>{'seekerProfileAccept'}</span>
+                        <span>{t('seekerProfileReject')}</span>
                     </Button>
                 </Modal.Footer>
             </Modal>
