@@ -14,6 +14,7 @@ import NextIcon from '../../../images/icons/selbsthilfegruppe/nextIcon.svg';
 import LocationIcon from '../../../images/icons/selbsthilfegruppe/locationIcon.svg';
 import LocationDropdown from '../../../images/icons/selbsthilfegruppe/locationDropdownIcon.svg';
 import IconFilter from '../../../images/icons/selbsthilfegruppe/filterIcon.svg';
+import { useTranslation } from 'react-i18next';
 
 const GroupsMockData = [
     {title: "BEM während der Ausbildung", members: 124, id: 1, background: pic1},
@@ -29,6 +30,8 @@ const Groups = () => {
     const [isSearchClicked, setIsSearchClicked] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [isDecending, setIsDecending] = useState(false);
+
+    const {t} = useTranslation();
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
@@ -57,9 +60,8 @@ const Groups = () => {
     return (
         <div className={classNames(styles.Groups)}>
             <div className={classNames(styles.GroupsLocationFilter)}>
-                {/*TODO: Hasan*/}
                 <img src={LocationIcon} alt="search"/>
-                Bundesweit
+                {t('groupsNationwide')}
                 <img src={LocationDropdown} alt="search"/>
 
             </div>
@@ -71,17 +73,15 @@ const Groups = () => {
                         className={classNames(styles.GroupsHeadersHeadlineH1)}
                         headline="h1"
                     >
-                        {/*TODO: Hasan*/}
-                        Selbsthilfegruppen finden
+                        {t('groupsFindSupportGroups')}
                     </Headline>
                 }
                 {
                     isSearchClicked &&
                     <div className={classNames(styles.GroupsHeadersSearch)}>
                         <img className={classNames(styles.GroupsHeadersSearchImg)} src={magnifier} alt="search"/>
-                        {/*TODO: Hasan*/}
                         <input onChange={handleOnChange} className={classNames(styles.GroupsHeadersSearchInput)}
-                               type={"text"} placeholder={"Suche nach Gruppen"} value={searchValue}/>
+                               type={"text"} placeholder={t('groupsFindGroup')!} value={searchValue}/>
                     </div>
                 }
                 <div style={{display: "flex"}}>
@@ -107,15 +107,13 @@ const Groups = () => {
             </div>
             <div className={classNames(styles.GroupsFilterContainer)}>
                 <div className={classNames(styles.GroupsFilterContainerFilter)} onClick={sortMembers}>
-                    {/*TODO: Hasan*/}
-                    Beliebt
+                    {t('groupsLovly')}
                     <img src={IconFilter} alt="search"/>
                 </div>
             </div>
             <div className={classNames(styles.GroupsContent)}>
-                {/*TODO: Hasan*/}
                 {groups.length === 0 && <div>Keine Ergebnisse für <span
-                    className={classNames(styles.GroupsContentNoResults)}>{searchValue}</span> gefunden</div>}
+                    className={classNames(styles.GroupsContentNoResults)}>{searchValue}</span> {t('groupsFound')}</div>}
                 {groups.map((group) => (
                     <div className={classNames(styles.GroupsContentGroup)} key={group.id}>
                         <div className={classNames(styles.GroupsContentGroupBackground)}>
@@ -129,8 +127,7 @@ const Groups = () => {
                                 {group.title}
                             </div>
                             <p className={classNames(styles.GroupsContentGroupMembers)}>
-                                {/*TODO: Hasan*/}
-                                {group.members} Mitglieder
+                                {group.members} {t('groupsMembers')}
                             </p>
                         </div>
                         <div className={classNames(styles.GroupsContentGroupNextButton)}>

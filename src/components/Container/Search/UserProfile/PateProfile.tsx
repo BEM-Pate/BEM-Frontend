@@ -276,7 +276,6 @@ const PateProfile = (props: Props) => {
                             />
                         </div>
                         <div>
-                            {/* TODO Hasan */}
                             <Headline
                                 className={classNames(styles.UserProfileMiscHeadline)}
                                 headline="h6"
@@ -297,7 +296,6 @@ const PateProfile = (props: Props) => {
                             <img src={calendar} alt="calendar"/>
                         </div>
                         <div>
-                            {/* TODO Hasan */}
                             <Headline
                                 className={classNames(styles.UserProfileMiscHeadline)}
                                 headline="h6"
@@ -318,7 +316,6 @@ const PateProfile = (props: Props) => {
                             <img src={meeting} alt="meeting"/>
                         </div>
                         <div>
-                            {/* TODO Hasan */}
                             <Headline
                                 className={classNames(styles.UserProfileMiscHeadline)}
                                 headline="h6"
@@ -345,7 +342,6 @@ const PateProfile = (props: Props) => {
                     </div>
                 </div>
                 <div className={classNames(styles.UserProfileInformationBaseContainer)}>
-                    {/* TODO Hasan */}
                     <Headline
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
@@ -361,7 +357,6 @@ const PateProfile = (props: Props) => {
                     </Chip>
                 </div>
                 <div className={classNames(styles.UserProfileInformationBaseContainer)}>
-                    {/* TODO Hasan */}
                     <Headline
                         className={classNames(styles.UserProfileInformationHeadline)}
                         headline="h6"
@@ -378,11 +373,9 @@ const PateProfile = (props: Props) => {
                 centered
             >
                 <Modal.Header closeButton>
-                    {/* TODO Hasan */}
-                    <Modal.Title>Anfrage stornieren</Modal.Title>
+                    <Modal.Title>{t('pateProfileReject')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* TODO Hasan */}
                     <p>
                         {t('pateProfileCancelRequest')} {pateData?.baseUserData.firstName}{" "}
                         {pateData?.baseUserData.lastName} 
@@ -408,7 +401,6 @@ const PateProfile = (props: Props) => {
                     <Textarea id="decline" onChange={setMessage} defaultValue={message.length > 0 ? message : null} />
                 </Modal.Body>
                 <Modal.Footer>
-                    {/* TODO Hasan */}
                     <Button onClick={handleCloseAddModal}>
                         {t('seekerProfileClose')}
                     </Button>
