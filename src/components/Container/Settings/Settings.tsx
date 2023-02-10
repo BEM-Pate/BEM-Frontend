@@ -78,7 +78,7 @@ const Settings = (props: Props) => {
             <div><span>{`${profilePercentage(userAttributes!)}%`}</span></div>
             <p>{profilePercentage(userAttributes!) === 100 ? t('settingPage1') : t('settingPage2') }</p>
           </div>
-          <Button onClick={() => navigate("/dashboard/settings/profile")}>Profil ändern</Button>
+          <Button onClick={() => navigate("/dashboard/settings/profile")}>{t('settingPage3')}</Button>
         </div>
       </div>
      <div className={classNames(styles.SettingsButtons)}>
