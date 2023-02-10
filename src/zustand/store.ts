@@ -16,6 +16,7 @@ interface store {
     fetchContacts: (userIds: string[]) => Promise<void>,
     fetchPendingContacts: () => void,
     logout: () => void,
+    deleteAccount: () => void,
     token: null | string,
     setCurrentRoute: (route: string) => void,
     route: null | string,
@@ -141,6 +142,7 @@ export const useZustand = create<store>()(
                 set({ route })
             },
             logout: () => {set(initialState); socket?.disconnect(); socket = null;get().resetNotifications(); get().addNotification('You have been logged out', 'success')},
+            deleteAccount: () => {set(initialState); socket?.disconnect(); socket = null;get().resetNotifications(); get().addNotification('Your account has been successfully deleted', 'success')},
             pushMessageToChatRoom: (chatRoomId: string, messageObject: any) => {
                 const targetIndex = get().chatrooms.findIndex((chatroom: any) => chatroom._id === chatRoomId)
                 let chatrooms = get().chatrooms

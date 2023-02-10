@@ -26,6 +26,7 @@ import RegisterPatePage from "./pages/RegisterPatePage/RegisterPatePage";
 import SplashScreenPage from './pages/OnboardingPages/SplashScreen/SplashScreenPage';
 import Preferences from './components/Container/Settings/Preferences/Preferences';
 import Languages from './components/Container/Settings/Languages/Languages';
+import Account from './components/Container/Account/Account';
 
 const App = () => {
   const navigate = useNavigate();
@@ -151,6 +152,7 @@ const App = () => {
       case '/dashboard/messages':
       case '/dashboard/groups':
       case '/dashboard/settings':
+      case '/dashboard/settings/account':
       case '/dashboard/settings/profile':
       case '/dashboard/category': {
         if (!isSignedIn()) {
@@ -198,6 +200,7 @@ const App = () => {
                 <Route path="settings/profile" element={<Profile userData={userData} />} />
                 <Route path="settings/edit" element={<Preferences userData={userData}/>} />
                 <Route path="settings/languages" element={<Languages userData={userData}/>} />
+                <Route path="settings/account" element={<Account userData={userData}/>} />
               <Route path="category" element={<Category userData={userData} />} />
               <Route path="category/:id" element={<Category userData={userData} />} />
             </Route>
